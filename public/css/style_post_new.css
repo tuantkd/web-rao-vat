@@ -1,0 +1,392 @@
+.progress {
+  height: 13px;
+  width: 350px;
+  margin: 10px 20px;
+  background-color: #FFF176
+}
+
+.progress-bar {
+  background-color: #FBC02D
+}
+
+.count {
+  width: 350px
+}
+
+.fit-image {
+  width: 100%;
+  object-fit: cover
+}
+
+.card-header {
+  padding: 20px 60px
+}
+
+
+.yellow-text {
+  color: #FBC02D
+}
+
+.card-block {
+  width: 100%;
+  height: 60%;
+  color:black;
+  border: 0.5px solid lightgrey;
+  padding: 3px;
+  border-radius: 10px;
+  margin-bottom: 20px
+}
+
+.radio {
+  display: inline-block;
+  border-radius: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #000;
+  font-weight: 500;
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  filter: grayscale(100%)
+}
+
+.radio:hover {
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)
+}
+
+.radio.selected {
+  border: 1px solid #F9A825;
+  box-shadow: 0px 8px 16px 0px #EEEEEE;
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  -o-filter: grayscale(0%);
+  -ms-filter: grayscale(0%);
+  filter: grayscale(0%)
+}
+
+.fa-check {
+  color: #FBC02D;
+  border-radius: 50%;
+  border: 2px solid #FBC02D;
+  padding-top: 5px;
+}
+
+.card-block .row span {
+  font-size: 20px;
+  margin-right: 5px;
+  margin-left: 10px;
+  padding: 2px;
+}
+
+.card-block a {
+  text-decoration: none;
+  color: black;
+}
+
+.fa-circle {
+  color: #FAFAFA;
+  border-radius: 50%;
+  border: 2px solid #BDBDBD;
+  padding: 1px 1px
+}
+
+.pic,
+.pic-0 {
+  height: 90px;
+  width: 130px
+}
+
+.pic {
+  margin-top: 30px;
+  margin-bottom: 20px
+}
+
+.fa-long-arrow-right {
+  float: right;
+  margin-top: 4px
+}
+
+.fa-long-arrow-left {
+  float: left;
+  margin-top: 4px
+}
+
+
+/* =================================================== */
+
+.breadcrumb .breadcrumb-item a {
+  text-decoration: none;
+  color: orange;
+}
+
+.form-row .form-group label {
+  font-weight: bold;
+  color:black;
+
+}
+
+.form-row .form-group .category {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 8px;
+  color:black;
+  background-color: lightgray;
+}
+
+
+/* ================================================== */
+* {
+  margin: 0;
+  padding: 0
+}
+
+#grad1 {
+  background-color: : #9C27B0;
+  background-image: linear-gradient(120deg, #FF4081, #81D4FA)
+}
+
+#msform {
+  text-align: center;
+  position: relative;
+  margin-top: 20px
+}
+
+#msform fieldset .form-card {
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  padding:10px;
+  box-sizing: border-box;
+  width: 94%;
+  margin: 0 3% 20px 3%;
+  position: relative
+}
+
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius:5px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding-bottom: 20px;
+  position: relative
+}
+
+#msform fieldset:not(:first-of-type) {
+  display: none
+}
+
+#msform fieldset .form-card {
+  text-align: left;
+  color: #9E9E9E
+}
+
+
+#msform .action-button {
+  width: 100px;
+  font-family: 'Muli', sans-serif;
+  background: red;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius:5px;
+  cursor: pointer;
+  padding: 12px 5px;
+  margin: 10px 5px
+}
+
+#msform .post-new-button{
+  width: 200px;
+  font-family: 'Muli', sans-serif;
+  background: red;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius:5px;
+  cursor: pointer;
+  padding: 12px 5px;
+  margin: 10px 5px
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px red;
+}
+
+#msform .action-button-previous {
+  width: 100px;
+  background: orange;
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius:5px;
+  text-decoration:none;
+  cursor: pointer;
+  padding: 12px 15px;
+  margin: 10px 5px
+}
+
+#msform .a-previous {
+  width: 100px;
+  background: orange;
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius:5px;
+  text-decoration:none;
+  cursor: pointer;
+  padding: 14px 15px;
+  margin: 10px 5px
+}
+
+#msform .a-previous:hover{
+  box-shadow: 0 0 0 2px white, 0 0 0 3px orange;
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px orange;
+}
+
+select.list-dt {
+  border: none;
+  outline: 0;
+  border-bottom: 1px solid #ccc;
+  padding: 2px 5px 3px 5px;
+  margin: 2px
+}
+
+select.list-dt:focus {
+  border-bottom: 2px solid skyblue
+}
+
+.card {
+  z-index: 0;
+  border: none;
+  border-radius: 0.5rem;
+  position: relative
+}
+
+.fs-title {
+  font-size: 25px;
+  color:green;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left
+}
+
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  color: lightgrey
+}
+
+#progressbar .active {
+  color: #000000
+}
+
+#progressbar li {
+  list-style-type: none;
+  font-size: 12px;
+  width: 25%;
+  float: left;
+  position: relative
+}
+
+#progressbar #account:before {
+  font-family: FontAwesome;
+  content: "\f03a"
+}
+
+#progressbar #personal:before {
+  font-family: FontAwesome;
+  content: "\f022"
+}
+
+#progressbar #payment:before {
+  font-family: FontAwesome;
+  content: "\f1ea"
+}
+
+#progressbar #confirm:before {
+  font-family: FontAwesome;
+  content: "\f00c"
+}
+
+#progressbar li:before {
+  width: 50px;
+  height: 50px;
+  line-height: 45px;
+  display: block;
+  font-size: 18px;
+  color: #ffffff;
+  background: lightgray;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+  padding: 2px
+}
+
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: lightgray;
+  position: absolute;
+  left: 0;
+  top: 25px;
+  z-index: -1
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: red;
+}
+
+.radio-group {
+  position: relative;
+  margin-bottom: 25px
+}
+
+.radio {
+  display: inline-block;
+  width: 204;
+  height: 104;
+  border-radius:5px;
+  background: lightblue;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 8px 2px
+}
+
+.radio:hover {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.radio.selected {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.fit-image {
+  width: 100%;
+  object-fit: cover
+}
+
+/* ========================================================== */
+.custom-file-upload {
+    border:none;
+    display: inline-block;
+    padding:5px;
+    cursor: pointer;
+}
+::-webkit-file-upload-button {
+  background:red;
+  color:white;
+  font-family: 'Muli', sans-serif;
+  border-radius:5px;
+  padding:5px;
+}

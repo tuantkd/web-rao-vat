@@ -1,0 +1,233 @@
+    .nav-pills .nav-item {
+      margin-top:10px
+    }
+    .nav-pills .nav-item .active{
+      background-color: #dd3420;
+    }
+    .nav-pills .nav-item .active:hover{
+      background-color: #E94B3C;color:#EADEDB;
+    }
+    .navbar-nav .nav-item .nav-link{
+      color: white;
+    }
+    /* ========================= */
+    /* Footer */
+    @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    section {
+        padding: 10px 0;margin-top:15px;
+    }
+
+    section .section-title {
+        text-align: center;
+        color: #E94B3C;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+    }
+    #footer {
+        background: white !important;
+    }
+    #footer h5{
+      padding-left: 10px;
+      border-left: 3px solid #eeeeee;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+      color:#E94B3C;
+    }
+    #footer a {
+        color: #E94B3C;
+        text-decoration: none !important;
+        background-color: transparent;
+        -webkit-text-decoration-skip: objects;
+    }
+    #footer ul.social li{
+      padding: 3px 0;
+    }
+    #footer ul.social li a i {
+        margin-right: 5px;
+      font-size:25px;
+      -webkit-transition: .5s all ease;
+      -moz-transition: .5s all ease;
+      transition: .5s all ease;
+    }
+    #footer ul.social li:hover a i {
+      font-size:30px;
+      margin-top:-10px;
+    }
+    #footer ul.social li a,
+    #footer ul.quick-links li a{
+      color:#E94B3C;
+    }
+    #footer ul.social li a:hover{
+      color:red;
+    }
+    #footer ul.quick-links li{
+      padding: 3px 0;
+      -webkit-transition: .5s all ease;
+      -moz-transition: .5s all ease;
+      transition: .5s all ease;
+    }
+    #footer ul.quick-links li:hover{
+      padding: 3px 0;
+      margin-left:5px;
+      font-weight:700;
+    }
+    #footer ul.quick-links li a i{
+      margin-right: 5px;
+    }
+    #footer ul.quick-links li:hover a i {
+        font-weight: 700;
+    }
+    .form-reponsive{
+      display: none;
+    }
+    .res-login{
+      display: none;
+    }
+    .moblie{
+      display: none;
+    }
+    .media:hover{
+      background-color:#ffe6e6;
+      border-radius:5px;
+    }
+    .media{
+      padding-top:14px;
+      padding-left:14px;
+    }
+
+    @media (max-width:600px){
+      #footer h5 {
+        padding-left: 0;
+        border-left: transparent;
+        padding-bottom: 0px;
+        margin-bottom: 10px;
+      }
+      .form-reponsive{
+        display: inline;
+      }
+      .register-login{
+        display: none;
+      }
+      .res-login{
+        display: inline;
+      }
+      .form-search{
+        display: none;
+      }
+      .form-search{
+        display: none;
+      }
+      .desktop{
+        display: none;
+      }
+      .moblie{
+        display:block;
+        margin-right:2px;
+      }
+
+      /*=========================================*/
+      .category-mobile .card-body .row .col-6{
+        font-size:11px;margin-bottom:10px;
+      }
+      .search-quick{
+        display:none;
+      }
+      .breadcrumb-mobile{
+        font-size:11px;padding:10px;
+      }
+      .card-body .row .col-12{
+        padding:5px;padding-left:15px;padding-right:15px;
+      }
+      .card-body .row .col-12 a .media .media-body b{
+        font-size:13px;
+      }
+      .media{
+        padding-top:13px;
+        padding-left:13px;
+      }
+      .p-text{
+        font-size:10px;
+      }
+      .post-new .card-header .b-text{
+        color:red;font-size:15px;
+        text-transform: uppercase;
+      }
+      .post-new .card-header .b-text .fa-newspaper{
+        font-size:17px;
+      }
+
+      .post-new-category .card-header .b_text{
+        font-size:15px;
+      }
+      .post-new-category .card-header .b_text .arrow-up{
+        font-size:16px;
+      }
+      .footer .container .row .col-12 .list-unstyled{
+        margin-left:50px;
+      }
+      /* ================================ */
+      .navbar-mobile .navbar-brand .image-logo{
+        max-width:100%;height:30px;padding:3px;
+      }
+      .form-reponsive .input-search{
+        max-width:97%;border:none;margin-top:15px;
+      }
+      .text-left h4{
+        font-size:16px;
+      }
+      .text-left h5{
+        font-size:13px;
+      }
+      .card .card-body .row .col-12 p{
+        font-size:12px;
+      }
+      .card .card-body .row .col-12 .list-info{
+        font-size:13px;
+      }
+      .card .card-body .row .col-12 .contact-info h5{
+        font-size:15px;
+      }
+      .card .card-body .row .col-12 .social h5{
+        font-size:15px;
+      }
+      .card .card-body .row .col-12 .social .text-left a img{
+        max-width:100%;height:30px;
+      }
+      .card .card-body .row .col-12 .contact-info .p_contact{
+        font-size:13px;
+      }
+    }
+
+
+
+    /*=======================================*/
+    .post-new .card-header b{
+      color:red;font-size:25px;
+    }
+    .post-new-category .card-header b{
+      color:red;font-size:25px;
+    }
+    .p-text{
+      color:black;font-size:12px;
+    }
+    .arrow-up{
+      font-size:28px;
+    }
+    .fa-newspaper{
+      font-size:25px;
+    }
+    /* ================================= */
+    .navbar-mobile .navbar-brand img{
+      max-width:100%;height:45px;padding:1px;
+    }
+    .card .card-body .row .col-12 .contact-info p{
+      font-size:20px;
+    }
+    .social .text-left a .img-social{
+      max-width:100%;height:50px;margin-right:10px;
+    }
+
+
+
+
+    
