@@ -42,25 +42,28 @@
 <body style="font-family: 'Muli', sans-serif;background-color:#E2E4E5;">
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top navbar-mobile" style="background-color:#dd3420;">
-      <a class="navbar-brand" href="#" style="padding:0px;">
-        ​<img src="public/logo/transparent-text.png" class="image-logo">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top navbar-mobile" 
+    style="background-color:#dd3420;">
+      <a class="navbar-brand" href="{{ url('/') }}" style="padding:0px;">
+        ​<img src="{{ url('public/logo/transparent-text.png') }}" class="image-logo">
       </a>
 
       <div class="clearfix">
         <span class="float-right">
-          <a class="navbar-toggler bg-warning" type="button" data-toggle="collapse" style="border:none;color:white;">
-            <i class="fas fa-edit" style="font-size:20px;"></i> Đăng tin
+          <a class="navbar-toggler bg-warning button-post-new" style="border:none;color:white;">
+            <i class="fas fa-edit" style="font-size:15px;"></i> Đăng tin
           </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleForm"
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#collapsibleForm"
             style="border:none;">
-            <i class="fas fa-search" style="color:white;font-size:20px;"></i>
+            <i class="fas fa-search" style="color:white;font-size:15px;"></i>
           </button>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"
+          <button class="navbar-toggler" type="button" data-toggle="collapse" 
+          data-target="#collapsibleNavbar"
             style="border:none;">
-            <i class="fas fa-user" style="color:white;font-size:20px;"></i>
+            <i class="fas fa-user" style="color:white;font-size:15px;"></i>
             <!-- Nếu chưa đăng nhập thì hiện icon login -->
           </button>
         </span>
@@ -127,8 +130,8 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
-            <p style="color: #E94B3C;font-size:14px;">
+          <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
+            <p>
               CÔNG TY TNHH RAOVAT - Địa chỉ: Phòng 20, Tầng 18, Mê Linh Point Tower, 02 Ngô Đức Kế, Phường Bến Nghé, Quận 12, TP Hồ Chí Minh <br> Giấy chứng nhận đăng ký doanh nghiệp số 01234678 do Sở Kế Hoạch và Đầu Tư TPHCM cấp ngày 20/3/2020
               <br> Email: trogiup@raovat.vn - Đường dây nóng: (028)12364589
             </p>

@@ -29,4 +29,10 @@ class HomeController extends Controller
     {
     	return view('home.report.report_new');
     }
+
+    //Xem theo danh mục chi tiết
+    public function profile_user()
+    {
+        return view('home.profile_user');
+    }
 }
