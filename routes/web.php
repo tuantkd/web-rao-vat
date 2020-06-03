@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', 'HomeController@index');
 
 // =======================================
@@ -25,3 +24,16 @@ Route::get('admin/manage-member', [
     'as' => 'manage_member',
     'uses' => 'AdminController@manage_member'
 ]);
+
+/*HOME*/
+//Trang chủ
+Route::get('/', 'HomeController@index');
+
+//Xem danh mục
+Route::get('view-category', 'HomeController@view_category');
+
+//Xem danh mục chi tiết
+Route::get('view-category-detail', 'HomeController@view_category_detail');
+
+//Báo cáo vi phạm bản tin
+Route::get('report-new', 'HomeController@report_new');
