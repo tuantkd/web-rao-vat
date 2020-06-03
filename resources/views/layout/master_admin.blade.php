@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>@yield('title')</title> 
+    <link rel="icon" type="image/png" href="{{ url('public/logo/logo-title.png')}}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ url('public/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -90,7 +91,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tùy chỉnh</h6>
-                        <a class="collapse-item" href="manage_role.html">Quyền người dùng</a>
+                        <a class="collapse-item" href="{{ route('manage_role') }}">Quyền người dùng</a>
                     </div>
                 </div>
             </li>
@@ -113,29 +114,29 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tùy chỉnh</h6>
-                        <a class="collapse-item" href="manage_post_news.html">Bài đăng</a>
-                        <a class="collapse-item" href="manage_type_post_new.html">Loại bài đăng</a>
-                        <a class="collapse-item" href="manage_province.html">Tỉnh thành</a>
-                        <a class="collapse-item" href="manage_district.html">Quận huyện</a>
+                        <a class="collapse-item" href="{{ route('manage_post_new') }}">Bài đăng</a>
+                        <a class="collapse-item" href="{{ route('manage_type_post_new') }}">Loại bài đăng</a>
+                        <a class="collapse-item" href="{{ route('manage_province') }}">Tỉnh thành</a>
+                        <a class="collapse-item" href="{{ route('manage_district') }}">Quận huyện</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Tùy chỉnh khác</h6>
-                        <a class="collapse-item" href="manage_category.html">Danh mục</a>
-                        <a class="collapse-item" href="manage_category_first.html">Danh mục cấp 1</a>
-                        <a class="collapse-item" href="manage_category_second.html">Danh mục cấp 2</a>
+                        <a class="collapse-item" href="{{ route('manage_category') }}">Danh mục</a>
+                        <a class="collapse-item" href="{{ route('manage_category_first') }}">Danh mục cấp 1</a>
+                        <a class="collapse-item" href="{{ route('manage_category_second') }}">Danh mục cấp 2</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="manage_banner.html">
+                <a class="nav-link" href="{{ route('manage_banner') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Ảnh bìa</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="manage_new.html">
+                <a class="nav-link" href="{{ route('manage_new') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tin tức</span></a>
             </li>
