@@ -2,15 +2,26 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|php artisan make:controller ShowProfilephp artisan make:controller ShowProfile
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', 'HomeController@index');
+
+// =======================================
+// Phần trang quản trị
+// trang chủ admin
+Route::get('admin', [
+    'as' => 'index_admin',
+    'uses' => 'AdminController@index'
+]);
+
+// trang quản lý admin
+Route::get('admin/manage-admin', [
+    'as' => 'manage_admin',
+    'uses' => 'AdminController@manage_admin'
+]);
+
+
+// trang quản lý thành viên
+Route::get('admin/manage-member', [
+    'as' => 'manage_member',
+    'uses' => 'AdminController@manage_member'
+]);
