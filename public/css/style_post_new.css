@@ -18,11 +18,6 @@
   object-fit: cover
 }
 
-.card-header {
-  padding: 20px 60px
-}
-
-
 .yellow-text {
   color: #FBC02D
 }
@@ -262,13 +257,6 @@ select.list-dt {
 
 select.list-dt:focus {
   border-bottom: 2px solid skyblue
-}
-
-.card {
-  z-index: 0;
-  border: none;
-  border-radius: 0.5rem;
-  position: relative
 }
 
 .fs-title {
