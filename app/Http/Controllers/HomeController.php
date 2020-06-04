@@ -29,4 +29,22 @@ class HomeController extends Controller
     {
     	return view('home.report.report_new');
     }
+
+    //Xem theo danh mục chi tiết
+    public function profile_user()
+    {
+        return view('home.profile_user');
+    }
+
+    //Đăng tin cấp cha danh mục
+    public function post_new_category()
+    {
+        return view('home.post_new.post_new_parent');
+    }
+
+    //Đăng tin
+    public function post_new()
+    {
+        return view('home.post_new.post_new');
+    }
 }

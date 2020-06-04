@@ -5,6 +5,38 @@ use Illuminate\Support\Facades\Route;
 // =======================================
 // Phần trang quản trị
 // Trang chủ admin
+/*============================================================*/
+/*HOME*/
+//Trang chủ
+Route::get('/', 'HomeController@index');
+
+//Xem danh mục
+Route::get('view-category', 'HomeController@view_category');
+
+//Xem danh mục chi tiết
+Route::get('view-category-detail', 'HomeController@view_category_detail');
+
+//Báo cáo vi phạm bản tin
+Route::get('report-new', 'HomeController@report_new');
+
+//Xem trang cá nhân người dùng
+Route::get('profile-user', 'HomeController@profile_user');
+
+//Đăng tin cấp cha danh mục
+Route::get('post-new-category', 'HomeController@post_new_category');
+
+//Đăng tin
+Route::get('post-new', 'HomeController@post_new');
+/*============================================================*/
+
+
+
+
+
+
+/*============================================================*/
+/*ADMIN*/
+// trang chủ admin
 Route::get('admin', [
     'as' => 'index_admin',
     'uses' => 'AdminController@index'
@@ -22,6 +54,7 @@ Route::get('admin/manage-member', [
     'as' => 'manage_member',
     'uses' => 'AdminController@manage_member'
 ]);
+/*============================================================*/
 
 // Trang quản lý quyền truy cập
 Route::get('admin/manage-role', [
@@ -87,11 +120,5 @@ Route::get('admin/manage-new', [
 //Trang chủ
 Route::get('/', 'HomeController@index');
 
-//Xem danh mục
-Route::get('view-category', 'HomeController@view_category');
 
-//Xem danh mục chi tiết
-Route::get('view-category-detail', 'HomeController@view_category_detail');
 
-//Báo cáo vi phạm bản tin
-Route::get('report-new', 'HomeController@report_new');
