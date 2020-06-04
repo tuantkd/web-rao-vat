@@ -17,6 +17,12 @@ Route::get('report-new', 'HomeController@report_new');
 
 //Xem trang cá nhân người dùng
 Route::get('profile-user', 'HomeController@profile_user');
+
+//Đăng tin cấp cha danh mục
+Route::get('post-new-category', 'HomeController@post_new_category');
+
+//Đăng tin
+Route::get('post-new', 'HomeController@post_new');
 /*============================================================*/
 
 

@@ -261,13 +261,22 @@
               <div class="media p-2 user-icon">
                 <img src="{{ url('public/logo/security.png') }}" class="mr-2 mt-2 rounded-circle"
                   style="max-width:100%;height:60px;">
-                <div class="media-body text-left">
-                  <h5>Mã bản tin <b>58282327</b> này đã được duyệt đăng.</h5>
-                  <p>
-                    Nếu bạn gặp vấn đề, vui lòng báo vi phạm. &emsp;
-                    <a class="btn btn-outline-danger btn-sm" href="{{ url('report-new') }}" role="button">Báo vi
-                      phạm</a>
-                  </p>
+                <div class="media-body">
+
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left">
+                      <h5>Mã bản tin <b>58282327</b> này đã được duyệt đăng.</h5>
+                      <p>
+                        Nếu bạn gặp vấn đề, vui lòng báo vi phạm.
+                      </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                      <a class="btn btn-outline-danger btn-sm" href="{{ url('report-new') }}" role="button">
+                        Báo vi phạm
+                      </a>
+                    </div>
+                  </div>
+                  
                 </div>
               </div>
               <!-- =================== -->
@@ -286,41 +295,12 @@
                 </div>
                 <div class="card-body" style="padding:5px;">
 
-                  <a href="" style="text-decoration:none;color:#ff3333;">
+                  <a href="">
                     <div class="media">
-                      <img src="{{ url('public/images/car-1.jpg') }}" class="align-self-start mr-3"
-                        style="width:90px;height:60px;border-radius:5px;">
+                      <img src="{{ url('public/images/car-1.jpg') }}" class="align-self-start mr-3">
                       <div class="media-body">
-                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                        <p class="p-text">
-                          <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                          <i class="far fa-clock"></i> 30p trước
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-
-                  <a href="" style="text-decoration:none;color:#ff3333;">
-                    <div class="media">
-                      <img src="{{ url('public/images/car-1.jpg') }}" class="align-self-start mr-3"
-                        style="width:90px;height:60px;border-radius:5px;">
-                      <div class="media-body">
-                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                        <p class="p-text">
-                          <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                          <i class="far fa-clock"></i> 30p trước
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-
-                  <a href="" style="text-decoration:none;color:#ff3333;">
-                    <div class="media">
-                      <img src="{{ url('public/images/car-2.jpg') }}" class="align-self-start mr-3"
-                        style="width:90px;height:60px;border-radius:5px;">
-                      <div class="media-body">
-                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                        <p class="p-text">
+                        <b class="b-title b-title-mobile">Xe Kia Morning 2020 - thời trang -hiện đại</b>
+                        <p class="p-text-content p-text-mobile">
                           <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
                           <i class="far fa-clock"></i> 30p trước
                         </p>

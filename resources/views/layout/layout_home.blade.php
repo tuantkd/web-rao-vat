@@ -15,6 +15,7 @@
 
   <!-- fonts.googleapis -->
   <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   
   <!-- fontawesome 5 -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
@@ -39,7 +40,7 @@
 
 </head>
 
-<body style="font-family: 'Muli', sans-serif;background-color:#E2E4E5;">
+<body style="font-family: 'Roboto', sans-serif;background-color:#f1f1f1;">
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top navbar-mobile" 
@@ -50,7 +51,8 @@
 
       <div class="clearfix">
         <span class="float-right">
-          <a class="navbar-toggler bg-warning button-post-new" style="border:none;color:white;">
+          <a class="navbar-toggler bg-warning button-post-new" style="border:none;color:white;"
+          href="{{ url('post-new-category') }}">
             <i class="fas fa-edit" style="font-size:15px;"></i> Đăng tin
           </a>
 
@@ -91,7 +93,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-warning" href="#" role="button">
+            <a class="btn btn-warning" href="{{ url('post-new-category') }}" role="button">
               <b style="color:white;"><i class="fas fa-edit"></i> ĐĂNG TIN</b>
             </a>
           </li>

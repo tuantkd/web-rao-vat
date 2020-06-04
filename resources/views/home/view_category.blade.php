@@ -173,10 +173,10 @@
 
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                             <a href="{{ url('view-category-detail') }}" style="text-decoration:none;color:#ff3333;">
-                                <div class="media p-0">
+                                <div class="media">
                                     <img src="public/images/car-1.jpg" class="align-self-start mr-3">
                                     <div class="media-body">
-                                        <h4>Xe Kia Morning 2020 - thời trang -hiện đại</h4>
+                                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
                                         <p class="p-text">
                                             <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
                                             <i class="far fa-clock"></i> 30p trước
@@ -188,12 +188,26 @@
 
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
                             <a href="" style="text-decoration:none;color:#ff3333;">
-                                <div class="media p-0">
-                                    <img src="public/images/car-2.jpg" class="align-self-start mr-3"
-                                        style="width:110px;height:80px;border-radius:5px;">
+                                <div class="media">
+                                    <img src="public/images/car-1.jpg" class="align-self-start mr-3">
                                     <div class="media-body">
                                         <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                        <p style="color:black;font-size:12px;">
+                                        <p class="p-text">
+                                            <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
+                                            <i class="far fa-clock"></i> 30p trước
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                            <a href="" style="text-decoration:none;color:#ff3333;">
+                                <div class="media">
+                                    <img src="public/images/car-1.jpg" class="align-self-start mr-3">
+                                    <div class="media-body">
+                                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
+                                        <p class="p-text">
                                             <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
                                             <i class="far fa-clock"></i> 30p trước
                                         </p>
@@ -232,8 +246,8 @@
                     <div class="row">
                         <!-- ========================== -->
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
-                            style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                        style="padding:3px;margin-bottom:10px;margin-top:10px;">
+                            <a href="" style="text-decoration:none;">
                                 <i class="fas fa-home" style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Bất động sản</div>
                             </a>
@@ -241,7 +255,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Xe cộ</div>
                             </a>
@@ -249,7 +263,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-business-time' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Việc làm</div>
                             </a>
@@ -257,7 +271,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-mobile-alt' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Đồ điện tử</div>
                             </a>
@@ -266,7 +280,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-dog' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Thú cưng</div>
                             </a>
@@ -275,7 +289,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-subway' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
                             </a>
@@ -283,7 +297,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-hamburger' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;"> Đồ ăn, thực phẩm và các loại khác</div>
                             </a>
@@ -291,7 +305,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-baby' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Mẹ và bé</div>
                             </a>
@@ -300,7 +314,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-couch' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
                             </a>
@@ -308,7 +322,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-tshirt' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Thời trang, đồ dùng cá nhân</div>
                             </a>
@@ -316,7 +330,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-volleyball-ball' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
                             </a>
@@ -324,7 +338,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-book' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
                             </a>
@@ -332,7 +346,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3"
                             style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="">
+                            <a href="" style="text-decoration:none;">
                                 <i class='fas fa-phone-volume' style="font-size:30px;color:red;"></i>
                                 <div style="font-size:12px;color:red;">Dịch vụ, du lịch</div>
                             </a>
