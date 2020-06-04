@@ -53,3 +53,22 @@
     border: 1px solid black;
     border-radius: 4px;
 }
+
+/* định dạng modal */
+.modal .modal-content{
+    background-color: white;
+}
+
+.modal .modal-title{
+    color: rgb(5, 116, 64); 
+    font-weight: bold; 
+    text-transform: uppercase;
+}
+
+.modal .modal-body .form-group{
+    width: 80%;
+}
+
+.modal .modal-body .form-group label{
+    font-weight: 500;
+}

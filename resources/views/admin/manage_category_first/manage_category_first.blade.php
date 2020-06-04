@@ -20,9 +20,39 @@
                 Delete all
             </a>
 
-            <a name="" id="" class="btn btn-primary" href="#" role="button">
-                <i class="fa fa-plus" aria-hidden="true"></i> Thêm doanh mục
+            <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#modal_add_category_level1">
+                <i class="fa fa-plus" aria-hidden="true"></i> Thêm doanh mục cấp 1
             </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal_add_category_level1" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">thêm danh mục CẤP 1</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form class="needs-validation" action="" method="POST" novalidate>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="">Tên danh mục</label>
+                                    <input type="text" class="form-control" name="nameCategoryLevel1" id="nameCategoryLevel1" aria-describedby="helpId" placeholder="Enter type name category level 1" required>
+                                    <small class="invalid-feedback">Vui lòng nhập danh mục cấp 1</small>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">THÊM DANH MỤC CẤP 1</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </div>
         

@@ -18,11 +18,6 @@
             <a name="" id="" class="btn btn-danger" href="#" role="button">
                  Delete all
             </a>
-
-            <a name="" id="" class="btn btn-primary" href="#" role="button">
-                <i class="fa fa-plus" aria-hidden="true"></i> Thêm thành viên
-            </a>
-
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">

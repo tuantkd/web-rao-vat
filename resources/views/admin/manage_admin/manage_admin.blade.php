@@ -20,9 +20,81 @@
                  Delete all
             </a>
 
-            <a name="" id="" class="btn btn-primary" href="#" role="button">
+            <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#modal_add_admin">
                 <i class="fa fa-plus" aria-hidden="true"></i> Thêm admin
             </a>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="modal_add_admin" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title">Thêm người dùng admin</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <form class="needs-validation" action="" method="POST" novalidate>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="">Họ và tên</label>
+                                    <input type="text" class="form-control" name="fullname" id="fullname" aria-describedby="helpId" placeholder="Enter fullname" required>
+                                    <small class="invalid-feedback">Vui lòng nhập họ và tên</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Tên tài khoản</label>
+                                    <input type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="Enter username" required>
+                                    <small class="invalid-feedback">Vui lòng nhập tên tài khoản</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sex">Giới tính</label>
+                                    <select class="custom-select" name="sex" id="sex" required>
+                                        <option value="Nam" selected>Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                        <option value="Khác">Khác</option>
+                                    </select>
+                                    <small class="invalid-feedback">Vui lòng chọn giới tính</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Ngày sinh</label>
+                                    <input id="datepicker" class="form-control" name="birthday" id="birthday" aria-describedby="helpId" placeholder="" required/>
+                                    <small class="invalid-feedback">Vui lòng nhập ngày sinh</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Số điện thoại</label>
+                                    <input type="number" class="form-control" name="phone" id="phone" aria-describedby="helpId" placeholder="Enter phone number" required>
+                                    <small class="invalid-feedback">Vui lòng nhập số điện thoại</small>
+                                </div>
+
+                                <div class="form-group" style="width: 100%;">
+                                  <label for="address">Địa chỉ</label>
+                                  <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
+                                  <small class="invalid-feedback">Vui lòng nhập địa chỉ</small>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">THÊM ADMIN</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                $('#exampleModal').on('show.bs.modal', event => {
+                    var button = $(event.relatedTarget);
+                    var modal = $(this);
+                    // Use above variables to manipulate the DOM
+                });
+            </script>
 
         </div>
 

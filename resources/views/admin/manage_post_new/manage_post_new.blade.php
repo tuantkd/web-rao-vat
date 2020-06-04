@@ -15,10 +15,21 @@
     <!-- Content Row -->
     <div class="row">
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
             <a name="" id="" class="btn btn-danger" href="#" role="button">
-                <i class="fa fa-trash" aria-hidden="true"></i> Delete all
+                Delete all
             </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="form-group">        
+                <select class="custom-select" name="" id="">
+                    <option selected>Chọn trạng thái</option>
+                    <option value="Đã duyệt">Đã duyệt</option>
+                    <option value="Chưa duyệt">Chưa duyệt</option>
+                    <option value="Đã bán">Đã bán</option>
+                </select>
+            </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin">
@@ -86,38 +97,12 @@
                         <td>1.000.000</td>
                         <td>VNĐ</td>
                         <td>
-                            <img src="./img/636767658598578350_1.png"class="img-fluid rounded-circle"
-                                alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>3 ngày</td>
-                        <td>
-                            <button type="button" class="btn btn-primary">Chưa duyệt</button>
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>1</td>
-                        <td>Bài đăng 1</td>
-                        <td>1.000.000</td>
-                        <td>VNĐ</td>
-                        <td>
-                            <img src="./img/636767658598578350_1.png"class="img-fluid rounded-circle" alt="" 
+                            <img src=" {{url('public/img/636767658598578350_1.png')}}"class="img-fluid rounded-circle" alt="" 
                                 style="width: 50px; height: 50px;">
                         </td>
                         <td>3 ngày</td>
                         <td>
-                            <button type="button" class="btn btn-primary">Chưa duyệt</button>
+                            <button type="button" class="btn btn-info">Chưa duyệt</button>
                         </td>
                         <td>
                             <a name="" id="" class="btn btn-primary" href="#" role="button"
@@ -138,12 +123,12 @@
                         <td>1.000.000</td>
                         <td>VNĐ</td>
                         <td>
-                            <img src="./img/636767658598578350_1.png"class="img-fluid rounded-circle" alt="" 
+                            <img src=" {{url('public/img/636767658598578350_1.png')}}"class="img-fluid rounded-circle" alt="" 
                                 style="width: 50px; height: 50px;">
                         </td>
                         <td>3 ngày</td>
                         <td>
-                            <button type="button" class="btn btn-primary">Chưa duyệt</button>
+                            <button type="button" class="btn btn-info">Chưa duyệt</button>
                         </td>
                         <td>
                             <a name="" id="" class="btn btn-primary" href="#" role="button"
@@ -164,11 +149,38 @@
                         <td>1.000.000</td>
                         <td>VNĐ</td>
                         <td>
-                            <img src="./img/636767658598578350_1.png" class="img-fluid rounded-circle" alt="" style="width: 50px; height: 50px;">
+                            <img src=" {{url('public/img/636767658598578350_1.png')}}"class="img-fluid rounded-circle" alt="" 
+                                style="width: 50px; height: 50px;">
                         </td>
                         <td>3 ngày</td>
                         <td>
-                            <button type="button" class="btn btn-primary">Chưa duyệt</button>
+                            <button type="button" class="btn btn-info">Chưa duyệt</button>
+                        </td>
+                        <td>
+                            <a name="" id="" class="btn btn-primary" href="#" role="button"
+                                title="Xem chi tiết">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                            </a>
+
+                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
+                        <td>1</td>
+                        <td>Bài đăng 1</td>
+                        <td>1.000.000</td>
+                        <td>VNĐ</td>
+                        <td>
+                            <img src=" {{url('public/img/636767658598578350_1.png')}}"class="img-fluid rounded-circle" alt="" 
+                                style="width: 50px; height: 50px;">
+                        </td>
+                        <td>3 ngày</td>
+                        <td>
+                            <button type="button" class="btn btn-info">Chưa duyệt</button>
                         </td>
                         <td>
                             <a name="" id="" class="btn btn-primary" href="#" role="button"
