@@ -30,6 +30,14 @@
     <!-- định dạng table and select search -->
     <link rel="stylesheet" href="{{ url('public/css/style_admin.css') }}">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    {{-- sweetalert2  --}}
+    {{-- <link href="https://cdn.jsdelivr.net/sweetalert2/6.4.1/sweetalert2.css" rel="stylesheet"/> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" /> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+    @yield('link_css')
 </head>
 <body id="page-top">
     <style>
@@ -608,5 +616,6 @@
             }, false);
         })();
     </script>
-    
+
+    @yield('link_js')
 </html>

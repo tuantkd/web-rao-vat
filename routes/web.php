@@ -62,6 +62,18 @@ Route::get('admin/manage-role', [
     'uses' => 'AdminController@manage_role'
 ]);
 
+// thêm quyền truy cập
+Route::post('admin/manage-role/add-role', [
+    'as' => 'add_role',
+    'uses' => 'AdminController@add_role'
+]);
+
+// xóa quyền truy cập
+Route::get('admin/manage-role/delete/{id}', [
+    'as' => 'delete_role',
+    'uses' => 'AdminController@delete_role'
+]);
+
 // trang quản lý bài đăng
 Route::get('admin/manage-post-new', [
     'as' => 'manage_post_new',

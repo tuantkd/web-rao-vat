@@ -6,8 +6,6 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Quản lý tin tức</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Báo cáo</a>
     </div>
 
     <hr>
@@ -19,9 +17,39 @@
                 Delete all
             </a>
 
-            <a name="" id="" class="btn btn-primary" href="#" role="button">
+            <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#modal_add_new">
                 <i class="fa fa-plus" aria-hidden="true"></i> Thêm tin tức
             </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modal_add_new" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">thêm tin tức</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form class="needs-validation" action="" method="POST" novalidate>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="">Tiêu đề</label>
+                                    <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Enter title of new" required>
+                                    <small class="invalid-feedback">Vui lòng nhập tiêu đề tin tức</small>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">THÊM TIN TỨC</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
