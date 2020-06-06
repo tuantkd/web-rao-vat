@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('birthday');
             $table->string('phone');
             $table->mediumText('address');
+            $table->mediumText('image');
             $table->float('number_money');
             $table->timestamps();
         });
