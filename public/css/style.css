@@ -201,7 +201,10 @@ section .container .row .col-12 p {
 
 
 /* ======================================================= */
+
+
 /* post-new */
+
 .form-row .form-group .label-title-mobile {
     display: none;
 }
@@ -209,23 +212,36 @@ section .container .row .col-12 p {
 .form-row .form-group .label-title {
     display: inline-block;
 }
+
+
 /* post-new */
+
+
 /* ======================================================= */
 
 
 /* ======================================================= */
+
+
 /* trang chủ */
+
 .list-group-flush {
     display: none;
 }
-.container .row .col-sm-3 .card .card-body #btn-text-option:hover{
-    color:white;
+
+.container .row .col-sm-3 .card .card-body #btn-text-option:hover {
+    color: white;
 }
+
+
 /* trang chủ */
+
+
 /* ======================================================= */
 
 
 /* =================================================================================================*/
+
 @media (max-width:600px) {
     /* ======================================================= */
     /* trang chủ */

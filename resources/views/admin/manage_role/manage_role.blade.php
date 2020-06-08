@@ -6,8 +6,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Quản lý quyền người dùng</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Báo cáo</a>
 </div>
 
 <hr>
@@ -86,36 +84,43 @@
             Delete all
         </a>
 
-        <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#modal_add_role">
+        <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal"
+            data-target="#modal_add_role">
             <i class="fa fa-plus" aria-hidden="true"></i> Thêm quyền
         </a>
-        
+
         <!-- Modal -->
-        <div class="modal fade" id="modal_add_role" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal fade" id="modal_add_role" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">THÊM QUYỀN HỆ THỐNG</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <form class="needs-validation" action="" method="POST" novalidate>
+                    <form class="needs-validation" action="{{ route('add_role') }}" method="POST" novalidate>
+                        {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="">Tên quyền</label>
-                                <input type="text" class="form-control" name="roleName" id="roleName" aria-describedby="helpId" placeholder="Enter role name" required>
+                                <input type="text" class="form-control" name="roleName" id="roleName"
+                                    aria-describedby="helpId" placeholder="Enter role name" required>
                                 <small class="invalid-feedback">Vui lòng nhập tên quyền</small>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Mô tả</label>
-                                <input type="text" class="form-control" name="description" id="description" aria-describedby="helpId" placeholder="Enter description" required>
+                                {{-- <input type="text" class="form-control" name="description" id="description" aria-describedby="helpId" placeholder="Enter description" required> --}}
+                                <textarea class="form-control" name="description" id="description" rows="5"
+                                    aria-describedby="helpId" placeholder="Enter description" required></textarea>
                                 <small class="invalid-feedback">Vui lòng nhập mô tả</small>
                             </div>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary">
+                            <button type="button" class="btn btn-outline-primary" id="btn_refresh">
                                 <i class="fa fa-refresh" aria-hidden="true"></i>
                             </button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -131,22 +136,9 @@
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
         <div class="form-group inputSearch">
             <select data-live-search="true" title="Nhập tên để tìm kiếm" class="form-control selectpicker">
-                <option>Mango</option>
-                <option>Orange</option>
-                <option>Lychee</option>
-                <option>Pineapple</option>
-                <option>Apple</option>
-                <option>Banana</option>
-                <option>Grapes</option>
-                <option>Water Melon</option>
-                <option>Mango</option>
-                <option>Orange</option>
-                <option>Lychee</option>
-                <option>Pineapple</option>
-                <option>Apple</option>
-                <option>Banana</option>
-                <option>Grapes</option>
-                <option>Water Melon</option>
+                @foreach ($role as $value)
+                    <option value="{{ $value->name_level }}">{{ $value->name_level }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -170,45 +162,67 @@
                 </tr>
             </thead>
             <tbody>
+
+                @foreach ($role as $key => $value)
                 <tr>
                     <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                    <td scope="row">1</td>
-                    <td>Admin</td>
-                    <td>Admin là từ viết tắt của “Administrator” dịch ra là người quản trị, người
-                        quản trị hay là quản trị viên. Đây là quyền cao nhất đối với quản lý viên.
-                        Với các website thì admin là người điều hành. Admin chủ yếu là online là
-                        chính với nhiều kiểu khác nhau như Admin website, diễn đàn, fanpage, blog,
-                        Admin facebook, Admin máy tính. Hoặc trong kinh doanh có Sale Admin tức là
-                        trợ lý kinh doanh.</td>
+                    <td scope="row">{{ ++$key }}</td>
+                    <td>{{ $value->name_level }}</td>
+                    <td>{{ $value->discribe }}</td>
                     <td>
-                        <a name="" id="" class="btn btn-info" href="#" role="button" title="Chỉnh sửa">
-                            <i class="fa fa-info" aria-hidden="true"></i>
-                        </a>
-
-                        <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
+                        <a name="" id="btn_delete_role" class="btn btn-danger" href="{{ route('delete_role', $value->id)}}" role="button" title="Xóa" onclick="return confirm('Bạn có chắc xóa không?')">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>
                 </tr>
+                @endforeach
 
-                <tr>
-                    <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                    <td scope="row">2</td>
-                    <td>Thành viên</td>
-                    <td>Xem và muốn trở thành biên tập viên hoặc quản trị</td>
-                    <td>
-                        <a name="" id="" class="btn btn-info" href="#" role="button" title="Chỉnh sửa">
-                            <i class="fa fa-info" aria-hidden="true"></i>
-                        </a>
+                <!-- Modal -->
+                
 
-                        <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
             </tbody>
         </table>
 
     </div>
     <!-- /.container-fluid -->
+
+    @if(Session::has('add_role'))
+    <script type="text/javascript">
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Đã thêm quyền truy cập hệ thống',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+    @endif
+
+    @if(Session::has('delete_role'))
+    <script type="text/javascript">
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Đã xóa quyền truy cập hệ thống',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+    @endif
+
+    @endsection
+
+    @section('link_js')
+    <script>
+        $('#btn_refresh').click(function () {
+            $('#roleName, #description').val('');
+        });
+
+        $('#modal_edit_role').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var roleName = button.data('roleName')
+            var modal = $(this)
+            modal.find('.modal-body #roleNameEdit').val(roleName);
+        })
+    </script>
     @endsection
