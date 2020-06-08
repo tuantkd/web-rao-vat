@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// =======================================
-// Phần trang quản trị
-// Trang chủ admin
 /*============================================================*/
 /*HOME*/
 //Trang chủ
@@ -27,6 +24,29 @@ Route::get('post-new-category', 'HomeController@post_new_category');
 
 //Đăng tin
 Route::get('post-new', 'HomeController@post_new');
+
+//Đăng nhập
+Route::get('page-login', 'HomeController@page_login');
+
+//Đăng ký
+Route::get('page-register', 'HomeController@page_register');
+
+//--------------------------
+//Trang thông tin quản lý tin
+Route::get('page-manage-news', 'HomeController@page_manage_news');
+
+//Trang thông tin tin đã lưu
+Route::get('page-news-save', 'HomeController@page_news_save');
+
+//Trang thông tin cá nhân tài khoản
+Route::get('page-infor-account', 'HomeController@page_infor_account');
+
+//Trang thông tin thanh toán phương thức
+Route::get('page-payment-method', 'HomeController@page_payment_method');
+
+//Trang thay đổi mật khẩu
+Route::get('page-change-password', 'HomeController@page_change_password');
+//--------------------------
 /*============================================================*/
 
 

@@ -1,3 +1,51 @@
+/* Danh mục cấp cha (post-new-parent)*/
+.show h3{
+  margin-top:20px;margin-bottom:20px;
+}
+
+
+@media (max-width:600px) {
+  /* Danh mục cấp cha (post-new-parent)*/
+  .show h3{
+    font-size:18px;
+  }
+  .radio-group .radio .row span {
+    font-size:15px;
+  }
+  #progressbar li strong{
+    font-size: 10px;
+  }
+  .card-block{
+    padding:5px;
+  }
+
+  .card-block .form-check .form-check-label #check-box{
+    width:15px;height:15px;
+  }
+  .card-block .form-check .form-check-label #span-text{
+    font-size:12px;
+    margin-left:5px;
+  }
+  /* Danh mục cấp cha (post-new-parent)*/
+}
+
+
+/* chọn danh mục cha đăng tin */
+fieldset .form-card .card-block .form-check .form-check-label .form-check-input{
+  width:20px;height:20px;
+}
+fieldset .form-card .card-block .form-check .form-check-label span{
+  margin-left:10px;font-size:20px;
+}
+fieldset .form-card .card-block{
+  background-color:#d7d7d7;
+}
+fieldset .form-card .card-block:hover{
+  border:1px solid rgba(0,0,0,0.12);
+}
+/* chọn danh mục cha đăng tin */
+
+
 .progress {
   height: 13px;
   width: 350px;

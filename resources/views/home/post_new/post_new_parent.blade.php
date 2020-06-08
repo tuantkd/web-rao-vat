@@ -13,7 +13,7 @@
 
             <div class="card rounded-5">
                 <div class="card-body show pt-0">
-                    <h3 style="margin-top:20px;margin-bottom:20px;">
+                    <h3>
                         <b>Chọn danh mục tin đăng</b>
                     </h3>
                     <div class="radio-group row justify-content-between px-3">

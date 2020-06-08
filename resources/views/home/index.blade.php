@@ -203,25 +203,17 @@
                 <!-- option -->
                 <div class="card" style="margin-bottom:10px;">
                     <div class="card-body" style="padding:5px;">
-
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4" style="margin-bottom:5px;margin-top:5px;">
+                        <div class="d-flex">
+                          <div class="p-1 flex-fill">
                                 <button type="button" class="btn btn-danger">
-                                    <i class="fas fa-money-check-alt"></i> Nạp đồng xu
+                                    <i class="fas fa-money-check-alt"></i> Nạp tiền
                                 </button>
-                            </div>
-
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-center" style="margin-bottom:5px;margin-top:5px;">
-                                <button type="button" class="btn btn-danger">
-                                    <i class="fas fa-star"></i> Raovat ưu đãi
-                                </button>
-                            </div>
-
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-right" style="margin-bottom:5px;margin-top:5px;">
+                          </div>
+                          <div class="p-1 flex-fill">
                                 <button type="button" class="btn btn-danger">
                                     <i class="fas fa-search"></i> Tìm kiếm chọn lọc
                                 </button>
-                            </div>
+                          </div>
                         </div>
 
                     </div>

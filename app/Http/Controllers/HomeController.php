@@ -47,4 +47,48 @@ class HomeController extends Controller
     {
         return view('home.post_new.post_new');
     }
+
+    //Đăng nhập đăng ký
+    public function page_login()
+    {
+        return view('home.page_login');
+    }
+
+    //Đăng ký
+    public function page_register()
+    {
+        return view('home.page_register');
+    }
+
+    //------------------------------
+    //Quản lý tin
+    public function page_manage_news()
+    {
+        return view('home.infor_profile.manage_news');
+    }
+
+    //Quản lý tin lưu lại
+    public function page_news_save()
+    {
+        return view('home.infor_profile.news_save');
+    }
+
+    //Quản lý thông tin tài khoản
+    public function page_infor_account()
+    {
+        return view('home.infor_profile.infor_account');
+    }
+
+    //Quản lý thông tin tài khoản
+    public function page_payment_method()
+    {
+        return view('home.infor_profile.payment_method');
+    }
+
+    //Thay đổi mật khẩu
+    public function page_change_password()
+    {
+        return view('home.infor_profile.change_password');
+    }
+    //------------------------------
 }
