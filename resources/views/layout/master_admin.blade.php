@@ -12,8 +12,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ url('public/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
@@ -31,11 +30,11 @@
     <link rel="stylesheet" href="{{ url('public/css/style_admin.css') }}">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-    {{-- sweetalert2  --}}
-    {{-- <link href="https://cdn.jsdelivr.net/sweetalert2/6.4.1/sweetalert2.css" rel="stylesheet"/> --}}
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" /> --}}
+    {{-- alert bootstrap 4 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> --}}
 
     @yield('link_css')
 </head>
@@ -134,7 +133,6 @@
                         <h6 class="collapse-header">Tùy chỉnh khác</h6>
                         <a class="collapse-item" href="{{ route('manage_category') }}">Danh mục</a>
                         <a class="collapse-item" href="{{ route('manage_category_first') }}">Danh mục cấp 1</a>
-                        <a class="collapse-item" href="{{ route('manage_category_second') }}">Danh mục cấp 2</a>
                     </div>
                 </div>
             </li>
@@ -447,6 +445,11 @@
     <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    {{-- passing data modal --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> --}}
 
 <!-- table reponsive mobile -->
     <script>

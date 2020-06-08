@@ -33,7 +33,9 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form class="needs-validation" action="" method="POST" novalidate>
+                        <form class="needs-validation" action="{{ route('add_type_post_new') }}" method="POST" novalidate>
+                            @csrf
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="">Tên loại</label>
@@ -59,12 +61,9 @@
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập tỉnh để tìm kiếm"
                     class="form-control selectpicker">
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
+                    @foreach ($allTypePost as $value)
+                        <option value="{{ $value->post_type_name }}">{{ $value->post_type_name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -87,73 +86,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>1</td>
-                        <td>Bài đăng 1</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+                    @foreach ($allTypePost as $key => $value)
+                        <tr>
+                            <td><input type="checkbox" class="sub_chk" data-id=""></td>
+                            <td>{{ ++$key }}</td>
+                            <td>{{ $value->post_type_name }}</td>
+                            <td>
+                                <a name="" id="" class="btn btn-primary" href="#" role="button"
+                                    title="Chỉnh sửa">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </a>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>1</td>
-                        <td>Bài đăng 1</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>3</td>
-                        <td>Bài đăng 3</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>4</td>
-                        <td>Bài đăng 4</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
+                                <a name="" id="" class="btn btn-danger" href="{{ route('delete_type_post_new', $value->id) }}" role="button" title="Xóa" onclick="return confirm('Bạn có chác xóa không?')">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>
         </div>
     </div>
+
+    @if (Session::has('add_type_post'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Đã thêm loại bài đăng thành công',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
+    @if (Session::has('delete_type_post'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Đã xóa loại bài đăng thành công',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
 @endsection

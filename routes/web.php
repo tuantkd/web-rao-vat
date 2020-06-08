@@ -48,6 +48,18 @@ Route::get('admin/manage-admin', [
     'uses' => 'AdminController@manage_admin'
 ]);
 
+// trang thêm admin
+Route::post('admin/manage-admin/add-admin', [
+    'as' => 'add_admin',
+    'uses' => 'AdminController@add_admin'
+]);
+
+// delete admin
+Route::get('manage-admin/delete-admin/{id}', [
+    'as' => 'delete_admin',
+    'uses' => 'AdminController@delete_admin'
+]);
+
 
 // Trang quản lý thành viên
 Route::get('admin/manage-member', [
@@ -86,10 +98,34 @@ Route::get('admin/manage-type-post-new', [
     'uses' => 'AdminController@manage_type_post_new'
 ]);
 
+// thêm loại bài đăng
+Route::post('admin/manage-type-post-new/add-type-post-new', [
+    'as' => 'add_type_post_new',
+    'uses' => 'AdminController@add_type_post_new'
+]);
+
+// xóa loại bài đăng
+Route::get('admin/manage-type-post-new/delete-type-post-new/{id}', [
+    'as' => 'delete_type_post_new',
+    'uses' => 'AdminController@delete_type_post_new'
+]);
+
 // trang quản lý tỉnh thành
 Route::get('admin/manage-province', [
     'as' => 'manage_province',
     'uses' => 'AdminController@manage_province'
+]);
+
+// thêm tỉnh thành 
+Route::post('admin/manage-province/add-province', [
+    'as' => 'add_province',
+    'uses' => 'AdminController@add_province'
+]);
+
+// xóa tỉnh thành
+Route::get('admin/manage-province/delete-province/{id}', [
+    'as' => 'delete_province',
+    'uses' => 'AdminController@delete_province'
 ]);
 
 // trang quản lý quận huyện
@@ -98,10 +134,34 @@ Route::get('admin/manage-district', [
     'uses' => 'AdminController@manage_district'
 ]);
 
+// thêm quận huyện
+Route::post('admin/manage-district/add-district', [
+    'as' => 'add_district',
+    'uses' => 'AdminController@add_district'
+]);
+
+// xóa quận huyện
+Route::get('admin/manage-district/delete-district/{id}', [
+    'as' => 'delete_district',
+    'uses' => 'AdminController@delete_district'
+]);
+
 // trang quản lý doanh mục
 Route::get('admin/manage-category', [
     'as' => 'manage_category',
     'uses' => 'AdminController@manage_category'
+]);
+
+// thêm doanh mục 
+Route::post('admin/manage-category/add_category', [
+    'as' => 'add_category',
+    'uses' => 'AdminController@add_category'
+]);
+
+// xóa doanh mục
+Route::get('admin/manage-category/delete_category/{id}', [
+    'as' => 'delete_category',
+    'uses' => 'AdminController@delete_category'
 ]);
 
 // trang quản lý doanh mục cấp 1
@@ -110,10 +170,16 @@ Route::get('admin/manage-category-first', [
     'uses' => 'AdminController@manage_category_first'
 ]);
 
-// trang quản lý doanh mục cấp 2
-Route::get('admin/manage-category-second', [
-    'as' => 'manage_category_second',
-    'uses' => 'AdminController@manage_category_second'
+// thêm doanh mục cấp 1
+Route::post('admin/manage-category-first/add-category-first', [
+    'as' => 'add_category_first',
+    'uses' => 'AdminController@add_category_first'
+]);
+
+// xóa doanh mục cấp 1
+Route::get('admin/manage-category-first/delete-category-first/{id}', [
+    'as' => 'delete_category_first',
+    'uses' => 'AdminController@delete_category_first'
 ]);
 
 // trang quản lý ảnh bìa

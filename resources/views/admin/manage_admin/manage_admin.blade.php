@@ -12,6 +12,38 @@
 
     <!-- Content Row -->
     <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            @if ($errors->has('username'))
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ $errors->first('username') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            @endif
+
+            @if ($errors->has('email'))
+                <div class="alert alert-info" role="alert">
+                    <strong>{{ $errors->first('email') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            @endif
+
+            @if ($errors->has('phone'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ $errors->first('phone') }}</strong> 
+                </div>
+            @endif
+            
+            <script>
+              $(".alert").alert();
+            </script>
+        </div>
+    </div>
+
+    <div class="row">
 
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mr-auto mb-1">
             <a name="" id="" class="btn btn-danger" href="#" role="button">
@@ -32,7 +64,8 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                         </div>
-                        <form class="needs-validation" action="" method="POST" novalidate>
+                        <form class="needs-validation" action="{{ route('add_admin') }}" method="POST" novalidate>
+                            @csrf
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="">Họ và tên</label>
@@ -44,6 +77,18 @@
                                     <label for="">Tên tài khoản</label>
                                     <input type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="Enter username" required>
                                     <small class="invalid-feedback">Vui lòng nhập tên tài khoản</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId"     placeholder="Enter email" required>
+                                    <small class="invalid-feedback">Vui lòng nhập địa chỉ email</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Mật khẩu</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
+                                    <small class="invalid-feedback">Vui lòng nhập mật khẩu</small>
                                 </div>
 
                                 <div class="form-group">
@@ -64,14 +109,14 @@
 
                                 <div class="form-group">
                                     <label for="phone">Số điện thoại</label>
-                                    <input type="number" class="form-control" name="phone" id="phone" aria-describedby="helpId" placeholder="Enter phone number" required>
+                                    <input type="number" class="form-control" name="phone" id="phone" aria-describedby="helpId" placeholder="Enter phone number" onblur="Test_numberphone()" required>
                                     <small class="invalid-feedback">Vui lòng nhập số điện thoại</small>
                                 </div>
 
                                 <div class="form-group" style="width: 100%;">
-                                  <label for="address">Địa chỉ</label>
-                                  <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
-                                  <small class="invalid-feedback">Vui lòng nhập địa chỉ</small>
+                                    <label for="address">Địa chỉ</label>
+                                    <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
+                                    <small class="invalid-feedback">Vui lòng nhập địa chỉ</small>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -100,22 +145,9 @@
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập tên để tìm kiếm"
                     class="form-control selectpicker">
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
-                    <option>Grapes</option>
-                    <option>Water Melon</option>
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
-                    <option>Grapes</option>
-                    <option>Water Melon</option>
+                    @foreach ($admin as $value)
+                        <option value="{{ $value->username }}">{{ $value->username }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -143,92 +175,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nam</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nam</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nam</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">1</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nam</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>10/10/1998</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-
+                    @foreach ($admin as $key => $value)
+                        <tr>
+                            <td><input type="checkbox" class="sub_chk" data-id=""></td>
+                            <td scope="row">{{ ++$key }}</td>
+                            <td>{{ $value->fullname }}</td>
+                            <td>{{ $value->username}}</td>
+                            <td>{{ $value->sex }}</td>
+                            <td>{{ $value->birthday }}</td>
+                            <td>{{ $value->phone}}</td>
+                            <td>{{ $value->address }}</td>
+                            <td>
+                                <a name="" id="" class="btn btn-danger" href="{{ route('delete_admin', $value->id) }}" role="button" title="Xóa">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    
                 </tbody>
             </table>
         </div>
+
+    @if (Session::has('add_admin'))
+        <script type="text/javascript">
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Đã thêm tài khoản admin',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
+@endsection
+
+@section('link_js')
+    <script type="text/javascript">
+        CKEDITOR.replace( 'txt_describe_role' );
+
+        function Test_numberphone() {
+            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+            var mobile = $('#phone').val();
+            if(mobile !==''){
+                if (vnf_regex.test(mobile) == false) 
+                {
+                    confirm('Số điện thoại không đúng định dạng. Vui lòng nhập lại');
+                    $('#phone').val('');
+                }
+            }
+        }
+    </script>
 @endsection

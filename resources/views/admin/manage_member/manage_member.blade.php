@@ -12,12 +12,35 @@
 
     <!-- Content Row -->
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mr-auto mb-1">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mr-auto mb-1">
             <a name="" id="" class="btn btn-danger" href="#" role="button">
                  Delete all
             </a>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
+            <div class="form-group inputSearch">
+                <select data-live-search="true" title="Nhập sđt để tìm kiếm"
+                    class="form-control selectpicker">
+                    <option>Mango</option>
+                    <option>Orange</option>
+                    <option>Lychee</option>
+                    <option>Pineapple</option>
+                    <option>Apple</option>
+                    <option>Banana</option>
+                    <option>Grapes</option>
+                    <option>Water Melon</option>
+                    <option>Mango</option>
+                    <option>Orange</option>
+                    <option>Lychee</option>
+                    <option>Pineapple</option>
+                    <option>Apple</option>
+                    <option>Banana</option>
+                    <option>Grapes</option>
+                    <option>Water Melon</option>
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập tên để tìm kiếm"
@@ -77,11 +100,6 @@
                         <td>10/10/1998</td>
                         <td>10.000.000 VNĐ</td>
                         <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
                             <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
@@ -99,11 +117,6 @@
                         <td>10/10/1998</td>
                         <td>10.000.000 VNĐ</td>
                         <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
                             <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
@@ -121,11 +134,6 @@
                         <td>10/10/1998</td>
                         <td>10.000.000 VNĐ</td>
                         <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
                             <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
@@ -143,11 +151,6 @@
                         <td>10/10/1998</td>
                         <td>10.000.000 VNĐ</td>
                         <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
                             <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>

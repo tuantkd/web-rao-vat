@@ -14,7 +14,7 @@ class CreateDistrictsTable extends Migration
             $table->unsignedBigInteger('province_id');
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
 
-            $table->mediumText('province_name');
+            $table->mediumText('district_name');
             $table->timestamps();
         });
     }

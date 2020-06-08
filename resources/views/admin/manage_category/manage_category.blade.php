@@ -33,7 +33,9 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form class="needs-validation" action="" method="POST" novalidate>
+                        <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
+                            @csrf
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="">Tên danh mục</label>
@@ -59,12 +61,9 @@
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập tỉnh để tìm kiếm"
                     class="form-control selectpicker">
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
+                    @foreach ($category as $value)
+                        <option value="{{ $value->category_name }}">{{ $value->category_name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -87,75 +86,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>1</td>
-                        <td>Tên danh mục 1</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+                    @foreach ($allCategory as $key => $value)
+                        <tr>
+                            <td><input type="checkbox" class="sub_chk" data-id=""></td>
+                            <td>{{ ++$key }}</td>
+                            <td>{{ $value->category_name }}</td>
+                            <td>
+                                <a name="" id="" class="btn btn-primary" href="#" role="button"
+                                    title="Chỉnh sửa">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </a>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>2</td>
-                        <td>Tên doanh mục 2</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>3</td>
-                        <td>Tên doanh mục 3</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td>4</td>
-                        <td>Tên doanh mục 4</td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Chỉnh sửa">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
+                                <a name="" id="" class="btn btn-danger" href="{{ route('delete_category', $value->id) }}" role="button" title="Xóa" onclick="return confirm('Bạn có chắc xóa không?')">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>
         </div>
+
+        <div class="col-12">
+            {{ $allCategory->links() }}
+        </div>
     </div>
-    <!-- /.container-fluid -->    
+    <!-- /.container-fluid -->  
+    
+    @if (Session::has('add_category'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Đã thêm danh mục thành công',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
+
+    @if (Session::has('delete_category'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Đã xóa danh mục thành công',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
 @endsection
     

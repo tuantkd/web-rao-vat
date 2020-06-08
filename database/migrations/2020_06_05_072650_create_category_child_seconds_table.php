@@ -16,8 +16,8 @@ class CreateCategoryChildSecondsTable extends Migration
         Schema::create('category_child_seconds', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');
+            $table->unsignedBigInteger('category_first_id');
+            $table->foreign('category_first_id')->references('id')->on('category_child_firsts')->onDelete('cascade');
 
             $table->mediumText('type_property');
             $table->mediumText('address');

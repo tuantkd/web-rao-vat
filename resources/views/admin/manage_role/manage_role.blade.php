@@ -136,22 +136,9 @@
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
         <div class="form-group inputSearch">
             <select data-live-search="true" title="Nhập tên để tìm kiếm" class="form-control selectpicker">
-                <option>Mango</option>
-                <option>Orange</option>
-                <option>Lychee</option>
-                <option>Pineapple</option>
-                <option>Apple</option>
-                <option>Banana</option>
-                <option>Grapes</option>
-                <option>Water Melon</option>
-                <option>Mango</option>
-                <option>Orange</option>
-                <option>Lychee</option>
-                <option>Pineapple</option>
-                <option>Apple</option>
-                <option>Banana</option>
-                <option>Grapes</option>
-                <option>Water Melon</option>
+                @foreach ($role as $value)
+                    <option value="{{ $value->name_level }}">{{ $value->name_level }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -183,15 +170,6 @@
                     <td>{{ $value->name_level }}</td>
                     <td>{{ $value->discribe }}</td>
                     <td>
-                        {{-- <button class="btn btn-info" title="Chỉnh sửa" data-toggle="modal" data-target="#modal_edit_role" 
-                            data-roleId="{{ $value->id }}" data-roleName="{{ $value->name_level }}"
-                        data-roleDiscribe="{{ $value->discribe }}">
-                        <i class="fa fa-info" aria-hidden="true"></i>
-                        </button> --}}
-                        {{-- <button class="btn btn-info" data-mytitle="{{$cat->title}}"
-                        data-mydescription="{{$cat->description}}" data-catid={{$cat->id}} data-toggle="modal"
-                        data-target="#edit">Edit</button> --}}
-
                         <a name="" id="btn_delete_role" class="btn btn-danger" href="{{ route('delete_role', $value->id)}}" role="button" title="Xóa" onclick="return confirm('Bạn có chắc xóa không?')">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
