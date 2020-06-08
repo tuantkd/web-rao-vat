@@ -45,7 +45,7 @@
 
     <div class="row">
 
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mr-auto mb-1">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mr-auto mb-1">
             <a name="" id="" class="btn btn-danger" href="#" role="button">
                  Delete all
             </a>
@@ -130,14 +130,6 @@
                     </div>
                 </div>
             </div>
-            
-            <script>
-                $('#exampleModal').on('show.bs.modal', event => {
-                    var button = $(event.relatedTarget);
-                    var modal = $(this);
-                    // Use above variables to manipulate the DOM
-                });
-            </script>
 
         </div>
 

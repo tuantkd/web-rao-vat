@@ -1,5 +1,8 @@
 @extends('layout.master_admin')
 @section('title','Manage post new')
+@section('link_css')
+    <link rel="stylesheet" href="{{ url('public/css/media.css') }}">
+@endsection
 {{-- =============================================================================== --}}
 
 @section('content')
@@ -13,7 +16,7 @@
     <!-- Content Row -->
     <div class="row">
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mb-1">
             <div class="form-group">        
                 <select class="custom-select" name="" id="">
                     <option selected>Chọn trạng thái</option>
@@ -24,7 +27,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin mb-1">
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập loại để tìm kiếm"
                     class="form-control selectpicker">
@@ -35,7 +38,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin mb-1">
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập tỉnh để tìm kiếm"
                     class="form-control selectpicker">
@@ -47,117 +50,102 @@
         </div>
 
 
-        <div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 mb-1">
             <input id="datepicker" />
         </div>
 
-        <div class="col-xs-4 col-sm-4 col-md-1 col-lg-1">
+        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 mb-1">
             <a name="" id="" class="btn btn-primary" href="#" role="button" title="tìm kiếm">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </a>
         </div>
 
 
-
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
 
-            <style>
-                .media{
-                    background: white;
-                }
-
-                .media img{
-                    max-width: 170px;
-                }
-
-                .media:hover{
-                    background: rgb(233, 232, 232);
-                }
-
-                .media-body h4{
-                    text-transform: uppercase;
-                    font-family: Times New Roman;
-                }
-
-                .media-body small img{
-                    max-width: 25px;
-                }
-
-                .media-body strong{
-                    color: red;
-                }
-
-                .media-body small{
-                    font-weight: 500;
-                }
-
-                @media screen and (max-width: 768px) {
-                    .media img{
-                        max-width: 50px;
-                    }
-
-                    .media-body h4{
-                        font-size: 10px;
-                    }
-                }
-            </style>
-
             <div class="media border p-2 mt-3">
-                <img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
                 <div class="media-body">
-                    <h4>Tiêu đề bài đăng</h4> 
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
                     <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
-                    <small><img src="{{ url('public/icons/facebook.png') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
-                    <small><i class="fa fa-map" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+                    <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
+                    <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
 
             <div class="media border p-2 mt-3">
-                <img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
                 <div class="media-body">
-                    <h4>Tiêu đề bài đăng</h4> 
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
                     <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
-                    <small><img src="{{ url('public/icons/facebook.png') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
-                    <small><i class="fa fa-map" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+                    <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
+                    <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
 
             <div class="media border p-2 mt-3">
-                <img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
                 <div class="media-body">
-                    <h4>Tiêu đề bài đăng</h4> 
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
                     <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
-                    <small><img src="{{ url('public/icons/facebook.png') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
-                    <small><i class="fa fa-map" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+                    <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
+                    <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
 
             <div class="media border p-2 mt-3">
-                <img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
                 <div class="media-body">
-                    <h4>Tiêu đề bài đăng</h4> 
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
                     <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
-                    <small><img src="{{ url('public/icons/facebook.png') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
-                    <small><i class="fa fa-map" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+                    <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
+                    <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
-
         </div>
 
     </div>

@@ -1,5 +1,8 @@
 @extends('layout.master_admin')
 @section('title', 'Manage new')
+@section('link_css')
+    <link rel="stylesheet" href="{{ url('public/css/media.css') }}">
+@endsection
 {{-- ========================================================= --}}
 
 @section('content')
@@ -83,104 +86,32 @@
             </a>
         </div>
 
+        
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
-            <table class="table table-striped table-inverse table-responsive-stack" id="tableOne">
-                <thead class="thead-inverse">
-                    <tr>
-                        <th><input type="checkbox" id="master"></th>
-                        <th>STT</th>
-                        <th>tiêu đề</th>
-                        <th>Ngày đăng</th>
-                        <th>Hình ảnh</th>
-                        <th>Tùy chọn</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">1</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+            <div class="media border p-2 mt-3">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
+                <div class="media-body">
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
+                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
+                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
+                    <span class="badge badge-primary">Đã duyệt</span>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+                    <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
+                    <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
 
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">2</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">3</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">4</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
-
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
         </div>
+
     </div>
     <!-- /.container-fluid -->
 @endsection
