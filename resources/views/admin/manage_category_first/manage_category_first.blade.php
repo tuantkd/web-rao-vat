@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -164,4 +164,12 @@
             });
         </script>
     @endif
+@endsection
+
+@section('link_js')
+    <script>
+        $('#btn_refresh').click(function(){
+            $('#nameCategoryLevel1').val('');
+        });
+    </script>
 @endsection

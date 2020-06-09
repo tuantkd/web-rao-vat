@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -59,7 +59,7 @@
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin mb-1">
             <div class="form-group inputSearch">
-                <select data-live-search="true" title="Nhập tỉnh để tìm kiếm"
+                <select data-live-search="true" title="Nhập loại để tìm kiếm"
                     class="form-control selectpicker">
                     @foreach ($allTypePost as $value)
                         <option value="{{ $value->post_type_name }}">{{ $value->post_type_name }}</option>
@@ -131,4 +131,12 @@
             });
         </script>
     @endif
+@endsection
+
+@section('link_js')
+    <script>
+        $('#btn_refresh').click(function(){
+            $('#typeNamePost').val('');
+        });
+    </script>
 @endsection

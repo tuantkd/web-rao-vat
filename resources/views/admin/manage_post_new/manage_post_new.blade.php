@@ -71,14 +71,15 @@
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>    
                     <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
                     <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
 
-                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                    <a name="" id="" class="btn btn-outline-info btn_function btn_edit" href="#" role="button" title="Phê duyệt">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
                     </a>
-                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -92,14 +93,15 @@
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>        
                     <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
                     <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
 
-                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                    <a name="" id="" class="btn btn-outline-info btn_function btn_edit" href="#" role="button" title="Phê duyệt">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
                     </a>
-                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -113,14 +115,15 @@
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>    
                     <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
                     <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
 
-                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                    <a name="" id="" class="btn btn-outline-info btn_function btn_edit" href="#" role="button" title="Phê duyệt">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
                     </a>
-                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -134,14 +137,15 @@
                     <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> | 
                     <span class="badge badge-primary">Đã duyệt</span>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>       
                     <small><img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-circle" alt=""> Nguyễn Văn A </small> | 
                     <small><i class="fa fa-map-marker" aria-hidden="true"></i> TP.Hồ Chí Minh</small>
 
-                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button">
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                    <a name="" id="" class="btn btn-outline-info btn_function btn_edit" href="#" role="button" title="Phê duyệt">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
                     </a>
-                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button">
+
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>

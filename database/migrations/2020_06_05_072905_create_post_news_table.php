@@ -38,6 +38,7 @@ class CreatePostNewsTable extends Migration
             $table->float('hide_new');
             $table->mediumText('category_new');
             $table->string('status');
+            $table->integer('save_post');
             $table->timestamps();
         });
     }

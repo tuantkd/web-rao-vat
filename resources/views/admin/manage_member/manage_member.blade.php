@@ -22,45 +22,20 @@
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập sđt để tìm kiếm"
                     class="form-control selectpicker">
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
-                    <option>Grapes</option>
-                    <option>Water Melon</option>
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
-                    <option>Grapes</option>
-                    <option>Water Melon</option>
+                    @foreach ($member as $value)
+                        <option value="{{ $value->phone }}">{{ $value->phone }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập tên để tìm kiếm"
                     class="form-control selectpicker">
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
-                    <option>Grapes</option>
-                    <option>Water Melon</option>
-                    <option>Mango</option>
-                    <option>Orange</option>
-                    <option>Lychee</option>
-                    <option>Pineapple</option>
-                    <option>Apple</option>
-                    <option>Banana</option>
-                    <option>Grapes</option>
-                    <option>Water Melon</option>
+                    @foreach ($member as $value)
+                        <option value="{{ $value->username }}">{{ $value->username }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>

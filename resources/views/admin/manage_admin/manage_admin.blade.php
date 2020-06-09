@@ -45,7 +45,7 @@
 
     <div class="row">
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mr-auto mb-1">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mr-auto mb-1">
             <a name="" id="" class="btn btn-danger" href="#" role="button">
                  Delete all
             </a>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="quay lại">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -131,6 +131,17 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
+            <div class="form-group inputSearch">
+                <select data-live-search="true" title="Nhập sđt để tìm kiếm"
+                    class="form-control selectpicker">
+                    @foreach ($admin as $value)
+                        <option value="{{ $value->phone }}">{{ $value->phone }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto searchAdmin mb-1">
@@ -218,5 +229,11 @@
                 }
             }
         }
+    </script>
+
+    <script>
+        $('#btn_refresh').click(function () {
+            $('#fullname, #username, #email, #password, #birthday, #phone, #address').val('');
+        });
     </script>
 @endsection
