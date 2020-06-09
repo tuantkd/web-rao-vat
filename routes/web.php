@@ -68,6 +68,24 @@ Route::get('admin/manage-admin', [
     'uses' => 'AdminController@manage_admin'
 ]);
 
+// Trang thêm admin
+Route::get('admin/add-admin-new', [
+    'as' => 'add_admin-new',
+    'uses' => 'AdminController@add_admin_new'
+]);
+
+// Trang xem thông tin cá nhân
+Route::get('admin/profile-user', [
+    'as' => 'profile-user',
+    'uses' => 'AdminController@profile_user'
+]);
+
+// Trang thay đổi mật khẩu
+Route::get('admin/change-password', [
+    'as' => 'change-password',
+    'uses' => 'AdminController@change_password'
+]);
+
 // trang thêm admin
 Route::post('admin/manage-admin/add-admin', [
     'as' => 'add_admin',

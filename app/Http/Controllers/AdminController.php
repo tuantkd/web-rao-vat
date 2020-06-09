@@ -37,6 +37,22 @@ class AdminController extends Controller
         ]);
     }
 
+
+    // trang thông tin cá nhân
+    public function profile_user(Request $request){
+        return view('admin.profile_admin.profile_user');
+    }
+
+    // trang thay đổi mật khẩu
+    public function change_password(Request $request){
+        return view('admin.profile_admin.change_password');
+    }
+
+    // trang thêm mới admin
+    public function add_admin_new(Request $request){
+        return view('admin.manage_admin.add_admin');
+    }
+
     // thêm admin
     public function add_admin(Request $request){
         $this->validate($request,
