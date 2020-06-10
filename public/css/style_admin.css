@@ -65,10 +65,6 @@
     text-transform: uppercase;
 }
 
-.modal .modal-body .form-group{
-    width: 80%;
-}
-
 .modal .modal-body .form-group label{
     font-weight: 500;
 }
