@@ -5,12 +5,13 @@
 
 <!-- ============================= -->
 @section('content')
-    
-    <div class="row">
-      <div class="col-xl-12 col-md-12 mt-0">
-         <div class="card shadow h-100">
+
+<div class="row">
+
+    <div class="col-xl-12 col-md-12 mt-0">
+        <div class="card shadow h-100">
             <div class="card-header">
-               <h4 class="h4 mb-0 text-gray-800">Quản trị viên</h4>
+                <h4 class="h4 mb-0 text-gray-800">Quản trị viên</h4>
             </div>
             <div class="card-body p-2">
                 <!-- row1 -->
@@ -22,14 +23,13 @@
                         </a>
                     </div>
                     <!-- col-md-8 -->
-                    
+
                     <!-- col-md-4 -->
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1 mt-1">
                         <div class="input-group">
-                            <select data-live-search="true" title="Chọn nhập tìm kiếm ..."
-                            class="form-control selectpicker">
+                            <select data-live-search="true" title="Chọn nhập tìm kiếm ..." class="form-control selectpicker">
                                 @foreach ($admin as $value)
-                                    <option value="{{ $value->username }}">{{ $value->username }}</option>
+                                <option value="{{ $value->username }}">{{ $value->username }}</option>
                                 @endforeach
                             </select>
                             <div class="input-group-append">
@@ -50,21 +50,21 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="table-responsive|table-responsive-sm|table-responsive-md|table-responsive-lg|table-responsive-xl">
-                        <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
-                            <thead class="thead-dark|thead-light">
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Họ và tên</th>
-                                    <th>Tên tài khoản</th>
-                                    <th>Giới tính</th>
-                                    <th>Ngày sinh</th>
-                                    <th>Điện thoại</th>
-                                    <th>Địa chỉ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
+                                <thead class="thead-dark|thead-light">
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Họ và tên</th>
+                                        <th>Tên tài khoản</th>
+                                        <th>Giới tính</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Điện thoại</th>
+                                        <th>Địa chỉ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                @foreach ($admin as $key => $value)
+                                    @foreach ($admin as $key => $value)
                                     <tr>
                                         <td scope="row">{{ ++$key }}</td>
                                         <td>{{ $value->fullname }}</td>
@@ -74,61 +74,63 @@
                                         <td>{{ $value->phone}}</td>
                                         <td>{{ $value->address }}</td>
                                     </tr>
-                                @endforeach
-                                
-                            </tbody>
-                        </table>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <!-- row2 -->
                 </div>
-                <!-- row2 -->
-
             </div>
-         </div>
-      </div>
-   </div>
+            {{-- end card --}}
+        </div>
+    </div>
 
-   
-       
+
+
 
     @if (Session::has('add_admin'))
-        <script type="text/javascript">
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Đã thêm tài khoản admin',
-                showConfirmButton: false,
-                timer: 2000
-            });
-        </script>
+    <script type="text/javascript">
+        Swal.fire({
+            position: 'top-end'
+            , icon: 'success'
+            , title: 'Đã thêm tài khoản admin'
+            , showConfirmButton: false
+            , timer: 2000
+        });
+
+    </script>
     @endif
-    
+
     <script>
         $('#exampleModal').on('show.bs.modal', event => {
             var button = $(event.relatedTarget);
             var modal = $(this);
         });
+
     </script>
 
-@endsection
-<!-- ============================= -->
+    @endsection
+    <!-- ============================= -->
 
 
-<!-- ============================= -->
-@section('link_js')
+    <!-- ============================= -->
+    @section('link_js')
     <script type="text/javascript">
-        CKEDITOR.replace( 'txt_describe_role' );
+        CKEDITOR.replace('txt_describe_role');
 
         function Test_numberphone() {
             var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
             var mobile = $('#phone').val();
-            if(mobile !==''){
-                if (vnf_regex.test(mobile) == false) 
-                {
+            if (mobile !== '') {
+                if (vnf_regex.test(mobile) == false) {
                     confirm('Số điện thoại không đúng định dạng. Vui lòng nhập lại');
                     $('#phone').val('');
                 }
             }
         }
+
     </script>
-@endsection
-<!-- ============================= -->
+    @endsection
+    <!-- ============================= -->

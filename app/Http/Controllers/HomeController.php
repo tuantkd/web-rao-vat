@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\categorys;
 
 class HomeController extends Controller
 {
     //Trang chủ
     public function index()
     {
-        return view('home.index');
+        $show_category = categorys::all();
+        return view('home.index', ['show_category' => $show_category]);
     }
 
     //Xem theo danh mục

@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     // trang quản lý admin
     public function manage_admin(Request $request){
-        $admin = DB::table('users')->get();
+        $admin = DB::table('users')->where('level_id', 1)->get();
         return view('admin.manage_admin.manage_admin')->with([
             'admin' => $admin
         ]);
@@ -96,7 +96,10 @@ class AdminController extends Controller
 
     // trang quản lý thành viên
     public function manage_member(Request $request){
-        return view('admin.manage_member.manage_member');
+        $member = DB::table('users')->where('level_id',2)->get();
+        return view('admin.manage_member.manage_member')->with([
+            'member' => $member
+        ]);
     }
 
     // Trang quản lý quyền truy cập
@@ -340,11 +343,71 @@ class AdminController extends Controller
 
     // trang quản lý ảnh bìa
     public function manage_banner(Request $request){
-        return view('admin.manage_banner.manage_banner');
+        $post_new = DB::table('post_news')->get();
+        $banner = DB::table('banners')->get();
+        return view('admin.manage_banner.manage_banner')->with([
+            'post_new' => $post_new,
+            'banner' => $banner
+        ]);
+    }
+
+    // thêm ảnh bìa
+    public function add_banner(Request $request){
+        $banner = new banners();
+
+        if($request->hasfile('upload_file')){
+            $get_file = $request->file('upload_file');
+
+            $file_image_total = $get_file->getClientOriginalName();
+
+            $get_file->move(public_path('upload/banner'), $file_image_total);
+
+            $banner->image = $file_image_total;
+        }
+        $banner->post_id = $request->input('post_id');
+        $banner->title = $request->input('title');
+        $banner->save();
+
+        $add_banner = $request->session()->get('add_banner');
+        session()->put('add_banner');
+
+        return redirect()->back()->with('add_banner', '');
+    }
+
+    // xóa ảnh bìa
+    public function delete_banner(Request $request, $id){
+        banners::destroy($id);
+
+        $delete_banner = $request->session()->get('delete_banner');
+        session()->put('delete_banner');
+
+        return redirect()->back()->with('delete_banner', '');
     }
 
     // trang quản lý tin tức
     public function manage_new(Request $request){
         return view('admin.manage_new.manage_new');
+    }
+
+    // thêm tin tức
+    public function add_new(Request $request){
+        $new = new news();
+        if($request->hasfile('file')){
+            $get_file = $request->file('file');
+
+            $file_image_total = $get_file->getClientOriginalName();
+
+            $get_file->move(public_path('upload/image_new'), $file_image_total);
+
+            $new->image = $file_image_total;
+        }
+        $new->title = $request->input('title');
+        $new->content = $request->input('content');
+        $new->save();
+
+        $add_new = $request->session()->get('add_new');
+        session()->put('add_new');
+
+        return redirect()->back()->with('add_new', '');
     }
 }

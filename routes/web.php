@@ -226,8 +226,26 @@ Route::get('admin/manage-banner', [
     'uses' => 'AdminController@manage_banner'
 ]);
 
+// thêm ảnh bìa
+Route::post('admin/manage-banner/add-banner', [
+    'as' => 'add_banner',
+    'uses' => 'AdminController@add_banner'
+]);
+
+// xóa ảnh bìa
+Route::get('admin/manage-banner/delete-banner/{id}', [
+    'as' => 'delete_banner',
+    'uses' => 'AdminController@delete_banner'
+]);
+
 // trang quản lý tin tức
 Route::get('admin/manage-new', [
     'as' => 'manage_new',
     'uses' => 'AdminController@manage_new'
+]);
+
+// thêm tin tức
+Route::post('admin/manage-new/add-new', [
+    'as' => 'add_new',
+    'uses' => 'AdminController@add_new'
 ]);

@@ -16,43 +16,69 @@
                 </div>
                 <div class="card-body" style="padding:5px;padding-top:5px;font-size:13px;">
                     <ul class="nav nav-pills flex-column">
+
+                        @foreach($show_category as $key => $value)
+
+                        @if($value->id == 1)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('view-category') }}">
                                 <i class='fas fa-home'></i> Bất động sản
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href=""><i class='fas fa-car'></i> Xe cộ</a>
-                        </li>
+                        @elseif($value->id == 2)
+                            <li class="nav-item">
+                                <a class="nav-link active" href=""><i class='fas fa-car'></i> Xe cộ</a>
+                            </li>
+                        @elseif($value->id == 3)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#"><i class='fas fa-mobile-alt'></i> Đồ điện tử</a>
+                            </li>
+                        @elseif($value->id == 4)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class='fas fa-business-time'></i> Việc làm, tuyển sinh
+                                </a>
+                            </li>
+                        @elseif($value->id == 5)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#"><i class='fas fa-dog'></i> Thú cưng</a>
+                            </li>
+                        @elseif($value->id == 6)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class='fas fa-hamburger'></i> Đồ ăn, thực phẩm và loại khác
+                                </a>
+                            </li>
+                        @elseif($value->id == 7)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt
+                                </a>
+                            </li>
+                        @elseif($value->id == 8)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#"><i class='fas fa-baby'></i> Mẹ và bé</a>
+                            </li>
+                        @elseif($value->id == 9)
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh
+                                </a>
+                            </li>
+                        @endif
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#"><i class='fas fa-mobile-alt'></i> Đồ điện tử</a>
-                        </li>
+                        @endforeach
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#"><i class='fas fa-business-time'></i> Việc làm</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#"><i class='fas fa-dog'></i> Thú cưng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class='fas fa-hamburger'></i> Đồ ăn, thực phẩm và loại khác
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#"><i class='fas fa-baby'></i> Mẹ và bé</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh
-                            </a>
-                        </li>
+                        {{-- 
+
+                        
+
+                        
+                        
+                        
+                        
+                        
+                        
                         <li class="nav-item">
                             <a class="nav-link active" href="#">
                                 <i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân
@@ -72,7 +98,9 @@
                             <a class="nav-link active" href="#">
                                 <i class='fas fa-phone-volume'></i> Dịch vụ, du lịch
                             </a>
-                        </li>
+                        </li> --}}
+                        
+
                     </ul>
                 </div>
             </div>

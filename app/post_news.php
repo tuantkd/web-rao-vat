@@ -33,4 +33,9 @@ class post_news extends Model
     {
         return $this->belongsTo('App\categorys');
     }
+
+    public function banner()
+    {
+        return $this->hasMany('App\banners');
+    }
 }

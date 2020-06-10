@@ -39,7 +39,7 @@
                                 <div class="form-group inputSearch">
                                     <label for="">Thuộc tỉnh</label>
                                     <select data-live-search="true" title="Nhập tỉnh để tìm kiếm"
-                                        class="form-control selectpicker" name="province_id">
+                                        class="form-control selectpicker" name="province_id" id="province_id">
                                         @foreach ($allProvince as $value)
                                             <option value="{{ $value->id }}">{{ $value->province_name }}</option>
                                         @endforeach
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -165,5 +165,13 @@
             });
         </script>
     @endif
+@endsection
+
+@section('link_js')
+    <script>
+        $('#btn_refresh').click(function(){
+            $('#nameDistrict, #province_id').val('');
+        });
+    </script>
 @endsection
 

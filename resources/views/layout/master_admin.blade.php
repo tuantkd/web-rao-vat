@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('title')</title> 
-    <link rel="icon" type="image/png" href="{{ url('public/logo/logo-title.png')}}">
+    <title>@yield('title')</title>
+    <link rel="icon" type="image/png" href="{{ url('public/logo/logo-title.png') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ url('public/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -36,95 +37,107 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
-    
 
     @yield('link_css')
 
     <style type="text/css" media="screen">
         table {
-          margin: 5;
-          padding: 0;
-          width: 100%;
-          table-layout: auto;
-          border-radius:5px;
+            margin: 5;
+            padding: 0;
+            width: 100%;
+            table-layout: auto;
+            border-radius: 5px;
         }
 
         table tr {
-          background-color: #f8f8f8;
-          border: 1px solid #ddd;
-          padding: .10em;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: .10em;
         }
 
         table th,
         table td {
-          padding: .200em;
-          text-align: center;
-          border: 1px solid #ddd;
-          font-size: 12px;
+            padding: .200em;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 12px;
         }
 
         table th {
-          font-size: 10px;
-          text-transform: uppercase;
-          color: black;font-weight: bold;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: black;
+            font-weight: bold;
         }
 
         @media screen and (max-width: 600px) {
-          table {
-            border: 0;
-            width: 100%;
-          }
+            table {
+                border: 0;
+                width: 100%;
+            }
 
-          table thead {
-            clip: rect(0 0 0 0);
-            height: 1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-          }
-          
-          table tr {
-            display: block;
-            margin-bottom: .100em;
-          }
-          
-          table td {
-            border-bottom: 1px solid #ddd;
-            display: block;
-            font-size: .6em;
-            text-align: right;
+            table thead {
+                clip: rect(0 0 0 0);
+                height: 1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+            }
 
-          }
-          
-          table td::before {
-            /*
-            * aria-label has no advantage, it won't be read inside a table
-            content: attr(aria-label);
-            */
-            content: attr(data-label);
-            float: left;
-            font-weight: bold;
-            text-transform: uppercase;
-          }
-          
-          table td:last-child {
-            border-bottom: 0;border: 1px solid #ddd;
-          } 
-      </style>
+            table tr {
+                display: block;
+                margin-bottom: .100em;
+            }
 
+            table td {
+                border-bottom: 1px solid #ddd;
+                display: block;
+                font-size: .6em;
+                text-align: right;
 
+            }
+
+            table td::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            table td:last-child {
+                border-bottom: 0;
+                border: 1px solid #ddd;
+            }
+
+            body{
+                font-family: Muli, sans-serif;
+                background-color: #f1f1f1;
+            }
+    </style>
 </head>
 
-<body id="page-top" style="font-family: 'Muli', sans-serif;background-color:#f1f1f1;">
+<body id="page-top">
 
     <style type="text/css">
         @media (max-width:600px) {
-            #accordionSidebar{
-                display:none;
+            #accordionSidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #accordionSidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            #accordionSidebar {
+                display: none;
             }
         }
     </style>
-    
+
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -136,7 +149,7 @@
                     <img src="{{ url('public/logo/transparent-text.png') }}" style="max-width:100%;height:45px;">
                 </div>
             </a>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -217,12 +230,12 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
+                    aria-expanded="true" aria-controls="collapsePages1">
                     <i class="fas fa-map-marked-alt"></i>
                     <span>Đơn vị hành chính</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tùy chọn</h6>
                         <a class="collapse-item" href="{{ route('manage_province') }}">Tỉnh/Thành phố</a>
@@ -266,8 +279,7 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button class="btn btn-link d-md-none rounded-circle mr-3"
-                    onclick="myFunction()">
+                    <button class="btn btn-link d-md-none rounded-circle mr-3" onclick="myFunction()">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -301,7 +313,7 @@
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">3+</span>
@@ -331,6 +343,7 @@
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
+                            <!-- Dropdown - Messages -->
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-users fa-fw"></i>
@@ -359,7 +372,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                
+
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả</a>
                             </div>
                         </li>
@@ -370,9 +383,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Huynh Net</span>
                                 <img class="img-profile rounded-circle"
-                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
+                                    style="width: 30px; margin-right: 10px;">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Huynh Net</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -436,7 +450,8 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Chọn "Đăng xuất" bên dưới nếu bạn đã sẵn sàng kết thúc phiên hiện tại của mình.</div>
+                    <div class="modal-body">Chọn "Đăng xuất" bên dưới nếu bạn đã sẵn sàng kết thúc phiên hiện tại của
+                        mình.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Đóng</button>
                         <a class="btn btn-danger btn-sm" href=""><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
@@ -445,217 +460,217 @@
             </div>
         </div>
 
-        
+
     </div>
-    
+
 </body>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ url('public/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ url('public/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="{{ url('public/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url('public/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{ url('public/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{{ url('public/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="{{ url('public/js/sb-admin-2.min.js') }}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{ url('public/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ url('public/vendor/chart.js/Chart.min.js') }}"></script>
+<!-- Page level plugins -->
+<script src="{{ url('public/vendor/chart.js/Chart.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ url('public/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ url('public/js/demo/chart-pie-demo.js') }}"></script>
+<!-- Page level custom scripts -->
+<script src="{{ url('public/js/demo/chart-area-demo.js') }}"></script>
+<script src="{{ url('public/js/demo/chart-pie-demo.js') }}"></script>
 
-    <!-- select live search -->
-    <script type="text/javascript"
+<!-- select live search -->
+<script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript"
+<script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
-            $('.table-responsive-stack').find("th").each(function (i) {
+<script>
+    $(document).ready(function () {
+        // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
+        $('.table-responsive-stack').find("th").each(function (i) {
 
-                $('.table-responsive-stack td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
-                $('.table-responsive-stack-thead').hide();
-            });
+            $('.table-responsive-stack td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
+            $('.table-responsive-stack-thead').hide();
+        });
 
-            $('.table-responsive-stack').each(function () {
-                var thCount = $(this).find("th").length;
-                var rowGrow = 100 / thCount + '%';
-                //console.log(rowGrow);
-                $(this).find("th, td").css('flex-basis', rowGrow);
-            });
+        $('.table-responsive-stack').each(function () {
+            var thCount = $(this).find("th").length;
+            var rowGrow = 100 / thCount + '%';
+            //console.log(rowGrow);
+            $(this).find("th, td").css('flex-basis', rowGrow);
+        });
 
-            function flexTable() {
-                if ($(window).width() < 768) {
+        function flexTable() {
+            if ($(window).width() < 768) {
 
-                    $(".table-responsive-stack").each(function (i) {
-                        $(this).find(".table-responsive-stack-thead").show();
-                        $(this).find('thead').hide();
-                    });
+                $(".table-responsive-stack").each(function (i) {
+                    $(this).find(".table-responsive-stack-thead").show();
+                    $(this).find('thead').hide();
+                });
 
-                    // window is less than 768px   
-                } else {
+                // window is less than 768px   
+            } else {
 
 
-                    $(".table-responsive-stack").each(function (i) {
-                        $(this).find(".table-responsive-stack-thead").hide();
-                        $(this).find('thead').show();
-                    });
-                }
-                // flextable   
+                $(".table-responsive-stack").each(function (i) {
+                    $(this).find(".table-responsive-stack-thead").hide();
+                    $(this).find('thead').show();
+                });
             }
-
-            flexTable();
-
-            window.onresize = function (event) {
-                flexTable();
-            };
-        }); 
-
-    </script>
-
-    <script>
-        $(document).ready(function () {
-
-
-            $('#master').on('click', function (e) {
-                if ($(this).is(':checked', true)) {
-                    $(".sub_chk").prop('checked', true);
-                } else {
-                    $(".sub_chk").prop('checked', false);
-                }
-            });
-
-
-            $('.delete_all').on('click', function (e) {
-
-
-                var allVals = [];
-                $(".sub_chk:checked").each(function () {
-                    allVals.push($(this).attr('data-id'));
-                });
-
-
-                if (allVals.length <= 0) {
-                    alert("Vui lòng chọn thành viên cần xóa");
-                } else {
-
-
-                    var check = confirm("Bạn có chắc xóa không?");
-                    if (check == true) {
-
-
-                        var join_selected_values = allVals.join(",");
-
-
-                        $.ajax({
-                            url: "",
-                            type: 'GET',
-                            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                            data: 'ids=' + join_selected_values,
-                            success: function (data) {
-                                $(".sub_chk:checked").each(function () {
-                                    $(this).parents("tr").remove();
-                                });
-                                alert('Đã xóa tất cả các tài khoản được chọn');
-                            }
-                        });
-
-
-                        $.each(allVals, function (index, value) {
-                            $('table tr').filter("[data-row-id='" + value + "']").remove();
-                        });
-                    }
-                }
-            });
-
-
-            $('[data-toggle=confirmation]').confirmation({
-                rootSelector: '[data-toggle=confirmation]',
-                onConfirm: function (event, element) {
-                    element.trigger('confirm');
-                }
-            });
-
-
-            $(document).on('confirm', function (e) {
-                var ele = e.target;
-                e.preventDefault();
-
-                $.ajax({
-                    url: "",
-                    type: 'GET',
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    success: function (data) {
-                        if (data['success']) {
-                            $("#" + data['tr']).slideUp("slow");
-                        } else if (data['error']) {
-                            alert(data['error']);
-                        } else {
-                            alert('Rất tiếc có lỗi xảy ra!');
-                        }
-                    },
-                    error: function (data) {
-                        alert(data.responseText);
-                    }
-                });
-
-
-                return false;
-            });
-        });
-    </script>
-
-    {{-- date time input --}}
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-
-    <script>
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-    </script>
-
-    {{-- validation form --}}
-    <script>
-        // Self-executing function
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
-
-
-
-    <script type="text/javascript">
-        function myFunction() {
-          var x = document.getElementById("accordionSidebar");
-          if (x.style.display === "block") {
-            x.style.display = "none";
-          } else {
-            x.style.display = "block";
-          }
+            // flextable   
         }
-    </script>
+
+        flexTable();
+
+        window.onresize = function (event) {
+            flexTable();
+        };
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
 
 
-    @yield('link_js')
+        $('#master').on('click', function (e) {
+            if ($(this).is(':checked', true)) {
+                $(".sub_chk").prop('checked', true);
+            } else {
+                $(".sub_chk").prop('checked', false);
+            }
+        });
+
+
+        $('.delete_all').on('click', function (e) {
+
+
+            var allVals = [];
+            $(".sub_chk:checked").each(function () {
+                allVals.push($(this).attr('data-id'));
+            });
+
+
+            if (allVals.length <= 0) {
+                alert("Vui lòng chọn thành viên cần xóa");
+            } else {
+
+
+                var check = confirm("Bạn có chắc xóa không?");
+                if (check == true) {
+
+
+                    var join_selected_values = allVals.join(",");
+
+
+                    $.ajax({
+                        url: "",
+                        type: 'GET',
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: 'ids=' + join_selected_values,
+                        success: function (data) {
+                            $(".sub_chk:checked").each(function () {
+                                $(this).parents("tr").remove();
+                            });
+                            alert('Đã xóa tất cả các tài khoản được chọn');
+                        }
+                    });
+
+
+                    $.each(allVals, function (index, value) {
+                        $('table tr').filter("[data-row-id='" + value + "']").remove();
+                    });
+                }
+            }
+        });
+
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+            onConfirm: function (event, element) {
+                element.trigger('confirm');
+            }
+        });
+
+
+        $(document).on('confirm', function (e) {
+            var ele = e.target;
+            e.preventDefault();
+
+            $.ajax({
+                url: "",
+                type: 'GET',
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function (data) {
+                    if (data['success']) {
+                        $("#" + data['tr']).slideUp("slow");
+                    } else if (data['error']) {
+                        alert(data['error']);
+                    } else {
+                        alert('Rất tiếc có lỗi xảy ra!');
+                    }
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+
+
+            return false;
+        });
+    });
+</script>
+
+{{-- date time input --}}
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+<script>
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+</script>
+
+{{-- validation form --}}
+<script>
+    // Self-executing function
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+
+
+<script type="text/javascript">
+    function myFunction() {
+        var x = document.getElementById("accordionSidebar");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>
+
+
+@yield('link_js')
 
 </html>

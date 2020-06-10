@@ -1,5 +1,8 @@
 @extends('layout.master_admin')
 @section('title', 'Manage new')
+@section('link_css')
+    <link rel="stylesheet" href="{{ url('public/css/media.css') }}">
+@endsection
 {{-- ========================================================= --}}
 
 @section('content')
@@ -13,10 +16,6 @@
     <!-- Content Row -->
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mr-auto mb-1">
-            <a name="" id="" class="btn btn-danger" href="#" role="button">
-                Delete all
-            </a>
-
             <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#modal_add_new">
                 <i class="fa fa-plus" aria-hidden="true"></i> Thêm tin tức
             </a>
@@ -31,21 +30,40 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form class="needs-validation" action="" method="POST" novalidate>
+                        <form class="needs-validation" action="{{ route('add_new') }}" enctype="multipart/form-data" method="POST" novalidate>
+                            @csrf
+                            
                             <div class="modal-body">
+
                                 <div class="form-group">
                                     <label for="">Tiêu đề</label>
                                     <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Enter title of new" required>
                                     <small class="invalid-feedback">Vui lòng nhập tiêu đề tin tức</small>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="content">Nội dung</label>
+                                    <textarea class="form-control" name="content" id="content" rows="5"
+                                    aria-describedby="helpId" placeholder="Enter content" required></textarea>
+                                    <small class="invalid-feedback">Vui lòng nhập nội dung</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Hình ảnh</label>
+                                    <input type="file" class="form-control-file" name="file" id="file" placeholder="" aria-describedby="fileHelpId" required>
+                                    <small id="fileHelpId" class="invalid-feedback">Vui lòng nhập hình ảnh</small>
+                                </div>
+
                             </div>
+
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-success">THÊM TIN TỨC</button>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -83,104 +101,119 @@
             </a>
         </div>
 
-
+    
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
-            <table class="table table-striped table-inverse table-responsive-stack" id="tableOne">
-                <thead class="thead-inverse">
-                    <tr>
-                        <th><input type="checkbox" id="master"></th>
-                        <th>STT</th>
-                        <th>tiêu đề</th>
-                        <th>Ngày đăng</th>
-                        <th>Hình ảnh</th>
-                        <th>Tùy chọn</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">1</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+            <style>
+                .media-body .btn_edit{
+                    margin-left: 810px;
+                }
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+                @media screen and (max-width: 768px) {
+                    .media-body .btn_edit{
+                        margin-left: 160px;
+                    }
 
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">2</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+                }
+            </style>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+            <div class="media border p-2 mt-3">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
 
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">3</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+                <div class="media-body">
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
+                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
+                    <span class="badge badge-primary">Đã duyệt</span>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
 
-                    <tr>
-                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                        <td scope="row">4</td>
-                        <td>Tin tức 1</td>
-                        <td>10/10/2019</td>
-                        <td>
-                            <img src="{{ url('public/img/hp-15-da0051tu-core-i3-7020u-1.png') }}" class="img-thumbnail rounded-circle" alt="" style="width: 50px; height: 50px;">
-                        </td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button"
-                                title="Xem chi tiết">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </a>
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button" title="Chỉnh sửa">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
 
-                            <a name="" id="" class="btn btn-danger" href="#" role="button" title="Xóa">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
+            <div class="media border p-2 mt-3">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
 
+                <div class="media-body">
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
+                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
+                    <span class="badge badge-primary">Đã duyệt</span>
 
-                </tbody>
-            </table>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button" title="Chỉnh sửa">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="media border p-2 mt-3">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
+
+                <div class="media-body">
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
+                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
+                    <span class="badge badge-primary">Đã duyệt</span>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button" title="Chỉnh sửa">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="media border p-2 mt-3">
+                <a href="#"><img src="{{ url('public/images/car-2.jpg') }}" alt="John Doe" class="img-fluid mr-3" style="width:170px;"></a>
+
+                <div class="media-body">
+                    <a href="" id="title"><h4>Tiêu đề bài đăng </h4></a>
+                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
+                    <span class="badge badge-primary">Đã duyệt</span>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>    
+
+                    <a name="" id="" class="btn btn-primary btn_function btn_edit" href="#" role="button" title="Chỉnh sửa">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+                    </a>
+                    <a name="" id="" class="btn btn-danger btn_function btn_delete" href="#" role="button" title="xóa">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
+
     </div>
     <!-- /.container-fluid -->
+
+    @if (Session::has('add_new'))    
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Đã thêm tin tức thành công',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+@endif
+@endsection
+
+@section('link_js')
+    <script>
+        $('#btn_refresh').click(function(){
+            $('#title, #content, #file').val('');
+        });
+    </script>
 @endsection

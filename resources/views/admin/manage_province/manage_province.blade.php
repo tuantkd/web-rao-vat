@@ -13,7 +13,7 @@
     <!-- Content Row -->
     <div class="row">
 
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mb-1">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-1">
 
             <a name="" id="" class="btn btn-danger" href="#" role="button">
                 Delete all
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -58,7 +58,7 @@
 
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin mb-1">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 searchAdmin mb-1">
             <div class="form-group inputSearch">
                 <select data-live-search="true" title="Nhập Quận/Huyện để tìm kiếm"
                     class="form-control selectpicker">
@@ -127,13 +127,13 @@
                     
                                                 <div class="form-group">
                                                     <label for="province_name">Tên tỉnh thành</label>
-                                                    <input type="text" class="form-control" name="province_name" id="province_name" value="" required>
+                                                    <input type="text" class="form-control" name="province_name" id="province_name" required>
                                                     <small id="helpId" class="invalid-feedback">Vui lòng nhập tên tỉnh thành</small>
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-primary">
+                                                <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
                                                     <i class="fa fa-refresh" aria-hidden="true"></i>
                                                 </button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -203,5 +203,11 @@
         //     var provinceName = $(e.relatedTarget).data('province-name');
         //     $(e.currentTarget).find('input[name="province_name"]').val(provinceName);
         // });
+    </script>
+
+    <script>
+        $('#btn_refresh').click(function(){
+            $('#province_name, #nameProvince').val('');
+        });
     </script>
 @endsection
