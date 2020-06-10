@@ -17,104 +17,9 @@
                 <div class="row">
                     <!-- col-md-8 -->
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8 mr-auto mb-1 mt-1">
-                        <a name="" id="" class="btn btn-danger btn-sm" href="#" role="button">
-                            <i class="fas fa-trash-alt" aria-hidden="true"></i>&ensp;Xóa đã chọn
-                        </a>
-
                         <a class="btn btn-primary btn-sm" href="{{ url('admin/add-admin-new') }}" role="button">
                             <i class="fa fa-plus" aria-hidden="true"></i>&ensp;Thêm mới
                         </a>
-                        
-
-                        <!-- The Modal -->
-                          <div class="modal fade" id="myModal">
-                            <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                              
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                  <h5 class="modal-title">Thêm mới</h5>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                  <form class="needs-validation" action="{{ route('add_admin') }}" method="POST" novalidate>
-                                        @csrf
-                                        <div class="form-group row">
-                                            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                                                <label for="">Họ và tên</label>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-                                                <input type="text" class="form-control" name="fullname" id="fullname" 
-                                            placeholder="Nhập họ và tên" required style="width:100%;">
-                                            <small class="invalid-feedback">Vui lòng nhập họ và tên</small>
-                                            </div>
-                                            
-                                            
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Tên tài khoản</label>
-                                            <input type="text" class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="Enter username" required>
-                                            <small class="invalid-feedback">Vui lòng nhập tên tài khoản</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId"     placeholder="Enter email" required>
-                                            <small class="invalid-feedback">Vui lòng nhập địa chỉ email</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="password">Mật khẩu</label>
-                                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
-                                            <small class="invalid-feedback">Vui lòng nhập mật khẩu</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="sex">Giới tính</label>
-                                            <select class="custom-select" name="sex" id="sex" required>
-                                                <option value="Nam" selected>Nam</option>
-                                                <option value="Nữ">Nữ</option>
-                                                <option value="Khác">Khác</option>
-                                            </select>
-                                            <small class="invalid-feedback">Vui lòng chọn giới tính</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Ngày sinh</label>
-                                            <input id="datepicker" class="form-control" name="birthday" id="birthday" aria-describedby="helpId" placeholder="" required/>
-                                            <small class="invalid-feedback">Vui lòng nhập ngày sinh</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="phone">Số điện thoại</label>
-                                            <input type="number" class="form-control" name="phone" id="phone" aria-describedby="helpId" placeholder="Enter phone number" onblur="Test_numberphone()" required>
-                                            <small class="invalid-feedback">Vui lòng nhập số điện thoại</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="address">Địa chỉ</label>
-                                            <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
-                                            <small class="invalid-feedback">Vui lòng nhập địa chỉ</small>
-                                        </div>
-
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                        <button type="submit" class="btn btn-primary">THÊM</button>
-                                    </form>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                                
-                              </div>
-                            </div>
-                          </div>
-
-
                     </div>
                     <!-- col-md-8 -->
                     
@@ -148,7 +53,6 @@
                         <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
                             <thead class="thead-dark|thead-light">
                                 <tr>
-                                    <th><input type="checkbox" id="master"></th>
                                     <th>STT</th>
                                     <th>Họ và tên</th>
                                     <th>Tên tài khoản</th>
@@ -162,7 +66,6 @@
 
                                 @foreach ($admin as $key => $value)
                                     <tr>
-                                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
                                         <td scope="row">{{ ++$key }}</td>
                                         <td>{{ $value->fullname }}</td>
                                         <td>{{ $value->username}}</td>

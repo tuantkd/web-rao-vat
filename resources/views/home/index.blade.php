@@ -204,16 +204,16 @@
                 <div class="card" style="margin-bottom:10px;">
                     <div class="card-body" style="padding:5px;">
                         <div class="d-flex">
-                          <div class="p-1 flex-fill">
+                            <div class="p-1 flex-fill">
                                 <button type="button" class="btn btn-danger">
                                     <i class="fas fa-money-check-alt"></i> Nạp tiền
                                 </button>
-                          </div>
-                          <div class="p-1 flex-fill">
+                            </div>
+                            <div class="p-1 flex-fill">
                                 <button type="button" class="btn btn-danger">
                                     <i class="fas fa-search"></i> Tìm kiếm chọn lọc
                                 </button>
-                          </div>
+                            </div>
                         </div>
 
                     </div>
