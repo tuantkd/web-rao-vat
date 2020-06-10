@@ -245,6 +245,11 @@ Route::get('admin/manage-new', [
 ]);
 
 // thêm tin tức
+Route::get('admin/manage-new/add-new', [
+    'as' => 'get_add_new',
+    'uses' => 'AdminController@get_add_new'
+]);
+
 Route::post('admin/manage-new/add-new', [
     'as' => 'add_new',
     'uses' => 'AdminController@add_new'

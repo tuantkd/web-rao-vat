@@ -390,10 +390,14 @@ class AdminController extends Controller
     }
 
     // thêm tin tức
+    public function get_add_new(Request $request){
+        return view('admin.manage_new.add_new');
+    }
+
     public function add_new(Request $request){
         $new = new news();
-        if($request->hasfile('file')){
-            $get_file = $request->file('file');
+        if($request->hasfile('upload_file')){
+            $get_file = $request->file('upload_file');
 
             $file_image_total = $get_file->getClientOriginalName();
 
@@ -402,7 +406,7 @@ class AdminController extends Controller
             $new->image = $file_image_total;
         }
         $new->title = $request->input('title');
-        $new->content = $request->input('content');
+        $new->content = $request->input('summary-ckeditor');
         $new->save();
 
         $add_new = $request->session()->get('add_new');

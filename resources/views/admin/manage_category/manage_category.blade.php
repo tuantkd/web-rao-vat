@@ -53,7 +53,7 @@
                             <tbody>
                                 @foreach ($allCategory as $key => $value)
                                     <tr>
-                                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
+                                        <td data-lable=""><input type="checkbox" class="sub_chk" data-id=""></td>
                                         <td>{{ ++$key }}</td>
                                         <td>{{ $value->category_name }}</td>
                                         <td>
@@ -71,22 +71,19 @@
 
                 <div class="col-12 col-md-5">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header text-center" style="color: green;font-weight: 700;">
                             THÊM DANH MỤC
                         </div>
                         <div class="card-body">
                             <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
                                 @csrf
 
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <label for="">Tên danh mục</label>
                                     <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên doanh mục" required>
                                     <small class="invalid-feedback">Vui lòng nhập danh mục</small>
                                 </div>
-                                <button type="button" class="btn btn-outline-primary" id="refresh" title="Quay lại">
-                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                </button>
-                                <button type="submit" class="btn btn-success">THÊM DANH MỤC</button>
+                                <button type="submit" class="btn btn-success btn-block">THÊM DANH MỤC</button>
                                     
                             </form>
                         </div>
