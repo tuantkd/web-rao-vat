@@ -6,13 +6,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-    protected $table='users';
+
+    protected $table = 'users';
+
     protected $fillable = [
-        'id', 'level_id', 'fullname', 'username', 'email', 'verifyToken', 'verify', 'password', 'sex', 'birthday', 'phone',
-        'address', 'number_money'
+        'id', 'level_id', 'fullname', 'username', 'email', 'verifyToken', 'verify',
+        'password', 'sex', 'birthday', 'phone', 'address', 'number_money', 'avatar',
+        'facebook_id', 'google_id', 'access_token'
     ];
 
 
@@ -26,7 +29,8 @@ class User extends Authenticatable
 
     public $timestamps = true;
 
-    public function level(){
+    public function level()
+    {
         return $this->belongTo('App\levels');
     }
 }

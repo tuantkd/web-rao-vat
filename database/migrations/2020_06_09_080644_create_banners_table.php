@@ -11,11 +11,9 @@ class CreateBannersTable extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('post_id')->nullable();
             $table->foreign('post_id')->references('id')->on('post_news')->onDelete('cascade');
-
-            $table->mediumText('title');
+            $table->mediumText('title')->nullable();
             $table->mediumText('image')->nullable();
 
             $table->timestamps();

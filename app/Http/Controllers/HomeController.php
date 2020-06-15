@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\categorys;
+use App\User;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

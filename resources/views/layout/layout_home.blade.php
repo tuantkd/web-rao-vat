@@ -43,6 +43,20 @@
     <link rel="stylesheet" href="{{ url('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/css/style_post_new.css') }}">
 
+    <style type="text/css" media="screen">
+        .register-login .nav-item .link-image {
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .register-login .nav-item .link-image img {
+            max-width: 100%;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+    </style>
+
 </head>
 
 <body style="font-family: 'Muli', sans-serif;background-color:#f1f1f1;">
@@ -63,7 +77,6 @@
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="border:none;">
                     <i class="fas fa-user" style="color:white;font-size:15px;"></i>
-                    <!-- Nếu chưa đăng nhập thì hiện icon login -->
                 </button>
             </span>
         </div>
@@ -82,7 +95,23 @@
             </form>
 
             <ul class="nav justify-content-end register-login">
-
+                @if(Auth::check())
+                <li class="nav-item" style="margin-right:5px;">
+                    <a href="{{ url('page-manage-news') }}" class="link-image">
+                        @if(Auth::user()->avatar != NULL)
+                        <img src="{{ Auth::user()->avatar }}"> ​
+                        @else
+                        <img src="{{ url('public/logo/user/user-icon-edit.png') }}">
+                        @endif
+                        <span style="color:white;">{{ Auth::user()->username }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-warning" href="{{ url('post-new-category') }}" role="button">
+                        <b style="color:white;"><i class="fas fa-edit"></i> ĐĂNG TIN</b>
+                    </a>
+                </li>
+                @else
                 <li class="nav-item" style="margin-right:5px;">
                     <a class="btn btn-warning" href="{{ url('page-login') }}" role="button">
                         <i class="fas fa-sign-in-alt"></i> Đăng nhập
@@ -93,6 +122,7 @@
                         <b style="color:white;"><i class="fas fa-edit"></i> ĐĂNG TIN</b>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </nav>
@@ -104,32 +134,10 @@
 
 
     <!-- Footer -->
+    <br><br><br>
+    <br><br><br>
     <section id="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-4 col-md-4"></div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <ul class="list-unstyled list-inline social">
-                        <li class="list-inline-item"><a href=""><i class="fab fa-facebook"></i></a></li>
-
-                        <li class="list-inline-item"><a href=""><i class="fab fa-google-plus"></i></a></li>
-
-                        <li class="list-inline-item">
-                            <a href="" target="_blank">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <a href="" target="_blank">
-                                <img src="public/images/tra_dang_ky.jpg" style="max-width:100%;height:70px;">
-
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4"></div>
-            </div>
-
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
                     <p>

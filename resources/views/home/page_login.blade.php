@@ -16,14 +16,23 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <!-- ====================================================================== -->
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <form action="/action_page.php" class="needs-validation" novalidate>
+                            <form action="{{ url('post-page-login') }}" class="needs-validation" novalidate method="POST">
+                                @csrf
+
+                                @if(session()->has('message'))
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    {{ session('message') }}
+                                </div>
+                                @endif
+
                                 <div class="form-group">
                                     <label for="email">
                                         <i class="fa fa-envelope"></i> Email/Số điện thoại:
                                     </label>
-                                    <input type="text" class="form-control" id="email" placeholder="Email/số điện thoại" name="txt_email" required>
-                                    <div class="invalid-feedback">Chưa nhập địa chỉ email</div>
+                                    <input type="text" class="form-control" id="email" placeholder="Email/số điện thoại" name="txt_email_phone" required>
                                 </div>
 
                                 <div class="form-group">
@@ -38,6 +47,7 @@
                                             </button>
                                         </div>
                                     </div>
+                                    <div class="invalid-feedback">Chưa nhập mật khẩu</div>
                                 </div>
 
                                 <div class="row">
@@ -47,7 +57,7 @@
                                         </button>
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-right col-text-pwd">
-                                        <a href="" class="a-text-pwd"><b id="b-text">Quên mật khẩu</b></a>
+                                        <a href="{{ url('page-input-email') }}" class="a-text-pwd"><b id="b-text">Quên mật khẩu</b></a>
                                     </div>
                                 </div>
                                 <br>
@@ -57,18 +67,21 @@
                                 </span>
 
                             </form>
-
                         </div>
+                        <!-- ====================================================================== -->
+
 
                         <div class="vl"></div>
 
+
+                        <!-- ====================================================================== -->
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center line-social">
                             <b>Đăng nhập không cần tài khoản</b>
-                            <a class="btn btn-outline-primary button-social" href="#" role="button">
+                            <a class="btn btn-outline-primary button-social" href="{{ url('login/facebook') }}" role="button">
                                 <img src="{{ url('public/logo/facebook-icon.png') }}" style="max-width:100%;height:30px;">
                                 Đăng nhập với Facebook
                             </a>
-                            <a class="btn btn-outline-secondary button-social" href="#" role="button">
+                            <a class="btn btn-outline-secondary button-social" href="{{ url('login/google') }}" role="button">
                                 <img src="{{ url('public/logo/google-icon.png') }}" style="max-width:100%;height:25px;">
                                 Đăng nhập với Google
                             </a>
@@ -95,6 +108,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- ====================================================================== -->
                     </div>
                 </div>
             </div>
@@ -141,6 +155,8 @@
     });
 
 </script>
+
+
 
 @endsection
 {{-- ==================================================== --}}
