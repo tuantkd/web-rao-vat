@@ -31,7 +31,7 @@
 
  @media screen and (max-width: 600px) {
      .card-body .media .image-post-new{
-        max-width:100%;
+        max-width:90px;
         height:60px;
         border-radius:5px;
      }

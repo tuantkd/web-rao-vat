@@ -10,32 +10,31 @@
         </div>
 
         <div class="card-body p-2">
-            <div class="row">
+            <form action="{{ route('search_category') }}" method="get">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mb-1">
+                        <a class="btn btn-danger delete_all" role="button" href="#">
+                            <i class="fa fa-trash" aria-hidden="true"></i> Xóa đã chọn
+                        </a>
+                    </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 mb-1">
-        
-                    <a name="" id="" class="btn btn-danger" href="#" role="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Xóa đã chọn
-                    </a>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1 mt-1">
-                    <div class="input-group">
-                        <select data-live-search="true" title="Chọn nhập tìm kiếm ..."
-                            class="form-control selectpicker">
-                            @foreach ($category as $value)
-                                <option value="{{ $value->category_name }}">{{ $value->category_name }}</option>
-                            @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-danger" type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1 mt-1">
+                        <div class="input-group">
+                            <select data-live-search="true" title="Chọn nhập tìm kiếm ..."
+                                class="form-control selectpicker" name="category_name_search">
+                                @foreach ($allCategory as $value)
+                                    <option value="{{ $value->category_name }}">{{ $value->category_name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
+            </form>
             <hr>
 
             <div class="row">
@@ -44,21 +43,21 @@
                         <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
                             <thead class="thead-dark|thead-light">
                                 <tr>
-                                    <th><input type="checkbox" id="master"></th>
+                                    <th><input type="checkbox" id="check_all"></th>
                                     <th>STT</th>
                                     <th>Tên doanh mục</th>
                                     <th>Tùy chọn</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($allCategory as $key => $value)
-                                    <tr>
-                                        <td data-lable=""><input type="checkbox" class="sub_chk" data-id=""></td>
-                                        <td>{{ ++$key }}</td>
-                                        <td>{{ $value->category_name }}</td>
-                                        <td>
-                                            <a name="" id="" class="btn btn-primary" href="#" role="button" title="Chỉnh sửa">
-                                                <i class="fa fa-info" aria-hidden="true"></i>
+                                @foreach ($category as $key => $value)
+                                    <tr id="tr_{{ $value->id }}">
+                                        <td data-lable=""><input type="checkbox" class="sub_check" data-id="{{ $value->id }}"></td>
+                                        <td data-label="STT">{{ ++$key }}</td>
+                                        <td data-label="Tên doanh mục">{{ $value->category_name }}</td>
+                                        <td data-label="Tùy chọn">
+                                            <a name="" id="" class="btn btn-primary" href="{{ route('get_edit_category', $value->id)}}" role="button" title="Chỉnh sửa">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -91,7 +90,7 @@
                 </div>
         
                 <div class="col-12">
-                    {{ $allCategory->links() }}
+                    {{ $category->links() }}
                 </div>
             </div>
         </div>
@@ -127,12 +126,94 @@
             });
         </script>
     @endif
+
+    @if (Session::has('edit_category'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Đã chỉnh sửa danh mục thành công',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    @endif
 @endsection
 
 @section('link_js')
     <script>
         $('#refresh').click(function(){
             $('#nameCategory').val('');
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //Click chọn tất cả các checkbox
+            $('#check_all').on('click', function(e) {
+            if($(this).is(':checked',true))  
+            {
+                $(".sub_check").prop('checked', true);  
+            } else {  
+                $(".sub_check").prop('checked',false);  
+            }  
+            });
+
+            //Click xóa tất cả đã chọn
+            $('.delete_all').on('click', function(e) {
+
+                var allVals = [];  
+                $(".sub_check:checked").each(function() {  
+                    allVals.push($(this).attr('data-id'));
+                });  
+
+                if(allVals.length <= 0)  
+                {  
+                    alert("Vui lòng chọn hàng!");  
+                }  else {  
+
+
+                    var check = confirm("Bạn có chắc chắn muốn xóa?");  
+                    if(check == true){  
+                        var join_selected_values = allVals.join(","); 
+                        $.ajax({
+                            url: "{{ route('delete_category') }}",
+                            type: 'DELETE',
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: 'ids=' + join_selected_values,
+
+                            success: function (data) {
+                                if (data['success']) {
+                                    $(".sub_checkk:checked").each(function() {  
+                                        $(this).parents("tr").remove();
+                                    });
+                                    location.reload();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Đã xóa các doanh mục',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                }else {
+                                    alert('Rất tiếc, đã xảy ra lỗi!!');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data.responseText);
+                            }
+                        });
+
+
+                    $.each(allVals, function( index, value ) {
+                        $('table tr').filter("[data-row-id='" + value + "']").remove();
+                    });
+                    }  
+                }  
+            });
+
+
         });
     </script>
 @endsection

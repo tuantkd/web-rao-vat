@@ -9,106 +9,52 @@
             <h4 class="h3 mb-0 text-gray-800">Quản lý doanh mục cấp 1</h4>
         </div>
         <div class="card-body p-2">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mb-2">
-        
-                    <a name="" id="" class="btn btn-danger" href="#" role="button">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Xóa đã chọn
-                    </a>
-        
-                    <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#modal_add_category_level1">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Thêm doanh mục
-                    </a>
-        
-                    <!-- Modal -->
-                    <div class="modal fade" id="modal_add_category_level1" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">thêm danh mục CẤP 1</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form class="needs-validation" action="{{ route('add_category_first') }}" method="POST" novalidate>
-                                    @csrf
-        
-                                    <div class="modal-body">
-                                        <div class="form-group inputSearch row">
-                                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                                <label for="">Thuộc danh mục</label>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                                <select data-live-search="true" title="Danh mục cha"
-                                                    class="form-control selectpicker" name="category_id">
-                                                    @foreach ($category as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->category_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-        
-                                        <div class="form-group row">
-                                            <div class="col-12 col-md-3">
-                                                <label for="">Tên danh mục cấp 1</label>
-                                            </div>
-                                            <div class="col-12 col-md-9">
-                                                <input type="text" class="form-control" name="nameCategoryLevel1" id="nameCategoryLevel1" aria-describedby="helpId" placeholder="Nhập danh mục cấp 1" required>
-                                                <small class="invalid-feedback">Vui lòng nhập danh mục cấp 1</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-primary" id="btn_refresh" title="Quay lại">
-                                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">THÊM</button>
-                                    </div>
-                                </form>
+            <form action="{{ route('search_category_first') }}" method="get">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mb-2">
+                        <a class="btn btn-danger delete_all" href="#" role="button">
+                            <i class="fa fa-trash" aria-hidden="true"></i> Xóa đã chọn
+                        </a>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin mb-1">
+                        <div class="form-group inputSearch">
+                            <select data-live-search="true" title="Lọc theo danh mục cha"
+                                class="form-control selectpicker" name="category_id">
+                                @foreach ($category as $value)
+                                    <option value="{{ $value->id }}">{{ $value->category_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1">
+                        <div class="input-group">
+                            <select data-live-search="true" title="Chọn nhập tìm kiếm ..."
+                                class="form-control selectpicker" name="category_child_name">
+                                @foreach ($allCategoryFirst as $value)
+                                    <option value="{{ $value->category_child_name }}">{{ $value->category_child_name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
-        
-                </div>
-                
-                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 searchAdmin mb-1">
-                    <div class="form-group inputSearch">
-                        <select data-live-search="true" title="Lọc theo danh mục cha"
-                            class="form-control selectpicker">
-                            @foreach ($category as $value)
-                                <option value="{{ $value->category_name }}">{{ $value->category_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
 
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1">
-                    <div class="input-group">
-                        <select data-live-search="true" title="Chọn nhập tìm kiếm ..."
-                            class="form-control selectpicker">
-                            @foreach ($allCategoryFirst as $value)
-                                <option value="{{ $value->category_child_name }}">{{ $value->category_child_name }}</option>
-                            @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-danger" type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
-
-            </div>
+            </form>
             <hr>
 
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 mb-4">
                     <div class="table-responsive|table-responsive-sm|table-responsive-md|table-responsive-lg|table-responsive-xl">
                         <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
                             <thead class="thead-dark|thead-light">
                                 <tr>
-                                    <th><input type="checkbox" id="master"></th>
+                                    <th><input type="checkbox" id="check_all"></th>
                                     <th>STT</th>
                                     <th>Tên doanh mục cấp 1</th>
                                     <th>Doanh mục cha</th>
@@ -117,19 +63,19 @@
                             </thead>
                             <tbody>
                                 @foreach ($categoryFirst as $key => $value)
-                                    <tr>
-                                        <td><input type="checkbox" class="sub_chk" data-id=""></td>
-                                        <td>{{ ++$key }}</td>
-                                        <td>{{ $value->category_child_name }}</td>
+                                    <tr id="tr_{{ $value->id }}">
+                                        <td><input type="checkbox" class="sub_check" data-id="{{ $value->id }}"></td>
+                                        <td data-label="STT">{{ ++$key }}</td>
+                                        <td data-label="Tên doanh mục">{{ $value->category_child_name }}</td>
                                         @php
                                             $category_pather = DB::table('categorys')->where('id', $value->category_id)->get();
                                         @endphp
                                         @foreach ($category_pather as $item)
-                                            <td>{{ $item->category_name }}</td>
+                                            <td data-label="Doanh mục cha">{{ $item->category_name }}</td>
                                         @endforeach
-                                        <td>
-                                            <a name="" id="" class="btn btn-danger" href="{{ route('delete_category_first', $value->id) }}" role="button" title="Xóa" onclick="return confirm('Bạn có chắc xóa không?')">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <td data-label="Tùy chọn">
+                                            <a class="btn btn-primary" href="" role="button" title="Chỉnh sửa">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -137,6 +83,39 @@
             
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="modal-title">Thêm doanh mục cấp 1</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <form class="needs-validation" action="{{ route('add_category_first') }}" method="POST" novalidate>
+                                @csrf
+    
+                                <div class="form-group inputSearch">
+                                    <label for="">Thuộc danh mục</label>
+                                    <select data-live-search="true" title="Danh mục cha"
+                                        class="form-control selectpicker" name="category_id">
+                                        @foreach ($category as $value)
+                                            <option value="{{ $value->id }}">{{ $value->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Tên danh mục cấp 1</label>
+                                    <input type="text" class="form-control" name="nameCategoryLevel1" id="nameCategoryLevel1" aria-describedby="helpId" placeholder="Nhập danh mục cấp 1" required>
+                                    <small class="invalid-feedback">Vui lòng nhập danh mục cấp 1</small>
+                                </div>
+
+                                <button type="submit" class="btn btn-success btn-block">THÊM</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
         
@@ -169,12 +148,79 @@
             });
         </script>
     @endif
+
+
 @endsection
 
 @section('link_js')
-    <script>
-        $('#btn_refresh').click(function(){
-            $('#nameCategoryLevel1').val('');
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //Click chọn tất cả các checkbox
+            $('#check_all').on('click', function(e) {
+            if($(this).is(':checked',true))  
+            {
+                $(".sub_check").prop('checked', true);  
+            } else {  
+                $(".sub_check").prop('checked',false);  
+            }  
+            });
+
+            //Click xóa tất cả đã chọn
+            $('.delete_all').on('click', function(e) {
+
+                var allVals = [];  
+                $(".sub_check:checked").each(function() {  
+                    allVals.push($(this).attr('data-id'));
+                });  
+
+                if(allVals.length <= 0)  
+                {  
+                    alert("Vui lòng chọn hàng!");  
+                }  else {  
+
+
+                    var check = confirm("Bạn có chắc chắn muốn xóa?");  
+                    if(check == true){  
+                        var join_selected_values = allVals.join(","); 
+                        $.ajax({
+                            url: "{{ route('delete_category_first') }}",
+                            type: 'DELETE',
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            data: 'ids=' + join_selected_values,
+
+                            success: function (data) {
+                                if (data['success']) {
+                                    $(".sub_checkk:checked").each(function() {  
+                                        $(this).parents("tr").remove();
+                                    });
+                                    location.reload();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Đã xóa các doanh mục cấp 1',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+                                }else {
+                                    alert('Rất tiếc, đã xảy ra lỗi!!');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data.responseText);
+                            }
+                        });
+
+
+                    $.each(allVals, function( index, value ) {
+                        $('table tr').filter("[data-row-id='" + value + "']").remove();
+                    });
+                    }  
+                }  
+            });
+
+
         });
     </script>
 @endsection

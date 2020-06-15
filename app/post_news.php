@@ -8,7 +8,7 @@ class post_news extends Model
 {
     protected $table='post_news';
     protected $fillable = [
-        'id', 'post_type_id', 'user_id', 'category_id', 'province_id', 'title', 'price', 'currency', 'content', 'tag_search',
+        'id', 'post_type_id', 'user_id', 'category_id', 'district_id', 'title', 'price', 'currency', 'content', 'tag_search',
         'image', 'duration', 'hide_new', 'category_new', 'status'
     ];
 
@@ -19,9 +19,9 @@ class post_news extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function province()
+    public function district()
     {
-        return $this->belongsTo('App\province');
+        return $this->belongsTo('App\districts');
     }
 
     public function post_type()

@@ -17,16 +17,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(233, 5, 5, 0);
     transition: background 0.5s ease;
 }
 
 .anhbia:hover .overlay {
     display: block;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(138, 137, 137, 0.3);
 }
 
-img {
+.anhbia img {
     position: absolute;
     width: 100%;
     height: 150px;
@@ -47,10 +47,6 @@ img {
     transition: top .5s ease;
 }
 
-.anhbia:hover .title {
-    top: 20px;
-}
-
 .button {
     position: absolute;
     width: 500px;
@@ -65,16 +61,19 @@ img {
     width: 200px;
     padding: 12px 48px;
     text-align: center;
-    color: red;
-    border: solid 2px white;
+    color: black;
+    border: solid 2px red;
     z-index: 1;
     text-decoration: none;
     font-weight: bold;
+    background: red;
+    border-radius: 8%;
 }
 
 .anhbia:hover .button {
     opacity: 1;
 }
+
 
 .panel {
     /* margin: 100px auto 40px; */
@@ -272,82 +271,18 @@ img {
         width: 200px;
         padding: 12px 48px;
         text-align: center;
-        color: red;
-        border: solid 2px white;
+        color: black;
+        border: solid 2px red;
         z-index: 1;
         text-decoration: none;
         font-weight: bold;
         margin-left: 70px;
+        border-radius: 8%;
+        background-color: red;
+
     }
     
     .anhbia:hover .button {
         opacity: 1;
     }
 }
-
-/* @media (min-width: 414px) {
-    .anhbia {
-        position: relative;
-        margin-top: 0px;
-        width: 100%;
-        height: 150px;
-    }
-
-    img {
-        position: absolute;
-        width: 100%;
-        height: 120px;
-        left: 0;
-    }
-
-    .title {
-        position: absolute;
-        width: 500px;
-        left: 0;
-        top: 60px;
-        font-weight: 700;
-        font-size: 15px;
-        text-align: left;
-        text-transform: uppercase;
-        color: white;
-        z-index: 1;
-        transition: top .5s ease;
-        margin-left: 120px;
-    }
-    
-    .anhbia:hover .title {
-        top: 20px;
-    }
-
-    .button {
-        position: absolute;
-        width: 500px;
-        left: 0;
-        top: 70px;
-        text-align: left;
-        opacity: 0;
-        transition: opacity .35s ease;
-    }
-    
-    .button a {
-        width: 200px;
-        padding: 12px 48px;
-        text-align: center;
-        color: red;
-        border: solid 2px white;
-        z-index: 1;
-        text-decoration: none;
-        font-weight: bold;
-        margin-left: 90px;
-    }
-    
-    .anhbia:hover .button {
-        opacity: 1;
-    }
-} */
-
-/* @media (max-width: 1024px) {
-    #accordionSidebar{
-        display:none;
-    }
-} */

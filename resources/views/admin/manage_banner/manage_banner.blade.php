@@ -25,7 +25,6 @@
                 @foreach ($banner as $value)
                     <div class="anhbia">
                         <img src="{{ url('public/upload/banner/'.$value->image) }}" alt="" />
-                        {{-- <p class="title">{{ $value->title }}</p> --}}
                         <div class="overlay"></div>
                         <div class="button"><a href="{{ route('delete_banner', $value->id) }}" onclick="return confirm('Bạn có chắc xóa không?')"> DELETE </a></div>
                     </div>
@@ -60,7 +59,7 @@
                         <span class="file_remove">X</span>
                     </div>
 
-                    <br><br><br><br><br><br>
+                    <br><br><br>
 
                     <div class="form-group post_banner">
                         <label for="post_id">Thuộc bài đăng</label>
@@ -68,9 +67,6 @@
                             @foreach ($post_new as $value)
                                 <option value="{{ $value->id }}">{{ $value->title }}</option>
                             @endforeach
-                            <option value="1">Tiêu đề 1</option>
-                            <option value="2">Tiêu đề 2</option>
-                            <option value="3">Tiêu đề 3</option>
                         </select>
                     </div>
 

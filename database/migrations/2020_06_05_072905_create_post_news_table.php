@@ -28,8 +28,12 @@ class CreatePostNewsTable extends Migration
             $table->unsignedBigInteger('province_id');
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
 
+            $table->unsignedBigInteger('district_id');
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
+
             $table->mediumText('title');
             $table->float('price');
+            $table->mediumText('price_type');
             $table->mediumText('currency');
             $table->mediumText('content');
             $table->mediumText('tag_search');
