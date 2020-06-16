@@ -169,7 +169,7 @@
         <h4>Bạn có muốn đăng xuất khỏi hệ thống ?</h4>
       </div>
       <div class="modal-footer">
-        <a href="" >
+        <a href="{{ url('logout') }}">
           <button type="button" class="btn btn-danger">
             <i class="fas fa-sign-out-alt"></i>&ensp;Đăng xuất ngay
           </button>

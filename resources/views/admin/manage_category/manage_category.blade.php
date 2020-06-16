@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <div class="card shadow h-100">
-        <div class="card-header">
-            <h4 class="h3 mb-0 text-gray-800">Quản lý doanh mục</h4>
-        </div>
+<div class="card shadow h-100">
+    <div class="card-header">
+        <h4 class="h3 mb-0 text-gray-800">Quản lý doanh mục</h4>
+    </div>
 
         <div class="card-body p-2">
             <form action="{{ route('search_category') }}" method="get">
@@ -66,26 +66,21 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                    <div class="card-body">
+                        <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
+                            @csrf
 
-                <div class="col-12 col-md-5">
-                    <div class="card">
-                        <div class="card-header text-center" style="color: green;font-weight: 700;">
-                            THÊM DANH MỤC
-                        </div>
-                        <div class="card-body">
-                            <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
-                                @csrf
+                            <div class="form-group row">
+                                <label for="">Tên danh mục</label>
+                                <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên doanh mục" required>
+                                <small class="invalid-feedback">Vui lòng nhập danh mục</small>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary" id="refresh" title="Quay lại">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                            <button type="submit" class="btn btn-success">THÊM DANH MỤC</button>
 
-                                <div class="form-group">
-                                    <label for="">Tên danh mục</label>
-                                    <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên doanh mục" required>
-                                    <small class="invalid-feedback">Vui lòng nhập danh mục</small>
-                                </div>
-                                <button type="submit" class="btn btn-success btn-block">THÊM DANH MỤC</button>
-                                    
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
         
@@ -95,11 +90,11 @@
             </div>
         </div>
     </div>
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        
-    </div>
+</div>
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
 
+</div>
 
     <!-- /.container-fluid -->  
     
@@ -217,4 +212,3 @@
         });
     </script>
 @endsection
-    

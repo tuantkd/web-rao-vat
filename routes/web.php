@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*============================================================*/
+/*===============================================================================*/
+//Auth::routes(['verify' => true]);
+
 /*HOME*/
 //Trang chủ
 Route::get('/', 'HomeController@index');
@@ -12,6 +14,9 @@ Route::get('view-category', 'HomeController@view_category');
 
 //Xem danh mục chi tiết
 Route::get('view-category-detail', 'HomeController@view_category_detail');
+
+//Xem chi tiết tin tức đăng
+Route::get('view-news-detail', 'HomeController@view_news_detail');
 
 //Báo cáo vi phạm bản tin
 Route::get('report-new', 'HomeController@report_new');
@@ -25,13 +30,66 @@ Route::get('post-new-category', 'HomeController@post_new_category');
 //Đăng tin
 Route::get('post-new', 'HomeController@post_new');
 
+//----------------------------------------------------------------------------
 //Đăng nhập
-Route::get('page-login', 'HomeController@page_login');
+Route::get('page-login', 'HomeController@page_login')->name('page-login');
 
+//Xử lý đăng nhập
+Route::post('post-page-login', 'HomeController@post_page_login')->name('post_page_login');
+//----------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//Xử lý đăng nhập mạng xã hội facebook
+Route::get('login/facebook', 'Auth\LoginController@redirectToProviderFacebook');
+
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallbackFacebook');
+//----------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//Xử lý đăng nhập google
+Route::get('login/google', 'Auth\LoginController@redirectToProviderGoogle');
+
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallbackGoogle');
+//----------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+//Đăng xuất
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+//----------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------
+//Quên mật khẩu
+Route::post('postforgot', 'Auth\ForgotPasswordController@postforgot')->name('postforgot');
+
+//Trang hiển thị nhập email
+Route::get('page-input-email', 'Auth\ForgotPasswordController@page_input_email')->name('page-input-email');
+
+//Xác minh mã token
+Route::get('verifyToken', 'Auth\VerificationTokenController@verifyToken')->name('verifyToken');
+Route::post('post-verifyToken', 'Auth\VerificationTokenController@post_verifyToken')->name('post-verifyToken');
+
+//Thay đổi mật khẩu
+Route::post('post-reset-password/{token}', 'Auth\ResetPasswordController@update_password')->name('post-reset-password');
+
+//Hiển thị thay đổi mật khẩu
+Route::get('page-reset-password/{token}', 'Auth\ResetPasswordController@page_reset_password');
+//----------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------
 //Đăng ký
-Route::get('page-register', 'HomeController@page_register');
+Route::get('page-register', 'HomeController@page_register')->name('page-register');
 
-//--------------------------
+//Xử lý đăng ký
+Route::post('post-page-register', 'HomeController@post_page_register');
+
+//Xác nhận mã token
+Route::get('verify/{token}', 'VerifyController@VerifyEmail')->name('verify');
+//----------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------
 //Trang thông tin quản lý tin
 Route::get('page-manage-news', 'HomeController@page_manage_news');
 
@@ -46,15 +104,22 @@ Route::get('page-payment-method', 'HomeController@page_payment_method');
 
 //Trang thay đổi mật khẩu
 Route::get('page-change-password', 'HomeController@page_change_password');
-//--------------------------
-/*============================================================*/
+//----------------------------------------------------------------------------
+/*===============================================================================*/
 
 
 
 
 
 
-/*============================================================*/
+
+
+
+
+
+
+
+/*===============================================================================*/
 /*ADMIN*/
 // trang chủ admin
 Route::get('admin', [
@@ -338,7 +403,7 @@ Route::get('admin/manage-banner', [
 ]);
 
 // thêm ảnh bìa
-Route::post('admin/manage-banner/add-banner',[
+Route::post('admin/manage-banner/add-banner', [
     'as' => 'add_banner',
     'uses' => 'AdminController@add_banner'
 ]);

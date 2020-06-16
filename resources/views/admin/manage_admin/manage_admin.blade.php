@@ -96,12 +96,13 @@
     @if (Session::has('add_admin'))
     <script type="text/javascript">
         Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Đã thêm tài khoản admin',
-            showConfirmButton: false,
-            timer: 2000
+            position: 'top-end'
+            , icon: 'success'
+            , title: 'Đã thêm tài khoản admin'
+            , showConfirmButton: false
+            , timer: 2000
         });
+
     </script>
     @endif
 
@@ -110,6 +111,7 @@
             var button = $(event.relatedTarget);
             var modal = $(this);
         });
+
     </script>
 
     @endsection
@@ -131,6 +133,7 @@
                 }
             }
         }
+
     </script>
     @endsection
     <!-- ============================= -->
