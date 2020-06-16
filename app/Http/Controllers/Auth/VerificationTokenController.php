@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class VerificationTokenController extends Controller
 {
     //Trang hiển thị nhập mã OTP
-    public function verifyToken()
+    public function verifyToken(Request $request, $token = null)
     {
         return view('home.password.verification_token');
     }
@@ -17,14 +17,14 @@ class VerificationTokenController extends Controller
     //Xử lý
     public function post_verifyToken(Request $request)
     {
-        $user = User::where('verifyToken', $request->txt_otp)->first();
+        $user = User::where('activation_token', $request->activation_token)->first();
         if ($user == NULL) {
             return redirect()->back()->with('error', 'Mã OTP bạn đã nhập không chính xác');
         } else {
             $user->update([
-                'verifyToken' => rand(100000, 999999),
+                'activation_token' => rand(100000, 999999),
             ]);
-            return redirect('reset-password', [$user->verifyToken])->with('message', 'Vui lòng thay đổi mật khẩu của bạn');
+            return redirect('page-reset-password/' . $user->activation_token)->with('message', 'Thay đổi mật khẩu của bạn');
         }
     }
 }

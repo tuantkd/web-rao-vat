@@ -1,5 +1,5 @@
 @extends('layout.layout_home')
-@section('title', 'Xác nhận mật khẩu')
+@section('title', 'Xác nhận mã OTP')
 {{-- ==================================================== --}}
 
 
@@ -40,7 +40,7 @@
                                 <label for=""><b>Mã xác nhận của bạn</b></label>
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-1">
-                                <input type="number" name="txt_otp" class="form-control" placeholder="Nhập xác nhận mã OTP" required>
+                                <input type="number" name="activation_token" class="form-control" placeholder="Nhập xác nhận mã OTP" required>
                                 <div class="invalid-feedback">Chưa nhập mã xác nhận OTP.</div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-2 col-lg-2">

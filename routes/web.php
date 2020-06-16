@@ -70,10 +70,10 @@ Route::get('verifyToken', 'Auth\VerificationTokenController@verifyToken')->name(
 Route::post('post-verifyToken', 'Auth\VerificationTokenController@post_verifyToken')->name('post-verifyToken');
 
 //Thay đổi mật khẩu
-Route::resource('reset-password', 'Auth\ResetPasswordController@update');
+Route::post('post-reset-password/{token}', 'Auth\ResetPasswordController@update_password')->name('post-reset-password');
 
 //Hiển thị thay đổi mật khẩu
-Route::get('page-reset-password', 'Auth\ResetPasswordController@page_reset_password');
+Route::get('page-reset-password/{token}', 'Auth\ResetPasswordController@page_reset_password');
 //----------------------------------------------------------------------------
 
 

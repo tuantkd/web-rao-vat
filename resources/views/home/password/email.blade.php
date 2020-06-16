@@ -50,6 +50,7 @@
                                             <label for="email-for-pass">Nhập địa chỉ email của bạn</label>
                                             <input class="form-control" type="text" id="email-for-pass" required placeholder="Nhập địa chỉ email" name="txt_email">
                                             <div class="invalid-feedback">Bạn chưa nhập địa chỉ email.</div>
+                                            <p style="color:red;font-size:12px;">{{ $errors->first('txt_email') }}</p>
                                             <small class="form-text text-muted">
                                                 Nhập địa chỉ email bạn đã sử dụng trong quá trình đăng ký trên Raoban.com. Sau đó, chúng tôi sẽ gửi email một liên kết đến địa chỉ này.
                                             </small>

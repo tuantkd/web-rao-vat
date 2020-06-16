@@ -33,43 +33,59 @@
                     <hr>
                     @endif
 
-                    <form action="{{ route('reset-password.update', $token) }}" method="POST" class="needs-validation" novalidate>
+
+                    <form method="POST" action="{{ route('post-reset-password', $token) }}">
 
                         @csrf
-                        @method('PUT')
+
+                        <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                                <label for=""><b>Email</b></label>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-1">
-                                <input type="email" name="txt_email" class="form-control" placeholder="Nhập địa chỉ email" required>
-                                <div class="invalid-feedback">Chưa nhập địa chỉ email.</div>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Địa chỉ E-Mail') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                                <label for=""><b>Mật khẩu mới</b></label>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-1">
-                                <input type="password" name="txt_password" class="form-control" placeholder="Nhập mật khẩu mới" required>
-                                <div class="invalid-feedback">Chưa nhập mật khẩu mới</div>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mật khẩu') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                                <label for=""><b>Xác nhận mật khẩu mới</b></label>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-1">
-                                <input type="password" name="txt_comfirmed_password" class="form-control" placeholder="Nhập xác nhận mật khẩu mới" required>
-                                <div class="invalid-feedback">Chưa nhập xác nhận mật khẩu.</div>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Xác nhận mật khẩu') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Xác nhận</button>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Thay đổi') }}
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
         <div class="col-sm-1"></div>
