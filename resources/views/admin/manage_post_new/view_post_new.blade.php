@@ -95,12 +95,7 @@
                                 <div class="carousel-item active">
                                     <img src="{{ url('public/upload/image_post_new/'.$value->image) }}" alt="First slide">
                                 </div>
-                                {{-- <div class="carousel-item">
-                                    <img src="{{ url('public/images/car-3.jpg') }}" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{ url('public/images/car-4.jpg') }}" alt="Third slide">
-                                </div> --}}
+
                             </div>
                             <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
