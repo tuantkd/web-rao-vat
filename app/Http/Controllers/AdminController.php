@@ -91,19 +91,18 @@ class AdminController extends Controller
         $admin->save();
 
         $add_admin = $request->session()->get('add_admin');
-        session()->put('add_admin');
-
         return redirect()->back()->with('add_admin', '');
     }
 
     // tìm kiếm admin
-    public function search_admin(Request $request){
+    public function search_admin(Request $request)
+    {
         $admin_search = $request->input('username_search');
 
-        if($admin_search == null){
+        if ($admin_search == null) {
             $admin = DB::table('users')->where('level_id', 1)->get();
             $allAdmin = DB::table('users')->where('level_id', 1)->get();
-        }else{
+        } else {
             $admin = DB::table('users')->where('username', $admin_search)->get();
             $allAdmin = DB::table('users')->where('level_id', 1)->get();
         }
@@ -113,12 +112,13 @@ class AdminController extends Controller
             'allAdmin' => $allAdmin
         ]);
     }
-    
+
 
     // trang quản lý thành viên
-    public function manage_member(Request $request){
-        $member = DB::table('users')->where('level_id',2)->get();
-        $allMember = DB::table('users')->where('level_id',2)->get();
+    public function manage_member(Request $request)
+    {
+        $member = DB::table('users')->where('level_id', 2)->get();
+        $allMember = DB::table('users')->where('level_id', 2)->get();
         return view('admin.manage_member.manage_member')->with([
             'member' => $member,
             'allMember' => $allMember
@@ -126,7 +126,8 @@ class AdminController extends Controller
     }
 
     // trang xem thông tin thành viên
-    public function view_information_member(Request $request, $id){
+    public function view_information_member(Request $request, $id)
+    {
         $member = User::find($id);
         return view('admin.manage_member.information_member')->with([
             'member' => $member
@@ -134,25 +135,27 @@ class AdminController extends Controller
     }
 
     // xóa tất cả thành viên
-    public function delete_all_member(Request $request){
+    public function delete_all_member(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("users")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("users")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // tìm kiếm thành viên
-    public function search_member(Request $request){
+    public function search_member(Request $request)
+    {
         $username = $request->input('username_search');
         $phone = $request->input('phone_search');
 
-        if (($username == null) && ($phone == null)){
-            $allMember = DB::table('users')->where('level_id',2)->get();
-            $member = DB::table('users')->where('level_id',2)->get();
+        if (($username == null) && ($phone == null)) {
+            $allMember = DB::table('users')->where('level_id', 2)->get();
+            $member = DB::table('users')->where('level_id', 2)->get();
         } else {
-            $allMember = DB::table('users')->where('level_id',2)->get();
-            $member = DB::table('users')->where('username',$username)
-            ->orWhere('phone', $phone)->get();
+            $allMember = DB::table('users')->where('level_id', 2)->get();
+            $member = DB::table('users')->where('username', $username)
+                ->orWhere('phone', $phone)->get();
         }
 
         return view('admin.manage_member.manage_member')->with([
@@ -173,22 +176,22 @@ class AdminController extends Controller
     }
 
     // tìm kiếm quyền truy cập
-    public function search_role(Request $request){
+    public function search_role(Request $request)
+    {
         $role_search = $request->input('role_search');
 
-        if($role_search == null){
-            $role = DB::table('levels')->get();    
-            $allRole = DB::table('levels')->get();    
-        }else{
+        if ($role_search == null) {
+            $role = DB::table('levels')->get();
+            $allRole = DB::table('levels')->get();
+        } else {
             $role = DB::table('levels')->where('name_level', $role_search)->get();
-            $allRole = DB::table('levels')->get(); 
+            $allRole = DB::table('levels')->get();
         }
 
         return view('admin.manage_role.manage_role')->with([
             'role' => $role,
             'allRole' => $allRole
         ]);
-         
     }
 
     // thêm quyền truy cập
@@ -241,11 +244,12 @@ class AdminController extends Controller
     }
 
     // xóa tất cả quyền truy cập
-    public function delete_role(Request $request){
+    public function delete_role(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("levels")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("levels")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // trang quản lý bài đăng
@@ -264,7 +268,8 @@ class AdminController extends Controller
     }
 
     // tim kiếm bài đăng
-    public function search_post_new(Request $request){
+    public function search_post_new(Request $request)
+    {
         $status = $request->input('status_search');
         $post_type = $request->input('post_type_search_id');
         $province_search = $request->input('province_search_id');
@@ -278,44 +283,44 @@ class AdminController extends Controller
         if (($status == null) && ($post_type == null) && ($province_search == null)) {
 
             $postNew = DB::table('post_news')->paginate(10);
-        } elseif(($status != null) && ($post_type != null) && ($province_search != null)) {
+        } elseif (($status != null) && ($post_type != null) && ($province_search != null)) {
 
             $postNew = DB::table('post_news')
-                    ->where(function($query) use($status){
-                        $query->where('post_news.status', '=', $status);
-                    })
-                    ->where(function($query) use($post_type){
-                        $query->where('post_news.post_type_id', '=', $post_type);
-                    })
-                    ->where(function($query) use($province_search){
-                        $query->where('post_news.province_id', '=', $province_search);
-                    })
-                    ->paginate(10);
-        }else{
+                ->where(function ($query) use ($status) {
+                    $query->where('post_news.status', '=', $status);
+                })
+                ->where(function ($query) use ($post_type) {
+                    $query->where('post_news.post_type_id', '=', $post_type);
+                })
+                ->where(function ($query) use ($province_search) {
+                    $query->where('post_news.province_id', '=', $province_search);
+                })
+                ->paginate(10);
+        } else {
             $postNew = DB::table('post_news')
-                    ->where(function($query) use($status){
-                        $query->where('post_news.status', '=', $status);
-                    })
-                    ->orWhere(function($query) use($post_type){
-                        $query->where('post_news.post_type_id', '=', $post_type);
-                    })
-                    ->orWhere(function($query) use($province_search){
-                        $query->where('post_news.province_id', '=', $province_search);
-                    })
-                    ->paginate(10);
+                ->where(function ($query) use ($status) {
+                    $query->where('post_news.status', '=', $status);
+                })
+                ->orWhere(function ($query) use ($post_type) {
+                    $query->where('post_news.post_type_id', '=', $post_type);
+                })
+                ->orWhere(function ($query) use ($province_search) {
+                    $query->where('post_news.province_id', '=', $province_search);
+                })
+                ->paginate(10);
         }
-        
+
         return view('admin.manage_post_new.manage_post_new')->with([
             'type_post' => $type_post,
             'province' => $province,
             'district' => $district,
             'postNew' => $postNew
         ]);
-        
     }
 
     // xóa bài đăng
-    public function delete_post_new(Request $request, $id){
+    public function delete_post_new(Request $request, $id)
+    {
         post_news::destroy($id);
         $delete_post_new = $request->session()->get('delete_post_new');
         session()->put('delete_post_new');
@@ -323,8 +328,9 @@ class AdminController extends Controller
     }
 
     // xem chi tiết bài đăng
-    public function view_post_new(Request $request, $id){
-        $postNew = DB::table('post_news')->where('id',$id)->get();
+    public function view_post_new(Request $request, $id)
+    {
+        $postNew = DB::table('post_news')->where('id', $id)->get();
         return view('admin.manage_post_new.view_post_new')->with([
             'postNew' => $postNew
         ]);
@@ -340,22 +346,25 @@ class AdminController extends Controller
     }
 
     // xóa tất cả loại bài đăng
-    public function delete_all_type_post_new(Request $request){
+    public function delete_all_type_post_new(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("post_types")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("post_types")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // chỉnh sửa loại bài đăng
-    public function edit_type_post_new(Request $request, $id){
+    public function edit_type_post_new(Request $request, $id)
+    {
         $type_post = DB::table('post_types')->where('id', $id)->get();
         return view('admin.manage_type_post_new.edit_type_post_new')->with([
             'type_post' => $type_post
         ]);
     }
 
-    public function post_edit_type_post_new(Request $request, $id){
+    public function post_edit_type_post_new(Request $request, $id)
+    {
         $type_post = post_type::find($id);
         $type_post->post_type_name = $request->input('typePostName');
         $type_post->save();
@@ -379,7 +388,8 @@ class AdminController extends Controller
     }
 
     // trang quản lý tỉnh thành
-    public function manage_province(Request $request){
+    public function manage_province(Request $request)
+    {
         $allProvince = DB::table('provinces')->get();
         $province = DB::table('provinces')->paginate(10);
         return view('admin.manage_province.manage_province')->with([
@@ -389,7 +399,8 @@ class AdminController extends Controller
     }
 
     // tìm kiếm tỉnh thành
-    public function search_province(Request $request){
+    public function search_province(Request $request)
+    {
         $allProvince = DB::table('provinces')->get();
 
         $province_search = $request->input('province_id');
@@ -398,13 +409,13 @@ class AdminController extends Controller
             $province = DB::table('provinces')->paginate(10);
         } else {
             $province = DB::table('provinces')
-                ->where(function($query) use($province_search){
+                ->where(function ($query) use ($province_search) {
                     $query->where('provinces.id', '=', $province_search);
                 })
                 ->paginate(10);
         }
-        
-        
+
+
 
         return view('admin.manage_province.manage_province')->with([
             'province' => $province,
@@ -413,14 +424,16 @@ class AdminController extends Controller
     }
 
     // chỉnh sửa tỉnh thành
-    public function edit_province(Request $request, $id){
+    public function edit_province(Request $request, $id)
+    {
         $province = DB::table('provinces')->where('id', $id)->get();
         return view('admin.manage_province.edit_province')->with([
             'province' => $province
         ]);
     }
 
-    public function post_edit_province(Request $request, $id){
+    public function post_edit_province(Request $request, $id)
+    {
         $province = province::find($id);
         $province->province_name = $request->input('provinceName');
         $province->save();
@@ -444,11 +457,12 @@ class AdminController extends Controller
     }
 
     // xóa tất cả tỉnh thành
-    public function delete_province(Request $request){
+    public function delete_province(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("provinces")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("provinces")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // trang quản lý quận huyện
@@ -465,33 +479,34 @@ class AdminController extends Controller
     }
 
     // tìm kiếm quận huyện
-    public function search_district(Request $request){
+    public function search_district(Request $request)
+    {
         $allDistrict = DB::table('districts')->get();
         $allProvince = DB::table('provinces')->get();
 
         $district_search = $request->input('district_id');
         $province_search = $request->input('province_id');
 
-        if(($district_search == null) && ($province_search == null)){
+        if (($district_search == null) && ($province_search == null)) {
             $district = DB::table('districts')->paginate(10);
-        }elseif(($district_search != null) && ($province_search != null)){
+        } elseif (($district_search != null) && ($province_search != null)) {
             $district = DB::table('districts')
-                    ->where(function($query) use($district_search){
-                        $query->where('districts.id', '=', $district_search);
-                    })
-                    ->where(function($query) use($province_search){
-                        $query->where('districts.province_id', '=', $province_search);
-                    })
-                    ->paginate(10);
-        }else{
+                ->where(function ($query) use ($district_search) {
+                    $query->where('districts.id', '=', $district_search);
+                })
+                ->where(function ($query) use ($province_search) {
+                    $query->where('districts.province_id', '=', $province_search);
+                })
+                ->paginate(10);
+        } else {
             $district = DB::table('districts')
-                    ->where(function($query) use($district_search){
-                        $query->where('districts.id', '=', $district_search);
-                    })
-                    ->orWhere(function($query) use($province_search){
-                        $query->where('districts.province_id', '=', $province_search);
-                    })
-                    ->paginate(10);
+                ->where(function ($query) use ($district_search) {
+                    $query->where('districts.id', '=', $district_search);
+                })
+                ->orWhere(function ($query) use ($province_search) {
+                    $query->where('districts.province_id', '=', $province_search);
+                })
+                ->paginate(10);
         }
 
         return view('admin.manage_district.manage_district')->with([
@@ -499,7 +514,6 @@ class AdminController extends Controller
             'district' => $district,
             'allProvince' => $allProvince
         ]);
-        
     }
 
     // thêm quận huyện
@@ -517,27 +531,29 @@ class AdminController extends Controller
     }
 
     // xóa tất cả quận huyện
-    public function delete_district(Request $request){
+    public function delete_district(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("districts")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("districts")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // chỉnh sủa quận huyện
-    public function edit_district(Request $request, $id){
+    public function edit_district(Request $request, $id)
+    {
         $district = DB::table('districts')->where('id', $id)->get();
 
         $province_id = DB::table('districts')
-                ->select('province_id')
-                ->where('id', $id)
-                ->groupBy('province_id');
+            ->select('province_id')
+            ->where('id', $id)
+            ->groupBy('province_id');
 
         $province = DB::table('provinces')
-                ->joinSub($province_id, 'districts', function($join){
-                    $join->on('provinces.id', '=', 'districts.province_id');
-                })
-                ->get();
+            ->joinSub($province_id, 'districts', function ($join) {
+                $join->on('provinces.id', '=', 'districts.province_id');
+            })
+            ->get();
 
         $allProvince = DB::table('provinces')->get();
 
@@ -548,7 +564,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function post_edit_district(Request $request, $id){
+    public function post_edit_district(Request $request, $id)
+    {
         $district = districts::find($id);
         $district->district_name = $request->input('districtName');
         $district->province_id = $request->input('province_id');
@@ -558,11 +575,11 @@ class AdminController extends Controller
         session()->put('edit_district');
 
         return redirect()->route('manage_district')->with('edit_district', '');
-        
     }
 
     // trang quản lý danh mục
-    public function manage_category(Request $request){
+    public function manage_category(Request $request)
+    {
         $category = DB::table('categorys')->paginate(10);
         $allCategory = DB::table('categorys')->get();
         return view('admin.manage_category.manage_category')->with([
@@ -572,14 +589,15 @@ class AdminController extends Controller
     }
 
     // tìm kiếm doanh mục
-    public function search_category(Request $request){
+    public function search_category(Request $request)
+    {
         $category_name_search = $request->input('category_name_search');
 
-        if ($category_name_search ==  null){
+        if ($category_name_search ==  null) {
             $category = DB::table('categorys')->paginate(10);
             $allCategory = DB::table('categorys')->get();
-        }else{
-            $category = DB::table('categorys')->where('category_name',$category_name_search)->paginate(10);
+        } else {
+            $category = DB::table('categorys')->where('category_name', $category_name_search)->paginate(10);
             $allCategory = DB::table('categorys')->get();
         }
 
@@ -603,22 +621,25 @@ class AdminController extends Controller
     }
 
     // xóa danh mục
-    public function delete_category(Request $request){
+    public function delete_category(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("categorys")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("categorys")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // chỉnh sửa doang mục
-    public function get_edit_category(Request $request, $id){
+    public function get_edit_category(Request $request, $id)
+    {
         $category = DB::table('categorys')->where('id', $id)->get();
         return view('admin.manage_category.edit_category')->with([
             'category' => $category
         ]);
     }
 
-    public function put_edit_category(Request $request, $id){
+    public function put_edit_category(Request $request, $id)
+    {
         $category = categorys::find($id);
         $category->category_name = $request->input('category_name');
         $category->save();
@@ -626,7 +647,7 @@ class AdminController extends Controller
         $edit_category = $request->session()->get('edit_category');
         session()->put('edit_category');
 
-        return redirect()->route('manage_category')->with('edit_category','');
+        return redirect()->route('manage_category')->with('edit_category', '');
     }
 
     // trang quản lý danh mục cấp 1
@@ -643,7 +664,8 @@ class AdminController extends Controller
     }
 
     // tìm kiếm doanh mục cấp 1
-    public function search_category_first(Request $request){
+    public function search_category_first(Request $request)
+    {
         $category_id = $request->input('category_id');
         $category_child_name = $request->input('category_child_name');
 
@@ -654,7 +676,7 @@ class AdminController extends Controller
         } else {
             $allCategoryFirst = DB::table('category_child_firsts')->get();
             $categoryFirst = DB::table('category_child_firsts')->where('category_id', $category_id)
-            ->orWhere('category_child_name', $category_child_name)->paginate(15);
+                ->orWhere('category_child_name', $category_child_name)->paginate(15);
             $category = DB::table('categorys')->get();
         }
 
@@ -663,7 +685,6 @@ class AdminController extends Controller
             'categoryFirst' => $categoryFirst,
             'allCategoryFirst' => $allCategoryFirst
         ]);
-        
     }
 
     // thêm doanh mục cấp 1
@@ -681,11 +702,12 @@ class AdminController extends Controller
     }
 
     // xóa tất cả doanh mục cấp 1
-    public function delete_category_first(Request $request){
+    public function delete_category_first(Request $request)
+    {
         $ids = $request->ids;
-        DB::table("category_child_firsts")->whereIn('id',explode(",",$ids))->delete();
+        DB::table("category_child_firsts")->whereIn('id', explode(",", $ids))->delete();
 
-        return response()->json(['success'=>"Deleted successfully"]);
+        return response()->json(['success' => "Deleted successfully"]);
     }
 
     // trang quản lý ảnh bìa
@@ -735,7 +757,8 @@ class AdminController extends Controller
     }
 
     // trang quản lý tin tức
-    public function manage_new(Request $request){
+    public function manage_new(Request $request)
+    {
         $new = DB::table('news')->paginate(10);
         return view('admin.manage_new.manage_new')->with([
             'new' => $new
@@ -743,9 +766,10 @@ class AdminController extends Controller
     }
 
     // tìm kiếm tin tức
-    public function search_new(Request $request){
+    public function search_new(Request $request)
+    {
         $new_search = $request->input('new_id');
-        $new = DB::table('news')->where('id',$new_search)->paginate(10);
+        $new = DB::table('news')->where('id', $new_search)->paginate(10);
         return view('admin.manage_new.manage_new')->with([
             'new' => $new
         ]);
@@ -780,7 +804,8 @@ class AdminController extends Controller
     }
 
     // xóa tin tức
-    public function delete_new(Request $request, $id){
+    public function delete_new(Request $request, $id)
+    {
         news::destroy($id);
         $delete_new = $request->session()->get('delete_new');
         session()->put('delete_new');

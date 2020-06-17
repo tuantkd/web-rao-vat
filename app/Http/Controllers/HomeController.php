@@ -46,7 +46,8 @@ class HomeController extends Controller
     //Đăng tin cấp cha danh mục
     public function post_new_category()
     {
-        return view('home.post_new.post_new_parent');
+        $categorys = categorys::all();
+        return view('home.post_new.post_new_parent', ['categorys' => $categorys]);
     }
 
     //Đăng tin
