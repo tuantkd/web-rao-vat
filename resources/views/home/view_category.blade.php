@@ -1,6 +1,6 @@
+@include('layout\slug')
 @extends('layout.layout_home') @section('title', 'Xem danh mục')
 <!-- ==================================================== -->
-
 
 <!-- ==================================================== -->
 @section('content')
@@ -18,7 +18,7 @@
 
                         <div class="col-2 col-sm-2 col-md-2 col-lg-2" style="padding-right:1px;">
                             <select class="selectpicker form-control" data-live-search="true">
-                                <option data-tokens="Toàn quốc">Toàn quốc</option>
+                                <option data-tokens="Tỉnh">Tỉnh</option>
                                 <option value="">Hồ Chí Minh</option>
                                 <option value="">Hà Nội</option>
                             </select>
@@ -26,7 +26,7 @@
 
                         <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:1px;">
                             <select class="selectpicker form-control" data-live-search="true">
-                                <option data-tokens="Toàn quốc">Toàn quốc</option>
+                                <option data-tokens="Quận/Huyện">Quận/Huyện</option>
                                 <option value="">Hồ Chí Minh</option>
                                 <option value="">Hà Nội</option>
                             </select>
@@ -167,7 +167,7 @@
                     <div class="row">
 
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                            <a href="{{ url('view-category-detail') }}" style="text-decoration:none;color:#ff3333;">
+                            <a href="{{ url('view-category-detail/'.to_slug('Xe Kia Morning 2020 thời trang hiện đại')) }}" style="text-decoration:none;color:#ff3333;">
                                 <div class="media">
                                     <img src="public/images/car-1.jpg" class="align-self-start mr-3">
                                     <div class="media-body">

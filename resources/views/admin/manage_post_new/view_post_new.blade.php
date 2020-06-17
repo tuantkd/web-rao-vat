@@ -114,10 +114,10 @@
                             $user = DB::table('users')->where('id', $value->user_id)->get();
                         @endphp
                         @foreach ($user as $item)
-                            @if($item->image == null)
+                            @if($item->avatar == null)
                                 <img src="{{ url('public/icons/user.jpg') }}" class="img-thumbnail rounded-left rounded-circle" alt="">
                             @else
-                                <img src="{{ url('public/images/chan-dung-1.jpg') }}" class="img-thumbnail rounded-left rounded-circle" alt="">
+                                <img src="{{ $item->avatar }}" class="img-thumbnail rounded-left rounded-circle" alt="">
                             @endif
                             
                             <strong>Huỳnh Mi Nết</strong>

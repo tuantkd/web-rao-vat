@@ -13,7 +13,7 @@ Route::get('/', 'HomeController@index');
 Route::get('view-category', 'HomeController@view_category');
 
 //Xem danh mục chi tiết
-Route::get('view-category-detail', 'HomeController@view_category_detail');
+Route::get('view-category-detail/{name}', 'HomeController@view_category_detail');
 
 //Xem chi tiết tin tức đăng
 Route::get('view-news-detail', 'HomeController@view_news_detail');
