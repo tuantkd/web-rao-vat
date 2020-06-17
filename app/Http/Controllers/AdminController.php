@@ -14,23 +14,25 @@ use App\category_child_seconds;
 use App\categorys;
 use App\news;
 use App\post_news;
-use DB;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function __invoke(Request $request)
-    {
-        //
-    }
 
-    // trang chủ admin
+    // ==================================================================
+    //Trang chủ admin
     public function index(Request $request)
     {
         return view('admin.index_admin');
     }
+    // ==================================================================
 
-    // trang quản lý admin
+
+
+    // ==================================================================
+    //Trang quản lý admin
     public function manage_admin(Request $request)
     {
         $admin = DB::table('users')->where('level_id', 1)->get();
@@ -40,9 +42,12 @@ class AdminController extends Controller
             'allAdmin' => $allAdmin
         ]);
     }
+    // ==================================================================
 
 
-    // trang thông tin cá nhân
+
+    // ==================================================================
+    //Trang thông tin cá nhân
     public function profile_user(Request $request)
     {
         return view('admin.profile_admin.profile_user');
@@ -54,13 +59,15 @@ class AdminController extends Controller
         return view('admin.profile_admin.change_password');
     }
 
-    // trang thêm mới admin
+
+    // ==================================================================
+    // Trang thêm mới admin
     public function add_admin_new(Request $request)
     {
         return view('admin.manage_admin.add_admin');
     }
 
-    // thêm admin
+    // Xử lý thêm admin vào csdl
     public function add_admin(Request $request)
     {
         $this->validate(
@@ -88,12 +95,18 @@ class AdminController extends Controller
         $admin->birthday = date('Y-m-d', strtotime($request->input('birthday')));
         $admin->phone = $request->input('phone');
         $admin->address = $request->input('address');
+        $admin->verify = 0;
         $admin->save();
 
         $add_admin = $request->session()->get('add_admin');
-        return redirect()->back()->with('add_admin', '');
+        return redirect('admin/manage-admin')->with('add_admin', '');
     }
+    // ==================================================================
 
+
+
+
+    // ==================================================================
     // tìm kiếm admin
     public function search_admin(Request $request)
     {

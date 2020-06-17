@@ -6,7 +6,7 @@ use App\Mail\VerificationEmail;
 use Illuminate\Support\Str;
 use App\categorys;
 use App\User;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
