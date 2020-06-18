@@ -98,7 +98,6 @@
     .FileNameCaptionStyle {
         font-size: 12px;
     }
-
 </style>
 
 <div class="container" style="padding-top:15px;margin-top:70px;padding:5px;">
@@ -126,7 +125,8 @@
                                     <div class="card-block">
                                         <div class="form-check text-left">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" value="" name="optradio" id="check-box">
+                                                <input type="radio" class="form-check-input" value="" name="optradio"
+                                                    id="check-box">
                                                 <span id="span-text">
                                                     Mua nhà, bán nhà
                                                 </span>
@@ -137,7 +137,8 @@
                                     <div class="card-block">
                                         <div class="form-check text-left">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" value="" name="optradio" id="check-box">
+                                                <input type="radio" class="form-check-input" value="" name="optradio"
+                                                    id="check-box">
                                                 <span id="span-text">
                                                     Căn hộ/Chung cư
                                                 </span>
@@ -203,12 +204,14 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Diện tích sử dụng: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập diện tích sử dụng">
+                                            <input type="text" class="form-control"
+                                                placeholder="Nhập diện tích sử dụng">
                                         </div>
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="previous action-button-previous" value="Quay lại" />
+                                <input type="button" name="previous" class="previous action-button-previous"
+                                    value="Quay lại" />
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
                             </fieldset>
 
@@ -220,7 +223,8 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Chuyên mục đã chọn: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left" style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left"
+                                            style="padding:2px;">
                                             <label class="label-title-mobile">Chuyên mục đã chọn:</label>
                                             <span class="category">
                                                 Bất động sản / Mua nhà, bán nhà
@@ -232,7 +236,8 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Tỉnh thành/Quận huyện: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-5 text-left" style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-5 text-left"
+                                            style="padding:2px;">
                                             <label class="label-title-mobile">Tỉnh thành:</label>
                                             <select class="selectpicker form-control" data-live-search="true">
                                                 <option value="">- - Chọn Tỉnh/TP - -</option>
@@ -241,7 +246,8 @@
                                                 <option value="">Đà Nẵng</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-4 text-left" style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-4 text-left"
+                                            style="padding:2px;">
                                             <label class="label-title-mobile">Quận huyện:</label>
                                             <select class="selectpicker form-control" data-live-search="true">
                                                 <option value="">- - Chọn Huyện/Quận - -</option>
@@ -266,7 +272,8 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Loại tin: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left" style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left"
+                                            style="padding:2px;">
                                             <label class="label-title-mobile">Loại tin: </label>
                                             <select class="selectpicker form-control" data-live-search="true">
                                                 <option value="">- - Chọn loại tin - -</option>
@@ -306,7 +313,9 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-4" style="padding:2px;">
                                             <label class="label-title-mobile">Đơn vị tính: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính" data-toggle="popover" data-trigger="hover" data-content="Cái, Chiếc, m2, Ngày, Giờ ...">
+                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính"
+                                                data-toggle="popover" data-trigger="hover"
+                                                data-content="Cái, Chiếc, m2, Ngày, Giờ ...">
                                         </div>
                                     </div>
 
@@ -316,7 +325,8 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Nội dung đăng tin: </label>
-                                            <textarea name="" class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ"></textarea>
+                                            <textarea name="" class="form-control" rows="10"
+                                                placeholder="Nhập nội dung miêu tả đầy đủ"></textarea>
                                         </div>
                                     </div>
 
@@ -356,7 +366,8 @@
                                                         <i class="fas fa-camera"></i>
                                                         Chọn hình ảnh
                                                     </span>
-                                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif,"><br />
+                                                    <input type="file" name="files[]" id="files" multiple
+                                                        accept="image/jpeg, image/png, image/gif,"><br />
                                                 </span><br><br>
                                                 <output id="Filelist"></output>
                                             </div>
@@ -372,7 +383,8 @@
                                             <label class="label-title-mobile">Ẩn tin này: </label>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="1">
-                                                <label class="form-check-label">(Khi xem các bản tin khác của bạn)</label>
+                                                <label class="form-check-label">(Khi xem các bản tin khác của
+                                                    bạn)</label>
                                             </div>
                                         </div>
                                     </div>
@@ -420,12 +432,12 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         var current_fs, next_fs, previous_fs; //fieldsets
         var opacity;
 
-        $(".next").click(function() {
+        $(".next").click(function () {
 
             current_fs = $(this).parent();
             next_fs = $(this).parent().next();
@@ -436,26 +448,22 @@
             //show the next fieldset
             next_fs.show();
             //hide the current fieldset with style
-            current_fs.animate({
-                opacity: 0
-            }, {
-                step: function(now) {
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
                     // for making fielset appear animation
                     opacity = 1 - now;
 
                     current_fs.css({
-                        'display': 'none'
-                        , 'position': 'relative'
+                        'display': 'none',
+                        'position': 'relative'
                     });
-                    next_fs.css({
-                        'opacity': opacity
-                    });
-                }
-                , duration: 600
+                    next_fs.css({ 'opacity': opacity });
+                },
+                duration: 600
             });
         });
 
-        $(".previous").click(function() {
+        $(".previous").click(function () {
 
             current_fs = $(this).parent();
             previous_fs = $(this).parent().prev();
@@ -467,46 +475,40 @@
             previous_fs.show();
 
             //hide the current fieldset with style
-            current_fs.animate({
-                opacity: 0
-            }, {
-                step: function(now) {
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now) {
                     // for making fielset appear animation
                     opacity = 1 - now;
 
                     current_fs.css({
-                        'display': 'none'
-                        , 'position': 'relative'
+                        'display': 'none',
+                        'position': 'relative'
                     });
-                    previous_fs.css({
-                        'opacity': opacity
-                    });
-                }
-                , duration: 600
+                    previous_fs.css({ 'opacity': opacity });
+                },
+                duration: 600
             });
         });
 
-        $('.radio-group .radio').click(function() {
+        $('.radio-group .radio').click(function () {
             $(this).parent().find('.radio').removeClass('selected');
             $(this).addClass('selected');
         });
 
-        $(".submit").click(function() {
+        $(".submit").click(function () {
             return false;
         })
 
     });
-
 </script>
 
 
 
 
 <script>
-    window.addEventListener("beforeunload", function(event) {
+    window.addEventListener("beforeunload", function (event) {
         event.returnValue = "Your custom message.";
     });
-
 </script>
 
 
@@ -544,14 +546,13 @@
         var files = e.target.files;
 
         // Loop through the FileList and then to render image files as thumbnails.
-        for (var i = 0, f;
-            (f = files[i]); i++) {
+        for (var i = 0, f; (f = files[i]); i++) {
             //instantiate a FileReader object to read its contents into memory
             var fileReader = new FileReader();
 
             // Closure to capture the file information and apply validation.
-            fileReader.onload = (function(readerEvt) {
-                return function(e) {
+            fileReader.onload = (function (readerEvt) {
+                return function (e) {
                     //Apply the validation rules for attachments upload
                     ApplyFileValidationRules(readerEvt);
 
@@ -574,15 +575,15 @@
     }
 
     //To remove attachment once user click on x button
-    jQuery(function($) {
-        $("div").on("click", ".img-wrap .close", function() {
+    jQuery(function ($) {
+        $("div").on("click", ".img-wrap .close", function () {
             var id = $(this)
                 .closest(".img-wrap")
                 .find("img")
                 .data("id");
 
             //to remove the deleted item from array
-            var elementPos = AttachmentArray.map(function(x) {
+            var elementPos = AttachmentArray.map(function (x) {
                 return x.FileName;
             }).indexOf(id);
             if (elementPos !== -1) {
@@ -613,8 +614,7 @@
 
             //to remove li tag
             var lis = document.querySelectorAll("#imgList li");
-            for (var i = 0;
-                (li = lis[i]); i++) {
+            for (var i = 0; (li = lis[i]); i++) {
                 if (li.innerHTML == "") {
                     li.parentNode.removeChild(li);
                 }
@@ -707,13 +707,13 @@
         ul.appendChild(li);
         li.innerHTML = [
             '<div class="img-wrap"> <span class="close">&times;</span>' +
-            '<img class="thumb" src="'
-            , e.target.result
-            , '" title="'
-            , escape(readerEvt.name)
-            , '" data-id="'
-            , readerEvt.name
-            , '"/>' + "</div>"
+            '<img class="thumb" src="',
+            e.target.result,
+            '" title="',
+            escape(readerEvt.name),
+            '" data-id="',
+            readerEvt.name,
+            '"/>' + "</div>"
         ].join("");
 
         var div = document.createElement("div");
@@ -726,18 +726,17 @@
     //Fill the array of attachment
     function FillAttachmentArray(e, readerEvt) {
         AttachmentArray[arrCounter] = {
-            AttachmentType: 1
-            , ObjectType: 1
-            , FileName: readerEvt.name
-            , FileDescription: "Attachment"
-            , NoteText: ""
-            , MimeType: readerEvt.type
-            , Content: e.target.result.split("base64,")[1]
-            , FileSizeInBytes: readerEvt.size
+            AttachmentType: 1,
+            ObjectType: 1,
+            FileName: readerEvt.name,
+            FileDescription: "Attachment",
+            NoteText: "",
+            MimeType: readerEvt.type,
+            Content: e.target.result.split("base64,")[1],
+            FileSizeInBytes: readerEvt.size
         };
         arrCounter = arrCounter + 1;
     }
-
 </script>
 
 @endsection

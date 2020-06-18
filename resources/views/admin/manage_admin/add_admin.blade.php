@@ -35,6 +35,7 @@
 
                 <form class="needs-validation" action="{{ route('add_admin') }}" method="POST" novalidate>
                     @csrf
+                    
                     <div class="form-group row">
                         <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                             <label for="">Họ và tên</label>

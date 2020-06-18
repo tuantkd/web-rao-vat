@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <title>@yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,6 +41,7 @@
 
     <link rel="stylesheet" href="{{ url('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/css/style_post_new.css') }}">
+
 
     <style type="text/css" media="screen">
         .register-login .nav-item .link-image {
