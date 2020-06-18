@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-warning" href="{{ url('post-new-category') }}" role="button">
+                    <a class="btn btn-warning" href="{{ url('page-login') }}" role="button">
                         <b style="color:white;"><i class="fas fa-edit"></i> ĐĂNG TIN</b>
                     </a>
                 </li>

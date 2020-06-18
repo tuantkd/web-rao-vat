@@ -24,12 +24,11 @@
                             </a>
                         </div>
                         <!-- col-md-8 -->
-    
+
                         <!-- col-md-4 -->
                         <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1 mt-1">
                             <div class="input-group">
-                                <select data-live-search="true" title="Chọn nhập tìm kiếm ..."
-                                    class="form-control selectpicker" name="username_search">
+                                <select data-live-search="true" title="Chọn nhập tìm kiếm ..." class="form-control selectpicker" name="username_search">
                                     @foreach ($allAdmin as $value)
                                     <option value="{{ $value->username }}">{{ $value->username }}</option>
                                     @endforeach

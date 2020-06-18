@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Mail\VerificationEmail;
 use Illuminate\Support\Str;
-use App\categorys;
+use App\levels;
 use App\User;
-use Mail;
+use App\province;
+use App\districts;
+use App\post_type;
+use App\banners;
+use App\category_child_firsts;
+use App\category_child_seconds;
+use App\categorys;
+use App\news;
+use App\post_news;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +25,9 @@ class HomeController extends Controller
     public function index()
     {
         $show_category = categorys::all();
-        return view('home.index', ['show_category' => $show_category]);
+        return view('home.index', [
+            'show_category' => $show_category
+        ]);
     }
 
     //Xem theo danh mục
@@ -46,7 +57,8 @@ class HomeController extends Controller
     //Đăng tin cấp cha danh mục
     public function post_new_category()
     {
-        return view('home.post_new.post_new_parent');
+        $categorys = categorys::all();
+        return view('home.post_new.post_new_parent', ['categorys' => $categorys]);
     }
 
     //Đăng tin

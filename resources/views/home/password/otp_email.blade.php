@@ -109,7 +109,6 @@
                     <tr>
                         <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <p style="margin: 0;font-family: 'Muli', sans-serif;">
-                                <h1>Xin chào {{ $user->username }}</h1>
                                 <h2>Mã OTP bên dưới:</h2>
                             </p>
                         </td>
@@ -122,7 +121,9 @@
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td align="center" style="border-radius: 3px;" bgcolor="#FFA73B">
-                                                    <h1>{{ $user->activation_token}}</h1>
+                                                    <a href="#" style="font-size: 20px; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 5px; border: 1px solid #FFA73B; display: inline-block;">
+                                                        {{ $user->activation_token}}
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </table>

@@ -18,6 +18,10 @@
                     </h3>
                     <div class="radio-group row justify-content-between px-3">
 
+                        @foreach($categorys as $key => $category)
+
+                        @if($category->id == 1)
+
                         <div class="card-block radio">
                             <a href="{{ url('post-new') }}">
                                 <div class="row d-flex px-3">
@@ -25,6 +29,9 @@
                                 </div>
                             </a>
                         </div>
+
+                        @elseif($category->id == 2)
+
 
                         <div class="card-block radio">
                             <a href="post_new_first.html">
@@ -34,6 +41,10 @@
                             </a>
                         </div>
 
+                        @elseif($category->id == 3)
+
+
+
                         <div class="card-block radio">
                             <a href="post_new_first.html">
                                 <div class="row d-flex px-3">
@@ -41,6 +52,9 @@
                                 </div>
                             </a>
                         </div>
+
+                        @elseif($category->id == 4)
+
 
                         <div class="card-block radio">
                             <a href="">
@@ -50,6 +64,9 @@
                             </a>
                         </div>
 
+                        @elseif($category->id == 5)
+
+
                         <div class="card-block radio">
                             <a href="">
                                 <div class="row d-flex px-3">
@@ -57,6 +74,9 @@
                                 </div>
                             </a>
                         </div>
+
+                        @elseif($category->id == 6)
+
 
                         <div class="card-block radio">
                             <a href="">
@@ -66,6 +86,9 @@
                             </a>
                         </div>
 
+                        @elseif($category->id == 7)
+
+
                         <div class="card-block radio">
                             <a href="">
                                 <div class="row d-flex px-3">
@@ -73,6 +96,9 @@
                                 </div>
                             </a>
                         </div>
+
+                        @elseif($category->id == 8)
+
 
                         <div class="card-block radio">
                             <a href="">
@@ -82,6 +108,9 @@
                             </a>
                         </div>
 
+                        @elseif($category->id == 9)
+
+
                         <div class="card-block radio">
                             <a href="">
                                 <div class="row d-flex px-3">
@@ -89,6 +118,9 @@
                                 </div>
                             </a>
                         </div>
+
+                        @elseif($category->id == 10)
+
 
                         <div class="card-block radio">
                             <a href="">
@@ -98,6 +130,9 @@
                             </a>
                         </div>
 
+                        @elseif($category->id == 11)
+
+
                         <div class="card-block radio">
                             <a href="">
                                 <div class="row d-flex px-3">
@@ -105,6 +140,9 @@
                                 </div>
                             </a>
                         </div>
+
+                        @elseif($category->id == 12)
+
 
                         <div class="card-block radio">
                             <a href="">
@@ -114,6 +152,9 @@
                             </a>
                         </div>
 
+                        @elseif($category->id == 13)
+
+
                         <div class="card-block radio">
                             <a href="">
                                 <div class="row d-flex px-3">
@@ -121,6 +162,10 @@
                                 </div>
                             </a>
                         </div>
+
+                        @endif
+
+                        @endforeach
 
                     </div>
                 </div>
