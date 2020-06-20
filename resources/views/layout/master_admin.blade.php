@@ -118,6 +118,7 @@
 </head>
 
 <body id="page-top">
+    @include('layout/slug')
 
     <style type="text/css">
         @media (max-width:600px) {
@@ -138,7 +139,6 @@
             }
         }
     </style>
-
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -392,7 +392,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ url('admin/profile-user') }}">
+                                <a class="dropdown-item" href="{{ url('admin/profile-user/'.to_slug('Huynh-Net').'/'.'2') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thông tin
                                 </a>

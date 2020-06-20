@@ -65,21 +65,31 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-body">
-                    <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
-                        @csrf
+            </div>
 
-                        <div class="form-group row">
-                            <label for="">Tên danh mục</label>
-                            <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên doanh mục" required>
-                            <small class="invalid-feedback">Vui lòng nhập danh mục</small>
-                        </div>
-                        <button type="button" class="btn btn-outline-primary" id="refresh" title="Quay lại">
-                            <i class="fa fa-refresh" aria-hidden="true"></i>
-                        </button>
-                        <button type="submit" class="btn btn-success">THÊM DANH MỤC</button>
+            <div class="col-12 col-md-5">
+                <div class="card">
 
-                    </form>
+                    <div class="card-header">
+                        Thêm danh mục
+                    </div>
+
+                    <div class="card-body">
+                        <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
+                            @csrf
+    
+                            <div class="form-group row">
+                                <label for="">Tên danh mục</label>
+                                <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên doanh mục" required>
+                                <small class="invalid-feedback">Vui lòng nhập danh mục</small>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary" id="refresh" title="Quay lại">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </button>
+                            <button type="submit" class="btn btn-success">THÊM DANH MỤC</button>
+    
+                        </form>
+                    </div>
                 </div>
             </div>
 

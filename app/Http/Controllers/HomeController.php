@@ -18,6 +18,7 @@ use App\post_news;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class HomeController extends Controller
 {
@@ -25,15 +26,51 @@ class HomeController extends Controller
     public function index()
     {
         $show_category = categorys::all();
+        $banner = DB::table('banners')->latest()->limit(3)->get();
+        $new = DB::table('news')->latest()->limit(1)->get();
         return view('home.index', [
-            'show_category' => $show_category
+            'show_category' => $show_category,
+            'banner' => $banner,
+            'new' => $new
         ]);
     }
 
     //Xem theo danh mục
-    public function view_category()
-    {
-        return view('home.view_category');
+    public function view_category($name, $id){
+        $category = DB::table('categorys')->where('id', $id)->get();
+        $category_first = DB::table('category_child_firsts')->where('category_id', $id)->get();
+        $allCategory = DB::table('categorys')->get();
+        $province = DB::table('provinces')->get();
+
+        return view('home.view_category')->with([
+            'category' => $category,
+            'category_first' => $category_first,
+            'province' => $province,
+            'allCategory' => $allCategory
+        ]);
+    }
+
+    // lọc tỉnh thành - quận huyện
+    public function filter(Request $request){
+
+        $value = $request->value;
+        $dependent = $request->dependent;
+
+        $data = DB::table('districts')
+            ->where('province_id', 2)
+            ->get();
+
+        // $data = DB::table('districts')
+        //     ->where($select, $value)
+        //     ->groupBy($dependent)
+        //     ->get();
+
+        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+        foreach($data as $row)
+        {
+        $output .= '<option value="'.$row->id.'">'.$row->district_name.'</option>';
+        }
+        echo $output;
     }
 
     //Xem theo danh mục chi tiết
@@ -65,6 +102,14 @@ class HomeController extends Controller
     public function post_new()
     {
         return view('home.post_new.post_new');
+    }
+
+    // xem tin tức
+    public function view_news_detail(Request $request, $name, $id){
+        $new = DB::table('news')->where('id', $id)->get();
+        return view('home/view_news_detail')->with([
+            'new' => $new
+        ]);
     }
     //=================================================
 

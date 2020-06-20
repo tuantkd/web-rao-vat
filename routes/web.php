@@ -10,13 +10,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 
 //Xem danh mục
-Route::get('view-category', 'HomeController@view_category');
+Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
+
+// lọc tỉnh thành - quận huyện
+Route::get('loc/quan-huyen', 'HomeController@filter')->name('filter_district');
 
 //Xem danh mục chi tiết
 Route::get('view-category-detail/{name}', 'HomeController@view_category_detail');
 
 //Xem chi tiết tin tức đăng
-Route::get('view-news-detail', 'HomeController@view_news_detail');
+Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail');
 
 //Báo cáo vi phạm bản tin
 Route::get('report-new', 'HomeController@report_new');
@@ -136,7 +139,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // Trang xem thông tin cá nhân
-    Route::get('admin/profile-user', [
+    Route::get('admin/profile-user/{name}/{id}', [
         'as' => 'profile-user',
         'uses' => 'AdminController@profile_user'
     ]);
@@ -167,7 +170,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xem thông tin thành viên
-    Route::get('admin/manage-member/view-information/{id}', [
+    Route::get('admin/manage-member/view-information/{name}/{id}', [
         'as' => 'view_information_member',
         'uses' => 'AdminController@view_information_member'
     ]);
@@ -434,7 +437,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xóa tin tức
-    Route::delete('admin/manage-new/delete/{id}', [
+    Route::get('admin/manage-new/delete/{id}', [
         'as' => 'delete_new',
         'uses' => 'AdminController@delete_new'
     ]);

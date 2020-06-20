@@ -1,3 +1,4 @@
+@include('layout/slug')
 @extends('layout.master_admin')
 @section('title','Manage member')
 {{-- =============================================================================== --}}
@@ -85,7 +86,7 @@
                                 <td data-label="Tài khoản">{{ $value->number_money }} VNĐ</td>
                                 <td data-label="Tùy chọn">
                                     <a name="" id="" class="btn btn-info"
-                                        href="{{ route('view_information_member',$value->id) }}" role="button"
+                                        href="{{ route('view_information_member',[to_slug($value->username), $value->id]) }}" role="button"
                                         title="xem chi tiết">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>

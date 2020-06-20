@@ -813,7 +813,7 @@ class AdminController extends Controller
         $add_new = $request->session()->get('add_new');
         session()->put('add_new');
 
-        return redirect()->back()->with('add_new', '');
+        return redirect()->route('manage_new')->with('add_new', '');
     }
 
     // xóa tin tức

@@ -353,9 +353,36 @@ section .container .row .col-12 p {
         font-size: 11px;
         margin-bottom: 10px;
     }
+
     .search-quick {
         display: none;
     }
+
+    .search-quick .card-header{
+        font-size: 15px;
+    }
+
+    .search-quick .card-body .row .col-12{
+        padding-left: 20px;
+        max-width: 400px;
+    }
+
+    .search-quick .card-body .row .district{
+        margin-left: 20px;
+        max-width: 395px;
+    }
+
+    .search-quick .card-body .row .category{
+        padding-top: 10px;
+        margin-left: 20px;
+        max-width: 380px;
+    }
+
+    .search-quick .card-body .row .search{
+        margin-left: 20px;
+        max-width: 395px;
+    }
+
     .breadcrumb-mobile {
         font-size: 11px;
         padding: 10px;

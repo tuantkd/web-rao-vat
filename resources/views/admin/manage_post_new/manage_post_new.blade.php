@@ -58,7 +58,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
                 @foreach ($postNew as $value)
                     <div class="media border p-2">
-                        <img src="{{ url('public/images/'.$value->image) }}" class="img-fluid mr-3 image-post-new">
+                        <img src="{{ url('public/upload/image_post_new/'.$value->image) }}" class="img-fluid mr-3 image-post-new">
                         <div class="media-body">
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-10 col-lg-10">
