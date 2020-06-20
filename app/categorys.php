@@ -2,16 +2,20 @@
 
 namespace App;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class categorys extends Model
 {
     protected $table = 'categorys';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'id', 'category_name'
+        'id', 'category_name', 'slug'
     ];
 
     public $timestamps = true;
+
 
     public function category_child_first()
     {

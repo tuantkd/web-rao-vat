@@ -18,6 +18,7 @@ use App\post_news;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -62,9 +63,16 @@ class HomeController extends Controller
     }
 
     //Đăng tin
-    public function post_new()
+    public function post_new($name, $id)
     {
-        return view('home.post_new.post_new');
+        $categorys_ids = categorys::find($id);
+
+        return view(
+            'home.post_new.post_new',
+            [
+                'categorys_ids' => $categorys_ids
+            ]
+        );
     }
     //=================================================
 

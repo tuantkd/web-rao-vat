@@ -1,5 +1,5 @@
 @extends('layout.layout_home')
-@section('title', 'Xem trang cá nhân')
+@section('title', 'Đăng tin')
 <!-- ==================================================== -->
 
 
@@ -98,7 +98,14 @@
     .FileNameCaptionStyle {
         font-size: 12px;
     }
+
+    .form-check-inline .form-check-label {
+        font-weight: normal;
+        font-size: 14px;
+    }
+
 </style>
+
 
 <div class="container" style="padding-top:15px;margin-top:70px;padding:5px;">
     <div class="row d-flex justify-content-center">
@@ -110,51 +117,67 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form id="msform">
-                            <!-- progressbar -->
+                            {{-- <!-- progressbar --> --}}
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Chọn danh mục</strong></li>
                                 <li id="personal"><strong>Thông tin danh mục</strong></li>
                                 <li id="payment"><strong>Đăng tin</strong></li>
                                 <li id="confirm"><strong>Hoàn tất</strong></li>
                             </ul>
+                            {{-- <!-- progressbar --> --}}
 
-                            <!-- fieldsets danh mục -->
+
+
+
+
+
+
+
+                            {{-- ==============================================================================================  --}}
+                            {{-- <!-- fieldsets danh mục --> --}}
                             <fieldset>
                                 <div class="form-card">
+                                    @php
+                                    $category_firsts_1s = DB::table('category_child_firsts')
+                                    ->where('category_id', $categorys_ids->id)->get()
+                                    @endphp
 
+                                    @foreach($category_firsts_1s as $category_child_1)
                                     <div class="card-block">
                                         <div class="form-check text-left">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" value="" name="optradio"
-                                                    id="check-box">
+                                                <input type="radio" class="form-check-input" value="{{ $category_child_1->id }}" name="category_firsts_id" id="check-box">
                                                 <span id="span-text">
-                                                    Mua nhà, bán nhà
+                                                    {{ $category_child_1->category_child_name }}
                                                 </span>
                                             </label>
                                         </div>
                                     </div>
-
-                                    <div class="card-block">
-                                        <div class="form-check text-left">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" value="" name="optradio"
-                                                    id="check-box">
-                                                <span id="span-text">
-                                                    Căn hộ/Chung cư
-                                                </span>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    @endforeach
 
                                 </div>
-
                                 <a class="a-previous" href="{{ url('post-new-category') }}">Quay lại</a>
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
                             </fieldset>
+                            {{-- <!-- fieldsets danh mục --> --}}
+                            {{-- ==============================================================================================  --}}
 
-                            <!-- fieldsets thông tin -->
+
+
+
+
+
+
+
+
+
+                            {{-- ==============================================================================================  --}}
+                            {{-- <!-- fieldsets thông tin -->  --}}
                             <fieldset>
                                 <div class="form-card">
+                                    {{-- =====================================================  --}}
+                                    {{-- Bất động sản  --}}
+                                    @if($categorys_ids->id == 1)
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Loại bất động sản:</label><br>
@@ -204,18 +227,431 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Diện tích sử dụng: </label>
-                                            <input type="text" class="form-control"
-                                                placeholder="Nhập diện tích sử dụng">
+                                            <input type="text" class="form-control" placeholder="Nhập diện tích sử dụng">
                                         </div>
                                     </div>
+                                    {{-- =====================================================  --}}
+
+
+                                    @elseif($categorys_ids->id == 2)
+                                    {{-- =====================================================  --}}
+                                    {{-- Xe cộ  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Màu xe: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập màu xe">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Phiên bản:</label><br>
+                                            <select class="form-control">
+                                                <option value="">
+                                                    - - Chọn - -
+                                                </option>
+                                                <option value="2.2 DAT Tự động, Dầu, Minivan (MPV)">
+                                                    2.2 DAT Tự động, Dầu, Minivan (MPV)
+                                                </option>
+                                                <option value="2.2 DATHTự động, Dầu, Minivan (MPV)">
+                                                    2.2 DATH Tự động, Dầu, Minivan (MPV)
+                                                </option>
+                                                <option value="3.3 GAT Tự động, Xăng, Minivan (MPV)">
+                                                    3.3 GAT Tự động, Xăng, Minivan (MPV)
+                                                </option>
+                                                <option value="3.3 GATH Tự động, Xăng, Minivan (MPV)">
+                                                    3.3 GATH Tự động, Xăng, Minivan (MPV)
+                                                </option>
+                                                <option value="Tôi không rõ">
+                                                    Tôi không rõ
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Xuất xứ: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập xuất xứ">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng:</label><br>
+                                            <select class="form-control">
+                                                <option value="">
+                                                    - - Chọn - -
+                                                </option>
+                                                <option value="Đã sử dụng">
+                                                    Đã sử dụng
+                                                </option>
+                                                <option value="Mới">
+                                                    Mới
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Hãng xe: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập hãng xe">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Dòng xe:</label>
+                                            <input type="text" class="form-control" placeholder="Nhập dòng xe">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Năm sản xuất: </label><br>
+                                            <select class="selectpicker form-control" data-live-search="true" id="selectElementId">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Dòng xe:</label>
+                                            <input type="text" class="form-control" placeholder="Nhập dòng xe">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Số Km đã đi: </label><br>
+                                            <input type="number" class="form-control" placeholder="Nhập số Km đã đi">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Nhiên liệu:</label>
+                                            <input type="text" class="form-control" placeholder="Nhập nhiên liệu">
+                                        </div>
+                                    </div>
+                                    {{-- Xe cộ  --}}
+                                    {{-- =====================================================  --}}
+
+
+                                    @elseif($categorys_ids->id == 3)
+                                    {{-- =====================================================  --}}
+                                    {{-- Đồ điện tử  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Hãng sản xuất:</label><br>
+                                            <input type="text" class="form-control" placeholder="Nhập hãng sản xuất">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Dòng máy: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập dòng máy">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Màu sắc:</label><br>
+                                            <input type="text" class="form-control" placeholder="Nhập màu sắc">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng:</label><br>
+                                            <select class="form-control">
+                                                <option value="">
+                                                    - - Chọn - -
+                                                </option>
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng (chưa sửa chữa)">Đã sử dụng (chưa sửa chữa)</option>
+                                                <option value="Đã sử dụng (qua sửa chữa)">Đã sử dụng (qua sửa chữa)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {{-- Đồ điện tử  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+                                    @elseif($categorys_ids->id == 4)
+                                    {{-- =====================================================  --}}
+                                    {{-- Việc làm tuyển sinh  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Loại hình làm việc: </label><br>
+                                            <select class="selectpicker form-control" data-live-search="true">
+                                                <option value="Toàn thời gian cố định">Toàn thời gian cố định</option>
+                                                <option value="Toàn thời gian tạm thời">Toàn thời gian tạm thời</option>
+                                                <option value="Bán thời gian cố định">Bán thời gian cố định</option>
+                                                <option value="Bán thời gian tạm thời">Bán thời gian tạm thời</option>
+                                                <option value="Cộng tác viên">Cộng tác viên</option>
+                                                <option value="Làm việc từ xa">Làm việc từ xa</option>
+                                                <option value="Khác">Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Tuổi: </label>
+                                            <input type="number" class="form-control" placeholder="Nhập số tuổi">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Giới tính: </label><br>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="optradio"> Nam
+                                                </label>
+                                            </div>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="optradio"> Nữ
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Bằng cấp: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập bằng cấp">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Ngoại ngữ: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập ngoại ngữ">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Vị trí: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập vị trí">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Nghề nghiệp: </label><br>
+                                            <select class="selectpicker form-control" data-live-search="true">
+                                                <option value="An ninh, bảo vệ">An ninh, bảo vệ</option>
+                                                <option value="Bán hàng">Bán hàng</option>
+                                                <option value="Bếp, pha chế">Bếp, pha chế</option>
+                                                <option value="Cắt tóc, gội đầu, làm móng">Cắt tóc, gội đầu, làm móng</option>
+                                                <option value="Giám đốc, Quản lý, Trưởng phòng">Giám đốc, Quản lý, Trưởng phòng</option>
+                                                <option value="Giao chở hàng">Giao chở hàng</option>
+                                                <option value="Giáo viên, Gia sư">Giáo viên, Gia sư</option>
+                                                <option value="Kế toán, Thu ngân">Kế toán, Thu ngân</option>
+                                                <option value="Kinh doanh">Kinh doanh</option>
+                                                <option value="Kỹ sư điện, Điện tử, Công nghệ thông tin">Kỹ sư điện, Điện tử, Công nghệ thông tin</option>
+                                                <option value="Kỹ sư cơ khí, Xây dựng, Mỹ thuật, In">Kỹ sư cơ khí, Xây dựng, Mỹ thuật, In</option>
+                                                <option value="Lái xe, Phụ xe">Lái xe, Phụ xe</option>
+                                                <option value="Lao động phổ thông khác">Lao động phổ thông khác</option>
+                                                <option value="Massage, Mỹ Phẩm">Massage, Mỹ Phẩm</option>
+                                                <option value="May mặc, Giày da">May mặc, Giày da</option>
+                                                <option value="NV Văn phòng, Hành chính, Nhân sự">NV Văn phòng, Hành chính, Nhân sự</option>
+                                                <option value="Người giúp việc, tạp vụ">Người giúp việc, tạp vụ</option>
+                                                <option value="Nhân viên Nhà Hàng, Khách Sạn, Quán">Nhân viên Nhà Hàng, Khách Sạn, Quán</option>
+                                                <option value="Tuyển Ngành nghề khác">Tuyển Ngành nghề khác</option>
+                                                <option value="Tư vấn chăm sóc khách hàng">Tư vấn chăm sóc khách hàng</option>
+                                                <option value="Thợ mộc, Điện, Xây dựng, Cơ khí">Thợ mộc, Điện, Xây dựng, Cơ khí</option>
+                                                <option value="Làm việc bán thời gian">Làm việc bán thời gian</option>
+                                                <option value="Y dược">Y dược</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Kinh nghiệm: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập kinh nghiệm">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Mức lương: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập mức lương">
+                                        </div>
+                                    </div>
+                                    {{-- Việc làm tuyển sinh  --}}
+                                    {{-- =====================================================  --}}
+
+
+                                    {{-- =====================================================  --}}
+                                    {{-- thu-cung số 5 không có danh mục cấp 2  --}}
+                                    {{-- =====================================================  --}}
+
+
+                                    @elseif($categorys_ids->id == 6)
+                                    {{-- =====================================================  --}}
+                                    {{-- do-an-thuc-pham-va-loai-khac  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Xuất xứ: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập xuất xứ">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Hạn sử dụng: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập hạn sử dụng">
+                                        </div>
+                                    </div>
+                                    {{-- do-an-thuc-pham-va-loai-khac  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+
+                                    @elseif($categorys_ids->id == 7)
+                                    {{-- =====================================================  --}}
+                                    {{-- tu-lanh-may-lanh-may-giat  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng: </label><br>
+                                            <select class="form-control">
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng">Đã sử dụng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Hãng sản xuất: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập hãng sản xuất">
+                                        </div>
+                                    </div>
+                                    {{-- tu-lanh-may-lanh-may-giat  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+                                    @elseif($categorys_ids->id == 8)
+                                    {{-- =====================================================  --}}
+                                    {{-- do-gia-dung-noi-that-cay-canh  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng: </label><br>
+                                            <select class="form-control">
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng">Đã sử dụng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                        </div>
+                                    </div>
+                                    {{-- do-gia-dung-noi-that-cay-canh  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+                                    @elseif($categorys_ids->id == 9)
+                                    {{-- =====================================================  --}}
+                                    {{-- thoi-trang-do-dung-ca-nhan  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng: </label><br>
+                                            <select class="form-control">
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng">Đã sử dụng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Loại sản phẩm: </label><br>
+                                            <select class="form-control">
+                                                <option value="Đồ Nam">Đồ Nam</option>
+                                                <option value="Đồ Nữ">Đồ Nữ</option>
+                                                <option value="Cả hai">Cả hai</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {{-- thoi-trang-do-dung-ca-nhan  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+                                    @elseif($categorys_ids->id == 10)
+                                    {{-- =====================================================  --}}
+                                    {{-- giai-tri-the-thao-so-thich  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng: </label><br>
+                                            <select class="form-control">
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng">Đã sử dụng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                        </div>
+                                    </div>
+                                    {{-- giai-tri-the-thao-so-thich  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+
+                                    @elseif($categorys_ids->id == 11)
+                                    {{-- =====================================================  --}}
+                                    {{-- do-van-phong-cong-nong-nghiep  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng: </label><br>
+                                            <select class="form-control">
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng">Đã sử dụng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                        </div>
+                                    </div>
+                                    {{-- do-van-phong-cong-nong-nghiep  --}}
+                                    {{-- =====================================================  --}}
+
+
+
+
+                                    @elseif($categorys_ids->id == 12)
+                                    {{-- =====================================================  --}}
+                                    {{-- dich-vu-du-lich  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Loại hình làm việc: </label><br>
+                                            <select class="selectpicker form-control" data-live-search="true">
+                                                <option value="Toàn thời gian cố định">Toàn thời gian cố định</option>
+                                                <option value="Toàn thời gian tạm thời">Toàn thời gian tạm thời</option>
+                                                <option value="Bán thời gian cố định">Bán thời gian cố định</option>
+                                                <option value="Bán thời gian tạm thời">Bán thời gian tạm thời</option>
+                                                <option value="Cộng tác viên">Cộng tác viên</option>
+                                                <option value="Làm việc từ xa">Làm việc từ xa</option>
+                                                <option value="Khác">Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Kinh nghiệm làm việc: </label>
+                                            <input type="text" class="form-control" placeholder="Nhập kinh nghiệm làm việc">
+                                        </div>
+                                    </div>
+                                    {{-- dich-vu-du-lich --}}
+                                    {{-- =====================================================  --}}
+
+
+                                    @elseif($categorys_ids->id == 13)
+                                    {{-- =====================================================  --}}
+                                    {{-- me-va-be  --}}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Tình trạng: </label><br>
+                                            <select class="form-control">
+                                                <option value="Mới">Mới</option>
+                                                <option value="Đã sử dụng">Đã sử dụng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Loại sản phẩm: </label><br>
+                                            <select class="form-control">
+                                                <option value="Đồ cho bé">Đồ cho bé</option>
+                                                <option value="Đồ cho mẹ">Đồ cho mẹ</option>
+                                                <option value="Cả hai">Cả hai</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {{-- me-va-be  --}}
+                                    {{-- =====================================================  --}}
+
+                                    @endif
                                 </div>
 
-                                <input type="button" name="previous" class="previous action-button-previous"
-                                    value="Quay lại" />
+                                <input type="button" name="previous" class="previous action-button-previous" value="Quay lại" />
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
                             </fieldset>
+                            {{-- <!-- fieldsets thông tin -->  --}}
+                            {{-- ==============================================================================================  --}}
 
-                            <!-- fieldsets đăng tin -->
+
+
+
+
+
+
+
+
+                            {{-- ==============================================================================================  --}}
+                            {{-- <!-- fieldsets đăng tin -->  --}}
                             <fieldset>
                                 <div class="form-card">
 
@@ -223,11 +659,10 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Chuyên mục đã chọn: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left"
-                                            style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Chuyên mục đã chọn:</label>
                                             <span class="category">
-                                                Bất động sản / Mua nhà, bán nhà
+                                                {{ $categorys_ids->category_name }}
                                             </span>
                                         </div>
                                     </div>
@@ -236,8 +671,7 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Tỉnh thành/Quận huyện: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-5 text-left"
-                                            style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-5 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Tỉnh thành:</label>
                                             <select class="selectpicker form-control" data-live-search="true">
                                                 <option value="">- - Chọn Tỉnh/TP - -</option>
@@ -246,8 +680,7 @@
                                                 <option value="">Đà Nẵng</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-4 text-left"
-                                            style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-4 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Quận huyện:</label>
                                             <select class="selectpicker form-control" data-live-search="true">
                                                 <option value="">- - Chọn Huyện/Quận - -</option>
@@ -272,8 +705,7 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Loại tin: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left"
-                                            style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-9 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Loại tin: </label>
                                             <select class="selectpicker form-control" data-live-search="true">
                                                 <option value="">- - Chọn loại tin - -</option>
@@ -313,9 +745,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-4" style="padding:2px;">
                                             <label class="label-title-mobile">Đơn vị tính: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính"
-                                                data-toggle="popover" data-trigger="hover"
-                                                data-content="Cái, Chiếc, m2, Ngày, Giờ ...">
+                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính" data-toggle="popover" data-trigger="hover" data-content="Cái, Chiếc, m2, Ngày, Giờ ...">
                                         </div>
                                     </div>
 
@@ -325,8 +755,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Nội dung đăng tin: </label>
-                                            <textarea name="" class="form-control" rows="10"
-                                                placeholder="Nhập nội dung miêu tả đầy đủ"></textarea>
+                                            <textarea name="" class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ"></textarea>
                                         </div>
                                     </div>
 
@@ -366,8 +795,7 @@
                                                         <i class="fas fa-camera"></i>
                                                         Chọn hình ảnh
                                                     </span>
-                                                    <input type="file" name="files[]" id="files" multiple
-                                                        accept="image/jpeg, image/png, image/gif,"><br />
+                                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif,"><br />
                                                 </span><br><br>
                                                 <output id="Filelist"></output>
                                             </div>
@@ -395,8 +823,17 @@
 
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
                             </fieldset>
+                            {{-- ==============================================================================================  --}}
 
-                            <!-- fieldsets hoàn tất -->
+
+
+
+
+
+
+
+                            {{-- ==============================================================================================  --}}
+                            {{-- <!-- fieldsets hoàn tất -->  --}}
                             <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title text-center">Hoàn tất</h2>
@@ -416,7 +853,9 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <!-- fieldsets hoàn tất -->
+                            {{-- <!-- fieldsets hoàn tất -->  --}}
+                            {{-- ==============================================================================================  --}}
+
                         </form>
                     </div>
                 </div>
@@ -428,16 +867,28 @@
 </div>
 
 
+<script>
+    var max = new Date().getFullYear()
+        , min = max - 20
+        , select = document.getElementById('selectElementId');
 
+    for (var i = max; i >= min; i--) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select.appendChild(opt);
+    }
+
+</script>
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         var current_fs, next_fs, previous_fs; //fieldsets
         var opacity;
 
-        $(".next").click(function () {
+        $(".next").click(function() {
 
             current_fs = $(this).parent();
             next_fs = $(this).parent().next();
@@ -448,22 +899,26 @@
             //show the next fieldset
             next_fs.show();
             //hide the current fieldset with style
-            current_fs.animate({ opacity: 0 }, {
-                step: function (now) {
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function(now) {
                     // for making fielset appear animation
                     opacity = 1 - now;
 
                     current_fs.css({
-                        'display': 'none',
-                        'position': 'relative'
+                        'display': 'none'
+                        , 'position': 'relative'
                     });
-                    next_fs.css({ 'opacity': opacity });
-                },
-                duration: 600
+                    next_fs.css({
+                        'opacity': opacity
+                    });
+                }
+                , duration: 600
             });
         });
 
-        $(".previous").click(function () {
+        $(".previous").click(function() {
 
             current_fs = $(this).parent();
             previous_fs = $(this).parent().prev();
@@ -475,40 +930,44 @@
             previous_fs.show();
 
             //hide the current fieldset with style
-            current_fs.animate({ opacity: 0 }, {
-                step: function (now) {
+            current_fs.animate({
+                opacity: 0
+            }, {
+                step: function(now) {
                     // for making fielset appear animation
                     opacity = 1 - now;
 
                     current_fs.css({
-                        'display': 'none',
-                        'position': 'relative'
+                        'display': 'none'
+                        , 'position': 'relative'
                     });
-                    previous_fs.css({ 'opacity': opacity });
-                },
-                duration: 600
+                    previous_fs.css({
+                        'opacity': opacity
+                    });
+                }
+                , duration: 600
             });
         });
 
-        $('.radio-group .radio').click(function () {
+        $('.radio-group .radio').click(function() {
             $(this).parent().find('.radio').removeClass('selected');
             $(this).addClass('selected');
         });
 
-        $(".submit").click(function () {
+        $(".submit").click(function() {
             return false;
         })
 
     });
+
 </script>
 
 
-
-
 <script>
-    window.addEventListener("beforeunload", function (event) {
-        event.returnValue = "Your custom message.";
+    window.addEventListener("beforeunload", function(event) {
+        event.returnValue = "Bạn có chắc chắc chắn";
     });
+
 </script>
 
 
@@ -546,13 +1005,14 @@
         var files = e.target.files;
 
         // Loop through the FileList and then to render image files as thumbnails.
-        for (var i = 0, f; (f = files[i]); i++) {
+        for (var i = 0, f;
+            (f = files[i]); i++) {
             //instantiate a FileReader object to read its contents into memory
             var fileReader = new FileReader();
 
             // Closure to capture the file information and apply validation.
-            fileReader.onload = (function (readerEvt) {
-                return function (e) {
+            fileReader.onload = (function(readerEvt) {
+                return function(e) {
                     //Apply the validation rules for attachments upload
                     ApplyFileValidationRules(readerEvt);
 
@@ -575,15 +1035,15 @@
     }
 
     //To remove attachment once user click on x button
-    jQuery(function ($) {
-        $("div").on("click", ".img-wrap .close", function () {
+    jQuery(function($) {
+        $("div").on("click", ".img-wrap .close", function() {
             var id = $(this)
                 .closest(".img-wrap")
                 .find("img")
                 .data("id");
 
             //to remove the deleted item from array
-            var elementPos = AttachmentArray.map(function (x) {
+            var elementPos = AttachmentArray.map(function(x) {
                 return x.FileName;
             }).indexOf(id);
             if (elementPos !== -1) {
@@ -614,7 +1074,8 @@
 
             //to remove li tag
             var lis = document.querySelectorAll("#imgList li");
-            for (var i = 0; (li = lis[i]); i++) {
+            for (var i = 0;
+                (li = lis[i]); i++) {
                 if (li.innerHTML == "") {
                     li.parentNode.removeChild(li);
                 }
@@ -707,13 +1168,13 @@
         ul.appendChild(li);
         li.innerHTML = [
             '<div class="img-wrap"> <span class="close">&times;</span>' +
-            '<img class="thumb" src="',
-            e.target.result,
-            '" title="',
-            escape(readerEvt.name),
-            '" data-id="',
-            readerEvt.name,
-            '"/>' + "</div>"
+            '<img class="thumb" src="'
+            , e.target.result
+            , '" title="'
+            , escape(readerEvt.name)
+            , '" data-id="'
+            , readerEvt.name
+            , '"/>' + "</div>"
         ].join("");
 
         var div = document.createElement("div");
@@ -726,17 +1187,18 @@
     //Fill the array of attachment
     function FillAttachmentArray(e, readerEvt) {
         AttachmentArray[arrCounter] = {
-            AttachmentType: 1,
-            ObjectType: 1,
-            FileName: readerEvt.name,
-            FileDescription: "Attachment",
-            NoteText: "",
-            MimeType: readerEvt.type,
-            Content: e.target.result.split("base64,")[1],
-            FileSizeInBytes: readerEvt.size
+            AttachmentType: 1
+            , ObjectType: 1
+            , FileName: readerEvt.name
+            , FileDescription: "Attachment"
+            , NoteText: ""
+            , MimeType: readerEvt.type
+            , Content: e.target.result.split("base64,")[1]
+            , FileSizeInBytes: readerEvt.size
         };
         arrCounter = arrCounter + 1;
     }
+
 </script>
 
 @endsection

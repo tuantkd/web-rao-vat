@@ -1,5 +1,6 @@
 @include('layout\slug')
-@extends('layout.layout_home') @section('title', 'Xem danh mục')
+@extends('layout.layout_home')
+@section('title', 'Xem danh mục')
 <!-- ==================================================== -->
 
 <!-- ==================================================== -->

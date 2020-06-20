@@ -1,5 +1,5 @@
 @extends('layout.layout_home')
-@section('title', 'Xem trang cá nhân')
+@section('title', 'Danh mục đăng tin')
 <!-- ==================================================== -->
 
 
@@ -23,7 +23,7 @@
                         @if($category->id == 1)
 
                         <div class="card-block radio">
-                            <a href="{{ url('post-new') }}">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-home'></i> Bất động sản</span>
                                 </div>
@@ -34,7 +34,7 @@
 
 
                         <div class="card-block radio">
-                            <a href="post_new_first.html">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-car'></i> Xe cộ</span>
                                 </div>
@@ -46,7 +46,7 @@
 
 
                         <div class="card-block radio">
-                            <a href="post_new_first.html">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-mobile-alt'></i> Đồ điện tử</span>
                                 </div>
@@ -57,7 +57,7 @@
 
 
                         <div class="card-block radio">
-                            <a href="">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-business-time'></i> Việc làm</span>
                                 </div>
@@ -68,7 +68,7 @@
 
 
                         <div class="card-block radio">
-                            <a href="">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-dog'></i> Thú cưng</span>
                                 </div>
@@ -79,7 +79,7 @@
 
 
                         <div class="card-block radio">
-                            <a href="">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-hamburger'></i> Đồ ăn, thực phẩm và các loại khác</span>
                                 </div>
@@ -90,64 +90,9 @@
 
 
                         <div class="card-block radio">
-                            <a href="">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        @elseif($category->id == 8)
-
-
-                        <div class="card-block radio">
-                            <a href="">
-                                <div class="row d-flex px-3">
-                                    <span><i class='fas fa-baby'></i> Mẹ và bé</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        @elseif($category->id == 9)
-
-
-                        <div class="card-block radio">
-                            <a href="">
-                                <div class="row d-flex px-3">
-                                    <span><i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        @elseif($category->id == 10)
-
-
-                        <div class="card-block radio">
-                            <a href="">
-                                <div class="row d-flex px-3">
-                                    <span><i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        @elseif($category->id == 11)
-
-
-                        <div class="card-block radio">
-                            <a href="">
-                                <div class="row d-flex px-3">
-                                    <span><i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích</span>
-                                </div>
-                            </a>
-                        </div>
-
-                        @elseif($category->id == 12)
-
-
-                        <div class="card-block radio">
-                            <a href="">
-                                <div class="row d-flex px-3">
-                                    <span><i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp</span>
                                 </div>
                             </a>
                         </div>
@@ -156,7 +101,62 @@
 
 
                         <div class="card-block radio">
-                            <a href="">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
+                                <div class="row d-flex px-3">
+                                    <span><i class='fas fa-baby'></i> Mẹ và bé</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        @elseif($category->id == 8)
+
+
+                        <div class="card-block radio">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
+                                <div class="row d-flex px-3">
+                                    <span><i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        @elseif($category->id == 9)
+
+
+                        <div class="card-block radio">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
+                                <div class="row d-flex px-3">
+                                    <span><i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        @elseif($category->id == 10)
+
+
+                        <div class="card-block radio">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
+                                <div class="row d-flex px-3">
+                                    <span><i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        @elseif($category->id == 11)
+
+
+                        <div class="card-block radio">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
+                                <div class="row d-flex px-3">
+                                    <span><i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        @elseif($category->id == 12)
+
+
+                        <div class="card-block radio">
+                            <a href="{{ url('post-new/'.Str::slug($category->category_name).'/'.$category->id) }}">
                                 <div class="row d-flex px-3">
                                     <span><i class='fas fa-phone-volume'></i> Dịch vụ, du lịch</span>
                                 </div>

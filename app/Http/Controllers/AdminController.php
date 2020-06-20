@@ -32,21 +32,6 @@ class AdminController extends Controller
 
 
     // ==================================================================
-    //Trang quản lý admin
-    public function manage_admin(Request $request)
-    {
-        $admin = DB::table('users')->where('level_id', 1)->get();
-        $allAdmin = DB::table('users')->where('level_id', 1)->get();
-        return view('admin.manage_admin.manage_admin')->with([
-            'admin' => $admin,
-            'allAdmin' => $allAdmin
-        ]);
-    }
-    // ==================================================================
-
-
-
-    // ==================================================================
     //Trang thông tin cá nhân
     public function profile_user(Request $request)
     {
@@ -58,9 +43,24 @@ class AdminController extends Controller
     {
         return view('admin.profile_admin.change_password');
     }
+    // ==================================================================
+
+
 
 
     // ==================================================================
+    //Trang quản lý admin
+    public function manage_admin(Request $request)
+    {
+        $admin = DB::table('users')->where('level_id', 1)->get();
+        $allAdmin = DB::table('users')->where('level_id', 1)->get();
+        return view('admin.manage_admin.manage_admin')->with([
+            'admin' => $admin,
+            'allAdmin' => $allAdmin
+        ]);
+    }
+
+
     // Trang thêm mới admin
     public function add_admin_new(Request $request)
     {
@@ -101,12 +101,8 @@ class AdminController extends Controller
         $add_admin = $request->session()->get('add_admin');
         return redirect('admin/manage-admin')->with('add_admin', '');
     }
-    // ==================================================================
 
 
-
-
-    // ==================================================================
     // tìm kiếm admin
     public function search_admin(Request $request)
     {
@@ -125,8 +121,12 @@ class AdminController extends Controller
             'allAdmin' => $allAdmin
         ]);
     }
+    // ==================================================================
 
 
+
+
+    // ==================================================================
     // trang quản lý thành viên
     public function manage_member(Request $request)
     {
@@ -165,10 +165,14 @@ class AdminController extends Controller
         if (($username == null) && ($phone == null)) {
             $allMember = DB::table('users')->where('level_id', 2)->get();
             $member = DB::table('users')->where('level_id', 2)->get();
+        } elseif ($username != null) {
+            $allMember = DB::table('users')->where('level_id', 2)->get();
+            $member = DB::table('users')->where('username', $username)->paginate(1);
+        } elseif ($phone != null) {
+            $allMember = DB::table('users')->where('level_id', 2)->get();
+            $member = DB::table('users')->where('phone', $phone)->paginate(1);
         } else {
             $allMember = DB::table('users')->where('level_id', 2)->get();
-            $member = DB::table('users')->where('username', $username)
-                ->orWhere('phone', $phone)->get();
         }
 
         return view('admin.manage_member.manage_member')->with([
@@ -593,7 +597,7 @@ class AdminController extends Controller
     // trang quản lý danh mục
     public function manage_category(Request $request)
     {
-        $category = DB::table('categorys')->paginate(10);
+        $category = DB::table('categorys')->paginate(5);
         $allCategory = DB::table('categorys')->get();
         return view('admin.manage_category.manage_category')->with([
             'allCategory' => $allCategory,

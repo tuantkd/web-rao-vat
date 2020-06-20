@@ -19,32 +19,24 @@ class CreateCategoryChildSecondsTable extends Migration
             $table->unsignedBigInteger('category_first_id');
             $table->foreign('category_first_id')->references('id')->on('category_child_firsts')->onDelete('cascade');
 
-            $table->mediumText('type_property');
-            $table->mediumText('address');
-            $table->mediumText('project_name');
-            $table->mediumText('land_area');
-            $table->mediumText('floor');
-            $table->mediumText('bedroom');
-            $table->mediumText('bathroom');
-            $table->integer('area_used');
-            $table->mediumText('juridical');
-            $table->mediumText('type_work');
-            $table->integer('year_old');
-            $table->string('sex');
-            $table->mediumText('certificate');
-            $table->mediumText('foreign_anguage');
-            $table->mediumText('position');
-            $table->mediumText('job');
-            $table->mediumText('experience');
-            $table->integer('level_salary');
-            $table->mediumText('manufacture');
-            $table->mediumText('color_item');
-            $table->mediumText('new_percent_item');
-            $table->integer('year_manufacture');
-            $table->mediumText('manufacture_item');
-            $table->mediumText('fuel');
-            $table->mediumText('model_line_item');
-            $table->date('expiration_date');
+            $table->mediumText('estate_category')->nullable();
+            $table->mediumText('estate_address')->nullable();
+            $table->mediumText('estate_name_project')->nullable();
+            $table->mediumText('estate_land_area')->nullable();
+            $table->mediumText('estate_land_area')->nullable();
+            $table->mediumText('estate_floor')->nullable();
+            $table->mediumText('estate_bedroom')->nullable();
+            $table->mediumText('estate_bathroom')->nullable();
+            $table->integer('estate_area_used')->nullable();
+            $table->mediumText('estate_juridical')->nullable();
+
+
+            $table->mediumText('car_color')->nullable();
+            $table->mediumText('car_version')->nullable();
+            $table->mediumText('car_origin')->nullable();
+            $table->mediumText('car_produce_name')->nullable();
+            $table->mediumText('car_model_name')->nullable();
+            $table->mediumText('car_produce_year')->nullable();
             $table->timestamps();
         });
     }

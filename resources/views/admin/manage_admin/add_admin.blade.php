@@ -6,23 +6,14 @@
 <!-- ============================= -->
 @section('content')
 
-<style type="text/css">
-    .breadcrumb .breadcrumb-item a {
-        text-decoration: none;
-    }
-
-    .breadcrumb {
-        background-color: white;
-    }
-
-</style>
-
+<!-- breadcrumb -->
 <ul class="breadcrumb">
     <li class="breadcrumb-item">
         <a href="{{ url('admin/manage-admin') }}">Quản trị viên</a>
     </li>
     <li class="breadcrumb-item active">Thêm mới</li>
 </ul>
+<!-- breadcrumb -->
 
 <div class="row">
     <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mt-0"></div>

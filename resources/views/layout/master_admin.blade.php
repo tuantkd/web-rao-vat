@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
+
     <link rel="icon" type="image/png" href="{{ url('public/logo/logo-title.png') }}">
 
     <!-- Custom fonts for this template-->
@@ -21,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ url('public/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('public/css/style_admin.css') }}">
 
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,7 +31,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 
     <!-- định dạng table and select search -->
-    <link rel="stylesheet" href="{{ url('public/css/style_admin.css') }}">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
     <!-- alert bootstrap 4 -->
@@ -38,6 +39,7 @@
 
 
     @yield('link_css')
+
 
     <style type="text/css" media="screen">
         table {
@@ -112,10 +114,17 @@
                 font-family: Muli, sans-serif;
                 background-color: #f1f1f1;
             }
+        }
+        .breadcrumb .breadcrumb-item a {
+            text-decoration: none;
+        }
 
+        .breadcrumb {
+            background-color: white;
+        }
     </style>
-</head>
 
+</head>
 <body id="page-top">
 
     <style type="text/css">
@@ -139,8 +148,10 @@
 
     </style>
 
+
     <!-- Page Wrapper -->
     <div id="wrapper">
+
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -282,27 +293,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -331,36 +321,44 @@
                             </div>
                         </li>
 
+
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <!-- Dropdown - Messages -->
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-users fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">5+</span>
+                                <span class="badge badge-danger badge-counter">3+</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Thành viên mới
-                                </h6>
+                                <h6 class="dropdown-header">Thành viên mới</h6>
 
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                @php($member_users = DB::table('users')->where('verify',1)->take(3)->get())
+                                @foreach($member_users as $member_user)
+                                <a class="dropdown-item d-flex align-items-center" href="{{ url('admin/manage-member/view-information/'
+                                    .$member_user->slug.'-'.$member_user->id) }}">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                                        @if($member_user->avatar != NULL)
+                                        <img src="{{ $member_user->avatar }}" class="rounded-circle"> ​
+                                        @else
+                                        <img src="{{ url('public/logo/user/user-icon-edit.png') }}" class="rounded-circle">
+                                        @endif
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">
-                                            Huỳnh Anh (065326869)
+                                            {{ $member_user->username }} ({{ $member_user->phone }})
                                         </div>
                                         <div class="small text-gray-500">
-                                            <i class="far fa-clock"></i> 30 phút trước
+                                            <i class="far fa-clock"></i>
+                                            {{ date("d/m/Y-H:i", strtotime($member_user->created_at)) }} phút
                                         </div>
                                     </div>
                                 </a>
+                                @endforeach
 
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="{{ route('manage_member') }}">Xem tất cả</a>
                             </div>
                         </li>
 
@@ -556,7 +554,6 @@
 </script>
 
 
-
 <script type="text/javascript">
     function myFunction() {
         var x = document.getElementById("accordionSidebar");
@@ -568,7 +565,6 @@
     }
 
 </script>
-
 
 @yield('link_js')
 

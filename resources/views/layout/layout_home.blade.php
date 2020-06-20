@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/png" href="public/logo/logo-title.png">
+    <link rel="icon" type="image/png" href="{{ url('public/logo/logo-title.png') }}">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -15,7 +15,6 @@
 
     <!-- fonts.googleapis -->
     <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
-
 
     <!-- fontawesome 5 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -54,7 +53,6 @@
             height: 40px;
             border-radius: 50%;
         }
-
     </style>
 
 </head>
@@ -64,11 +62,11 @@
         <a class="navbar-brand" href="{{ url('/') }}" style="padding:0px;">
             ​<img src="{{ url('public/logo/transparent-text.png') }}" class="image-logo">
         </a>
-
         <div class="clearfix">
             <span class="float-right">
                 <a class="navbar-toggler bg-warning button-post-new" style="border:none;color:white;" href="{{ url('post-new-category') }}">
-                    <i class="fas fa-edit" style="font-size:15px;"></i> Đăng tin
+                    <i class="fas fa-edit" style="font-size:15px;"></i>
+                    Đăng tin
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleForm" style="border:none;">
