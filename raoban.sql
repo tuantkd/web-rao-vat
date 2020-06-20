@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2020 at 03:54 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Generation Time: Jun 19, 2020 at 09:48 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `banners` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `image` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -44,7 +45,8 @@ CREATE TABLE `banners` (
 
 CREATE TABLE `categorys` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `category_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `category_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -53,22 +55,19 @@ CREATE TABLE `categorys` (
 -- Dumping data for table `categorys`
 --
 
-INSERT INTO `categorys` (`id`, `category_name`, `created_at`, `updated_at`) VALUES
-(1, 'Nhà cửa - Đất đai', '2020-06-07 06:00:07', '2020-06-07 06:00:07'),
-(2, 'Việc làm - Tuyển sinh', '2020-06-07 06:03:29', '2020-06-07 06:03:29'),
-(3, 'Cơ khí - Máy móc', '2020-06-07 06:04:17', '2020-06-07 06:04:17'),
-(4, 'Điện máy - Điện tử', '2020-06-07 06:04:32', '2020-06-07 06:04:32'),
-(5, 'Thời trang - Làm đẹp', '2020-06-07 06:04:50', '2020-06-07 06:04:50'),
-(6, 'Đời sống -  Xã hội', '2020-06-07 06:05:06', '2020-06-07 06:05:06'),
-(7, 'Ô tô - Xe máy', '2020-06-07 06:05:20', '2020-06-07 06:05:20'),
-(8, 'Máy tính - Linh kiện', '2020-06-07 06:05:38', '2020-06-07 06:05:38'),
-(9, 'Dịch vụ', '2020-06-07 06:05:48', '2020-06-07 06:05:48'),
-(10, 'Kinh doanh', '2020-06-07 06:05:56', '2020-06-07 06:05:56'),
-(11, 'Hàng hóa - Vật liệu', '2020-06-07 06:06:12', '2020-06-07 06:06:12'),
-(12, 'Công nghệ thông tin', '2020-06-07 06:06:24', '2020-06-07 06:06:24'),
-(13, 'Điện thoại - Phụ kiện', '2020-06-07 06:06:39', '2020-06-07 06:06:39'),
-(14, 'Mỹ thuật - Thiết kế', '2020-06-07 06:06:57', '2020-06-07 06:06:57'),
-(15, 'Ẩm thực - Thực phẩm', '2020-06-07 06:07:12', '2020-06-07 06:07:12');
+INSERT INTO `categorys` (`id`, `category_name`, `slug`, `created_at`, `updated_at`) VALUES
+(1, 'Bất động sản', NULL, '2020-06-18 07:26:46', '2020-06-18 07:26:46'),
+(2, 'Xe cộ', NULL, '2020-06-18 07:39:15', '2020-06-18 07:39:15'),
+(3, 'Đồ điện tử', NULL, '2020-06-18 07:39:27', '2020-06-18 07:39:27'),
+(4, 'Việc làm, tuyển sinh', NULL, '2020-06-18 07:39:37', '2020-06-18 07:39:37'),
+(5, 'Thú cưng', NULL, '2020-06-18 07:39:47', '2020-06-18 07:39:47'),
+(6, 'Đồ ăn, thực phẩm và loại khác', NULL, '2020-06-18 07:39:57', '2020-06-18 07:39:57'),
+(7, 'Tủ lạnh, máy lạnh, máy giặt', NULL, '2020-06-18 07:40:20', '2020-06-18 07:40:20'),
+(8, 'Đồ gia dụng, nội thất, cây cảnh', NULL, '2020-06-18 07:40:31', '2020-06-18 07:40:31'),
+(9, 'Thời trang, đồ dùng cá nhân', NULL, '2020-06-18 07:40:41', '2020-06-18 07:40:41'),
+(10, 'Giải trí, thể thao, sở thích', NULL, '2020-06-18 07:43:27', '2020-06-18 07:43:27'),
+(11, 'Đồ văn phòng, công nông nghiệp', NULL, '2020-06-18 07:43:39', '2020-06-18 07:43:39'),
+(12, 'Dịch vụ, du lịch', NULL, '2020-06-18 07:43:49', '2020-06-18 07:43:49');
 
 -- --------------------------------------------------------
 
@@ -89,114 +88,86 @@ CREATE TABLE `category_child_firsts` (
 --
 
 INSERT INTO `category_child_firsts` (`id`, `category_id`, `category_child_name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Mua nhà, bán nhà', '2020-06-07 06:37:17', '2020-06-07 06:37:17'),
-(2, 1, 'Thuê và cho thuê nhà', '2020-06-07 06:37:50', '2020-06-07 06:37:50'),
-(3, 1, 'Mua đất, bán đất', '2020-06-07 06:38:09', '2020-06-07 06:38:09'),
-(4, 1, 'Vật liệu xây dựng', '2020-06-07 06:38:23', '2020-06-07 06:38:23'),
-(5, 1, 'Thi công xây dựng', '2020-06-07 06:38:40', '2020-06-07 06:38:40'),
-(6, 1, 'Sang nhượng QSD', '2020-06-07 06:38:59', '2020-06-07 06:38:59'),
-(7, 1, 'Nội thất', '2020-06-07 06:39:10', '2020-06-07 06:39:10'),
-(8, 1, 'Ngoại thất', '2020-06-07 06:39:20', '2020-06-07 06:39:20'),
-(9, 1, 'Kiến trúc', '2020-06-07 06:39:56', '2020-06-07 06:39:56'),
-(10, 1, 'Các loại khác', '2020-06-07 06:40:27', '2020-06-07 06:40:27'),
-(11, 2, 'Tuyển sinh', '2020-06-07 06:44:40', '2020-06-07 06:44:40'),
-(12, 2, 'Dạy kèm', '2020-06-07 06:44:59', '2020-06-07 06:44:59'),
-(13, 2, 'Học hành', '2020-06-07 06:45:12', '2020-06-07 06:45:12'),
-(14, 2, 'Người tìm việc', '2020-06-07 06:45:26', '2020-06-07 06:45:26'),
-(15, 2, 'Giáo dục, đào tạo', '2020-06-07 06:45:45', '2020-06-07 06:45:45'),
-(16, 2, 'Dịch vụ lao động', '2020-06-07 06:45:57', '2020-06-07 06:45:57'),
-(17, 3, 'Thiết bị văn phòng', '2020-06-07 06:48:01', '2020-06-07 06:48:01'),
-(18, 3, 'Thiết bị bảo an, bảo vệ', '2020-06-07 06:48:18', '2020-06-07 06:48:18'),
-(19, 3, 'Cơ khí', '2020-06-07 06:48:29', '2020-06-07 06:48:29'),
-(20, 3, 'Điện lạnh', '2020-06-07 06:48:40', '2020-06-07 06:48:40'),
-(21, 3, 'Kỹ thuật, ứng dụng', '2020-06-07 06:48:54', '2020-06-07 06:48:54'),
-(22, 4, 'Điện tử', '2020-06-07 06:49:27', '2020-06-07 06:49:27'),
-(23, 4, 'Điện gia dụng', '2020-06-07 06:49:39', '2020-06-07 06:49:39'),
-(24, 4, 'Điện lạnh', '2020-06-07 06:49:49', '2020-06-07 06:49:49'),
-(25, 4, 'Thiết bị số khác', '2020-06-07 06:50:05', '2020-06-07 06:50:05'),
-(26, 4, 'Thiết bị trình chiếu', '2020-06-07 06:50:18', '2020-06-07 06:50:18'),
-(27, 4, 'Máy nghe nhạc', '2020-06-07 06:50:33', '2020-06-07 06:50:33'),
-(28, 4, 'Máy ảnh số', '2020-06-07 06:50:42', '2020-06-07 06:50:42'),
-(29, 4, 'Máy chơi game', '2020-06-07 06:50:56', '2020-06-07 06:50:56'),
-(30, 5, 'Mỹ phẩm', '2020-06-07 06:51:23', '2020-06-07 06:51:23'),
-(31, 5, 'Giày dép', '2020-06-07 06:51:33', '2020-06-07 06:51:33'),
-(32, 5, 'Đồng hồ, mắt kính', '2020-06-07 06:51:51', '2020-06-07 06:51:51'),
-(33, 5, 'Trang sức', '2020-06-07 06:52:04', '2020-06-07 06:52:04'),
-(34, 5, 'Khác', '2020-06-07 06:52:21', '2020-06-07 06:52:21'),
-(35, 6, 'Trong nước', '2020-06-07 06:52:41', '2020-06-07 06:52:41'),
-(36, 6, 'Văn phòng luật', '2020-06-07 06:52:56', '2020-06-07 06:52:56'),
-(37, 6, 'Đồ chơi', '2020-06-07 06:53:11', '2020-06-07 06:53:11'),
-(38, 6, 'Gift shop', '2020-06-07 06:53:22', '2020-06-07 06:53:22'),
-(39, 6, 'Ngoài nước', '2020-06-07 06:53:37', '2020-06-07 06:53:37'),
-(40, 6, 'Thông báo, tin nhắn', '2020-06-07 06:53:49', '2020-06-07 06:53:49'),
-(41, 6, 'Cá kiểng, cây cảnh', '2020-06-07 06:54:16', '2020-06-07 06:54:16'),
-(42, 6, 'Sách, truyện, báo', '2020-06-07 06:54:30', '2020-06-07 06:54:30'),
-(43, 6, 'Ngữ văn, dịch thuật', '2020-06-07 06:54:45', '2020-06-07 06:54:45'),
-(44, 6, 'Kết bạn', '2020-06-07 06:54:58', '2020-06-07 06:54:58'),
-(45, 6, 'Hoa tươi', '2020-06-07 06:55:09', '2020-06-07 06:55:09'),
-(46, 6, 'CD, DVD, phim ảnh', '2020-06-07 06:55:24', '2020-06-07 06:55:24'),
-(47, 6, 'Rơi giấy tờ', '2020-06-07 06:55:37', '2020-06-07 06:55:37'),
-(48, 6, 'Y khoa, y tế', '2020-06-07 06:55:55', '2020-06-07 06:55:55'),
-(49, 6, 'Luật', '2020-06-07 06:56:06', '2020-06-07 06:56:06'),
-(50, 6, 'Thông tin, quảng cáo', '2020-06-07 06:56:19', '2020-06-07 06:56:19'),
-(51, 6, 'Games', '2020-06-07 06:56:27', '2020-06-07 06:56:27'),
-(52, 6, 'Thể dục, thể thao', '2020-06-07 06:56:40', '2020-06-07 06:56:40'),
-(53, 6, 'Văn phòng phẩm', '2020-06-07 06:56:53', '2020-06-07 06:56:53'),
-(54, 6, 'Thú nuôi, vật nuôi', '2020-06-07 06:57:12', '2020-06-07 06:57:12'),
-(55, 7, 'Ô tô', '2020-06-07 06:57:36', '2020-06-07 06:57:36'),
-(56, 7, 'Xe tải', '2020-06-07 06:57:45', '2020-06-07 06:57:45'),
-(57, 7, 'Nộ thất, đồ chơi ô tô', '2020-06-07 06:58:02', '2020-06-07 06:58:02'),
-(58, 7, 'Xe máy', '2020-06-07 06:58:09', '2020-06-07 06:58:09'),
-(59, 7, 'Xe đạp điện', '2020-06-07 06:58:23', '2020-06-07 06:58:23'),
-(60, 7, 'Mũ bảo hiểm', '2020-06-07 06:58:36', '2020-06-07 06:58:36'),
-(61, 8, 'Laptop, notebook', '2020-06-07 06:59:09', '2020-06-07 06:59:09'),
-(62, 8, 'Máy in, mực in', '2020-06-07 06:59:20', '2020-06-07 06:59:20'),
-(63, 8, 'Máy bộ, Desktop PC', '2020-06-07 06:59:42', '2020-06-07 06:59:42'),
-(64, 8, 'Hàng thanh lý', '2020-06-07 06:59:53', '2020-06-07 06:59:53'),
-(65, 8, 'Thiết bị mạng', '2020-06-07 07:00:04', '2020-06-07 07:00:04'),
-(66, 9, 'Tổ chức sự kiện', '2020-06-07 07:00:26', '2020-06-07 07:00:26'),
-(67, 9, 'Dịch vụ vận chuyển', '2020-06-07 07:00:48', '2020-06-07 07:00:48'),
-(68, 9, 'Dịch vụ chuyển phát', '2020-06-07 07:00:58', '2020-06-07 07:00:58'),
-(69, 9, 'An ninh, bảo vệ', '2020-06-07 07:01:12', '2020-06-07 07:01:12'),
-(70, 9, 'Du lịch', '2020-06-07 07:01:23', '2020-06-07 07:01:23'),
-(71, 9, 'Sửa chữa, bảo chì', '2020-06-07 07:01:35', '2020-06-07 07:01:35'),
-(72, 9, 'Vận tải, vận chuyển', '2020-06-07 07:01:55', '2020-06-07 07:01:55'),
-(73, 10, 'Hợp tác, cộng tác', '2020-06-07 07:02:53', '2020-06-07 07:02:53'),
-(74, 10, 'Doanh nghiệp', '2020-06-07 07:03:05', '2020-06-07 07:03:05'),
-(75, 10, 'Mua bán qua mạng', '2020-06-07 07:03:16', '2020-06-07 07:03:16'),
-(76, 10, 'Chứng khoán, cổ phiếu', '2020-06-07 07:03:33', '2020-06-07 07:03:33'),
-(77, 10, 'Tài chính, kế toán', '2020-06-07 07:03:48', '2020-06-07 07:03:48'),
-(78, 11, 'Hoàng hóa, vật liệu', '2020-06-07 07:05:01', '2020-06-07 07:05:01'),
-(79, 11, 'Thanh lý, khuyến mãi', '2020-06-07 07:05:16', '2020-06-07 07:05:16'),
-(80, 11, 'Nông, lâm, thủy sản', '2020-06-07 07:05:32', '2020-06-07 07:05:32'),
-(81, 11, 'Đồ gỗ cao cấp', '2020-06-07 07:05:46', '2020-06-07 07:05:46'),
-(82, 11, 'Vàng bạc, đá quý', '2020-06-07 07:05:58', '2020-06-07 07:05:58'),
-(83, 11, 'Đồ cổ, hàng hiếm', '2020-06-07 07:06:18', '2020-06-07 07:06:18'),
-(84, 11, 'Dệt may, vải sợi', '2020-06-07 07:06:45', '2020-06-07 07:06:45'),
-(85, 11, 'Hóa chất, sinh học', '2020-06-07 07:06:58', '2020-06-07 07:06:58'),
-(86, 12, 'Phần mềm', '2020-06-07 07:07:33', '2020-06-07 07:07:33'),
-(87, 12, 'Giới thiệu Website', '2020-06-07 07:07:46', '2020-06-07 07:07:46'),
-(88, 12, 'Dịch vụ tin học', '2020-06-07 07:07:58', '2020-06-07 07:07:58'),
-(89, 12, 'Viễn thông', '2020-06-07 07:08:08', '2020-06-07 07:08:08'),
-(90, 12, 'Điện thoại VoIP', '2020-06-07 07:08:37', '2020-06-07 07:08:37'),
-(91, 12, 'Internet', '2020-06-07 07:08:49', '2020-06-07 07:08:49'),
-(92, 12, 'Domain, Web, Hosting', '2020-06-07 07:09:17', '2020-06-07 07:09:17'),
-(93, 12, 'Dịch vụ khác', '2020-06-07 07:09:30', '2020-06-07 07:09:30'),
-(94, 13, 'Điện thoại di động', '2020-06-07 07:09:53', '2020-06-07 07:09:53'),
-(95, 13, 'Linh kiện', '2020-06-07 07:10:04', '2020-06-07 07:10:04'),
-(96, 13, 'Sim, card, thẻ', '2020-06-07 07:10:18', '2020-06-07 07:10:18'),
-(97, 13, 'Phần mềm ĐTDĐ', '2020-06-07 07:10:45', '2020-06-07 07:10:45'),
-(98, 14, 'In ấn, thiết kế', '2020-06-07 07:11:04', '2020-06-07 07:11:04'),
-(99, 14, 'Trang trí nội thất', '2020-06-07 07:11:22', '2020-06-07 07:11:22'),
-(100, 14, 'Tranh ảnh nghệ thuât', '2020-06-07 07:11:41', '2020-06-07 07:11:41'),
-(101, 14, 'Mỹ thuật, kiến trúc', '2020-06-07 07:11:55', '2020-06-07 07:11:55'),
-(102, 14, 'Thủ công, mỹ nghệ', '2020-06-07 07:12:13', '2020-06-07 07:12:13'),
-(103, 15, 'Thực phẩm dinh dưỡng', '2020-06-07 07:12:36', '2020-06-07 07:12:36'),
-(104, 15, 'Tiệc cưới', '2020-06-07 07:12:48', '2020-06-07 07:12:48'),
-(105, 15, 'Ẩm thực khác', '2020-06-07 07:12:59', '2020-06-07 07:12:59'),
-(106, 2, 'Việc tìm người', '2020-06-07 07:14:05', '2020-06-07 07:14:05'),
-(107, 3, 'Thiết bị sản xuất', '2020-06-07 07:14:31', '2020-06-07 07:14:31'),
-(108, 5, 'Quần áo, thời trang', '2020-06-07 07:15:10', '2020-06-07 07:15:10');
+(109, 1, 'Mua nhà, bán nhà', '2020-06-18 13:47:26', '2020-06-18 13:47:26'),
+(110, 1, 'Thuê và cho thuê nhà', '2020-06-18 13:47:49', '2020-06-18 13:47:49'),
+(111, 1, 'Mua đất, bán đất', '2020-06-18 13:48:00', '2020-06-18 13:48:00'),
+(112, 1, 'Vật liệu xây dựng', '2020-06-18 13:48:20', '2020-06-18 13:48:20'),
+(113, 1, 'Thi công xây dựng', '2020-06-18 13:48:30', '2020-06-18 13:48:30'),
+(114, 1, 'Sang nhượng QSD', '2020-06-18 13:48:42', '2020-06-18 13:48:42'),
+(115, 1, 'Nội Thất', '2020-06-18 13:48:51', '2020-06-18 13:48:51'),
+(116, 1, 'Ngoại thất', '2020-06-18 13:49:13', '2020-06-18 13:49:13'),
+(117, 1, 'Kiến trúc', '2020-06-18 13:49:23', '2020-06-18 13:49:23'),
+(118, 1, 'Các loại khác', '2020-06-18 13:49:33', '2020-06-18 13:49:33'),
+(119, 2, 'Ô tô', '2020-06-18 13:50:47', '2020-06-18 13:50:47'),
+(120, 2, 'Xe tải', '2020-06-18 13:51:01', '2020-06-18 13:51:01'),
+(121, 2, 'Nội thất, đồ chơi Ô tô', '2020-06-18 13:51:11', '2020-06-18 13:51:11'),
+(122, 2, 'Xe máy', '2020-06-18 13:51:23', '2020-06-18 13:51:23'),
+(123, 2, 'Xe đạp điện', '2020-06-18 13:51:36', '2020-06-18 13:51:36'),
+(124, 2, 'Mũ bảo hiểm xe máy', '2020-06-18 13:52:11', '2020-06-18 13:52:11'),
+(125, 2, 'Phương tiện khác', '2020-06-18 13:54:53', '2020-06-18 13:54:53'),
+(126, 2, 'Phụ tùng xe', '2020-06-18 13:55:11', '2020-06-18 13:55:11'),
+(127, 4, 'Việc tìm người', '2020-06-18 14:00:30', '2020-06-18 14:00:30'),
+(128, 4, 'Tuyển sinh', '2020-06-18 14:00:43', '2020-06-18 14:00:43'),
+(129, 4, 'Dạy kèm', '2020-06-18 14:00:59', '2020-06-18 14:00:59'),
+(130, 4, 'Học hành', '2020-06-18 14:01:08', '2020-06-18 14:01:08'),
+(131, 4, 'Người tìm việc', '2020-06-18 14:01:19', '2020-06-18 14:01:19'),
+(132, 4, 'Giáo dục, đào tạo', '2020-06-18 14:01:33', '2020-06-18 14:01:33'),
+(133, 4, 'Dịch vụ lao động', '2020-06-18 14:01:55', '2020-06-18 14:01:55'),
+(134, 3, 'Điện tử', '2020-06-18 14:05:44', '2020-06-18 14:05:44'),
+(135, 3, 'Điện gia dụng', '2020-06-18 14:05:56', '2020-06-18 14:05:56'),
+(136, 3, 'Điện lạnh', '2020-06-18 14:06:05', '2020-06-18 14:06:05'),
+(137, 3, 'Thiết bị số khác', '2020-06-18 14:06:16', '2020-06-18 14:06:16'),
+(138, 3, 'Thiết bị trình chiếu', '2020-06-18 14:06:31', '2020-06-18 14:06:31'),
+(139, 3, 'Máy nghe nhạc', '2020-06-18 14:06:51', '2020-06-18 14:06:51'),
+(140, 3, 'Máy ảnh số', '2020-06-18 14:33:36', '2020-06-18 14:33:36'),
+(141, 3, 'Máy chơi game', '2020-06-18 14:34:13', '2020-06-18 14:34:13'),
+(142, 3, 'Linh kiện (Ram, Card)', '2020-06-18 14:36:34', '2020-06-18 14:36:34'),
+(143, 3, 'Phụ kiện (Màn hình, Chuột)', '2020-06-18 14:37:16', '2020-06-18 14:37:16'),
+(144, 3, 'Điện thoại', '2020-06-18 14:38:05', '2020-06-18 14:38:05'),
+(145, 3, 'Máy tính bảng', '2020-06-18 14:38:32', '2020-06-18 14:38:32'),
+(146, 3, 'Máy tính để bàn, Laptop', '2020-06-18 14:39:18', '2020-06-18 14:39:18'),
+(147, 3, 'Máy ảnh, Máy quay', '2020-06-18 14:40:45', '2020-06-18 14:40:45'),
+(148, 3, 'Tivi, Âm thanh', '2020-06-18 14:41:04', '2020-06-18 14:41:04'),
+(149, 3, 'Thiết bị đeo thông minh', '2020-06-18 14:41:21', '2020-06-18 14:41:21'),
+(150, 5, 'Mèo', '2020-06-18 14:42:43', '2020-06-18 14:42:43'),
+(151, 5, 'Chó', '2020-06-18 14:42:54', '2020-06-18 14:42:54'),
+(152, 5, 'Gà', '2020-06-18 14:43:02', '2020-06-18 14:43:02'),
+(153, 5, 'Chim', '2020-06-18 15:17:45', '2020-06-18 15:17:45'),
+(154, 5, 'Thú cưng khác', '2020-06-18 15:18:11', '2020-06-18 15:18:11'),
+(155, 5, 'Phụ kiện, Thức ăn, Dịch vụ', '2020-06-18 15:18:47', '2020-06-18 15:18:47'),
+(156, 7, 'Tủ lạnh', '2020-06-19 03:05:12', '2020-06-19 03:05:12'),
+(157, 7, 'Máy lạnh, Điều hòa', '2020-06-19 03:05:29', '2020-06-19 03:05:29'),
+(158, 7, 'Máy giặt', '2020-06-19 03:05:39', '2020-06-19 03:05:39'),
+(159, 8, 'Đèn', '2020-06-19 03:06:19', '2020-06-19 03:06:19'),
+(160, 8, 'Bàn ghế', '2020-06-19 03:06:32', '2020-06-19 03:06:32'),
+(161, 8, 'Tủ, kệ gia đình', '2020-06-19 03:06:47', '2020-06-19 03:06:47'),
+(162, 8, 'Bếp, lò, đồ điện nhà bếp', '2020-06-19 03:07:28', '2020-06-19 03:07:28'),
+(163, 8, 'Dụng cụ nhà bếp', '2020-06-19 03:08:24', '2020-06-19 03:08:24'),
+(164, 8, 'Quạt', '2020-06-19 03:08:34', '2020-06-19 03:08:34'),
+(165, 8, 'Cây cảnh, đồ trang trí', '2020-06-19 03:09:05', '2020-06-19 03:09:05'),
+(166, 8, 'Thiết bị vệ sinh, nhà tắm', '2020-06-19 03:09:31', '2020-06-19 03:09:31'),
+(167, 8, 'Nội thất, đồ gia dụng khác', '2020-06-19 03:09:53', '2020-06-19 03:09:53'),
+(168, 9, 'Quần áo', '2020-06-19 03:34:41', '2020-06-19 03:34:41'),
+(169, 9, 'Đồng hồ', '2020-06-19 03:34:54', '2020-06-19 03:34:54'),
+(170, 9, 'Giày dép', '2020-06-19 03:35:47', '2020-06-19 03:35:47'),
+(171, 9, 'Túi xách', '2020-06-19 03:36:03', '2020-06-19 03:36:03'),
+(172, 9, 'Nước hoa', '2020-06-19 03:36:18', '2020-06-19 03:36:18'),
+(173, 9, 'Phụ kiện thời trang khác', '2020-06-19 03:36:35', '2020-06-19 03:36:35'),
+(174, 10, 'Nhạc cụ', '2020-06-19 03:40:39', '2020-06-19 03:40:39'),
+(175, 10, 'Sách', '2020-06-19 03:40:48', '2020-06-19 03:40:48'),
+(176, 10, 'Đồ thể thao, Dã ngoại', '2020-06-19 03:41:06', '2020-06-19 03:41:06'),
+(177, 10, 'Đồ sưu tầm, đồ cổ', '2020-06-19 03:41:30', '2020-06-19 03:41:30'),
+(178, 10, 'Thiết bị chơi game', '2020-06-19 03:41:45', '2020-06-19 03:41:45'),
+(179, 10, 'Sở thích khác', '2020-06-19 03:42:05', '2020-06-19 03:42:05'),
+(180, 11, 'Đồ dùng văn phòng', '2020-06-19 03:43:50', '2020-06-19 03:43:50'),
+(181, 11, 'Đồ dùng chuyên dụng, Giống nuôi trồng', '2020-06-19 03:44:13', '2020-06-19 03:44:13'),
+(182, 12, 'Tổ chức sự kiện', '2020-06-19 03:44:50', '2020-06-19 03:44:50'),
+(183, 12, 'Dịch vụ vận chuyển', '2020-06-19 03:45:00', '2020-06-19 03:45:00'),
+(184, 12, 'Dịch vụ chuyến phát', '2020-06-19 03:45:23', '2020-06-19 03:45:23'),
+(185, 12, 'An ninh, bảo vệ', '2020-06-19 03:45:35', '2020-06-19 03:45:35'),
+(186, 12, 'Du lịch', '2020-06-19 03:45:46', '2020-06-19 03:45:46'),
+(187, 12, 'Sửa chữa, bảo trì', '2020-06-19 03:45:54', '2020-06-19 03:45:54'),
+(188, 12, 'Vận tải, vận chuyển', '2020-06-19 03:46:03', '2020-06-19 03:46:03');
 
 -- --------------------------------------------------------
 
@@ -1063,7 +1034,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1109,14 +1080,16 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2020_06_05_071002_create_levels_table', 1),
 (4, '2020_06_05_072023_create_post_types_table', 1),
 (5, '2020_06_05_072052_create_provinces_table', 1),
-(6, '2020_06_05_072227_create_categorys_table', 1),
 (7, '2020_06_05_072525_create_banners_table', 1),
 (8, '2020_06_05_072554_create_news_table', 1),
 (9, '2020_06_05_072632_create_category_child_firsts_table', 1),
 (12, '2020_06_05_072905_create_post_news_table', 1),
-(13, '2014_10_12_000000_create_users_table', 2),
 (14, '2020_06_05_072710_create_districts_table', 3),
-(15, '2020_06_05_072650_create_category_child_seconds_table', 4);
+(15, '2020_06_05_072650_create_category_child_seconds_table', 4),
+(16, '2014_10_12_100000_create_password_resets_table', 5),
+(17, '2020_06_09_080644_create_banners_table', 6),
+(20, '2014_10_12_000000_create_users_table', 7),
+(22, '2020_06_05_072227_create_categorys_table', 8);
 
 -- --------------------------------------------------------
 
@@ -1131,6 +1104,18 @@ CREATE TABLE `news` (
   `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1266,7 +1251,8 @@ INSERT INTO `provinces` (`id`, `province_name`, `created_at`, `updated_at`) VALU
 (61, 'Tỉnh Hậu Giang', NULL, NULL),
 (62, 'Tỉnh Sóc Trăng', NULL, NULL),
 (63, 'Tỉnh Bạc Liêu', NULL, NULL),
-(64, 'Tỉnh Cà Mau', NULL, NULL);
+(64, 'Tỉnh Cà Mau', NULL, NULL),
+(65, 'Thành phố Hà Nội', '2020-06-16 03:00:01', '2020-06-16 03:00:01');
 
 -- --------------------------------------------------------
 
@@ -1276,21 +1262,25 @@ INSERT INTO `provinces` (`id`, `province_name`, `created_at`, `updated_at`) VALU
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `level_id` int(11) NOT NULL,
-  `fullname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `level_id` int(11) DEFAULT NULL,
+  `fullname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `verifyToken` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `verify` int(11) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sex` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `birthday` date NOT NULL,
-  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `address` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `image` mediumtext COLLATE utf8_unicode_ci,
+  `sex` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `google_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `facebook_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `activation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `number_money` double(8,2) DEFAULT NULL,
+  `slug` varchar(252) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1299,9 +1289,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `level_id`, `fullname`, `username`, `email`, `verifyToken`, `verify`, `email_verified_at`, `password`, `remember_token`, `sex`, `birthday`, `phone`, `address`, `image`, `number_money`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Huỳnh Mi Nết', 'HuynhNet', 'huynhnet72@gmail.com', NULL, 1, NULL, '$2y$10$Vsxj0w55a.ZHoEiXSiToce0s1PBrIdXVp.pt7Elm8egqRfqktQyaO', NULL, 'Nam', '1999-08-19', '0859134539', 'Cà Mau', NULL, NULL, '2020-06-06 01:32:25', '2020-06-06 01:32:25'),
-(3, 1, 'Huỳnh Văn Tuấn', 'TuanTKD', 'nguyenvantuan9a7@gmail.com', NULL, NULL, NULL, '$2y$10$pKP3e6ihL0M3MfjTEf3ACe.oNUMGAsH97xpay0DC9YP2hQNXKhPGG', NULL, 'Nam', '1997-11-13', '0326827373', 'Hậu Giang', NULL, NULL, '2020-06-06 01:46:06', '2020-06-06 01:46:06');
+INSERT INTO `users` (`id`, `level_id`, `fullname`, `username`, `email`, `verifyToken`, `verify`, `email_verified_at`, `password`, `remember_token`, `sex`, `birthday`, `phone`, `address`, `avatar`, `google_id`, `facebook_id`, `activation_token`, `number_money`, `slug`, `created_at`, `updated_at`) VALUES
+(6, 1, 'Nguyễn Văn Tuấn', 'tuantkd', 'tuanb1607138@student.ctu.edu.vn', NULL, 0, NULL, '$2y$10$4eOzsG/vz27Sul.Bpht1eun4I.D/we49/qiENOlwsfj4IVPfarOm2', NULL, 'Nam', '1998-01-25', '0326827373', 'Hậu Giang - Vị Thủy', NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-18 05:52:08', '2020-06-18 05:52:08'),
+(8, 2, NULL, 'Tuan Tkd', 'nguyenvantuan9a7@gmail.com', 'EAAEPxT4VpRIBAPLgIjVN1m4NH6SrlWTq4Wmd95gxZClJQmI5OnwdXtBDsxeM1uw7DfomVxBMzxCzK4aNm8GfTBmMJsQrsfe5z6WZBii7yeZCmVeD0yPZBcQHxRNRbxwtX6rMiantMrcJtnTvpkoids3gYTa4WC9FL4V6sGso4wZDZD', 1, NULL, NULL, '9STMoSdTpF3ZjzLbsYJb3TtMPP2vBG4SHIVzbrQnjS52CoKj0RAJTwafPDNg', NULL, NULL, NULL, NULL, 'https://graph.facebook.com/v3.3/2484322845186561/picture?type=normal', NULL, '2484322845186561', NULL, NULL, 'tuan-tkd', '2020-06-18 06:02:05', '2020-06-18 06:02:05');
 
 --
 -- Indexes for dumped tables
@@ -1311,7 +1301,8 @@ INSERT INTO `users` (`id`, `level_id`, `fullname`, `username`, `email`, `verifyT
 -- Indexes for table `banners`
 --
 ALTER TABLE `banners`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `banners_post_id_foreign` (`post_id`);
 
 --
 -- Indexes for table `categorys`
@@ -1365,6 +1356,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
 -- Indexes for table `post_news`
 --
 ALTER TABLE `post_news`
@@ -1408,13 +1405,13 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT for table `categorys`
 --
 ALTER TABLE `categorys`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `category_child_firsts`
 --
 ALTER TABLE `category_child_firsts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `category_child_seconds`
@@ -1444,7 +1441,7 @@ ALTER TABLE `levels`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1468,17 +1465,23 @@ ALTER TABLE `post_types`
 -- AUTO_INCREMENT for table `provinces`
 --
 ALTER TABLE `provinces`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `banners`
+--
+ALTER TABLE `banners`
+  ADD CONSTRAINT `banners_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `post_news` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `category_child_firsts`

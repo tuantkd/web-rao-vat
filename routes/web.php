@@ -32,7 +32,7 @@ Route::get('profile-user', 'HomeController@profile_user');
 Route::get('post-new-category', 'HomeController@post_new_category');
 
 //Đăng tin
-Route::get('post-new', 'HomeController@post_new');
+Route::get('post-new/{name}/{id}', 'HomeController@post_new');
 //----------------------------------------------------------------------------
 
 
@@ -117,7 +117,6 @@ Route::get('page-change-password', 'HomeController@page_change_password');
 
 /*===============================================================================*/
 /*ADMIN*/
-
 Route::middleware(['checkStatus'])->group(function () {
 
     // trang chủ admin
@@ -170,10 +169,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xem thông tin thành viên
-    Route::get('admin/manage-member/view-information/{name}/{id}', [
-        'as' => 'view_information_member',
-        'uses' => 'AdminController@view_information_member'
-    ]);
+    Route::get('admin/manage-member/view-information/{name}-{id}', 'AdminController@view_information_member');
 
     // xóa tất cả thành viên
     Route::delete('admin/manage-member/delete-all-member', [

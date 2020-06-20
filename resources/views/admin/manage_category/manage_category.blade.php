@@ -4,21 +4,26 @@
 
 @section('content')
 
+{{-- CSS  --}}
+<style>
+    @media (max-width:600px) {
+        .card-header .row .col-12 form {
+            margin-top: 10px;
+        }
+    }
+
+</style>
+{{-- CSS  --}}
+
+
 <div class="card shadow h-100">
     <div class="card-header">
-        <h4 class="h3 mb-0 text-gray-800">Quản lý doanh mục</h4>
-    </div>
-
-    <div class="card-body p-2">
-        <form action="{{ route('search_category') }}" method="get">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-8 col-lg-8 mb-1">
-                    <a class="btn btn-danger delete_all" role="button" href="#">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Xóa đã chọn
-                    </a>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4 ml-auto mb-1 mt-1">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                <h3 class="h3 mb-0 text-gray-800">Quản lý danh mục</h3>
+            </div>
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                <form action="{{ route('search_category') }}" method="get">
                     <div class="input-group">
                         <select data-live-search="true" title="Chọn nhập tìm kiếm ..." class="form-control selectpicker" name="category_name_search">
                             @foreach ($allCategory as $value)
@@ -31,31 +36,59 @@
                             </button>
                         </div>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-2">
+        <div class="row">
+            {{-- col-md-5 col-lg-5  --}}
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="h4 mb-0 text-gray-800">Thêm danh mục</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for=""><b>Tên danh mục:</b></label>
+                                <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên danh mục" required>
+                                <small class="invalid-feedback">Vui lòng nhập danh mục</small>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-outline-success btn-sm" id="refresh" title="Làm mới">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </button>
+                                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-plus" aria-hidden="true"></i> THÊM</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </form>
-        <hr>
+            {{-- col-md-5 col-lg-5  --}}
 
-        <div class="row">
+            {{-- col-md-7 col-lg-7  --}}
             <div class="col-12 col-sm-12 col-md-7 col-lg-7 mb-4">
                 <div class="table-responsive|table-responsive-sm|table-responsive-md|table-responsive-lg|table-responsive-xl">
                     <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
                         <thead class="thead-dark|thead-light">
                             <tr>
-                                <th><input type="checkbox" id="check_all"></th>
                                 <th>STT</th>
-                                <th>Tên doanh mục</th>
+                                <th>Tên danh mục</th>
                                 <th>Tùy chọn</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($category as $key => $value)
                             <tr id="tr_{{ $value->id }}">
-                                <td data-lable=""><input type="checkbox" class="sub_check" data-id="{{ $value->id }}"></td>
                                 <td data-label="STT">{{ ++$key }}</td>
-                                <td data-label="Tên doanh mục">{{ $value->category_name }}</td>
+                                <td data-label="Tên danh mục">{{ $value->category_name }}</td>
                                 <td data-label="Tùy chọn">
-                                    <a name="" id="" class="btn btn-primary" href="{{ route('get_edit_category', $value->id)}}" role="button" title="Chỉnh sửa">
+                                    <a name="" id="" class="btn btn-primary btn-sm" href="{{ route('get_edit_category', $value->id)}}" role="button" title="Chỉnh sửa">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
                                 </td>
@@ -66,35 +99,13 @@
                     </table>
                 </div>
             </div>
+            {{-- col-md-7 col-lg-7  --}}
 
-            <div class="col-12 col-md-5">
-                <div class="card">
-
-                    <div class="card-header">
-                        Thêm danh mục
-                    </div>
-
-                    <div class="card-body">
-                        <form class="needs-validation" action="{{ route('add_category') }}" method="POST" novalidate>
-                            @csrf
-    
-                            <div class="form-group row">
-                                <label for="">Tên danh mục</label>
-                                <input type="text" class="form-control" name="nameCategory" id="nameCategory" aria-describedby="helpId" placeholder="Nhập tên doanh mục" required>
-                                <small class="invalid-feedback">Vui lòng nhập danh mục</small>
-                            </div>
-                            <button type="button" class="btn btn-outline-primary" id="refresh" title="Quay lại">
-                                <i class="fa fa-refresh" aria-hidden="true"></i>
-                            </button>
-                            <button type="submit" class="btn btn-success">THÊM DANH MỤC</button>
-    
-                        </form>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-12">
-                {{ $category->links() }}
+                <ul class="pagination justify-content-end pagination-sm" style="margin:20px 0">
+                    {{ $category->links() }}
+                </ul>
             </div>
         </div>
     </div>
@@ -104,8 +115,8 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
 </div>
-
 <!-- /.container-fluid -->
+
 
 @if (Session::has('add_category'))
 <script>

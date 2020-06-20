@@ -9,17 +9,19 @@
 
 <style type="text/css" media="screen">
     /* =================================== */
-    .lead{
-        font-style:italic;
-        font-size:16px;
+    .lead {
+        font-style: italic;
+        font-size: 16px;
     }
+
     /* =================================== */
 
     @media (max-width:600px) {
-        .lead span{
-            display:block;
+        .lead span {
+            display: block;
         }
     }
+
 </style>
 
 
@@ -53,13 +55,12 @@
             @endforeach
                 
             </div>
+
         </div>
-          
-      </div>
     </div>
     <!-- /.row -->
-  </div>
-  <!-- /.container -->
+</div>
+<!-- /.container -->
 
 @endsection
 <!-- ==================================================== -->

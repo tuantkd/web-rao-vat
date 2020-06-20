@@ -33,6 +33,7 @@
     }
 
     /* =================================== */
+
 </style>
 <!-- ======================================================= -->
 
@@ -47,8 +48,7 @@
                 <div class="card card-outline m-0">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle"
-                                src="{{ url('public/dist/img/user4-128x128.jpg') }}" style="border-radius:50%;">
+                            <img class="profile-user-img img-fluid img-circle" src="{{ url('public/dist/img/user4-128x128.jpg') }}" style="border-radius:50%;">
                         </div>
 
                         <h3 class="profile-username text-center">Tuan TKD</h3>
@@ -102,15 +102,13 @@
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ url('admin/profile-user') }}"
-                                    onclick="myFunction()">
+                                <a class="nav-link active" href="{{ url('admin/profile-user') }}" onclick="myFunction()">
                                     <i class="fas fa-user-edit"></i> Chỉnh sửa thông tin
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ url('admin/change-password') }}"
-                                    onclick="myFunction()">
+                                <a class="nav-link active" href="{{ url('admin/change-password') }}" onclick="myFunction()">
                                     <i class="fas fa-key"></i> Thay đổi mật khẩu
                                 </a>
                             </li>

@@ -1,9 +1,9 @@
 @extends('layout.layout_home')
 @section('title', 'Xem trang cá nhân')
-<!-- ==================================================== -->
+{{-- <!-- ==================================================== --> --}}
 
 
-<!-- ==================================================== -->
+{{-- <!-- ==================================================== --> --}}
 @section('content')
 
 <div class="container" style="padding-top:5px;margin-top:50px;padding:5px;">
@@ -11,14 +11,14 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
 
-            <!-- breadcrumb -->
+            {{-- breadcrumb --}}
             <ul class="breadcrumb breadcrumb-mobile">
                 <li class="breadcrumb-item">
                     <a href="#" style="text-decoration:none;color:red;">Trang chủ</a>
                 </li>
                 <li class="breadcrumb-item active">Trang cá nhân của Văn luận</li>
             </ul>
-            <!-- breadcrumb -->
+            {{-- breadcrumb --}}
 
             <!-- infor-user -->
             <div class="card">

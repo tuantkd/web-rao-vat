@@ -8,7 +8,8 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Socialite;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -71,6 +72,8 @@ class LoginController extends Controller
                     'verify' => 1,
                     'avatar' => $user->getAvatar(),
                     'verifyToken' => $user->token,
+                    'level_id' => 2,
+                    'slug' => Str::slug($user->getName()),
                 ]);
 
                 Auth::login($newUser, true);
@@ -113,6 +116,8 @@ class LoginController extends Controller
                     'verify' => 1,
                     'avatar' => $user_fb->getAvatar(),
                     'verifyToken' => $user_fb->token,
+                    'level_id' => 2,
+                    'slug' => Str::slug($user_fb->getName()),
                 ]);
 
                 Auth::login($newUser_fb, true);

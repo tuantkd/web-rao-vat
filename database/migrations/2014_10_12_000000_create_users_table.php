@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('facebook_id')->nullable();
             $table->string('access_token')->nullable();
             $table->float('number_money')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

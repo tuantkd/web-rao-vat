@@ -10,6 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
+
     <link rel="icon" type="image/png" href="{{ url('public/logo/logo-title.png') }}">
 
     <!-- Custom fonts for this template-->
@@ -21,17 +22,15 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ url('public/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('public/css/style_admin.css') }}">
 
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 
     <!-- định dạng table and select search -->
-    <link rel="stylesheet" href="{{ url('public/css/style_admin.css') }}">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
     <!-- alert bootstrap 4 -->
@@ -40,6 +39,7 @@
 
 
     @yield('link_css')
+
 
     <style type="text/css" media="screen">
         table {
@@ -110,13 +110,21 @@
                 border: 1px solid #ddd;
             }
 
-            body{
+            body {
                 font-family: Muli, sans-serif;
                 background-color: #f1f1f1;
             }
-    </style>
-</head>
+        }
+        .breadcrumb .breadcrumb-item a {
+            text-decoration: none;
+        }
 
+        .breadcrumb {
+            background-color: white;
+        }
+    </style>
+
+</head>
 <body id="page-top">
     @include('layout/slug')
 
@@ -138,9 +146,12 @@
                 display: none;
             }
         }
+
     </style>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
+
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -172,8 +183,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users"></i>
                     <span>Danh sách người dùng</span>
                 </a>
@@ -188,13 +198,11 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-user-lock"></i>
                     <span>Quyền người dùng</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tùy chọn</h6>
                         <a class="collapse-item" href="{{ route('manage_role') }}">Quyền người dùng</a>
@@ -212,8 +220,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Quản lý bài đăng</span>
                 </a>
@@ -231,8 +238,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
-                    aria-expanded="true" aria-controls="collapsePages1">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
                     <i class="fas fa-map-marked-alt"></i>
                     <span>Đơn vị hành chính</span>
                 </a>
@@ -287,41 +293,14 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Bài đăng mới
                                 </h6>
@@ -342,57 +321,64 @@
                             </div>
                         </li>
 
+
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <!-- Dropdown - Messages -->
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-users fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">5+</span>
+                                <span class="badge badge-danger badge-counter">3+</span>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Thành viên mới
-                                </h6>
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">Thành viên mới</h6>
 
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                @php($member_users = DB::table('users')->where('verify',1)->take(3)->get())
+                                @foreach($member_users as $member_user)
+                                <a class="dropdown-item d-flex align-items-center" href="{{ url('admin/manage-member/view-information/'
+                                    .$member_user->slug.'-'.$member_user->id) }}">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60"
-                                            alt="">
+                                        @if($member_user->avatar != NULL)
+                                        <img src="{{ $member_user->avatar }}" class="rounded-circle"> ​
+                                        @else
+                                        <img src="{{ url('public/logo/user/user-icon-edit.png') }}" class="rounded-circle">
+                                        @endif
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">
-                                            Huỳnh Anh (065326869)
+                                            {{ $member_user->username }} ({{ $member_user->phone }})
                                         </div>
                                         <div class="small text-gray-500">
-                                            <i class="far fa-clock"></i> 30 phút trước
+                                            <i class="far fa-clock"></i>
+                                            {{ date("d/m/Y-H:i", strtotime($member_user->created_at)) }} phút
                                         </div>
                                     </div>
                                 </a>
+                                @endforeach
 
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="{{ route('manage_member') }}">Xem tất cả</a>
                             </div>
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Nav Item - User Information -->
+                        @if(Auth::check())
+
+
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle"
-                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
-                                    style="width: 30px; margin-right: 10px;">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Huynh Net</span>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @if(Auth::user()->avatar != NULL)
+                                <img src="{{ url('public/image_avatar/'.Auth::user()->avatar) }}" class="img-profile rounded-circle" style="width: 30px; margin-right: 10px;"> ​
+                                @else
+                                <img src="{{ url('public/logo/user/user-icon-edit.png') }}" class="img-profile rounded-circle" style="width: 30px; margin-right: 10px;">
+                                @endif
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ url('admin/profile-user/'.to_slug('Huynh-Net').'/'.'2') }}">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ url('admin/profile-user') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thông tin
                                 </a>
@@ -406,6 +392,8 @@
                                 </a>
                             </div>
                         </li>
+
+                        @endif
 
                     </ul>
 
@@ -441,8 +429,7 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -484,22 +471,20 @@
 <script src="{{ url('public/js/demo/chart-pie-demo.js') }}"></script>
 
 <!-- select live search -->
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
-        $('.table-responsive-stack').find("th").each(function (i) {
+        $('.table-responsive-stack').find("th").each(function(i) {
 
             $('.table-responsive-stack td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
             $('.table-responsive-stack-thead').hide();
         });
 
-        $('.table-responsive-stack').each(function () {
+        $('.table-responsive-stack').each(function() {
             var thCount = $(this).find("th").length;
             var rowGrow = 100 / thCount + '%';
             //console.log(rowGrow);
@@ -509,26 +494,26 @@
         function flexTable() {
             if ($(window).width() < 768) {
 
-                $(".table-responsive-stack").each(function (i) {
+                $(".table-responsive-stack").each(function(i) {
                     $(this).find(".table-responsive-stack-thead").show();
                     $(this).find('thead').hide();
                 });
 
-                // window is less than 768px   
+                // window is less than 768px
             } else {
 
 
-                $(".table-responsive-stack").each(function (i) {
+                $(".table-responsive-stack").each(function(i) {
                     $(this).find(".table-responsive-stack-thead").hide();
                     $(this).find('thead').show();
                 });
             }
-            // flextable   
+            // flextable
         }
 
         flexTable();
 
-        window.onresize = function (event) {
+        window.onresize = function(event) {
             flexTable();
         };
     });
@@ -542,19 +527,20 @@
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
+
 </script>
 
 {{-- validation form --}}
 <script>
     // Self-executing function
-    (function () {
+    (function() {
         'use strict';
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
@@ -564,8 +550,8 @@
             });
         }, false);
     })();
-</script>
 
+</script>
 
 
 <script type="text/javascript">
@@ -577,8 +563,8 @@
             x.style.display = "block";
         }
     }
-</script>
 
+</script>
 
 @yield('link_js')
 

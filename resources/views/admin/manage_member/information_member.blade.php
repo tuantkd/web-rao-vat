@@ -1,4 +1,3 @@
-
 @extends('layout.master_admin')
 @section('title','Admin - Hồ sơ cá nhân')
 
@@ -38,6 +37,7 @@
     }
 
     /* =================================== */
+
 </style>
 <!-- ======================================================= -->
 
@@ -45,6 +45,17 @@
 <!-- ======================================================= -->
 <section class="content">
     <div class="container" style="padding:1px;">
+
+        <!-- breadcrumb -->
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ url('admin/manage-member') }}">Quản lý thành viên</a>
+            </li>
+            <li class="breadcrumb-item active">Xem thông tin</li>
+        </ul>
+        <!-- breadcrumb -->
+
+
         <div class="row">
 
             <div class="col-md-3">
@@ -52,8 +63,7 @@
                 <div class="card card-outline m-0">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle"
-                                src="{{ url('public/dist/img/user4-128x128.jpg') }}" style="border-radius:50%;">
+                            <img class="profile-user-img img-fluid img-circle" src="{{ url('public/dist/img/user4-128x128.jpg') }}" style="border-radius:50%;">
                         </div>
 
                         <h3 class="profile-username text-center">Tuan TKD</h3>
@@ -105,15 +115,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header p-2">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="{{ url('admin/profile-user') }}"
-                                    onclick="myFunction()">
-                                    <i class="fas fa-user-edit"></i> Danh sách bài đăng
-                                </a>
-                            </li>
-
-                        </ul>
+                        <h4 class="h4 text-secondary pt-1">Danh sách bài đăng</h4>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -121,7 +123,7 @@
                         <div class="tab-content">
                             <!-- tab-content -->
                             <div class="tab-pane active" id="settings">
-                                
+
                                 <div class="media border p-2">
                                     <img src="{{ url('public/images/car-2.jpg') }}" class="img-fluid mr-3 image-post-new">
                                     <div class="media-body">
@@ -134,10 +136,9 @@
                                                     <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
                                                 </p>
                                             </div>
-                
+
                                             <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip"
-                                                    title="Chưa duyệt">
+                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
                                                     <i class="far fa-check-square"></i>
                                                 </a>
                                                 <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
@@ -159,10 +160,9 @@
                                                     <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
                                                 </p>
                                             </div>
-                
+
                                             <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip"
-                                                    title="Chưa duyệt">
+                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
                                                     <i class="far fa-check-square"></i>
                                                 </a>
                                                 <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
@@ -184,10 +184,9 @@
                                                     <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
                                                 </p>
                                             </div>
-                
+
                                             <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip"
-                                                    title="Chưa duyệt">
+                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
                                                     <i class="far fa-check-square"></i>
                                                 </a>
                                                 <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
@@ -209,10 +208,9 @@
                                                     <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
                                                 </p>
                                             </div>
-                
+
                                             <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip"
-                                                    title="Chưa duyệt">
+                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
                                                     <i class="far fa-check-square"></i>
                                                 </a>
                                                 <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
