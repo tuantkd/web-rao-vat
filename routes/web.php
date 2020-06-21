@@ -9,23 +9,36 @@ use Illuminate\Support\Facades\Route;
 //Trang chủ
 Route::get('/', 'HomeController@index');
 
+//----------------------------------------------------------------------------
 //Xem danh mục
 Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
 
-// lọc tỉnh thành - quận huyện
-Route::get('loc/quan-huyen', 'HomeController@filter')->name('filter_district');
-
 //Xem danh mục chi tiết
 Route::get('view-category-detail/{name}', 'HomeController@view_category_detail');
+//----------------------------------------------------------------------------
 
+
+
+//----------------------------------------------------------------------------
 //Xem chi tiết tin tức đăng
 Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail');
+//----------------------------------------------------------------------------
 
+
+
+//----------------------------------------------------------------------------
 //Báo cáo vi phạm bản tin
 Route::get('report-new', 'HomeController@report_new');
+//----------------------------------------------------------------------------
 
+
+
+//----------------------------------------------------------------------------
 //Xem trang cá nhân người dùng
 Route::get('profile-user', 'HomeController@profile_user');
+//----------------------------------------------------------------------------
+
+
 
 //----------------------------------------------------------------------------
 //Đăng tin cấp cha danh mục
@@ -33,6 +46,9 @@ Route::get('post-new-category', 'HomeController@post_new_category');
 
 //Đăng tin
 Route::get('post-new/{name}/{id}', 'HomeController@post_new');
+
+//Xử lý đăng tin
+Route::post('post-post-new', 'HomeController@post_post_new');
 //----------------------------------------------------------------------------
 
 
