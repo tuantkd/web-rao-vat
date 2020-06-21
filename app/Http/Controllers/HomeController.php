@@ -147,7 +147,6 @@ class HomeController extends Controller
         $add_post_new->images = $request->input('txt_category_firsts_id');
 
 
-
         //Ẩn là 1, hiện là 0
         $add_post_new->hidden_new = $request->input('txt_category_firsts_id');
 
