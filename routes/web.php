@@ -12,6 +12,9 @@ Route::get('/', 'HomeController@index');
 //Xem danh mục
 Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
 
+// xem danh mục cấp 1
+Route::get('danh-muc-cap-1/{name}/{id_category_first}', 'HomeController@view_category_first')->name('view_category_first');
+
 // lọc tỉnh thành - quận huyện
 Route::get('loc/quan-huyen', 'HomeController@filter')->name('filter_district');
 

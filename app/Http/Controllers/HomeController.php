@@ -35,6 +35,7 @@ class HomeController extends Controller
         ]);
     }
 
+    // ==================================================================
     //Xem theo danh mục
     public function view_category($name, $id){
         $category = DB::table('categorys')->where('id', $id)->get();
@@ -50,6 +51,39 @@ class HomeController extends Controller
         ]);
     }
 
+    // ==================================================================
+    // xem danh mục cấp 1
+    public function view_category_first(Request $request, $name, $id_category_first){
+        $province = DB::table('provinces')->get();
+        $allCategory = DB::table('categorys')->get();
+
+        $category_first = DB::table('category_child_firsts')->where('id', $id_category_first)->get();
+
+        $category_id = DB::table('category_child_firsts')
+                ->select('category_id')
+                ->where('id', $id_category_first)
+                ->groupBy('category_id');
+
+        $category = DB::table('categorys')
+                ->joinSub($category_id, 'category_child_firsts', function($join){
+                    $join->on('categorys.id', '=', 'category_child_firsts.category_id');
+                })
+                ->get();
+
+        foreach ($category_first as $value) {
+            $allCategoryFirst = DB::table('category_child_firsts')->where('category_id', $value->category_id)->get();
+        }
+
+        return view('home.view_category_first')->with([
+            'category' => $category,
+            'category_first' => $category_first,
+            'province' => $province,
+            'allCategory' => $allCategory,
+            'allCategoryFirst' => $allCategoryFirst
+        ]);
+    }
+
+    // ====================================================================
     // lọc tỉnh thành - quận huyện
     public function filter(Request $request){
 
