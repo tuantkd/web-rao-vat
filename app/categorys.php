@@ -16,19 +16,9 @@ class categorys extends Model
 
     public $timestamps = true;
 
-
+    //Danh mục cha có nhiều danh mục cấp 1
     public function category_child_first()
     {
         return $this->hasMany('App\category_child_firsts');
-    }
-
-    public function category_child_second()
-    {
-        return $this->hasMany('App\category_child_seconds');
-    }
-
-    public function post_new()
-    {
-        return $this->hasMany('App\post_news');
     }
 }

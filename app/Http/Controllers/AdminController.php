@@ -25,7 +25,12 @@ class AdminController extends Controller
     //Trang chủ admin
     public function index(Request $request)
     {
-        return view('admin.index_admin');
+        $member = DB::table('users')->where('level_id', 2)->latest()->limit(5)->get();
+        $postNew = DB::table('post_news')->latest()->limit(5)->get();
+        return view('admin.index_admin')->with([
+            'member' => $member,
+            'postNew' => $postNew
+        ]);
     }
     // ==================================================================
 
@@ -275,7 +280,7 @@ class AdminController extends Controller
         $type_post = DB::table('post_types')->get();
         $province = DB::table('provinces')->get();
         $district = DB::table('districts')->get();
-        $postNew = DB::table('post_news')->paginate(10);
+        $postNew = DB::table('post_news')->latest()->paginate(10);
         return view('admin.manage_post_new.manage_post_new')->with([
             'type_post' => $type_post,
             'province' => $province,
@@ -345,7 +350,7 @@ class AdminController extends Controller
     }
 
     // xem chi tiết bài đăng
-    public function view_post_new(Request $request, $id)
+    public function view_post_new(Request $request, $name ,$id)
     {
         $postNew = DB::table('post_news')->where('id', $id)->get();
         return view('admin.manage_post_new.view_post_new')->with([
@@ -827,5 +832,12 @@ class AdminController extends Controller
         $delete_new = $request->session()->get('delete_new');
         session()->put('delete_new');
         return redirect()->back()->with('delete_new', '');
+    }
+
+    public function view_detail_new(Request $request, $name, $id){
+        $new = DB::table('news')->where('id', $id)->get();
+        return view('admin.manage_new.view_new')->with([
+            'new' => $new
+        ]);
     }
 }

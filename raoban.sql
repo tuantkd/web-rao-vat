@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2020 at 09:48 AM
+-- Generation Time: Jun 23, 2020 at 04:39 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -67,7 +67,8 @@ INSERT INTO `categorys` (`id`, `category_name`, `slug`, `created_at`, `updated_a
 (9, 'Thời trang, đồ dùng cá nhân', NULL, '2020-06-18 07:40:41', '2020-06-18 07:40:41'),
 (10, 'Giải trí, thể thao, sở thích', NULL, '2020-06-18 07:43:27', '2020-06-18 07:43:27'),
 (11, 'Đồ văn phòng, công nông nghiệp', NULL, '2020-06-18 07:43:39', '2020-06-18 07:43:39'),
-(12, 'Dịch vụ, du lịch', NULL, '2020-06-18 07:43:49', '2020-06-18 07:43:49');
+(12, 'Dịch vụ, du lịch', NULL, '2020-06-18 07:43:49', '2020-06-18 07:43:49'),
+(13, 'Mẹ và bé', NULL, '2020-06-19 09:46:39', '2020-06-19 09:46:39');
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,20 @@ INSERT INTO `category_child_firsts` (`id`, `category_id`, `category_child_name`,
 (185, 12, 'An ninh, bảo vệ', '2020-06-19 03:45:35', '2020-06-19 03:45:35'),
 (186, 12, 'Du lịch', '2020-06-19 03:45:46', '2020-06-19 03:45:46'),
 (187, 12, 'Sửa chữa, bảo trì', '2020-06-19 03:45:54', '2020-06-19 03:45:54'),
-(188, 12, 'Vận tải, vận chuyển', '2020-06-19 03:46:03', '2020-06-19 03:46:03');
+(188, 12, 'Vận tải, vận chuyển', '2020-06-19 03:46:03', '2020-06-19 03:46:03'),
+(189, 6, 'Thực phẩm dinh dưỡng', '2020-06-19 12:54:29', '2020-06-19 12:54:29'),
+(190, 6, 'Tiệc cưới', '2020-06-19 12:54:39', '2020-06-19 12:54:39'),
+(191, 6, 'Ẩm thực khác', '2020-06-19 12:54:50', '2020-06-19 12:54:50'),
+(192, 10, 'Nhạc cụ', '2020-06-19 12:56:35', '2020-06-19 12:56:35'),
+(193, 10, 'Sách', '2020-06-19 12:56:51', '2020-06-19 12:56:51'),
+(194, 10, 'Đồ thể thao, Dã ngoại', '2020-06-19 12:57:08', '2020-06-19 12:57:08'),
+(195, 10, 'Đồ sưu tầm, đồ cổ', '2020-06-19 12:57:36', '2020-06-19 12:57:36'),
+(196, 10, 'Thiết bị chơi game', '2020-06-19 12:57:56', '2020-06-19 12:57:56'),
+(197, 10, 'Sở thích khác', '2020-06-19 12:58:09', '2020-06-19 12:58:09'),
+(198, 13, 'Thời trang trẻ em', '2020-06-22 13:56:08', '2020-06-22 13:56:08'),
+(199, 13, 'Thời trang cho mẹ', '2020-06-22 13:56:50', '2020-06-22 13:56:50'),
+(200, 13, 'Giải trí cho bé', '2020-06-22 13:57:31', '2020-06-22 13:57:31'),
+(201, 13, 'Xe cho bé', '2020-06-22 13:57:47', '2020-06-22 13:57:47');
 
 -- --------------------------------------------------------
 
@@ -178,35 +192,77 @@ INSERT INTO `category_child_firsts` (`id`, `category_id`, `category_child_name`,
 CREATE TABLE `category_child_seconds` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_first_id` bigint(20) UNSIGNED NOT NULL,
-  `type_property` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `address` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `project_name` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `land_area` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `floor` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `bedroom` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `bathroom` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `area_used` int(11) NOT NULL,
-  `juridical` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `type_work` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `year_old` int(11) NOT NULL,
-  `sex` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `certificate` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `foreign_anguage` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `position` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `job` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `experience` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `level_salary` int(11) NOT NULL,
-  `manufacture` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `color_item` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `new_percent_item` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `year_manufacture` int(11) NOT NULL,
-  `manufacture_item` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `fuel` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `model_line_item` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `expiration_date` date NOT NULL,
+  `estate_category` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_address` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_name_project` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_land_area` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_floor` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_bedroom` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_bathroom` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_area_used` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estate_juridical` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_color` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_version` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_origin` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_produce_name` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_model_name` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_register_year` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_category` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_number_kilometer` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_fuel` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `electron_manufacturer` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `electron_model_machine` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `electron_color` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `electron_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_type` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_old` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_sex` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_certificate` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_foreign_language` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_position` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_job` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_experience` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `work_salary_level` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `food_origin` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `food_expiration` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `refrigerator_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `refrigerator_manufacturer` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `furniture_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fashion_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fashion_type_product` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sport_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `office_furniture_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `service_type_work` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `service_experience_work` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mom_baby_status` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mom_baby_type_product` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `category_child_seconds`
+--
+
+INSERT INTO `category_child_seconds` (`id`, `category_first_id`, `estate_category`, `estate_address`, `estate_name_project`, `estate_land_area`, `estate_floor`, `estate_bedroom`, `estate_bathroom`, `estate_area_used`, `estate_juridical`, `car_color`, `car_version`, `car_origin`, `car_status`, `car_produce_name`, `car_model_name`, `car_register_year`, `car_category`, `car_number_kilometer`, `car_fuel`, `electron_manufacturer`, `electron_model_machine`, `electron_color`, `electron_status`, `work_type`, `work_old`, `work_sex`, `work_certificate`, `work_foreign_language`, `work_position`, `work_job`, `work_experience`, `work_salary_level`, `food_origin`, `food_expiration`, `refrigerator_status`, `refrigerator_manufacturer`, `furniture_status`, `fashion_status`, `fashion_type_product`, `sport_status`, `office_furniture_status`, `service_type_work`, `service_experience_work`, `mom_baby_status`, `mom_baby_type_product`, `created_at`, `updated_at`) VALUES
+(1, 109, 'Biệt thự, Villa, Penthouse', 'Thị xã Phú Mỹ, tỉnh Bà Rịa - Vũng Tàu', NULL, '3200m2', '1', '3', '2', NULL, 'Giấy tờ đầy đủ, chính chủ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:02:46', '2020-06-22 13:02:46'),
+(2, 109, 'Biệt thự, Villa, Penthouse', 'Thị xã Phú Mỹ, tỉnh Bà Rịa - Vũng Tàu', NULL, '3200m2', '1', '3', '2', NULL, 'Giấy tờ đầy đủ, chính chủ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:04:36', '2020-06-22 13:04:36'),
+(3, 119, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Đỏ', 'Tôi không rõ', 'Nhật Bản', 'Mới', 'Mazda', 'Mazda CX-5', '2020', 'Xe số', NULL, 'Xăng', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:07:46', '2020-06-22 13:07:46'),
+(4, 119, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Đỏ', 'Tôi không rõ', 'Nhật Bản', 'Mới', 'Mazda', 'Mazda CX-5', '2020', 'Xe số', NULL, 'Xăng', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:08:33', '2020-06-22 13:08:33'),
+(5, 119, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Đỏ', 'Tôi không rõ', 'Nhật Bản', 'Mới', 'Mazda', 'Mazda CX-5', '2020', 'Xe số', NULL, 'Xăng', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:10:27', '2020-06-22 13:10:27'),
+(6, 119, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Đỏ', 'Tôi không rõ', 'Nhật Bản', 'Mới', 'Mazda', 'Mazda CX-5', '2020', 'Xe số', NULL, 'Xăng', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:13:35', '2020-06-22 13:13:35'),
+(7, 148, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Đen', 'Đã sử dụng (chưa sửa chữa)', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:18:49', '2020-06-22 13:18:49'),
+(8, 127, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Khác', NULL, NULL, NULL, NULL, NULL, 'Làm việc bán thời gian', NULL, '18000/Giờ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:25:08', '2020-06-22 13:25:08'),
+(9, 151, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:28:29', '2020-06-22 13:28:29'),
+(10, 191, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:30:55', '2020-06-22 13:30:55'),
+(11, 156, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mới', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:34:06', '2020-06-22 13:34:06'),
+(12, 167, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mới', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:37:48', '2020-06-22 13:37:48'),
+(13, 170, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mới', 'Đồ Nữ', NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:40:52', '2020-06-22 13:40:52'),
+(14, 174, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mới', NULL, NULL, NULL, NULL, NULL, '2020-06-22 13:43:53', '2020-06-22 13:43:53'),
+(15, 180, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Đã sử dụng', NULL, NULL, NULL, NULL, '2020-06-22 13:47:04', '2020-06-22 13:47:04'),
+(16, 182, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Khác', NULL, NULL, NULL, '2020-06-22 13:50:37', '2020-06-22 13:50:37'),
+(17, 198, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mới', 'Đồ cho bé', '2020-06-22 13:59:09', '2020-06-22 13:59:09');
 
 -- --------------------------------------------------------
 
@@ -1083,13 +1139,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2020_06_05_072525_create_banners_table', 1),
 (8, '2020_06_05_072554_create_news_table', 1),
 (9, '2020_06_05_072632_create_category_child_firsts_table', 1),
-(12, '2020_06_05_072905_create_post_news_table', 1),
 (14, '2020_06_05_072710_create_districts_table', 3),
-(15, '2020_06_05_072650_create_category_child_seconds_table', 4),
 (16, '2014_10_12_100000_create_password_resets_table', 5),
 (17, '2020_06_09_080644_create_banners_table', 6),
 (20, '2014_10_12_000000_create_users_table', 7),
-(22, '2020_06_05_072227_create_categorys_table', 8);
+(22, '2020_06_05_072227_create_categorys_table', 8),
+(29, '2020_06_05_072905_create_post_news_table', 13),
+(30, '2020_06_05_072650_create_category_child_seconds_table', 14);
 
 -- --------------------------------------------------------
 
@@ -1126,23 +1182,44 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `post_news` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `post_type_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `category_id` bigint(20) UNSIGNED NOT NULL,
-  `province_id` bigint(20) UNSIGNED NOT NULL,
-  `title` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `price` double(8,2) NOT NULL,
-  `currency` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `tag_search` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `image` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `duration` double(8,2) NOT NULL,
-  `hide_new` double(8,2) NOT NULL,
-  `category_new` mediumtext COLLATE utf8_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `post_type_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `category_first_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `province_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `district_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `title` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `unit_price` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `currency` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tag_search` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `images` mediumtext COLLATE utf8_unicode_ci DEFAULT NULL,
+  `number_date_expired` int(11) DEFAULT NULL,
+  `hidden_new` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `save_post` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `post_news`
+--
+
+INSERT INTO `post_news` (`id`, `post_type_id`, `user_id`, `category_first_id`, `province_id`, `district_id`, `title`, `price`, `unit_price`, `currency`, `content`, `tag_search`, `images`, `number_date_expired`, `hidden_new`, `status`, `save_post`, `created_at`, `updated_at`) VALUES
+(1, 2, 8, 109, 50, 1262, 'Bán Villa 2 diện tích 3200m2 - Phú Mỹ, Bà Rịa Vũng Tàu', 5000000000, 'Nền', 'Đ', '<p>Cần cho thu&ecirc; hay b&aacute;n con villa 2 đầy đủ tiện nghi, s&acirc;n vườn cực rộng v&agrave; quang cảnh xung quanh tuyệt vời, rất y&ecirc;n tĩnh:<br />\r\n✅&nbsp;C&oacute; thể ở ngay để tr&aacute;nh dịch v&agrave; l&agrave;m nơi nghỉ dưỡng tuyệt vời.<br />\r\n✅&nbsp;Nếu bạn muốn mua th&igrave; xem như l&agrave; khoảng đầu tư cũng tốt (c&aacute;ch s&acirc;n bay Long Th&agrave;nh hơn 15km) trong hiện tại v&agrave; tương lai.<br />\r\n✅&nbsp;Vị tr&iacute; đẹp gần Hồ Đ&aacute; Đen<br />\r\n✅&nbsp;C&aacute;ch S&agrave;i G&ograve;n 65km, c&aacute;ch Vũng T&agrave;u 50km<br />\r\n????&nbsp;Xem to&agrave;n cảnh từ h&igrave;nh chụp flycam&nbsp;<a href=\"https://maps.app.goo.gl/TT7NtTvZPg37ecqX8\" rel=\"noopener nofollow\" target=\"_blank\">https://maps.app.goo.gl/TT7NtTvZPg37ecqX8</a><br />\r\n&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;<br />\r\n*** Diện t&iacute;ch: khoảng 3200m2<br />\r\n*** C&oacute; vườn rau đẹp, trong v&ograve;ng 10-20 ng&agrave;y c&oacute; rau sạch ăn<br />\r\n*** C&oacute; 2 cổng ở 2 mặt tiền đường, xe hơi v&agrave;o tận b&ecirc;n trong.<br />\r\n*** H&agrave;ng r&agrave;o bao quanh to&agrave;n bộ khu đất, h&agrave;ng r&agrave;o gần cổng x&acirc;y bằng đ&aacute; rất chắc chắn.<br />\r\n*** Giấy tờ đầy đủ, kh&ocirc;ng thuộc diện giải tỏa, gần đường v&agrave;nh đai 4 trong tương lai.<br />\r\n*** C&oacute; 1 căn nh&agrave; lớn gần giữa khu đất, đẹp nhưng cực kỳ chắn chắc, an to&agrave;n v&agrave; đầy đủ tiện nghi, nh&agrave; gồm:<br />\r\n➡️&nbsp;Trệt: c&oacute; 2 PN, 1 PK, 1 toilet, 1 bếp, 1 kho, 1 nh&agrave; trồng nấm b&agrave;o ngư). Đồ d&ugrave;ng nh&agrave; bếp v&agrave; b&agrave;n ghế đầy đủ cho 8 người ở, 1 b&igrave;nh lọc nước bằng gốm c&ocirc;ng nghệ cao (nước lọc c&oacute; thể uống m&agrave; kh&ocirc;ng cần đun s&ocirc;i, c&ocirc;ng nghệ của Unicef viện trợ)<br />\r\n➡️&nbsp;Lầu: được chế tạo từ container loại lớn theo thiết kế ri&ecirc;ng, rất tiện nghi v&agrave; tho&aacute;ng m&aacute;t, c&oacute; đầy đủ toilet, bếp, m&aacute;y giặt, tủ lạnh với 6 cửa sổ, 2 cửa ra v&agrave;o loại 1 c&aacute;nh v&agrave; 1 cửa lớn 2 c&aacute;nh. B&ecirc;n ngo&agrave;i l&agrave; ban c&ocirc;ng lớn, c&oacute; thể tổ chức tiệc cho 20-30 người.C&oacute; wifi (4G)<br />\r\n➡️&nbsp;S&acirc;n thượng lớn, ngắm cảnh hay dựng lều ngủ ngo&agrave;i trời rất l&yacute; tưởng v&agrave; an to&agrave;n.<br />\r\n&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;<br />\r\n*** Quang cảnh xung quanh con Villa 2:<br />\r\n✅&nbsp;Đầy c&acirc;y xanh<br />\r\n✅&nbsp;Gần hồ Đ&aacute; Đen (hồ cung cấp nước cho cả Tp Vũng T&agrave;u) n&ecirc;n m&ocirc;i trường trong l&agrave;nh, xanh m&aacute;t với rất nhiều chim ch&oacute;c, c&ocirc;n tr&ugrave;ng. C&oacute; thể đạp xe quanh hồ hay đi bộ ra hồ ngắm cảnh v&agrave;o buổi chiều.<br />\r\n✅&nbsp;Đất đ&atilde; được thải độc (h&oacute;a chất n&ocirc;ng nghiệp độc hại) hơn 1 năm nay<br />\r\n✅&nbsp;Được trồng đa dạng c&acirc;y ăn tr&aacute;i (hơn chục loại c&acirc;y ăn tr&aacute;i kh&aacute;c nhau, một số loại chưa tới 1 năm nữa l&agrave; đ&atilde; c&oacute; tr&aacute;i ăn.).<br />\r\n✅&nbsp;M&ocirc;i trường tốt cho sự sống n&ecirc;n c&ocirc;n tr&ugrave;ng, chim ch&oacute;c kh&aacute; nhiều, v&agrave;o m&ugrave;a mưa c&oacute; thể thấy đom đ&oacute;m.<br />\r\n✅&nbsp;To&agrave;n bộ vườn đ&atilde; l&agrave;m hệ thống tưới nước tự động, c&oacute; thể điều khiển qua smartphone hay lập tr&igrave;nh tưới v&agrave;o thời gian quy định.<br />\r\n✅&nbsp;Rau sạch c&oacute; thể trồng v&agrave; thu hoạch sau khoảng 2-4 tuần.<br />\r\n✅&nbsp;C&oacute; 1 hồ sen nở rất đẹp<br />\r\n✅&nbsp;C&oacute; 1 giếng nước khoan rất s&acirc;u (gần 70m) qua nhiều tầng đ&aacute; đen, n&ecirc;n nước ngon v&agrave; c&oacute; độ pH gần như nước Lavie. Xung quanh gần như kh&ocirc;ng c&oacute; nguồn &ocirc; nhiễm n&agrave;o<br />\r\n*** Con villa 2 nằm ở khu vực c&oacute; độ cao hơn trăm m&eacute;t so với mực nước biển n&ecirc;n chưa bao giờ c&oacute; t&igrave;nh trạng ngập nước.<br />\r\n&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;<br />\r\n&ldquo;Những l&uacute;c khủng hoảng như vậy, nếu giữ tiền chưa chắc gi&uacute;p bạn sống s&oacute;t v&agrave; tiền c&oacute; thể mất gi&aacute; do lạm ph&aacute;t, nhưng nếu bạn c&oacute; một căn nh&agrave; tr&aacute;nh dịch với một vườn đầy rau quả th&igrave; bạn vẫn c&oacute; thể ung dung vượt qua dịch.&rdquo;<br />\r\n????&nbsp;Gi&aacute; cho thu&ecirc; 16 triệu/ th&aacute;ng<br />\r\n????&nbsp;Gi&aacute; b&aacute;n : 4,8 tỷ đồng (1,5tr/m2)<br />\r\n????&nbsp;Li&ecirc;n hệ: Minh Bảo - 0913732102 (Viber / Zalo / Whatsapp)<br />\r\nP/s: m&igrave;nh vẫn c&ograve;n 1 con villa 1 gần đ&oacute;, nếu bạn thu&ecirc; hay, mua v&agrave; cần hỗ trợ để quen với nơi n&agrave;y th&igrave; m&igrave;nh sẽ hỗ trợ. Hỗ trợ người chăm vườn 3 th&aacute;ng.<br />\r\n*** Nếu bạn nghĩ người quen của m&igrave;nh c&oacute; nhu cầu muốn thu&ecirc; hay mua th&igrave; share gi&uacute;p nh&eacute;. Cảm ơn rất nhiều.</p>', 'Villa 2 diện tích', '[\"biet_thu1.jpg\",\"biet_thu2.jpg\",\"biet_thu3.png\"]', 1, NULL, 0, 0, '2020-06-22 13:04:36', '2020-06-22 13:04:36'),
+(2, 2, 8, 119, 51, 1287, 'MAZDA CX-5-Trả trước 291 triệu-Tặng Bảo hiểm-VAY NHANH', 824000000, 'Chiếc', 'Đ', '<p><span style=\"font-size:18px\">NEW Mazda CX-5 hiện giảm gi&aacute; tiền mặt l&ecirc;n đến 85 triệu, trả trước 291 triệu nhận ngay xe, gi&aacute;<br />\r\nxe chỉ từ 824 triệu đồng.<br />\r\nLI&Ecirc;N HỆ TRỰC TIẾP ĐỂ ĐƯỢC HỖ TRỢ HỒ SƠ VAY NHANH CH&Oacute;NG. VAY TỐI ĐA ĐẾN&nbsp;8<br />\r\nNĂM K&Egrave;M LOẠT ƯU Đ&Atilde;I KH&Aacute;C.<br />\r\n<br />\r\nN&acirc;ng cấp an to&agrave;n đ&aacute;ng ch&uacute; &yacute; ch&iacute;nh l&agrave; g&oacute;i trang bị an to&agrave;n i-Activsense với<br />\r\nh&agrave;ng loạt t&iacute;nh năng nổi trội.<br />\r\nThay đổi về nội thất v&agrave; tiện nghi:<br />\r\n&bull; Đồng hồ l&aacute;i th&ecirc;m m&agrave;n h&igrave;nh kỹ thuật số 7inch ở giữa, hiển thị nhiều th&ocirc;ng tin vận h&agrave;nh hơn.<br />\r\n&bull; Cụm điều khiến Mazda Connect v&agrave; c&aacute;c n&uacute;t bấm được trau chuốt gọn g&agrave;ng hơn.<br />\r\n&bull; H&agrave;ng ghế trước t&iacute;ch hợp t&iacute;nh năng l&agrave;m m&aacute;t<br />\r\n&bull; M&agrave;n h&igrave;nh giải tr&iacute; trung t&acirc;m hiển thị tốt hơn, kết nối Apple Carplay v&agrave; Android Auto<br />\r\n&bull; &Acirc;m thanh 10 loa Bose cao cấp<br />\r\nQU&Agrave; TẶNG K&Egrave;M KHI MUA XE: Thảm l&oacute;t ch&acirc;n, t&uacute;i cứu hộ, Phim c&aacute;ch nhiệt Llumar bảo h&agrave;nh 5<br />\r\nnăm, Pagamui, thẻ GPS Navigation</span></p>', 'MAZDA CX-5', '[\"car-2.jpg\",\"car-3.jpg\",\"car-4.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:13:35', '2020-06-22 13:13:35'),
+(3, 2, 8, 148, 51, 1271, 'Loa có kệ treo JBL F-450 dành cho Quán Cafe, Shop thời trang', 1450000, 'Cái', 'Đ', '<p>Loa treo tường JBL-F450 hay c&ograve;n c&ograve;n l&agrave; loa hộp treo tường c&oacute; thiết kế nhỏ gọn, chuy&ecirc;n được<br />\r\ntreo tường v&agrave; thường được lựa chọn sử dụng trong c&aacute;c hệ thống &acirc;m thanh:<br />\r\n- &Acirc;m thanh hội thảo,<br />\r\n- &Acirc;m thanh th&ocirc;ng b&aacute;o<br />\r\n- &Acirc;m thanh ph&ograve;ng tr&agrave;<br />\r\n- &Acirc;m thanh qu&aacute;n cafe,<br />\r\n- &Acirc;m thanh Shop cửa h&agrave;ng<br />\r\n- &Acirc;m thanh ph&ograve;ng tập Gym<br />\r\n- &Acirc;m thanh nh&agrave; h&agrave;ng...<br />\r\nLoa JBL F-450 được Cửa H&agrave;ng Hải b&aacute;n giảm gi&aacute; đến 10%, từ gi&aacute; gốc l&agrave; 1,600K, giảm chỉ c&ograve;n<br />\r\n1,450K/ cặp. Bảo đảm với Qu&yacute; kh&aacute;ch đ&acirc;y l&agrave; gi&aacute; rẻ hơn nhiều so với gi&aacute; b&aacute;n tại c&aacute;c Trung t&acirc;m v&agrave;<br />\r\nSi&ecirc;u thị xung quanh Thủ Đức.<br />\r\nĐiện M&aacute;y Hải số 41 L&ecirc; văn Ninh, P Linh T&acirc;y, Chợ Thủ Đức l&agrave; địa chỉ tin cậy m&agrave; Qu&yacute; Kh&aacute;ch c&oacute;<br />\r\nthể đặt niềm tin để mua Loa cũng như nhiều sản phẩm &acirc;m thanh kh&aacute;c. Với tr&ecirc;n 20 năm gắn b&oacute;<br />\r\nvới thị trường &acirc;m thanh TPHCM Cửa h&agrave;ng Hải lu&ocirc;n chọn b&aacute;n những sản phẩm chất lượng gi&aacute;<br />\r\ntốt, vừa l&agrave;m h&agrave;i l&ograve;ng kh&aacute;ch h&agrave;ng v&agrave; tăng th&ecirc;m uy t&iacute;n của Điện M&aacute;y Hải.<br />\r\nTh&ocirc;ng số kỹ thuật:<br />\r\nLoa treo tường JBL F-450<br />\r\nC&ocirc;ng suất 80W/ 8 ohms<br />\r\nLoa nhựa treo<br />\r\nBass loa 10cm<br />\r\nQui c&aacute;ch: 28 x 16.5 x 16cm/c&aacute;i<br />\r\nBộ sản phẩm gồm 1 x Cặp loa<br />\r\nC&ocirc;ng suất tối đa: 160W<br />\r\nPhạm vi: 90dB 1W, 1M<br />\r\nTrọng lượng: Đơn: 5 kg, Đ&ocirc;i: 10 kg<br />\r\nBảo h&agrave;nh: 12 th&aacute;ng.<br />\r\nLưu &Yacute;: Cửa h&agrave;ng HẢI c&oacute; b&aacute;n trả g&oacute;p tất cả c&aacute;c Loại loa vali k&eacute;o, c&aacute;c mặt h&agrave;ng Điện Tử, M&aacute;y<br />\r\nt&iacute;nh, Thủ tục đơn giản, dể d&agrave;ng cho Qu&yacute; kh&aacute;ch mua g&oacute;p,<br />\r\nXin gọi 028 37205732 hoặc 0903 389026 gặp A Hải.<br />\r\nVui l&ograve;ng đặt h&agrave;ng theo số Điện thoại tr&ecirc;n<br />\r\nĐịa chỉ: 41 L&ecirc; Văn Ninh, P Linh T&acirc;y, Chợ Thủ Đức. ( Đối diện bưu điện Thủ Đức )<br />\r\nWebsite tham khảo: http://dienmayhaithuduc.com.<br />\r\nGmail: dienmayhai64@gmail.com.<br />\r\nZalo: 0903 389026 ( Trần Linh Hải Điện M&aacute;y Hải )<br />\r\nRất h&acirc;n hạnh phục vụ Qu&yacute; Kh&aacute;ch.<br />\r\nQu&yacute; kh&aacute;ch n&ecirc;n mua h&agrave;ng nơi Điện m&aacute;y Hải bởi:<br />\r\n-Tư vấn lựa chọn sản phẩm đ&uacute;ng nhu cầu<br />\r\n-Cam kết sản phẩm chọn lọc chất lượng tốt<br />\r\n-Cam kết 100% h&agrave;i l&ograve;ng với dịch vụ<br />\r\n-Dịch vụ thử sản phẩm tận nơi miễn ph&iacute; trước khi chọn mua<br />\r\n-Ch&iacute;nh s&aacute;ch chăm s&oacute;c hỗ trợ kh&aacute;ch h&agrave;ng tận t&acirc;m<br />\r\n-Bảo h&agrave;nh 06-12 th&aacute;ng.<br />\r\n-Giao h&agrave;ng nhanh ch&oacute;ng v&agrave; miễn ph&iacute;, đổi trả h&agrave;ng dễ d&agrave;ng<br />\r\nCHẤT LƯỢNG BẢO ĐẢM l&agrave; UY T&Iacute;N 20 năm kinh nghiệm của Cửa H&agrave;ng Hải mua b&aacute;n tại chợ<br />\r\nThủ Đức.<br />\r\nH&Acirc;N HẠNH PHỤC VỤ QU&Yacute; KH&Aacute;CH<br />\r\nTh&ocirc;ng tin t&agrave;i khoản ng&acirc;n h&agrave;ng:<br />\r\nT&ecirc;n TK: Hộ Kinh Doanh Cửa H&agrave;ng Điện M&aacute;y Hải.<br />\r\nNg&acirc;n h&agrave;ng ACB, Thủ Đức, TPHCM<br />\r\nSố Tk: 4452747<br />\r\nC&aacute;m ơn Qu&yacute; Kh&aacute;ch đ&atilde; ủng hộ Điện M&aacute;y Hải</p>', 'Loa có kệ treo JBL F-450', '[\"loa_1.jpg\",\"loa_2.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:18:49', '2020-06-22 13:18:49'),
+(4, 8, 8, 127, 51, 1273, 'Tuyển bảo vệ coi xe tại gò vấp', 18000, 'Giờ', 'Đ', '<p>Tuyển nh&acirc;n vi&ecirc;n bảo vệ tại CET g&ograve; vấp<br />\r\nTrung T&acirc;m Ngoại ngữ Kiến Tạo cần tuyển<br />\r\n<br />\r\n+ Vị tr&iacute; bảo vệ :<br />\r\n- Ưu ti&ecirc;n c&aacute;c bạn NAM ở khu vực G&ograve; Vấp (l&agrave;m việc nghi&ecirc;m chỉnh)<br />\r\n- Số lượng tuyển: 2 Nam từ&nbsp;18 &ndash; 26 tuổi ( tin tuyển gấp, kh&ocirc;ng m&ocirc;i giới hay đa<br />\r\ncấp )<br />\r\n- LƯU &Yacute;: Lương t&iacute;nh theo giờ l&agrave;m việc khởi điểm (18.500đ/ giờ). C&oacute; thỏa thuận<br />\r\nc&aacute;c phụ cấp bao<br />\r\ngồm trong qu&aacute; tr&igrave;nh l&agrave;m việc nếu cộng t&aacute;c l&acirc;u d&agrave;i.<br />\r\n<br />\r\n+ Thời gian l&agrave;m việc:<br />\r\n- Ca 1: từ 1h chiều đến 5h chiều<br />\r\n- Ca 2: từ 3h chiều đến 9h tối (ưu ti&ecirc;n buổi tối)<br />\r\n- L&agrave;m việc từ thứ Hai đến thứ Bảy (chủ nhật v&agrave; c&aacute;c ng&agrave;y lễ được nghỉ)<br />\r\n- Địa điểm l&agrave;m việc: 628/7 Phan Văn Trị, phường 10, G&ograve; Vấp<br />\r\n<br />\r\n+ C&ocirc;ng việc sẽ được hướng dẫn khi được nhận hồ sơ<br />\r\n_ Hồ sơ gồm:<br />\r\n1. Đơn xin việc<br />\r\n2. Sơ yếu l&yacute; lịch<br />\r\n3. CMND photo (c&oacute; sao y)<br />\r\n4. Sổ Hộ Khẩu photo (c&oacute; sao y)<br />\r\n5. Bằng tốt nghiệp cấp 3 photo (c&oacute; sao y) hoặc bằng đại học hoặc cao đẳng<br />\r\n<br />\r\nNộp tại địa điểm tr&ecirc;n (nơi l&agrave;m việc trực tiếp) từ 2h chiều đến 8h tối c&aacute;c ng&agrave;y<br />\r\ntrong tuần<br />\r\nThời gian nhận hồ sơ đến 31/10/2020</p>', 'Tuyển bảo vệ', '[\"work_job.png\"]', 1, NULL, 0, 0, '2020-06-22 13:25:08', '2020-06-22 13:25:08'),
+(5, 3, 8, 151, 51, 1278, 'Phối Giống chó Poodle', 1000000, 'con', 'Đ', '<p>Nhận phối giống Poodle N&acirc;u đỏ teacup tiny bao đỡ bao đậu , đưa đ&oacute;n tận nơi, lưu chuồng chờ phối miễn ph&iacute; cho c&aacute;c b&eacute; ở xa. Nh&agrave; c&oacute; nhiều b&eacute; đực đẹp tha hồ cho c&aacute;c bạn chọn lựa.</p>\r\n\r\n<p>Nhấn để hiện số:&nbsp;<strong>0972918612</strong></p>', 'Phối Giống chó Poodle', '[\"Thu_cung.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:28:29', '2020-06-22 13:28:29'),
+(6, 2, 8, 191, 65, 890, 'Chuyên sỉ lẻ bột Cacao nguyên chất toàn quốc Lhe 0916004117', 40000, 'Bịt', 'Đ', '<p>Chuy&ecirc;n sỉ lẻ to&agrave;n quốc. Nhận sỉ chỉ từ 5kg.<br />\r\nBột Cacao 100% nguy&ecirc;n chất Đăk Lăk kh&ocirc;ng đường th&iacute;ch hợp d&ugrave;ng v&agrave;o buổi tối, cho người<br />\r\nuống dễ d&agrave;ng c&oacute; được giấc ngủ ngon.<br />\r\nSản phẩm thuần khiết&nbsp;thi&ecirc;n nhi&ecirc;n, kh&ocirc;ng đường, m&ugrave;i vị v&agrave; hương thơm đậm đ&agrave;.<br />\r\n<br />\r\nHotline: 0916 004 117 Uy&ecirc;n<br />\r\n<br />\r\n**Hướng dẫn bảo quản: Bảo quản nơi kh&ocirc; r&aacute;o v&agrave; tho&aacute;ng m&aacute;t ở nhiệt độ 250C - 300C.<br />\r\n**Hướng dẫn sử dụng:<br />\r\n- Uống n&oacute;ng: 2 muỗng bột ca cao + 1 muỗng sữa đặc + 75ml nước s&ocirc;i.<br />\r\n- Uống lạnh: 2 muỗng bột ca cao + 1 muỗng sữa đặc + 75ml nước s&ocirc;i, th&ecirc;m nước đ&aacute; t&ugrave;y th&iacute;ch.<br />\r\n<br />\r\nCam kết ho&agrave;n tiền gấp 2 nếu sản phẩm k&eacute;m chất lượng.<br />\r\n<br />\r\nĐẶT MUA H&Agrave;NG - GIAO H&Agrave;NG NHANH TẬN NƠI<br />\r\nHotline: 0916 004 117 (Mua c&agrave;ng nhiều gi&aacute; c&agrave;ng rẻ)<br />\r\nGIAO H&Agrave;NG TẬN NƠI TẠI TP.HCM, SHIP H&Agrave;NG TO&Agrave;N QUỐC</p>', 'Cacao nguyên chất', '[\"ca_cao.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:30:55', '2020-06-22 13:30:55'),
+(7, 2, 8, 156, 51, 1288, 'CUNG CẤP Máy Lạnh Âm Trần Daikin FCNQ26MV1/RNQ26MV19', 29300000, 'Cái', 'Đ', '<p>ĐẠI L&Yacute; CHUY&Ecirc;N CUNG CẤP M&aacute;y Lạnh &Acirc;m Trần Daikin FCNQ26MV1/RNQ26MV19- GI&Aacute; RẺ<br />\r\nCẠNH TRANH<br />\r\n<br />\r\n<br />\r\n<br />\r\nHOTLINE: 0909 333 162 MS H&Agrave;<br />\r\n<br />\r\nTrong h&igrave;nh ảnh c&oacute; thể c&oacute;: m&agrave;n h&igrave;nh v&agrave; trong nh&agrave;<br />\r\n<br />\r\nƯu điểm của Điều H&ograve;a &Acirc;m Trần</p>', 'Máy Lạnh Âm Trần Daikin', '[\"may_lanh.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:34:06', '2020-06-22 13:34:06'),
+(8, 2, 8, 167, 21, 933, 'Báo giá Thùng gỗ sồi chuẩn', 111000, 'Thùng', 'Đ', '<p>GI&Aacute; TRỊ CỐT L&Otilde;I CỦA TH&Ugrave;NG GỖ SỒI<br />\r\nNhưng điều quan trọng nhất cũng ch&iacute;nh l&agrave; điểm kh&aacute;ch nhau giữa th&ugrave;ng sồi loại k&eacute;m chất lượng<br />\r\nv&agrave; loại tốt l&agrave; khoảng c&aacute;ch giữa những thanh gỗ.<br />\r\nNhững thanh gỗ&nbsp;kh&ocirc;ng được l&agrave;m cẩn thận sẽ tạo ra lỗ hổng v&agrave; l&agrave;m r&ograve; rượu, tuy nhi&ecirc;n nếu sử<br />\r\ndụng keo d&aacute;n để bịt k&iacute;n những khe hở giữa c&aacute;c thanh gỗ th&igrave; sẽ l&agrave;m mất đi bản chất vốn c&oacute; của<br />\r\nrượu ủ th&ugrave;ng gỗ sồi. Bởi v&igrave; lượng hơi nước trong rượu sẽ bay hơi qua thời gian, l&agrave;m tăng nồng<br />\r\nđộ rượu (alcohol) l&ecirc;n b&ecirc;n cạnh đ&oacute; c&ograve;n giảm nồng độ aldehyde trong rượu.<br />\r\nThương hiệu KAG Việt Nam &ndash; doanh nghiệp c&oacute; uy t&iacute;n trong ng&agrave;nh rượu, chuy&ecirc;n sản xuất v&agrave;<br />\r\ncung cấp thiết bị sản xuất rượu với hơn 10 năm kinh nghiệm, xứng đ&aacute;ng l&agrave; lựa chọn tin cậy, bạn<br />\r\nc&oacute; thể xem Bảng b&aacute;o gi&aacute; th&ugrave;ng gỗ sồi c&ugrave;ng những C&ocirc;ng dụng bất ngờ của th&ugrave;ng gỗ sồi tại<br />\r\nwebsite www. maythucphamkag . com.<br />\r\n<br />\r\nTH&Ocirc;NG TIN SẢN PHẨM<br />\r\n- T&ecirc;n sản phẩm: Th&ugrave;ng Gỗ Sồi KAG Việt Nam/ Oakwood Barrel<br />\r\n- Dung t&iacute;ch: 10L, 20L, 50L, 100L,&hellip;<br />\r\n- Nguy&ecirc;n liệu: sồi Nga, sồi Mỹ<br />\r\n- Đai th&eacute;p mạ kẽm<br />\r\n- M&agrave;u sắc: sồi trắng, sồi đỏ<br />\r\n- Th&iacute;ch hợp dung cho rượu nấu, whiskey, rum, tequila<br />\r\n- Khắc chữ hoặc h&igrave;nh vẽ theo y&ecirc;u cầu của kh&aacute;ch h&agrave;ng<br />\r\n<br />\r\nLI&Ecirc;N HỆ ĐỂ ĐƯỢC TƯ VẤN<br />\r\n- Hotline: 0904.68.5252<br />\r\n- Địa chỉ tham quan sản phẩm: Số 115, Ng&otilde; 509, Vũ T&ocirc;ng Phan, Thanh Xu&acirc;n, H&agrave; Nội<br />\r\n- Email: info@kagvietnam.com<br />\r\n- Website www. maythucphamkag.com/thung-dung-rượu-go-soi<br />\r\n- Website : www. thunggosoi. com</p>', 'Thùng gỗ sồi chuẩn', '[\"noi_that_go.jpg\",\"noi_that_go_2.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:37:48', '2020-06-22 13:37:48'),
+(9, 2, 8, 170, 51, 1279, 'Giày nữ tăng chiều cao tphcm', 1450000, 'Đôi', 'Đ', '<p>Gi&agrave;y da nữ tăng chiều cao 7cm<br />\r\nM&agrave;u sắc: trắng<br />\r\nChiều cao: tăng trong gi&agrave;y<br />\r\nKiểu d&aacute;ng đơn giản, sang trọng<br />\r\nMẫu gi&agrave;y ph&ugrave; hợp phối với nhiều loại trang<br />\r\nphục kh&aacute;c nhau như đầm, quần jean, short,<br />\r\nch&acirc;n v&aacute;y tạo<br />\r\nn&ecirc;n phong c&aacute;ch trẻ trung, thanh lịch<br />\r\nD&aacute;ng gi&agrave;y thon gọn, si&ecirc;u nhẹ, thoải m&aacute;i khi di<br />\r\nchuyển. Gi&agrave;y th&iacute;ch hợp mang đi du lịch, dạo<br />\r\nphố hay<br />\r\nđi l&agrave;m,...<br />\r\nC&oacute; nhiều mẫu tại website: giaycaomaxi.com<br />\r\nĐịa chỉ: 154 Điện Bi&ecirc;n Phủ, phường 6, quận 3, tpHCM (gần ng&atilde; tư Hai B&agrave; Trưng)<br />\r\nHotline: 0938274912</p>', 'Giày nữ tăng chiều cao', '[\"giay_nu.jpg\",\"giay_nu_2.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:40:52', '2020-06-22 13:40:52'),
+(10, 2, 8, 174, 65, 719, 'Đàn Piano Yamaha U3M thanh lý giá rẻ', 54990000, 'Chiếc', 'Đ', '<p>Đ&agrave;n Piano Yamaha U3M vừa mua về 65tr vợ kh&ocirc;ng th&iacute;ch, chưa kịp d&ugrave;ng đ&atilde; phải b&aacute;n thanh l&yacute;. Ai ưng em để gi&aacute; rẻ 54tr990k cho ai cần, đỡ phải ra cửa h&agrave;ng l&agrave;m g&igrave; đắt hơn chục triệu.</p>', 'Piano', '[\"piano.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:43:53', '2020-06-22 13:43:53'),
+(11, 2, 8, 180, 51, 1280, 'MÁY IN MÀU EPSON T60', 1900000, 'Cái', 'Đ', '<p>In m&agrave;u v&agrave; trắng đen khổ A4 A5... In h&igrave;nh ảnh chuy&ecirc;n nghiệp C&oacute; thể in mực chuyển nhiệt l&ecirc;n &aacute;o thun C&oacute; gắn hệ thống mực li&ecirc;n tục n&ecirc;n in rất nhiều mới nạp mực Đầu phun bền in được nhiều Bảo h&agrave;nh 3 th&aacute;ng Xem m&aacute;y tại 324 T&acirc;n Phước F7 Q10 TPHCM</p>', 'Máy In', '[\"van_phong_may_in.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:47:04', '2020-06-22 13:47:04'),
+(12, 4, 8, 182, 51, 1269, 'Dịch vu ban nhạc vip cho du lịch galateam building toàn quốc', 1000000, 'Giờ', 'Đ', '<p>C&Ocirc;NG TY TNHH GIẢI TR&Iacute; THANH T&Ugrave;NG<br />\r\nTUMBADORA BAND<br />\r\nMST: 0314283937<br />\r\nBAND FLAMENCO TUMBADORA - BAN<br />\r\nNHẠC TPHCM (SAIGON)<br />\r\nMr: THANH T&Ugrave;NG<br />\r\nPHONE 0908232718<br />\r\nGiới thiệu cung cấp ban nhạc<br />\r\nLựa chọn một ban nhạc ph&ugrave; hợp c&aacute;c ti&ecirc;u&nbsp;ch&iacute;<br />\r\nvề chất lượng biểu diễn, kh&ocirc;ng qu&aacute; ồn &agrave;o để<br />\r\nquan<br />\r\nkh&aacute;ch vừa nghe nhạc vừa đ&agrave;m đạo, nhưng<br />\r\ncũng kh&ocirc;ng qu&aacute; &ecirc;m dịu buồn tẻ, kh&ocirc;ng sử<br />\r\ndụng đĩa<br />\r\nCD hay USB organ ph&aacute;t nhạc nền. Ca kh&uacute;c<br />\r\nbiểu diễn được lựa chọn kỹ c&agrave;ng đ&uacute;ng chủ đề<br />\r\nph&ugrave;<br />\r\nhợp cả kh&aacute;ch quốc tế lẫn Việt Nam, ph&ugrave; hợp<br />\r\nvới mọi tầng lớp x&atilde; hội từ Đại gia đến C&ocirc;ng<br />\r\nnh&acirc;n,<br />\r\nTr&iacute; thức, N&ocirc;ng d&acirc;n v&agrave; ph&ugrave; hợp mọi lứa tuổi từ<br />\r\ncao ni&ecirc;n, trung ni&ecirc;n, thanh thiếu ni&ecirc;n. Phong<br />\r\nc&aacute;ch<br />\r\nbiểu diễn chuy&ecirc;n nghiệp trung thực, h&ograve;a &acirc;m<br />\r\nphối kh&iacute; trẻ trung sinh động, trang phục đ&uacute;ng<br />\r\nchủ đề<br />\r\ncủa sự kiện, đ&uacute;ng tone m&agrave;u của tiệc cưới<br />\r\nsang trọng l&atilde;ng mạn v&agrave; cuối c&ugrave;ng l&agrave; gi&aacute; dịch<br />\r\nvụ ban<br />\r\nnhạc phải hợp l&yacute; nhất trong thời buổi cạnh<br />\r\ntranh &ldquo;Kinh Tế Thị Trường&rdquo;, những ti&ecirc;u ch&iacute; đ&oacute;<br />\r\nlu&ocirc;n l&agrave;<br />\r\nmối quan t&acirc;m h&agrave;ng đầu với người l&agrave;m c&ocirc;ng<br />\r\nviệc Tổ Chức Sự Kiện (Event) cho c&aacute;c c&ocirc;ng<br />\r\nty, Tổ<br />\r\nchức tiệc cưới (Wedding planner) cho c&aacute;c<br />\r\ncặp đ&ocirc;i chuẩn bị h&ocirc;n lễ trọng đại<br />\r\nCHỈ C&Oacute; Ở CH&Uacute;NG T&Ocirc;I &ndash; BAN NHẠC<br />\r\nFLAMENCO TUMBADORA THANH T&Ugrave;NG- Uy<br />\r\nt&iacute;n tạo<br />\r\nn&ecirc;nThương hiệu đ&atilde; được khẳng định qua<br />\r\nnhiều năm tr&ecirc;n c&aacute;c diễn đ&agrave;n ban nhạc cho<br />\r\nEvents v&agrave;<br />\r\ntiệc cưới<br />\r\nBan nhạc FLAMENCO TUMBADORA th&agrave;nh<br />\r\nlập ng&agrave;y 16/04/2007, với 4 th&agrave;nh vi&ecirc;n ban<br />\r\nđầu<br />\r\nchuy&ecirc;n h&ograve;a tấu nhạc cổ điển, b&aacute;n cổ điển<br />\r\ncho c&aacute;c event khai trương showroom , ra mắt<br />\r\nmẫu xe<br />\r\nhơi mới, khai trương bất động sản mới, tiệc<br />\r\ncưới đại gia tại c&aacute;c kh&aacute;ch sạn 5 sao.<br />\r\nQua nhiều năm h&igrave;nh th&agrave;nh v&agrave; ph&aacute;t triển hiện<br />\r\nnay ban nhạc ch&uacute;ng t&ocirc;i đ&atilde; chuyển đổi ph&aacute;p<br />\r\nnh&acirc;n<br />\r\nDN l&ecirc;n C&ocirc;ng Ty TNHH với gần 20 th&agrave;nh vi&ecirc;n<br />\r\nbao gồm nhạc c&ocirc;ng v&agrave; ca sĩ c&oacute; chuy&ecirc;n m&ocirc;n<br />\r\ncao, tốt<br />\r\nnghiệp c&aacute;c trường đại học v&agrave; Nhạc Viện<br />\r\nTh&agrave;nh Phố . C&aacute;c th&agrave;nh vi&ecirc;n lu&acirc;n phi&ecirc;n biểu<br />\r\ndiển trong<br />\r\nc&aacute;c sự kiện lớn<br />\r\nChuy&ecirc;n đảm nh&acirc;n c&aacute;c show:<br />\r\nKhai trương Showroom, S&acirc;n Golf ,khai trương<br />\r\nc&ocirc;ng ty, Khai trương Bất động sản, Ra mắt<br />\r\nsản<br />\r\nphẩm, Thương hiệu mới, Kỷ niệm ng&agrave;y th&agrave;nh<br />\r\nlập, Lễ Đ&oacute;n Nhận Hu&acirc;n Chương, Huy Chương,<br />\r\nMở<br />\r\nB&aacute;n Căn Hộ Cao Cấp, Li&ecirc;n Hoan Tất ni&ecirc;n,<br />\r\nT&acirc;nni&ecirc;n,Gala Dinner, Hội nghị tổng kết, Tiệc<br />\r\ncưới,<br />\r\nRoad show&hellip;tại c&aacute;c kh&aacute;chsạn, resort 5 sao<br />\r\ntr&ecirc;n cả nước<br />\r\nLi&ecirc;n Hệ<br />\r\nMr: Thanh T&ugrave;ng<br />\r\nPhone: 0908232718- 028 22413990<br />\r\nM&atilde; Số Thuế: 0314283937<br />\r\nWeb site: https://chothuebannhac.net<br />\r\n<br />\r\nhttps://bannhacflamenco.net</p>', 'ban nhạc vip', '[\"dich_vu_1.jpg\",\"dich_vu_2.jpg\",\"dich_vu_3.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:50:38', '2020-06-22 13:50:38'),
+(13, 2, 6, 198, 65, 714, 'Xả kho Bộ Quần Áo trẻ em. Combo 5 bộ', 75000, 'Bộ', 'Đ', '<p>Xả kho nhiệt t&igrave;nh lu&ocirc;n, b&aacute;n v&igrave; đam m&ecirc; ko cần lợi nhuận :)) Combo 5 bộ gi&aacute; chỉ 75k Set bộ cotton chất đẹp &aacute;o ba lỗ quần đ&ugrave;i Mẫu mới về chất coton xịn nh&eacute;, họa tiết th&igrave; qu&aacute; y&ecirc;u lu&ocirc;n ạ, b&eacute; trai b&eacute; g&aacute;i mặc đều đẹp hết nh&eacute;. Chi tiết size số: Số 2 : từ 0-3 th&aacute;ng: 4-6kg Số 3 : từ 3-6 th&aacute;ng: 6-8kg Số 4 : từ 6-9 th&aacute;ng: 8-10kg Số 5 : từ 9-12 th&aacute;ng:10-12kg Số 6 : từ 12-14 th&aacute;ng: 12-14kg Sản phẩm ph&ugrave; hợp họa tiết cho cả b&eacute; trai v&agrave; b&eacute; g&aacute;i mặc rất dễ thương c&aacute;c mẹ nh&eacute;.</p>', 'Bộ Quần Áo trẻ em', '[\"tre_em.jpg\",\"tre_em_2.jpg\"]', 1, NULL, 0, 0, '2020-06-22 13:59:09', '2020-06-22 13:59:09');
 
 -- --------------------------------------------------------
 
@@ -1291,7 +1368,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `level_id`, `fullname`, `username`, `email`, `verifyToken`, `verify`, `email_verified_at`, `password`, `remember_token`, `sex`, `birthday`, `phone`, `address`, `avatar`, `google_id`, `facebook_id`, `activation_token`, `number_money`, `slug`, `created_at`, `updated_at`) VALUES
 (6, 1, 'Nguyễn Văn Tuấn', 'tuantkd', 'tuanb1607138@student.ctu.edu.vn', NULL, 0, NULL, '$2y$10$4eOzsG/vz27Sul.Bpht1eun4I.D/we49/qiENOlwsfj4IVPfarOm2', NULL, 'Nam', '1998-01-25', '0326827373', 'Hậu Giang - Vị Thủy', NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-18 05:52:08', '2020-06-18 05:52:08'),
-(8, 2, NULL, 'Tuan Tkd', 'nguyenvantuan9a7@gmail.com', 'EAAEPxT4VpRIBAPLgIjVN1m4NH6SrlWTq4Wmd95gxZClJQmI5OnwdXtBDsxeM1uw7DfomVxBMzxCzK4aNm8GfTBmMJsQrsfe5z6WZBii7yeZCmVeD0yPZBcQHxRNRbxwtX6rMiantMrcJtnTvpkoids3gYTa4WC9FL4V6sGso4wZDZD', 1, NULL, NULL, '9STMoSdTpF3ZjzLbsYJb3TtMPP2vBG4SHIVzbrQnjS52CoKj0RAJTwafPDNg', NULL, NULL, NULL, NULL, 'https://graph.facebook.com/v3.3/2484322845186561/picture?type=normal', NULL, '2484322845186561', NULL, NULL, 'tuan-tkd', '2020-06-18 06:02:05', '2020-06-18 06:02:05');
+(8, 2, NULL, 'Tuan Tkd', 'nguyenvantuan9a7@gmail.com', 'EAAEPxT4VpRIBAPLgIjVN1m4NH6SrlWTq4Wmd95gxZClJQmI5OnwdXtBDsxeM1uw7DfomVxBMzxCzK4aNm8GfTBmMJsQrsfe5z6WZBii7yeZCmVeD0yPZBcQHxRNRbxwtX6rMiantMrcJtnTvpkoids3gYTa4WC9FL4V6sGso4wZDZD', 1, NULL, NULL, 'JEHaHD3EPmnmry6X6B3QQJvAEVaZ9OJuo5HmskqsIh6zEG9GERJJ2LHScySc', NULL, NULL, NULL, NULL, 'https://graph.facebook.com/v3.3/2484322845186561/picture?type=normal', NULL, '2484322845186561', NULL, NULL, 'tuan-tkd', '2020-06-18 06:02:05', '2020-06-18 06:02:05'),
+(9, 1, 'Huỳnh Mi Nết', 'huynhnet', 'huynhnet72@gmail.com', NULL, 0, NULL, '$2y$10$O7fzQ2gBj5suTAQAa4gRIOweUfjqSZrBwvcO/HuoD.lLmzxZcc5zm', NULL, 'Nam', '1998-01-25', '0326827596', 'Cà Mau', NULL, NULL, NULL, NULL, NULL, NULL, '2020-06-23 02:39:13', '2020-06-23 02:39:13');
 
 --
 -- Indexes for dumped tables
@@ -1368,8 +1446,9 @@ ALTER TABLE `post_news`
   ADD PRIMARY KEY (`id`),
   ADD KEY `post_news_post_type_id_foreign` (`post_type_id`),
   ADD KEY `post_news_user_id_foreign` (`user_id`),
-  ADD KEY `post_news_category_id_foreign` (`category_id`),
-  ADD KEY `post_news_province_id_foreign` (`province_id`);
+  ADD KEY `post_news_category_first_id_foreign` (`category_first_id`),
+  ADD KEY `post_news_province_id_foreign` (`province_id`),
+  ADD KEY `post_news_district_id_foreign` (`district_id`);
 
 --
 -- Indexes for table `post_types`
@@ -1405,19 +1484,19 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT for table `categorys`
 --
 ALTER TABLE `categorys`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category_child_firsts`
 --
 ALTER TABLE `category_child_firsts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT for table `category_child_seconds`
 --
 ALTER TABLE `category_child_seconds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -1441,7 +1520,7 @@ ALTER TABLE `levels`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1453,7 +1532,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `post_news`
 --
 ALTER TABLE `post_news`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `post_types`
@@ -1471,7 +1550,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -1505,7 +1584,8 @@ ALTER TABLE `districts`
 -- Constraints for table `post_news`
 --
 ALTER TABLE `post_news`
-  ADD CONSTRAINT `post_news_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categorys` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_news_category_first_id_foreign` FOREIGN KEY (`category_first_id`) REFERENCES `category_child_firsts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_news_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `post_news_post_type_id_foreign` FOREIGN KEY (`post_type_id`) REFERENCES `post_types` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `post_news_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `post_news_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;

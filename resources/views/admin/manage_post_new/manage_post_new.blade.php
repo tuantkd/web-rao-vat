@@ -58,22 +58,24 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
                 @foreach ($postNew as $value)
                     <div class="media border p-2">
-                        <img src="{{ url('public/upload/image_post_new/'.$value->image) }}" class="img-fluid mr-3 image-post-new">
+                        <img src="{{ url('public/upload/image_post_new/'.$value->images) }}" class="img-fluid mr-3 image-post-new">
                         <div class="media-body">
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                    <a href="{{ route('view_post_new', $value->id) }}"><b>{{ $value->title }}</b></a>
+                                    <a href="{{ route('view_post_new', [ Str::slug($value->title), $value->id]) }}"><b>{{ $value->title }}</b></a>
                                     <p>
-                                        <strong><i class="fa fa-money" aria-hidden="true"></i> {{ number_format($value->price) }} {{ $value->price_type }}</strong> | 
+                                        <strong><i class="fa fa-money" aria-hidden="true"></i> {{ number_format($value->price) }} {{ $value->unit_price }}</strong> | 
                                         
-                                        @if($value->status == 'Chưa duyệt')
-                                            <span class="badge badge-danger">{{ $value->status }}</span>
+                                        @if($value->status == 0)
+                                            <span class="badge badge-danger">Chưa duyệt</span>
+                                        @elseif($value->status == 1)
+                                            <span class="badge badge-success">Đã duyệt</span>
                                         @else
-                                        <span class="badge badge-success">{{ $value->status }}</span>
+                                            <span class="badge badge-danger">Hết hạn</span>
                                         @endif
 
                                         <br>
-                                        <small><i class="fa fa-calendar" aria-hidden="true"></i> {{ $value->created_at }}</small> |
+                                        <small><i class="fa fa-calendar" aria-hidden="true"></i> {{ date("d/m/Y", strtotime($value->created_at )) }}</small> |
 
                                         @php
                                             $user = DB::table('users')->where('id', $value->user_id)->get();

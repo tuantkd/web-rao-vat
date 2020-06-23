@@ -51,6 +51,10 @@
             margin-left: 72px;
         }
 
+        .user_post .badge{
+            margin-left: 135px;
+        }
+
         .info_post{
             padding-left: 20px;
         }
@@ -93,7 +97,7 @@
                             </ol>
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active">
-                                    <img src="{{ url('public/upload/image_post_new/'.$value->image) }}" alt="First slide">
+                                    <img src="{{ url('public/upload/image_post_new/'.$value->images) }}" alt="First slide">
                                 </div>
 
                             </div>
@@ -121,15 +125,17 @@
                             @endif
                             
                             <strong>Huỳnh Mi Nết</strong>
-                            <a name="" id="" class="btn btn-outline-info" href="{{ route('view_information_member', $item->id )}}" role="button">Thông tin</a>
+                            <a name="" id="" class="btn btn-outline-info" href="{{ route('view_information_member', [Str::slug($item->username),$item->id] )}}" role="button">Thông tin</a>
                         @endforeach
 
-                        <span><i class="fa fa-calendar" aria-hidden="true"></i> <strong>{{ $value->created_at }}</strong></span>
+                        <span><i class="fa fa-calendar" aria-hidden="true"></i> <strong>{{ date("d/m/Y", strtotime($value->created_at)) }}</strong></span>
 
-                        @if($value->status == 'Chưa duyệt')
-                            <span class="badge badge-danger">{{ $value->status }}</span>
+                        @if($value->status == 0)
+                            <span class="badge badge-danger">Chưa duyệt</span>
+                        @elseif($value->status == 1)
+                            <span class="badge badge-success">Đã duyệt</span>
                         @else
-                            <span class="badge badge-success">{{ $value->status }}</span>
+                            <span class="badge badge-danger">Hết hạn</span>
                         @endif
 
                         @php
@@ -140,10 +146,10 @@
                         @endforeach
 
                         @php
-                            $category = DB::table('categorys')->where('id', $value->category_id)->get();
+                            $category_first = DB::table('category_child_firsts')->where('id', $value->category_first_id)->get();
                         @endphp
-                        @foreach ($category as $item_category)
-                            <span><i class="fa fa-list" aria-hidden="true"></i> <strong>{{ $item_category->category_name }}</strong></span><br>
+                        @foreach ($category_first as $item_category_first)
+                            <span><i class="fa fa-list" aria-hidden="true"></i> <strong>{{ $item_category_first->category_child_name }}</strong></span><br>
                         @endforeach
                         @php
                             $province = DB::table('provinces')->where('id', $value->province_id)->get();
@@ -162,7 +168,7 @@
                 <div class="row content">
                     <div class="col-12 col-md-12 mt-2">
                         <h5>{{ $value->title }}</h5>
-                        <h5 class="price"><strong> {{ number_format($value->price) }} {{ $value->price_type}}</strong></h5>
+                        <h5 class="price"><strong> {{ number_format($value->price) }} {{ $value->unit_price}}</strong></h5>
                         <p>{{ $value->content }}</p>
                     </div>
                 </div>

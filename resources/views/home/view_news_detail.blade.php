@@ -35,12 +35,11 @@
             <div class="card-body">
 
             @foreach ($new as $key => $value)
-    
-            
+                    
                 <!-- Title -->
-                <h1 class="mt-1 p-0">
+                <h3 class="mt-1 p-0">
                     <b>{!! $value->title !!}</b>
-                </h1>
+                </h3>
 
                 <hr>
 

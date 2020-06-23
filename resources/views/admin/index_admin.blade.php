@@ -94,55 +94,50 @@
             </div>
             <div class="card-body p-2">
 
-                <div class="media border p-2">
-                    <img src="{{ url('public/images/car-2.jpg') }}" class="img-fluid mr-3 image-post-new">
-                    <div class="media-body">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                <a href=""><b>Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019.</b></a>
-                                <p>
-                                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> <br>
-                                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
-                                    <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
-                                </p>
-                            </div>
+                @foreach ($postNew as $item_post_new)
+                    <div class="media border p-2">
+                        <img src="{{ url('public/upload/image_post_new/'.$item_post_new->images) }}" class="img-fluid mr-3 image-post-new">
+                        <div class="media-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+                                    <a href="{{ route('view_post_new', [ Str::slug($item_post_new->title), $item_post_new->id]) }}"><b>{{ $item_post_new->title }}</b></a>
+                                    <p>
+                                        <strong><i class="fa fa-money" aria-hidden="true"></i> {{ number_format($item_post_new->price) }} {{ $item_post_new->unit_price }}</strong> |
 
-                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                    <i class="far fa-check-square"></i>
-                                </a>
-                                <a class="btn btn-outline-danger btn-sm" href="#" role="button">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
+                                        @if($item_post_new->status == 0)
+                                            <span class="badge badge-danger">Chưa duyệt</span>
+                                        @elseif($value->status == 1)
+                                            <span class="badge badge-success">Đã duyệt</span>
+                                        @else
+                                            <span class="badge badge-danger">Hết hạn</span>
+                                        @endif
+
+                                        <br>
+                                        <small><i class="fa fa-calendar" aria-hidden="true"></i> {{ date("d/m/Y", strtotime($item_post_new->created_at )) }}</small> |
+                                        @php
+                                            $district = DB::table('districts')->where('id', $item_post_new->district_id)->get();
+                                            $province = DB::table('provinces')->where('id', $item_post_new->province_id)->get();
+                                        @endphp
+                                        @foreach ($district as $item)
+                                            @foreach ($province as $items)
+                                                <small><i class="fas fa-map-marker-alt"></i> {{ $items->province_name}} - {{ $item->district_name}}</small>
+                                            @endforeach
+                                        @endforeach
+                                    </p>
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
+                                    <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
+                                        <i class="far fa-check-square"></i>
+                                    </a>
+                                    <a class="btn btn-outline-danger btn-sm" href="{{ route('delete_post_new', $item_post_new->id)}}" role="button" title="xóa" onclick="return confirm('Bạn có chắc xóa không?')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="media border p-2">
-                    <img src="{{ url('public/images/car-3.jpg') }}" class="img-fluid mr-3 image-post-new">
-                    <div class="media-body">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                <a href=""><b>Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019.</b></a>
-                                <p>
-                                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> <br>
-                                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
-                                    <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
-                                </p>
-                            </div>
-
-                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                    <i class="far fa-check-square"></i>
-                                </a>
-                                <a class="btn btn-outline-danger btn-sm" href="#" role="button">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>
@@ -165,7 +160,6 @@
                     <table class="table table-striped|table-dark|table-bordered|table-borderless|table-hover|table-sm">
                         <thead class="thead-dark|thead-light">
                             <tr>
-                                <th scope="col"><input type="checkbox" id="check_all"></th>
                                 <th scope="col">STT</th>
                                 <th scope="col">Tên liên hệ</th>
                                 <th scope="col">Điện thoại</th>
@@ -173,34 +167,29 @@
                                 <th scope="col">Ngày sinh</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Địa chỉ</th>
-                                <th scope="col" colspan="2">Tùy chọn</th>
+                                <th scope="col">Tùy chọn</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td data-label="Chọn">
-                                    <input type="checkbox" class="sub_check" data-id="">
-                                </td>
-                                <td data-label="STT">1</td>
-                                <td data-label="Tên liên hệ">
-                                    <a href="">Tuan TKD</a>
-                                </td>
-                                <td data-label="Điện thoại">03268273273</td>
-                                <td data-label="Giới tính">Nam</td>
-                                <td data-label="Ngày sinh">23/5/1998</td>
-                                <td data-label="Email">tuan@gmail.com</td>
-                                <td data-label="Địa chỉ">Hậu Giang - Vị Thủy</td>
-                                <td data-label="Tùy chọn">
-                                    <a class="btn btn-outline-primary btn-sm" href="#" role="button">
-                                        <i class="fas fa-info"></i>
-                                    </a>
-                                </td>
-                                <td data-label="Tùy chọn">
-                                    <a class="btn btn-outline-danger btn-sm" href="#" role="button">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach ($member as $key => $item_member)
+                                <tr>
+                                    <td data-label="STT">{{ ++$key }}</td>
+                                    <td data-label="Tên liên hệ">
+                                        <a href="{{ route('view_information_member', [Str::slug($item_member->username), $item_member->id]) }}">{{ $item_member->username }}</a>
+                                    </td>
+                                    <td data-label="Điện thoại">{{ $item_member->phone }}</td>
+                                    <td data-label="Giới tính">{{ $item_member->sex }}</td>
+                                    <td data-label="Ngày sinh">{{ $item_member->birthday }}</td>
+                                    <td data-label="Email">{{ $item_member->email }}</td>
+                                    <td data-label="Địa chỉ">{{ $item_member->address }}</td>
+                                    <td data-label="Tùy chọn">
+                                        <a class="btn btn-outline-primary btn-sm" href="{{ route('view_information_member', [Str::slug($item_member->username), $item_member->id]) }}" role="button" title="Xem thông tin">
+                                            <i class="fas fa-info"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -211,4 +200,8 @@
 </div>
 <!-- ============================================== -->
 
+@endsection
+
+@section('link_js')
+   
 @endsection

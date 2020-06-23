@@ -22,8 +22,8 @@ class CreatePostNewsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');
+            $table->unsignedBigInteger('category_first_id');
+            $table->foreign('category_first_id')->references('id')->on('category_child_firsts')->onDelete('cascade');
 
             $table->unsignedBigInteger('province_id');
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
@@ -32,16 +32,15 @@ class CreatePostNewsTable extends Migration
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
 
             $table->mediumText('title');
-            $table->float('price');
-            $table->mediumText('price_type');
+            $table->integer('price');
+            $table->mediumText('unit_price');
             $table->mediumText('currency');
             $table->mediumText('content');
             $table->mediumText('tag_search');
-            $table->mediumText('image');
-            $table->float('duration');
-            $table->float('hide_new');
-            $table->mediumText('category_new');
-            $table->string('status');
+            $table->mediumText('images');
+            $table->integer('number_date_expired');
+            $table->integer('hidden_new');
+            $table->integer('status');
             $table->integer('save_post');
             $table->timestamps();
         });

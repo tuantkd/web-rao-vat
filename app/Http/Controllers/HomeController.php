@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+
+    // ==============================================================
     //Trang chủ
     public function index()
     {
@@ -34,10 +36,17 @@ class HomeController extends Controller
             'new' => $new
         ]);
     }
+    // ==============================================================
+
+    // trang đăng nhập
+    public function page_login(){
+        return view('home.page_login');
+    }
 
     // ==================================================================
     //Xem theo danh mục
-    public function view_category($name, $id){
+    public function view_category($name, $id)
+    {
         $category = DB::table('categorys')->where('id', $id)->get();
         $category_first = DB::table('category_child_firsts')->where('category_id', $id)->get();
         $allCategory = DB::table('categorys')->get();
@@ -113,6 +122,7 @@ class HomeController extends Controller
         return view('home.view_category_detail');
     }
 
+    // ==============================================================
     //Xem theo danh mục chi tiết
     public function report_new()
     {
@@ -124,7 +134,11 @@ class HomeController extends Controller
     {
         return view('home.profile_user');
     }
+    // ==============================================================
 
+
+
+    // ==============================================================
     //Đăng tin cấp cha danh mục
     public function post_new_category()
     {
@@ -136,34 +150,94 @@ class HomeController extends Controller
     public function post_new($name, $id)
     {
         $categorys_ids = categorys::find($id);
+        $province = province::all();
+        $post_types = post_type::all();
 
         return view(
             'home.post_new.post_new',
             [
-                'categorys_ids' => $categorys_ids
+                'categorys_ids' => $categorys_ids,
+                'province' => $province,
+                'post_types' => $post_types,
             ]
         );
     }
 
+    //Xử lý đăng tin
+    public function post_post_new(Request $request)
+    {
+        // THỰC HIỆN 1
+        // ----------------------------------------------------------------------------
+        $add_second = new category_child_seconds();
+        //ID danh mục cấp 1
+        $add_second->category_first_id = $request->input('txt_category_firsts_id');
+
+        //Bất động sản
+        $add_second->estate_category = $request->input('txt_estate_category');
+        $add_second->estate_address = $request->input('txt_estate_address');
+        $add_second->estate_name_project = $request->input('txt_estate_name_project');
+        $add_second->estate_land_area = $request->input('txt_estate_land_area');
+        $add_second->estate_floor = $request->input('txt_estate_floor');
+        $add_second->estate_bedroom = $request->input('txt_estate_bedroom');
+        $add_second->estate_bathroom = $request->input('txt_estate_bathroom');
+        $add_second->estate_area_used = $request->input('txt_estate_area_used');
+        $add_second->estate_juridical = $request->input('txt_estate_juridical');
+        // ----------------------------------------------------------------------------
+
+
+        //THỰC HIỆN 2
+        // ----------------------------------------------------------------------------
+        $add_post_new = new post_news();
+        $add_post_new->category_first_id = $request->input('txt_category_firsts_id');
+        $add_post_new->post_type_id = $request->input('txt_category_firsts_id');
+        $add_post_new->user_id = $request->input('txt_category_firsts_id');
+        $add_post_new->district_id = $request->input('txt_category_firsts_id');
+        $add_post_new->province_id = $request->input('txt_category_firsts_id');
+        $add_post_new->title = $request->input('txt_category_firsts_id');
+        $add_post_new->price = $request->input('txt_category_firsts_id');
+        $add_post_new->unit_price = $request->input('txt_category_firsts_id');
+        $add_post_new->currency = $request->input('txt_category_firsts_id');
+        $add_post_new->content = $request->input('txt_category_firsts_id');
+        $add_post_new->tag_search = $request->input('txt_category_firsts_id');
+        $add_post_new->number_date_expired = $request->input('txt_category_firsts_id');
+
+        //Upload nhiều hình ảnh
+        $add_post_new->images = $request->input('txt_category_firsts_id');
+
+
+        //Ẩn là 1, hiện là 0
+        $add_post_new->hidden_new = $request->input('txt_category_firsts_id');
+
+        //Trạng thái có 3 loại: 0 là chưa duyệt, 1 là đã duyệt, 2 là hết hạn
+        $add_post_new->status = $request->input('txt_category_firsts_id');
+
+        //Mặc định không lưu tin sẻ là 0
+        $add_post_new->save_post = 0;
+        // ----------------------------------------------------------------------------
+
+
+
+        dd($add_second);
+    }
+    // ==============================================================
+
+
+
+    // ==============================================================
     // xem tin tức
-    public function view_news_detail(Request $request, $name, $id){
+    public function view_news_detail(Request $request, $name, $id)
+    {
         $new = DB::table('news')->where('id', $id)->get();
         return view('home/view_news_detail')->with([
             'new' => $new
         ]);
     }
-    //=================================================
+    // ==============================================================
 
 
 
 
-    //=================================================
-    //Đăng nhập
-    public function page_login()
-    {
-        return view('home.page_login');
-    }
-
+    // ==============================================================
     //Xử lý đăng nhập
     public function post_page_login(Request $request)
     {

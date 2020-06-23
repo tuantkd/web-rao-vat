@@ -48,9 +48,9 @@
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                        <a href=""><b>{{ $value->title }}</b></a>
+                                        <a href="{{ route('view_detail_new', [Str::slug($value->title), $value->id] )}}"><b>{{ $value->title }}</b></a>
                                         <p>
-                                            {{ Str::limit($value->content,100, '...') }}
+                                            {!! Str::limit($value->content,200, '...') !!}
                                             <br>
                                             <small><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $value->created_at }}</small>
                                         </p>

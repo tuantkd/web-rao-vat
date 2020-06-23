@@ -116,13 +116,15 @@
             <div class="card">
                 <div class="row">
                     <div class="col-md-12">
-                        <form id="msform">
+
+                        {{-- form  --}}
+                        <form id="msform" method="POST" action="{{ url('post-post-new') }}" class="needs-validation" novalidate>
+                            @csrf
                             {{-- <!-- progressbar --> --}}
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Chọn danh mục</strong></li>
                                 <li id="personal"><strong>Thông tin danh mục</strong></li>
                                 <li id="payment"><strong>Đăng tin</strong></li>
-                                <li id="confirm"><strong>Hoàn tất</strong></li>
                             </ul>
                             {{-- <!-- progressbar --> --}}
 
@@ -134,7 +136,7 @@
 
 
                             {{-- ==============================================================================================  --}}
-                            {{-- <!-- fieldsets danh mục --> --}}
+                            {{-- <!-- fieldsets danh mục cấp 1 --> --}}
                             <fieldset>
                                 <div class="form-card">
                                     @php
@@ -146,7 +148,7 @@
                                     <div class="card-block">
                                         <div class="form-check text-left">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" value="{{ $category_child_1->id }}" name="category_firsts_id" id="check-box">
+                                                <input type="radio" class="form-check-input" value="{{ $category_child_1->id }}" name="txt_category_firsts_id" id="check-box">
                                                 <span id="span-text">
                                                     {{ $category_child_1->category_child_name }}
                                                 </span>
@@ -159,7 +161,7 @@
                                 <a class="a-previous" href="{{ url('post-new-category') }}">Quay lại</a>
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
                             </fieldset>
-                            {{-- <!-- fieldsets danh mục --> --}}
+                            {{-- <!-- fieldsets danh mục cấp 1 --> --}}
                             {{-- ==============================================================================================  --}}
 
 
@@ -181,53 +183,54 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Loại bất động sản:</label><br>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                                <option value="">Biệt thự, Villa, Penthouse</option>
-                                                <option value="">Nhà chung cư, tập thể</option>
-                                                <option value="">Nhà mặt tiền, mặt phố</option>
-                                                <option value="">Nhà hẻm, ngỏ nhỏ</option>
+                                            <select class="selectpicker form-control" data-live-search="true" name="txt_estate_category">
+                                                <option value="Biệt thự, Villa, Penthouse">Biệt thự, Villa, Penthouse</option>
+                                                <option value="Nhà chung cư, tập thể">Nhà chung cư, tập thể</option>
+                                                <option value="Nhà mặt tiền, mặt phố">Nhà mặt tiền, mặt phố</option>
+                                                <option value="Nhà hẻm, ngỏ nhỏ">Nhà hẻm, ngỏ nhỏ</option>
+                                                <option value="Khác">Khác</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Địa chỉ: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập địa chỉ đầy đủ">
+                                            <input type="text" class="form-control" placeholder="Nhập địa chỉ đầy đủ" name="txt_estate_address">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tên dự án: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập tên dự án">
+                                            <input type="text" class="form-control" placeholder="Nhập tên dự án" name="txt_estate_name_project">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Diện tích đất: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập diện tích đất">
+                                            <input type="text" class="form-control" placeholder="Nhập diện tích đất" name="txt_estate_land_area">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label>Tầng/lầu: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập tầng/lầu">
+                                            <input type="text" class="form-control" placeholder="Nhập tầng/lầu" name="txt_estate_floor">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label>Phòng ngủ: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập phòng ngủ">
+                                            <input type="text" class="form-control" placeholder="Nhập phòng ngủ" name="txt_estate_bedroom">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label>Phòng tắm: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập phòng tắm">
+                                            <input type="text" class="form-control" placeholder="Nhập phòng tắm" name="txt_estate_bathroom">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Pháp lý: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập pháp lý">
+                                            <input type="text" class="form-control" placeholder="Nhập pháp lý" name="txt_estate_juridical">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Diện tích sử dụng: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập diện tích sử dụng">
+                                            <input type="text" class="form-control" placeholder="Nhập diện tích sử dụng" name="txt_estate_area_used">
                                         </div>
                                     </div>
                                     {{-- =====================================================  --}}
@@ -300,13 +303,18 @@
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label>Năm sản xuất: </label><br>
+                                            <label>Năm đăng ký: </label><br>
                                             <select class="selectpicker form-control" data-live-search="true" id="selectElementId">
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Dòng xe:</label>
-                                            <input type="text" class="form-control" placeholder="Nhập dòng xe">
+                                            <label>Loại xe:</label><br>
+                                            <select class="form-control">
+                                                <option value="">- - Chọn - -</option>
+                                                <option value="Xe số">Xe số</option>
+                                                <option value="Tay ga">Tay ga</option>
+                                                <option value="Tay côn/Moto">Tay côn/Moto</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -647,9 +655,6 @@
 
 
 
-
-
-
                             {{-- ==============================================================================================  --}}
                             {{-- <!-- fieldsets đăng tin -->  --}}
                             <fieldset>
@@ -671,22 +676,33 @@
                                         <div class="form-group col-12 col-sm-12 col-md-3" style="padding:2px;">
                                             <label class="label-title">Tỉnh thành/Quận huyện: </label>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-5 text-left" style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-3 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Tỉnh thành:</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                                <option value="">- - Chọn Tỉnh/TP - -</option>
-                                                <option value="">TP Hồ Chí Minh</option>
-                                                <option value="">Hà Nội</option>
-                                                <option value="">Đà Nẵng</option>
+                                            <select id="state" class="form-control selectpicker" data-live-search="true" required name="txt_province">
+                                                <option value="">Chọn Tỉnh/TP</option>
+                                                @foreach ($province as $item_province)
+                                                <option value="{{ $item_province->province_name }}">
+                                                    {{ $item_province->province_name }}
+                                                </option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-12 col-sm-12 col-md-4 text-left" style="padding:2px;">
+                                        <div class="form-group col-12 col-sm-12 col-md-6 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Quận huyện:</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
-                                                <option value="">- - Chọn Huyện/Quận - -</option>
-                                                <option value="">Quận 8</option>
-                                                <option value="">Quận 9</option>
-                                                <option value="">Quận 12</option>
+                                            <select id="city" class="form-control" name="txt_district" required>
+                                                <option value="">Chọn Huyện</option>
+                                                @foreach ($province as $item_province)
+                                                @php
+                                                $district_id = DB::table('districts')->where('province_id',$item_province->id)->get();
+                                                @endphp
+
+                                                @foreach ($district_id as $item_district)
+                                                <option value="{{ $item_district->district_name }}">
+                                                    {{ $item_province->province_name }} - {{ $item_district->district_name }}
+                                                </option>
+                                                @endforeach
+
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -697,7 +713,7 @@
                                         </div>
                                         <div class="form-group col-md-9 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Tiêu đề đăng tin: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập tiêu đề đăng tin">
+                                            <input type="text" class="form-control" placeholder="Nhập tiêu đề đăng tin" required name="txt_title">
                                         </div>
                                     </div>
 
@@ -707,16 +723,11 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Loại tin: </label>
-                                            <select class="selectpicker form-control" data-live-search="true">
+                                            <select class="selectpicker form-control" data-live-search="true" required name="txt_new_type">
                                                 <option value="">- - Chọn loại tin - -</option>
-                                                <option value="">Cần bán</option>
-                                                <option value="">Cần mua</option>
-                                                <option value="">Hợp tác - Cộng tác</option>
-                                                <option value="">Quảng cáo</option>
-                                                <option value="">Rao vặt</option>
-                                                <option value="">Sang nhượng</option>
-                                                <option value="">Thuê - Cho thuê</option>
-                                                <option value="">Việc làm</option>
+                                                @foreach($post_types as $key => $post_type)
+                                                <option value="{{ $post_type->id }}">{{ $post_type->post_type_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -727,11 +738,11 @@
                                         </div>
                                         <div class="form-group col-8 col-sm-8 col-md-4" style="padding:2px;">
                                             <label class="label-title-mobile">Giá: </label>
-                                            <input type="number" class="form-control" placeholder="Nhập giá">
+                                            <input type="number" class="form-control" placeholder="Nhập giá" required name="txt_price">
                                         </div>
                                         <div class="form-group col-4 col-sm-4 col-md-2" style="padding:2px;">
                                             <label class="label-title-mobile">đơn vị</label>
-                                            <select class="selectpicker form-control" data-live-search="true">
+                                            <select class="selectpicker form-control" data-live-search="true" required name="txt_currency">
                                                 <option value="Đ">Đ</option>
                                                 <option value="USD">USD</option>
                                                 <option value="Lượng vàng">Lượng vàng</option>
@@ -745,7 +756,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-4" style="padding:2px;">
                                             <label class="label-title-mobile">Đơn vị tính: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính" data-toggle="popover" data-trigger="hover" data-content="Cái, Chiếc, m2, Ngày, Giờ ...">
+                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính" data-toggle="popover" data-trigger="hover" data-content="Cái, Chiếc, m2, Ngày, Giờ ..." required name="txt_unit_price">
                                         </div>
                                     </div>
 
@@ -755,7 +766,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Nội dung đăng tin: </label>
-                                            <textarea name="" class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ"></textarea>
+                                            <textarea name="" class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ" required name="txt_content"></textarea>
                                         </div>
                                     </div>
 
@@ -765,7 +776,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Từ khóa tìm kiếm: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
+                                            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" required name="txt_tag_search">
                                         </div>
                                     </div>
 
@@ -775,7 +786,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-5" style="padding:2px;">
                                             <label class="label-title-mobile">Thời hạn: </label>
-                                            <select class="selectpicker form-control" data-live-search="true">
+                                            <select class="selectpicker form-control" data-live-search="true" required name="txt_date_expired">
                                                 <option value="1">1 Ngày</option>
                                                 <option value="2">2 Ngày</option>
                                                 <option value="3">3 Ngày</option>
@@ -795,7 +806,7 @@
                                                         <i class="fas fa-camera"></i>
                                                         Chọn hình ảnh
                                                     </span>
-                                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif,"><br />
+                                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif," required name="txt_file_images"><br />
                                                 </span><br><br>
                                                 <output id="Filelist"></output>
                                             </div>
@@ -810,9 +821,10 @@
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Ẩn tin này: </label>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="1">
-                                                <label class="form-check-label">(Khi xem các bản tin khác của
-                                                    bạn)</label>
+                                                <input class="form-check-input" type="checkbox" value="1" required name="txt_hiden_new">
+                                                <label class="form-check-label">
+                                                    (Khi xem các bản tin khác của bạn)
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -820,43 +832,14 @@
                                 </div>
 
                                 <input type="button" class="previous action-button-previous" value="Quay lại" />
-
-                                <input type="button" name="next" class="next action-button" value="Tiếp tục" />
+                                <input type="submit" name="next" class="post-new-button action-button" value="Đăng tin ngay" id="btn" />
                             </fieldset>
                             {{-- ==============================================================================================  --}}
 
-
-
-
-
-
-
-
-                            {{-- ==============================================================================================  --}}
-                            {{-- <!-- fieldsets hoàn tất -->  --}}
-                            <fieldset>
-                                <div class="form-card">
-                                    <h2 class="fs-title text-center">Hoàn tất</h2>
-                                    <div class="row justify-content-center">
-                                        <div class="col-3">
-                                            <img class="fit-image check-img" src="https://i.imgur.com/QH6Zd6Y.gif">
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-12 text-center">
-                                            <h5>Bản tin của bạn sẽ được đăng ngay sau khi biên tập viên kiểm duyệt</h5>
-                                        </div>
-                                    </div>
-
-                                    <div class="row justify-content-center">
-                                        <input type="submit" class="post-new-button" value="Đăng tin ngay" />
-                                    </div>
-                                </div>
-                            </fieldset>
-                            {{-- <!-- fieldsets hoàn tất -->  --}}
-                            {{-- ==============================================================================================  --}}
 
                         </form>
+                        {{-- form  --}}
+
                     </div>
                 </div>
             </div>
@@ -866,10 +849,75 @@
     </div>
 </div>
 
+{{-- =====================================================================================================  --}}
 
+
+{{-- validation form --}}
+<script>
+    // Disable form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Get the forms we want to add validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+</script>
+{{-- validation form  --}}
+
+
+{{-- Hiện hover ra xem text  --}}
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover();
+    });
+
+</script>
+{{-- Hiện hover ra xem text  --}}
+
+
+{{-- Tỉnh thành - huyện  --}}
+<script>
+    $(function() {
+        var showCity = function(selectedState) {
+            $('#city option').hide();
+            $('#city').find('option').filter(function() {
+                var city = $(this).text();
+                return city.indexOf(selectedState) != -1;
+            }).show();
+            //set default value
+            var defaultCity = $('#city option:visible:first').text();
+            $('#city').val(defaultCity);
+        };
+
+        //set default state
+        var state = $('#state').val();
+        showCity(state);
+        $('#state').change(function() {
+            showCity($(this).val());
+        });
+    });
+
+</script>
+{{-- Tỉnh thành - huyện  --}}
+
+
+
+{{-- Lấy danh sách năm   --}}
 <script>
     var max = new Date().getFullYear()
-        , min = max - 20
+        , min = max - 40
         , select = document.getElementById('selectElementId');
 
     for (var i = max; i >= min; i--) {
@@ -880,8 +928,11 @@
     }
 
 </script>
+{{-- Lấy danh sách năm   --}}
 
 
+
+{{-- Form fieldsets đăng tin   --}}
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -961,16 +1012,22 @@
     });
 
 </script>
+{{-- Form fieldsets đăng tin   --}}
 
 
+
+{{-- Thoát khỏi trang nút quay về trên trình duyệt  --}}
 <script>
     window.addEventListener("beforeunload", function(event) {
         event.returnValue = "Bạn có chắc chắc chắn";
     });
 
 </script>
+{{-- Thoát khỏi trang nút quay về trên trình duyệt  --}}
 
 
+
+{{-- Upload file hình ảnh  --}}
 <script type="text/javascript">
     //I added event handler for the file upload control to access the files properties.
     document.addEventListener("DOMContentLoaded", init, false);
@@ -1200,6 +1257,7 @@
     }
 
 </script>
+{{-- Upload file hình ảnh  --}}
 
 @endsection
 <!-- ==================================================== -->
