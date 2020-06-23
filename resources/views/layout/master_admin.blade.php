@@ -115,6 +115,7 @@
                 background-color: #f1f1f1;
             }
         }
+
         .breadcrumb .breadcrumb-item a {
             text-decoration: none;
         }
@@ -122,11 +123,11 @@
         .breadcrumb {
             background-color: white;
         }
+
     </style>
 
 </head>
 <body id="page-top">
-    @include('layout/slug')
 
     <style type="text/css">
         @media (max-width:600px) {

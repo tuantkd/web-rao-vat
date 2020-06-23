@@ -42,6 +42,9 @@
     <link rel="stylesheet" href="{{ url('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/css/style_post_new.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
 
     <style type="text/css" media="screen">
         .register-login .nav-item .link-image {
@@ -54,6 +57,7 @@
             height: 40px;
             border-radius: 50%;
         }
+
     </style>
 
 </head>
@@ -96,7 +100,7 @@
             <ul class="nav justify-content-end register-login">
                 @if(Auth::check())
                 <li class="nav-item" style="margin-right:5px;">
-                    <a href="{{ url('page-manage-news') }}" class="link-image">
+                    <a href="{{ url('page-all-news') }}" class="link-image">
                         @if(Auth::user()->avatar != NULL)
                         <img src="{{ Auth::user()->avatar }}"> ​
                         @else
@@ -165,8 +169,11 @@
 
     </script>
 
-    
-    
-</body>
+
     @yield('link_js')
+
+    <script src="{{ url('public/notify_js/notify.js') }}"></script>
+    <script src="{{ url('public/notify_js/notify.min.js') }}"></script>
+
+</body>
 </html>

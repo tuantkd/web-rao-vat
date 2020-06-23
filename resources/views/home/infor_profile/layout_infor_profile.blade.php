@@ -137,7 +137,7 @@
                     <a class="btn-link" href="{{ url('post-new-category') }}">
                         <i class="fas fa-edit" style="font-size:16px;"></i> &ensp;Đăng tin rao bán
                     </a>
-                    <a class="btn-link" href="{{ url('page-manage-news') }}">
+                    <a class="btn-link" href="{{ url('page-all-news') }}">
                         <i class="far fa-file-alt" style="font-size:16px;"></i>
                         &ensp;Quản lý tin, nâng cấp tin
                     </a>

@@ -118,7 +118,8 @@
                     <div class="col-md-12">
 
                         {{-- form  --}}
-                        <form id="msform" method="POST" action="{{ url('post-post-new') }}" class="needs-validation" novalidate>
+                        <form id="msform" method="POST" action="{{ url('post-post-new') }}" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()" novalidate>
+
                             @csrf
                             {{-- <!-- progressbar --> --}}
                             <ul id="progressbar">
@@ -127,13 +128,6 @@
                                 <li id="payment"><strong>Đăng tin</strong></li>
                             </ul>
                             {{-- <!-- progressbar --> --}}
-
-
-
-
-
-
-
 
                             {{-- ==============================================================================================  --}}
                             {{-- <!-- fieldsets danh mục cấp 1 --> --}}
@@ -148,7 +142,7 @@
                                     <div class="card-block">
                                         <div class="form-check text-left">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" value="{{ $category_child_1->id }}" name="txt_category_firsts_id" id="check-box">
+                                                <input type="radio" class="form-check-input" value="{{ $category_child_1->id }}" name="txt_category_firsts_id" id="check-box" required>
                                                 <span id="span-text">
                                                     {{ $category_child_1->category_child_name }}
                                                 </span>
@@ -235,18 +229,17 @@
                                     </div>
                                     {{-- =====================================================  --}}
 
-
                                     @elseif($categorys_ids->id == 2)
                                     {{-- =====================================================  --}}
                                     {{-- Xe cộ  --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Màu xe: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập màu xe">
+                                            <input type="text" class="form-control" placeholder="Nhập màu xe" name="txt_car_color">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Phiên bản:</label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_car_version">
                                                 <option value="">
                                                     - - Chọn - -
                                                 </option>
@@ -272,11 +265,11 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Xuất xứ: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập xuất xứ">
+                                            <input type="text" class="form-control" placeholder="Nhập xuất xứ" name="txt_car_origin">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng:</label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_car_status">
                                                 <option value="">
                                                     - - Chọn - -
                                                 </option>
@@ -293,23 +286,23 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Hãng xe: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập hãng xe">
+                                            <input type="text" class="form-control" placeholder="Nhập hãng xe" name="txt_car_produce_name">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Dòng xe:</label>
-                                            <input type="text" class="form-control" placeholder="Nhập dòng xe">
+                                            <input type="text" class="form-control" placeholder="Nhập dòng xe" name="txt_car_model_name">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Năm đăng ký: </label><br>
-                                            <select class="selectpicker form-control" data-live-search="true" id="selectElementId">
+                                            <select class="selectpicker form-control" data-live-search="true" id="selectElementId" name="txt_car_register_year">
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Loại xe:</label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_car_category">
                                                 <option value="">- - Chọn - -</option>
                                                 <option value="Xe số">Xe số</option>
                                                 <option value="Tay ga">Tay ga</option>
@@ -321,16 +314,15 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Số Km đã đi: </label><br>
-                                            <input type="number" class="form-control" placeholder="Nhập số Km đã đi">
+                                            <input type="number" class="form-control" placeholder="Nhập số Km đã đi" name="txt_car_number_kilometer">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Nhiên liệu:</label>
-                                            <input type="text" class="form-control" placeholder="Nhập nhiên liệu">
+                                            <input type="text" class="form-control" placeholder="Nhập nhiên liệu" name="txt_car_fuel">
                                         </div>
                                     </div>
                                     {{-- Xe cộ  --}}
                                     {{-- =====================================================  --}}
-
 
                                     @elseif($categorys_ids->id == 3)
                                     {{-- =====================================================  --}}
@@ -338,25 +330,23 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Hãng sản xuất:</label><br>
-                                            <input type="text" class="form-control" placeholder="Nhập hãng sản xuất">
+                                            <input type="text" class="form-control" placeholder="Nhập hãng sản xuất" name="txt_electron_manufacturer">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Dòng máy: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập dòng máy">
+                                            <input type="text" class="form-control" placeholder="Nhập dòng máy" name="txt_electron_model_machine">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Màu sắc:</label><br>
-                                            <input type="text" class="form-control" placeholder="Nhập màu sắc">
+                                            <input type="text" class="form-control" placeholder="Nhập màu sắc" name="txt_electron_color">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng:</label><br>
-                                            <select class="form-control">
-                                                <option value="">
-                                                    - - Chọn - -
-                                                </option>
+                                            <select class="form-control" name="txt_electron_status">
+                                                <option value="">- - Chọn - -</option>
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng (chưa sửa chữa)">Đã sử dụng (chưa sửa chữa)</option>
                                                 <option value="Đã sử dụng (qua sửa chữa)">Đã sử dụng (qua sửa chữa)</option>
@@ -366,15 +356,13 @@
                                     {{-- Đồ điện tử  --}}
                                     {{-- =====================================================  --}}
 
-
-
                                     @elseif($categorys_ids->id == 4)
                                     {{-- =====================================================  --}}
                                     {{-- Việc làm tuyển sinh  --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Loại hình làm việc: </label><br>
-                                            <select class="selectpicker form-control" data-live-search="true">
+                                            <select class="selectpicker form-control" data-live-search="true" name="txt_work_type">
                                                 <option value="Toàn thời gian cố định">Toàn thời gian cố định</option>
                                                 <option value="Toàn thời gian tạm thời">Toàn thời gian tạm thời</option>
                                                 <option value="Bán thời gian cố định">Bán thời gian cố định</option>
@@ -386,18 +374,18 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Tuổi: </label>
-                                            <input type="number" class="form-control" placeholder="Nhập số tuổi">
+                                            <input type="number" class="form-control" placeholder="Nhập số tuổi" name="txt_work_old">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>Giới tính: </label><br>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="optradio"> Nam
+                                                    <input type="radio" class="form-check-input" name="txt_work_sex" value="Nam"> Nam
                                                 </label>
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="optradio"> Nữ
+                                                    <input type="radio" class="form-check-input" name="txt_work_sex" value="Nữ"> Nữ
                                                 </label>
                                             </div>
                                         </div>
@@ -406,22 +394,22 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Bằng cấp: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập bằng cấp">
+                                            <input type="text" class="form-control" placeholder="Nhập bằng cấp" name="txt_work_certificate">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Ngoại ngữ: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập ngoại ngữ">
+                                            <input type="text" class="form-control" placeholder="Nhập ngoại ngữ" name="txt_work_foreign_language">
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Vị trí: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập vị trí">
+                                            <input type="text" class="form-control" placeholder="Nhập vị trí" name="txt_work_position">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Nghề nghiệp: </label><br>
-                                            <select class="selectpicker form-control" data-live-search="true">
+                                            <select class="selectpicker form-control" data-live-search="true" name="txt_work_job">
                                                 <option value="An ninh, bảo vệ">An ninh, bảo vệ</option>
                                                 <option value="Bán hàng">Bán hàng</option>
                                                 <option value="Bếp, pha chế">Bếp, pha chế</option>
@@ -453,21 +441,19 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Kinh nghiệm: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập kinh nghiệm">
+                                            <input type="text" class="form-control" placeholder="Nhập kinh nghiệm" name="txt_work_experience">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Mức lương: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập mức lương">
+                                            <input type="text" class="form-control" placeholder="Nhập mức lương" name="txt_work_salary_level">
                                         </div>
                                     </div>
                                     {{-- Việc làm tuyển sinh  --}}
                                     {{-- =====================================================  --}}
 
-
                                     {{-- =====================================================  --}}
                                     {{-- thu-cung số 5 không có danh mục cấp 2  --}}
                                     {{-- =====================================================  --}}
-
 
                                     @elseif($categorys_ids->id == 6)
                                     {{-- =====================================================  --}}
@@ -475,18 +461,15 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Xuất xứ: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập xuất xứ">
+                                            <input type="text" class="form-control" placeholder="Nhập xuất xứ" name="txt_food_origin">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Hạn sử dụng: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập hạn sử dụng">
+                                            <input type="text" class="form-control" placeholder="Nhập hạn sử dụng" name="txt_food_expiration">
                                         </div>
                                     </div>
                                     {{-- do-an-thuc-pham-va-loai-khac  --}}
                                     {{-- =====================================================  --}}
-
-
-
 
                                     @elseif($categorys_ids->id == 7)
                                     {{-- =====================================================  --}}
@@ -494,20 +477,18 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_refrigerator_status">
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng">Đã sử dụng</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Hãng sản xuất: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập hãng sản xuất">
+                                            <input type="text" class="form-control" placeholder="Nhập hãng sản xuất" name="txt_refrigerator_manufacturer">
                                         </div>
                                     </div>
                                     {{-- tu-lanh-may-lanh-may-giat  --}}
                                     {{-- =====================================================  --}}
-
-
 
                                     @elseif($categorys_ids->id == 8)
                                     {{-- =====================================================  --}}
@@ -515,7 +496,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_furniture_status">
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng">Đã sử dụng</option>
                                             </select>
@@ -526,22 +507,20 @@
                                     {{-- do-gia-dung-noi-that-cay-canh  --}}
                                     {{-- =====================================================  --}}
 
-
-
                                     @elseif($categorys_ids->id == 9)
                                     {{-- =====================================================  --}}
                                     {{-- thoi-trang-do-dung-ca-nhan  --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_fashion_status">
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng">Đã sử dụng</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Loại sản phẩm: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_fashion_type_product">
                                                 <option value="Đồ Nam">Đồ Nam</option>
                                                 <option value="Đồ Nữ">Đồ Nữ</option>
                                                 <option value="Cả hai">Cả hai</option>
@@ -551,15 +530,13 @@
                                     {{-- thoi-trang-do-dung-ca-nhan  --}}
                                     {{-- =====================================================  --}}
 
-
-
                                     @elseif($categorys_ids->id == 10)
                                     {{-- =====================================================  --}}
                                     {{-- giai-tri-the-thao-so-thich  --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_sport_status">
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng">Đã sử dụng</option>
                                             </select>
@@ -569,9 +546,6 @@
                                     </div>
                                     {{-- giai-tri-the-thao-so-thich  --}}
                                     {{-- =====================================================  --}}
-
-
-
 
                                     @elseif($categorys_ids->id == 11)
                                     {{-- =====================================================  --}}
@@ -579,7 +553,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_office_furniture_status">
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng">Đã sử dụng</option>
                                             </select>
@@ -590,16 +564,13 @@
                                     {{-- do-van-phong-cong-nong-nghiep  --}}
                                     {{-- =====================================================  --}}
 
-
-
-
                                     @elseif($categorys_ids->id == 12)
                                     {{-- =====================================================  --}}
                                     {{-- dich-vu-du-lich  --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Loại hình làm việc: </label><br>
-                                            <select class="selectpicker form-control" data-live-search="true">
+                                            <select class="selectpicker form-control" data-live-search="true" name="txt_service_type_work">
                                                 <option value="Toàn thời gian cố định">Toàn thời gian cố định</option>
                                                 <option value="Toàn thời gian tạm thời">Toàn thời gian tạm thời</option>
                                                 <option value="Bán thời gian cố định">Bán thời gian cố định</option>
@@ -611,27 +582,25 @@
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Kinh nghiệm làm việc: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập kinh nghiệm làm việc">
+                                            <input type="text" class="form-control" placeholder="Nhập kinh nghiệm làm việc" name="txt_service_experience_work">
                                         </div>
                                     </div>
                                     {{-- dich-vu-du-lich --}}
                                     {{-- =====================================================  --}}
-
-
                                     @elseif($categorys_ids->id == 13)
                                     {{-- =====================================================  --}}
                                     {{-- me-va-be  --}}
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Tình trạng: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_mom_baby_status">
                                                 <option value="Mới">Mới</option>
                                                 <option value="Đã sử dụng">Đã sử dụng</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Loại sản phẩm: </label><br>
-                                            <select class="form-control">
+                                            <select class="form-control" name="txt_mom_baby_type_product">
                                                 <option value="Đồ cho bé">Đồ cho bé</option>
                                                 <option value="Đồ cho mẹ">Đồ cho mẹ</option>
                                                 <option value="Cả hai">Cả hai</option>
@@ -640,7 +609,6 @@
                                     </div>
                                     {{-- me-va-be  --}}
                                     {{-- =====================================================  --}}
-
                                     @endif
                                 </div>
 
@@ -678,7 +646,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-3 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Tỉnh thành:</label>
-                                            <select id="state" class="form-control selectpicker" data-live-search="true" required name="txt_province">
+                                            <select id="state" class="form-control selectpicker" data-live-search="true" name="txt_province">
                                                 <option value="">Chọn Tỉnh/TP</option>
                                                 @foreach ($province as $item_province)
                                                 <option value="{{ $item_province->province_name }}">
@@ -689,19 +657,15 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-6 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Quận huyện:</label>
-                                            <select id="city" class="form-control" name="txt_district" required>
+                                            <select id="city" class="form-control" name="txt_district">
                                                 <option value="">Chọn Huyện</option>
                                                 @foreach ($province as $item_province)
-                                                @php
-                                                $district_id = DB::table('districts')->where('province_id',$item_province->id)->get();
-                                                @endphp
-
+                                                @php($district_id = DB::table('districts')->where('province_id',$item_province->id)->get())
                                                 @foreach ($district_id as $item_district)
                                                 <option value="{{ $item_district->district_name }}">
                                                     {{ $item_province->province_name }} - {{ $item_district->district_name }}
                                                 </option>
                                                 @endforeach
-
                                                 @endforeach
                                             </select>
                                         </div>
@@ -713,7 +677,7 @@
                                         </div>
                                         <div class="form-group col-md-9 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Tiêu đề đăng tin: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập tiêu đề đăng tin" required name="txt_title">
+                                            <input type="text" class="form-control" placeholder="Nhập tiêu đề đăng tin" name="txt_title" id="txt_title">
                                         </div>
                                     </div>
 
@@ -723,7 +687,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9 text-left" style="padding:2px;">
                                             <label class="label-title-mobile">Loại tin: </label>
-                                            <select class="selectpicker form-control" data-live-search="true" required name="txt_new_type">
+                                            <select class="selectpicker form-control" data-live-search="true" name="txt_post_type_id" id="txt_post_type_id">
                                                 <option value="">- - Chọn loại tin - -</option>
                                                 @foreach($post_types as $key => $post_type)
                                                 <option value="{{ $post_type->id }}">{{ $post_type->post_type_name }}</option>
@@ -738,7 +702,7 @@
                                         </div>
                                         <div class="form-group col-8 col-sm-8 col-md-4" style="padding:2px;">
                                             <label class="label-title-mobile">Giá: </label>
-                                            <input type="number" class="form-control" placeholder="Nhập giá" required name="txt_price">
+                                            <input type="number" class="form-control" placeholder="Nhập giá" name="txt_price" id="txt_price" maxlength="20">
                                         </div>
                                         <div class="form-group col-4 col-sm-4 col-md-2" style="padding:2px;">
                                             <label class="label-title-mobile">đơn vị</label>
@@ -756,7 +720,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-4" style="padding:2px;">
                                             <label class="label-title-mobile">Đơn vị tính: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính" data-toggle="popover" data-trigger="hover" data-content="Cái, Chiếc, m2, Ngày, Giờ ..." required name="txt_unit_price">
+                                            <input type="text" class="form-control" placeholder="Nhập đơn vị tính" data-toggle="popover" data-trigger="hover" data-content="Cái, Chiếc, m2, Ngày, Giờ ..." name="txt_unit_price" id="txt_unit_price">
                                         </div>
                                     </div>
 
@@ -766,7 +730,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Nội dung đăng tin: </label>
-                                            <textarea name="" class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ" required name="txt_content"></textarea>
+                                            <textarea class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ" name="txt_content" id="txt_content"></textarea>
                                         </div>
                                     </div>
 
@@ -776,7 +740,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Từ khóa tìm kiếm: </label>
-                                            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" required name="txt_tag_search">
+                                            <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" name="txt_tag_search">
                                         </div>
                                     </div>
 
@@ -806,11 +770,11 @@
                                                         <i class="fas fa-camera"></i>
                                                         Chọn hình ảnh
                                                     </span>
-                                                    <input type="file" name="files[]" id="files" multiple accept="image/jpeg, image/png, image/gif," required name="txt_file_images"><br />
+                                                    <input type="file" name="txt_images[]" id="files" multiple accept="image/jpeg, image/png, image/gif,">
                                                 </span><br><br>
                                                 <output id="Filelist"></output>
                                             </div>
-
+                                            <div class="invalid-feedback">Please fill out this field.</div>
                                         </div>
                                     </div>
 
@@ -821,7 +785,7 @@
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Ẩn tin này: </label>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="1" required name="txt_hiden_new">
+                                                <input class="form-check-input" type="checkbox" value="1" name="txt_hiden_new">
                                                 <label class="form-check-label">
                                                     (Khi xem các bản tin khác của bạn)
                                                 </label>
@@ -844,15 +808,74 @@
                 </div>
             </div>
         </div>
-        <!-- col-sm-10 -->
+        {{-- <!-- col-sm-10 --> --}}
         <div class="col-sm-1"></div>
     </div>
 </div>
 
 {{-- =====================================================================================================  --}}
+<script>
+    function validateForm() {
+        var category_firsts_id = document.forms["myForm"]["txt_category_firsts_id"].value;
+        var content = document.forms["myForm"]["txt_content"].value;
+        var images = document.forms["myForm"]["txt_images[]"].value;
+        var province = document.forms["myForm"]["txt_province"].value;
+        var district = document.forms["myForm"]["txt_district"].value;
+        var title = document.forms["myForm"]["txt_title"].value;
+        var post_type_id = document.forms["myForm"]["txt_post_type_id"].value;
+        var price = document.forms["myForm"]["txt_price"].value;
+        var unit_price = document.forms["myForm"]["txt_unit_price"].value;
 
 
-{{-- validation form --}}
+        if (category_firsts_id == "") {
+            alert("Bạn chưa chọn Danh Mục. Vui lòng quay lại!");
+            return false;
+        }
+        if (province == "") {
+            alert("Bạn chưa chọn Tỉnh/TP!");
+            document.getElementById('state').focus();
+            return false;
+        }
+        if (district == "") {
+            alert("Bạn chưa chọn Huyện!");
+            document.getElementById('city').focus();
+            return false;
+        }
+        if (title == "") {
+            alert("Bạn chưa nhập Tiêu Đề!");
+            document.getElementById('txt_title').focus();
+            return false;
+        }
+        if (post_type_id == "") {
+            alert("Bạn chưa chọn Loại Tin!");
+            document.getElementById('txt_post_type_id').focus();
+            return false;
+        }
+        if (price == "") {
+            alert("Bạn chưa nhập Giá!");
+            document.getElementById('txt_price').focus();
+            return false;
+        }
+        if (unit_price == "") {
+            alert("Bạn chưa nhập Đơn Vị Tính!");
+            document.getElementById('txt_unit_price').focus();
+            return false;
+        }
+        if (content == "") {
+            alert("Bạn chưa nhập Nội Dung!");
+            document.getElementById('txt_content').focus();
+            return false;
+        }
+        if (images == "") {
+            alert("Bạn chưa chọn Hình Ảnh!");
+            document.getElementById('files').focus();
+            return false;
+        }
+    }
+
+</script>
+
+
 <script>
     // Disable form submissions if there are invalid fields
     (function() {
@@ -874,8 +897,15 @@
     })();
 
 </script>
-{{-- validation form  --}}
 
+
+
+
+<script src="{{ url('public/ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace('txt_content');
+
+</script>
 
 {{-- Hiện hover ra xem text  --}}
 <script>

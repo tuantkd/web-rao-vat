@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 /*===============================================================================*/
-//Auth::routes(['verify' => true]);
 
 /*HOME*/
 //Trang chủ
@@ -35,24 +34,11 @@ Route::get('report-new', 'HomeController@report_new');
 //----------------------------------------------------------------------------
 
 
-
 //----------------------------------------------------------------------------
 //Xem trang cá nhân người dùng
 Route::get('profile-user', 'HomeController@profile_user');
 //----------------------------------------------------------------------------
 
-
-
-//----------------------------------------------------------------------------
-//Đăng tin cấp cha danh mục
-Route::get('post-new-category', 'HomeController@post_new_category');
-
-//Đăng tin
-Route::get('post-new/{name}/{id}', 'HomeController@post_new');
-
-//Xử lý đăng tin
-Route::post('post-post-new', 'HomeController@post_post_new');
-//----------------------------------------------------------------------------
 
 
 //----------------------------------------------------------------------------
@@ -112,32 +98,72 @@ Route::post('post-page-register', 'HomeController@post_page_register');
 //Xác nhận mã token
 Route::get('verify/{token}', 'VerifyController@VerifyEmail')->name('verify');
 //----------------------------------------------------------------------------
-
-
-//----------------------------------------------------------------------------
-//Trang thông tin quản lý tin
-Route::get('page-manage-news', 'HomeController@page_manage_news');
-
-//Trang thông tin tin đã lưu
-Route::get('page-news-save', 'HomeController@page_news_save');
-
-//Trang thông tin cá nhân tài khoản
-Route::get('page-infor-account', 'HomeController@page_infor_account');
-
-//Trang thông tin thanh toán phương thức
-Route::get('page-payment-method', 'HomeController@page_payment_method');
-
-//Trang thay đổi mật khẩu
-Route::get('page-change-password', 'HomeController@page_change_password');
-//----------------------------------------------------------------------------
 /*===============================================================================*/
+
+
+
+
+
+
+
+Route::middleware(['CheckViewInfor'])->group(function () {
+    // ===========================================================================
+    //ĐÃ ĐĂNG NHẬP VÀO TRANG KHÁCH (HOME)
+    //----------------------------------------------------------------------------
+    //Đăng tin cấp cha danh mục
+    Route::get('post-new-category', 'HomeController@post_new_category');
+
+    //Đăng tin
+    Route::get('post-new/{name}/{id}', 'HomeController@post_new');
+
+    //Xử lý đăng tin
+    Route::post('post-post-new', 'HomeController@post_post_new');
+    //----------------------------------------------------------------------------
+
+    //----------------------------------------------------------------------------
+    //-----------------------------
+    //Trang tất cả tin
+    Route::get('page-all-news', 'HomeController@page_all_news');
+    //Trang tin dịch vụ
+    Route::get('page-service-news', 'HomeController@page_service_news');
+    //Trang tin hết hạn
+    Route::get('page-expired-news', 'HomeController@page_expired_news');
+    //-----------------------------
+
+    //Trang thông tin tin đã lưu
+    Route::get('page-news-save', 'HomeController@page_news_save');
+
+    //Trang thông tin cá nhân tài khoản
+    Route::get('page-infor-account', 'HomeController@page_infor_account');
+
+    //Trang thông tin thanh toán phương thức
+    Route::get('page-payment-method', 'HomeController@page_payment_method');
+
+    //Trang thay đổi mật khẩu
+    Route::get('page-change-password', 'HomeController@page_change_password');
+    //----------------------------------------------------------------------------
+    // ===========================================================================
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 /*===============================================================================*/
 /*ADMIN*/
 Route::middleware(['checkStatus'])->group(function () {
-
+    // ===========================================================================
     // trang chủ admin
     Route::get('admin', [
         'as' => 'index_admin',
