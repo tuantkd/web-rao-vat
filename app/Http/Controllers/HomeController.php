@@ -15,6 +15,7 @@ use App\category_child_seconds;
 use App\categorys;
 use App\news;
 use App\post_news;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,42 +125,128 @@ class HomeController extends Controller
         $add_second->estate_bathroom = $request->input('txt_estate_bathroom');
         $add_second->estate_area_used = $request->input('txt_estate_area_used');
         $add_second->estate_juridical = $request->input('txt_estate_juridical');
+
+        //Xe cộ
+        $add_second->car_color = $request->input('txt_car_color');
+        $add_second->car_version = $request->input('txt_car_version');
+        $add_second->car_origin = $request->input('txt_car_origin');
+        $add_second->car_status = $request->input('txt_car_status');
+        $add_second->car_produce_name = $request->input('txt_car_produce_name');
+        $add_second->car_model_name = $request->input('txt_car_model_name');
+        $add_second->car_register_year = $request->input('txt_car_register_year');
+        $add_second->car_category = $request->input('txt_car_category');
+        $add_second->car_number_kilometer = $request->input('txt_car_number_kilometer');
+        $add_second->car_fuel = $request->input('txt_car_fuel');
+
+        //Đồ điện tử
+        $add_second->electron_manufacturer = $request->input('txt_electron_manufacturer');
+        $add_second->electron_model_machine = $request->input('txt_electron_model_machine');
+        $add_second->electron_color = $request->input('txt_electron_color');
+        $add_second->electron_status = $request->input('txt_electron_status');
+
+        //Việc làm tuyển sinh
+        $add_second->work_type = $request->input('txt_work_type');
+        $add_second->work_old = $request->input('txt_work_old');
+        $add_second->work_sex = $request->input('txt_work_sex');
+        $add_second->work_certificate = $request->input('txt_work_certificate');
+        $add_second->work_foreign_language = $request->input('txt_work_foreign_language');
+        $add_second->work_position = $request->input('txt_work_position');
+        $add_second->work_job = $request->input('txt_work_job');
+        $add_second->work_experience = $request->input('txt_work_experience');
+        $add_second->work_salary_level = $request->input('txt_work_salary_level');
+
+        //do-an-thuc-pham-va-loai-khac
+        $add_second->food_origin = $request->input('txt_food_origin');
+        $add_second->food_expiration = $request->input('txt_food_expiration');
+
+        //tu-lanh-may-lanh-may-giat
+        $add_second->refrigerator_status = $request->input('txt_refrigerator_status');
+        $add_second->refrigerator_manufacturer = $request->input('txt_refrigerator_manufacturer');
+
+        //do-gia-dung-noi-that-cay-canh
+        $add_second->furniture_status = $request->input('txt_furniture_status');
+
+        //thoi-trang-do-dung-ca-nhan
+        $add_second->fashion_status = $request->input('txt_fashion_status');
+        $add_second->fashion_type_product = $request->input('txt_fashion_type_product');
+
+        //giai-tri-the-thao-so-thich
+        $add_second->sport_status = $request->input('txt_sport_status');
+
+        //do-van-phong-cong-nong-nghiep
+        $add_second->office_furniture_status = $request->input('txt_office_furniture_status');
+
+        //dich-vu-du-lich
+        $add_second->service_type_work = $request->input('txt_service_type_work');
+        $add_second->service_experience_work = $request->input('txt_service_experience_work');
+
+        //me-va-be
+        $add_second->mom_baby_status = $request->input('txt_mom_baby_status');
+        $add_second->mom_baby_type_product = $request->input('txt_mom_baby_type_product');
         // ----------------------------------------------------------------------------
+        $add_second->save();
 
 
-        //THỰC HIỆN 2
+
+
+
+        //THỰC HIỆN CUỐI
         // ----------------------------------------------------------------------------
         $add_post_new = new post_news();
         $add_post_new->category_first_id = $request->input('txt_category_firsts_id');
-        $add_post_new->post_type_id = $request->input('txt_category_firsts_id');
-        $add_post_new->user_id = $request->input('txt_category_firsts_id');
-        $add_post_new->district_id = $request->input('txt_category_firsts_id');
-        $add_post_new->province_id = $request->input('txt_category_firsts_id');
-        $add_post_new->title = $request->input('txt_category_firsts_id');
-        $add_post_new->price = $request->input('txt_category_firsts_id');
-        $add_post_new->unit_price = $request->input('txt_category_firsts_id');
-        $add_post_new->currency = $request->input('txt_category_firsts_id');
-        $add_post_new->content = $request->input('txt_category_firsts_id');
-        $add_post_new->tag_search = $request->input('txt_category_firsts_id');
-        $add_post_new->number_date_expired = $request->input('txt_category_firsts_id');
+        $add_post_new->post_type_id = $request->input('txt_post_type_id');
+        $add_post_new->user_id = Auth::user()->id;
+
+        //Lấy ID tỉnh/Huyện
+        $district = $request->input('txt_district');
+        $province = $request->input('txt_province');
+
+        $get_provinces = DB::table('provinces')->where('province_name', $province)->get();
+        foreach ($get_provinces as $key => $get_province) {
+            $id_province = $get_province->id;
+        }
+
+        $get_districts = DB::table('districts')->where('district_name', $district)->get();
+        foreach ($get_districts as $key => $get_district) {
+            $id_district = $get_district->id;
+        }
+
+        $add_post_new->district_id = $id_district;
+        $add_post_new->province_id = $id_province;
+        //---------------------------------
+
+        $add_post_new->title = $request->input('txt_title');
+        $add_post_new->price = $request->input('txt_price');
+        $add_post_new->unit_price = $request->input('txt_unit_price');
+        $add_post_new->currency = $request->input('txt_currency');
+        $add_post_new->content = $request->input('txt_content');
+        $add_post_new->tag_search = $request->input('txt_tag_search');
+        $add_post_new->number_date_expired = $request->input('txt_date_expired');
 
         //Upload nhiều hình ảnh
-        $add_post_new->images = $request->input('txt_category_firsts_id');
+        if ($request->hasFile('txt_images')) {
+            foreach ($request->file('txt_images') as $image) {
+                $image_posts = $image->getClientOriginalName();
+                $image->move(public_path('upload_images_post_new'), $image_posts);
+                $data_image[] = $image_posts;
+            }
+        }
+        $add_post_new->images = json_encode($data_image);
+        //---------------------------------
 
-
-        //Ẩn là 1, hiện là 0
-        $add_post_new->hidden_new = $request->input('txt_category_firsts_id');
+        //Ẩn là 1, hiện là NULL
+        $add_post_new->hidden_new = $request->input('txt_hiden_new');
 
         //Trạng thái có 3 loại: 0 là chưa duyệt, 1 là đã duyệt, 2 là hết hạn
-        $add_post_new->status = $request->input('txt_category_firsts_id');
+        $add_post_new->status = 0;
 
         //Mặc định không lưu tin sẻ là 0
         $add_post_new->save_post = 0;
+
+        $add_post_new->save();
         // ----------------------------------------------------------------------------
-
-
-
-        dd($add_second);
+        $session_success = $request->session()->get('session_success');
+        return redirect('page-all-news')->with('session_success', '');
     }
     // ==============================================================
 
@@ -170,7 +257,7 @@ class HomeController extends Controller
     public function view_news_detail(Request $request, $name, $id)
     {
         $new = DB::table('news')->where('id', $id)->get();
-        return view('home/view_news_detail')->with([
+        return view('home.view_news_detail')->with([
             'new' => $new
         ]);
     }
@@ -180,6 +267,12 @@ class HomeController extends Controller
 
 
     // ==============================================================
+    //Trang đăng nhập
+    public function page_login()
+    {
+        return view('home.page_login');
+    }
+
     //Xử lý đăng nhập
     public function post_page_login(Request $request)
     {
@@ -251,11 +344,24 @@ class HomeController extends Controller
 
 
     //=================================================
-    //Quản lý tin
-    public function page_manage_news()
+    //-------------------------------------------
+    //Quản lý tin tất cả
+    public function page_all_news()
     {
-        return view('home.infor_profile.manage_news');
+        $all_news = post_news::where('user_id', Auth::user()->id)->paginate(5);
+        return view('home.infor_profile.all_news', ['all_news' => $all_news]);
     }
+    //Quản lý tin dịch vụ
+    public function page_service_news()
+    {
+        return view('home.infor_profile.service_news');
+    }
+    //Quản lý tin hết hạn
+    public function page_expired_news()
+    {
+        return view('home.infor_profile.expired_news');
+    }
+    //-------------------------------------------
 
     //Quản lý tin lưu lại
     public function page_news_save()

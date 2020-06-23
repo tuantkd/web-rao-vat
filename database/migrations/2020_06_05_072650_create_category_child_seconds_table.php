@@ -27,7 +27,7 @@ class CreateCategoryChildSecondsTable extends Migration
             $table->mediumText('estate_floor')->nullable();
             $table->mediumText('estate_bedroom')->nullable();
             $table->mediumText('estate_bathroom')->nullable();
-            $table->integer('estate_area_used')->nullable();
+            $table->mediumText('estate_area_used')->nullable();
             $table->mediumText('estate_juridical')->nullable();
             // -----------------------------------------------------------
 
@@ -35,6 +35,7 @@ class CreateCategoryChildSecondsTable extends Migration
             $table->mediumText('car_color')->nullable();
             $table->mediumText('car_version')->nullable();
             $table->mediumText('car_origin')->nullable();
+            $table->mediumText('car_status')->nullable();
             $table->mediumText('car_produce_name')->nullable();
             $table->mediumText('car_model_name')->nullable();
             $table->mediumText('car_register_year')->nullable();

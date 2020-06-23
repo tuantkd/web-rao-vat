@@ -18,10 +18,10 @@ class CheckStatus
     {
         if (!Auth::check()) {
             return redirect('page-login');
-        } elseif (Auth::check() && Auth::user()->verify == 0) {
+        } elseif (Auth::check() && Auth::user()->level_id == 1 || Auth::user()->verify == 0) {
             return $next($request);
-        } elseif (Auth::check() && Auth::user()->verify == 1) {
-            return redirect('/');
         }
+
+        abort(403);
     }
 }
