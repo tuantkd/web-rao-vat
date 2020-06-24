@@ -48,14 +48,14 @@
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                        <a href=""><b>{{ $value->title }}</b></a>
-                                        <p>
-                                            {{ Str::limit($value->content,100, '...') }}
+                                        <a href="{{ route('view_detail_new', [Str::slug($value->title), $value->id] )}}"><b>{{ $value->title }}</a></b>
+                                        <span>
+                                            {!! Str::limit($value->content,200, '...') !!}
                                             <br>
                                             <small><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $value->created_at }}</small>
-                                        </p>
+                                        </span>
                                     </div>
-        
+                                    
                                     <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
                                         <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip"
                                             title="Phê duyệt">

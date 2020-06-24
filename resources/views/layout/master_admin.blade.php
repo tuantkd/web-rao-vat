@@ -305,20 +305,23 @@
                                 <h6 class="dropdown-header">
                                     Bài đăng mới
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded" src="https://source.unsplash.com/fn_BT9fwg_E/60x60">
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">
-                                            <i class="far fa-clock"></i> 30 phút trước
+                                @foreach ($postNew as $item_post_new)
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded" src="{{ url('public/upload/image_post_new/'.$item_post_new->images) }}">
                                         </div>
-                                        <span class="font-weight-bold">
-                                            Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019
-                                        </span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Xem tất cả</a>
+                                        <div>
+                                            <div class="small text-gray-500">
+                                                <i class="far fa-clock"></i> {{ date("d/m/Y-H:i", strtotime($item_post_new->created_at)) }}
+                                            </div>
+                                            <span class="font-weight-bold">
+                                                {{ Str::limit($item_post_new->title,30,'...') }}
+                                            </span>
+                                        </div>
+                                    </a>
+                                @endforeach
+
+                                <a class="dropdown-item text-center small text-gray-500" href="{{ route('manage_post_new') }}">Xem tất cả</a>
                             </div>
                         </li>
 
@@ -452,9 +455,7 @@
 
     </div>
 
-</body>
-
-<!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavaScript-->
 <script src="{{ url('public/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ url('public/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -569,4 +570,5 @@
 
 @yield('link_js')
 
+</body>
 </html>

@@ -1,4 +1,4 @@
-@extends('layout.layout_home') @section('title', 'Xem danh mục')
+@extends('layout.layout_home') @section('title', 'Xem danh mục cấp 1')
 <!-- ==================================================== -->
 
 <!-- ==================================================== -->
@@ -17,7 +17,7 @@
 
                         <div class="col-12 col-sm-12 col-md-2 col-lg-2" style="padding-right:1px;">
                             <select id="state" class="form-control selectpicker" data-live-search="true">
-                                <option>Chọn Tỉnh/TP</option>
+                                <option>Chọn tỉnh</option>
                                 @foreach ($province as $item_province)
                                 <option value="{{ $item_province->province_name }}">{{ $item_province->province_name }}</option>
                                 @endforeach
@@ -124,47 +124,52 @@
                 <li class="breadcrumb-item">
                     <a href="#" style="text-decoration:none;color:red;">{{ $value->category_name }}</a>
                 </li>
-                <li class="breadcrumb-item active">Tất cả mục phụ</li>
+                @foreach ($category_first as $item_category_first)
+                <li class="breadcrumb-item active">{{ $item_category_first->category_child_name }}</li>
+                @endforeach
             </ul>
             <!-- breadcrumb -->
 
             <!-- category-child -->
             <div class="card category-mobile" style="margin-bottom:10px;">
                 <div class="card-header" style="background-color:white;padding:10px;">
+                    @foreach ($category_first as $item_category_first)
                     @if($value->id == 1)
-                    <b><i class='fas fa-home' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-home' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 2)
-                    <b><i class='fas fa-car' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-car' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 3)
-                    <b><i class='fas fa-mobile-alt' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-mobile-alt' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 4)
-                    <b><i class='fas fa-business-time' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-business-time' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 5)
-                    <b><i class='fas fa-dog' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-dog' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 6)
-                    <b><i class='fas fa-hamburger' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-hamburger' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 7)
-                    <b><i class='fas fa-subway' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-subway' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 8)
-                    <b><i class='fas fa-couch' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-couch' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 9)
-                    <b><i class='fas fa-tshirt' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-tshirt' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 10)
-                    <b><i class='fas fa-volleyball-ball' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-volleyball-ball' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @elseif($value->id == 11)
-                    <b><i class='fas fa-book' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-book' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @else
-                    <b><i class='fas fa-phone-volume' style="font-size:20px;"></i>&ensp;{{ $value->category_name }}</b>
+                    <b><i class='fas fa-phone-volume' style="font-size:20px;"></i>&ensp;{{ $value->category_name }} / {{ $item_category_first->category_child_name }}</b>
                     @endif
+                    @endforeach
                 </div>
                 <div class="card-body" style="padding:10px;">
                     <div class="row">
-                        @foreach ($category_first as $key => $item_category_first)
-                            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                                <a href="{{ url('danh-muc-cap-1/'.Str::slug($item_category_first->category_child_name).'/'.$item_category_first->id) }}" style="text-decoration:none;">
-                                    <b style="color:red;">{{ $item_category_first->category_child_name}}</b>
-                                </a> 10,123
-                            </div>
+
+                        @foreach ($allCategoryFirst as $item_allCategoryFirst)
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                            <a href="{{ route('view_category_first', [ Str::slug($item_allCategoryFirst->category_child_name),$item_allCategoryFirst->id]) }}" style="text-decoration:none;">
+                                <b style="color:red;">{{ $item_allCategoryFirst->category_child_name}}</b>
+                            </a> 10,123
+                        </div>
                         @endforeach
 
                     </div>
@@ -179,45 +184,46 @@
                 <div class="card-header" style="background-color:white;padding:10px;">
                     <b class="b-text">
                         <i class="far fa-newspaper"></i>
-                        Tin rao bán mới nhất
+                        @foreach ($category_first as $item_category_first)
+                        Tin rao bán mới nhất / {{ $item_category_first->category_child_name }}
+                        @endforeach
                     </b>
                 </div>
                 <div class="card-body" style="padding:5px;">
                     <div class="row">
 
-                        @foreach ($postNew as $itemPostNew)
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                <a href="{{ url('view-category-detail/'.Str::slug('Xe Kia Morning 2020 thời trang hiện đại')) }}" style="text-decoration:none;color:#ff3333;">
-                                    <div class="media">
-                                        @php
-                                            $image_decode = (array)json_decode($itemPostNew->images,true)
-                                        @endphp
-                                        @foreach ($image_decode as $picture)
-                                            @if ($loop->first)
-                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="align-self-start mr-3">
-                                            @endif
-                                        @endforeach
+                        @foreach ($postNewCategoryFirst as $item_postNewCategoryFirst)
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <a href="{{ url('view-category-detail/'.Str::slug('Xe Kia Morning 2020 thời trang hiện đại')) }}" style="text-decoration:none;color:#ff3333;">
+                                <div class="media">
+                                    @php
+                                    $image_decode = (array)json_decode($item_postNewCategoryFirst->images,true)
+                                    @endphp
+                                    @foreach ($image_decode as $picture)
+                                    @if ($loop->first)
+                                    <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="align-self-start mr-3">
+                                    @endif
+                                    @endforeach
 
-                                        <div class="media-body">
-                                            <b style="font-size: 14px;">{{ $itemPostNew->title }}</b>
-                                            <p class="p-text">
-                                                @php
-                                                    $province = DB::table('provinces')->where('id', $itemPostNew->province_id)->get();
-                                                    $district = DB::table('districts')->where('id', $itemPostNew->district_id)->get();
-                                                @endphp
-                                                @foreach ($province as $item_province)
-                                                    @foreach ($district as $item_district)
-                                                        <i class="fas fa-map-marker-alt"></i> {{ $item_province->province_name }} / {{ $item_district->district_name }} <br>
-                                                    @endforeach
-                                                @endforeach
-                                                
-                                                <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($itemPostNew->created_at )) }}
-                                            </p>
+                                    <div class="media-body">
+                                        <b>{{ $item_postNewCategoryFirst->title }}</b>
+                                        <p class="p-text">
+                                            @php
+                                            $province = DB::table('provinces')->where('id', $item_postNewCategoryFirst->province_id)->get();
+                                            $district = DB::table('districts')->where('id', $item_postNewCategoryFirst->district_id)->get();
+                                            @endphp
+                                            @foreach ($province as $item_province)
+                                            @foreach ($district as $item_district)
+                                            <i class="fas fa-map-marker-alt"></i> {{ $item_province->province_name }} / {{ $item_district->district_name }} <br>
+                                            @endforeach
+                                            @endforeach
 
-                                        </div>
+                                            <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($item_postNewCategoryFirst->created_at )) }}
+                                        </p>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
+                            </a>
+                        </div>
                         @endforeach
 
                     </div>
@@ -228,10 +234,11 @@
                     <ul class="pagination justify-content-center">
                         {{-- <li class="page-item"><a class="page-link" href="#" style="color:red;">Previous</a></li>
                         <li class="page-item"><a class="page-link" href="#" style="color:red;">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#" style="background-color:red;color:white;border-color:red;">2</a></li>
+                        <li class="page-item active"><a class="page-link" href="#"
+                                style="background-color:red;color:white;border-color:red;">2</a></li>
                         <li class="page-item"><a class="page-link" href="#" style="color:red;">3</a></li>
                         <li class="page-item"><a class="page-link" href="#" style="color:red;">Next</a></li> --}}
-                        {{ $postNew->links() }}
+                        {{ $postNewCategoryFirst->links() }}
                     </ul>
                     <!-- pagination -->
                 </div>
@@ -250,71 +257,71 @@
                     <div class="row">
                         <!-- ========================== -->
                         @foreach($allCategory as $key => $value)
-                            <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
+                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
 
-                                    @if($value->id == 1)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class="fas fa-home" style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Bất động sản</div>
-                                        </a>
-                                    @elseif($value->id == 2)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Xe cộ</div>
-                                        </a>
-                                    @elseif($value->id == 3)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-mobile-alt' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Đồ điện tử</div>
-                                        </a>
-                                    @elseif($value->id == 4)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-business-time' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Việc làm</div>
-                                        </a>
-                                    @elseif($value->id == 5)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-dog' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Thú cưng</div>
-                                        </a>
-                                    @elseif($value->id == 6)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-hamburger' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;"> Đồ ăn, thực phẩm và các loại khác</div>
-                                        </a>
-                                    @elseif($value->id == 7)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-subway' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
-                                        </a>
-                                    @elseif($value->id == 8)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-couch' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
-                                        </a>
-                                    @elseif($value->id == 9)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-tshirt' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Thời trang, đồ dùng cá nhân</div>
-                                        </a>
-                                    @elseif($value->id == 10)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-volleyball-ball' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
-                                        </a>
-                                    @elseif($value->id == 11)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-book' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
-                                        </a>
-                                    @elseif($value->id == 12)
-                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
-                                            <i class='fas fa-phone-volume' style="font-size:30px;color:red;"></i>
-                                            <div style="font-size:12px;color:red;">Dịch vụ, du lịch</div>
-                                        </a>
-                                    @endif
+                            @if($value->id == 1)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class="fas fa-home" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Bất động sản</div>
+                            </a>
+                            @elseif($value->id == 2)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Xe cộ</div>
+                            </a>
+                            @elseif($value->id == 3)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-mobile-alt' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ điện tử</div>
+                            </a>
+                            @elseif($value->id == 4)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-business-time' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Việc làm</div>
+                            </a>
+                            @elseif($value->id == 5)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-dog' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Thú cưng</div>
+                            </a>
+                            @elseif($value->id == 6)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-hamburger' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;"> Đồ ăn, thực phẩm và các loại khác</div>
+                            </a>
+                            @elseif($value->id == 7)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-subway' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
+                            </a>
+                            @elseif($value->id == 8)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-couch' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
+                            </a>
+                            @elseif($value->id == 9)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-tshirt' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Thời trang, đồ dùng cá nhân</div>
+                            </a>
+                            @elseif($value->id == 10)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-volleyball-ball' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
+                            </a>
+                            @elseif($value->id == 11)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-book' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
+                            </a>
+                            @elseif($value->id == 12)
+                            <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                <i class='fas fa-phone-volume' style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Dịch vụ, du lịch</div>
+                            </a>
+                            @endif
 
-                            </div>
+                        </div>
                         @endforeach
 
                     </div>

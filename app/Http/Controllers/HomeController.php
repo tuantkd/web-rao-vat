@@ -39,9 +39,12 @@ class HomeController extends Controller
     }
     // ==============================================================
 
+    // trang đăng nhập
+    public function page_login(){
+        return view('home.page_login');
+    }
 
-
-    // ==============================================================
+    // ==================================================================
     //Xem theo danh mục
     public function view_category($name, $id)
     {
@@ -50,14 +53,83 @@ class HomeController extends Controller
         $allCategory = DB::table('categorys')->get();
         $province = DB::table('provinces')->get();
 
+        $categoryFirstId = DB::table('category_child_firsts')
+                    ->select('id')
+                    ->where('category_id', $id)
+                    ->groupBy('id');
+        
+        $postNew = DB::table('post_news')
+                ->joinSub($categoryFirstId, 'category_child_firsts', function($join){
+                    $join->on('post_news.category_first_id', '=', 'category_child_firsts.id');
+                })
+                ->paginate(8);
+
         return view('home.view_category')->with([
             'category' => $category,
             'category_first' => $category_first,
             'province' => $province,
-            'allCategory' => $allCategory
+            'allCategory' => $allCategory,
+            'postNew' => $postNew
         ]);
     }
 
+    // ==================================================================
+    // xem danh mục cấp 1
+    public function view_category_first(Request $request, $name, $id_category_first){
+        $province = DB::table('provinces')->get();
+        $allCategory = DB::table('categorys')->get();
+
+        $category_first = DB::table('category_child_firsts')->where('id', $id_category_first)->get();
+        $postNewCategoryFirst = DB::table('post_news')->where('category_first_id', $id_category_first)->paginate(8);
+
+        $category_id = DB::table('category_child_firsts')
+                ->select('category_id')
+                ->where('id', $id_category_first)
+                ->groupBy('category_id');
+
+        $category = DB::table('categorys')
+                ->joinSub($category_id, 'category_child_firsts', function($join){
+                    $join->on('categorys.id', '=', 'category_child_firsts.category_id');
+                })
+                ->get();
+
+        foreach ($category_first as $value) {
+            $allCategoryFirst = DB::table('category_child_firsts')->where('category_id', $value->category_id)->get();
+        }
+
+        return view('home.view_category_first')->with([
+            'category' => $category,
+            'category_first' => $category_first,
+            'province' => $province,
+            'allCategory' => $allCategory,
+            'allCategoryFirst' => $allCategoryFirst,
+            'postNewCategoryFirst' => $postNewCategoryFirst
+        ]);
+    }
+
+    // ====================================================================
+    // lọc tỉnh thành - quận huyện
+    public function filter(Request $request){
+
+        $value = $request->value;
+        $dependent = $request->dependent;
+
+        $data = DB::table('districts')
+            ->where('province_id', 2)
+            ->get();
+
+        // $data = DB::table('districts')
+        //     ->where($select, $value)
+        //     ->groupBy($dependent)
+        //     ->get();
+
+        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
+        foreach($data as $row)
+        {
+        $output .= '<option value="'.$row->id.'">'.$row->district_name.'</option>';
+        }
+        echo $output;
+    }
 
     //Xem theo danh mục chi tiết
     public function view_category_detail()
@@ -254,7 +326,7 @@ class HomeController extends Controller
 
     // ==============================================================
     // xem tin tức
-    public function view_news_detail(Request $request, $name, $id)
+    public function view_news_detail(Request $request,$name, $id)
     {
         $new = DB::table('news')->where('id', $id)->get();
         return view('home.view_news_detail')->with([
@@ -268,10 +340,10 @@ class HomeController extends Controller
 
     // ==============================================================
     //Trang đăng nhập
-    public function page_login()
-    {
-        return view('home.page_login');
-    }
+    // public function page_login()
+    // {
+    //     return view('home.page_login');
+    // }
 
     //Xử lý đăng nhập
     public function post_page_login(Request $request)

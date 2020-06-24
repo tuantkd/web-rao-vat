@@ -16,8 +16,8 @@
     }
 
     .carousel-inner img{
-        max-width: 100%; 
-        max-height: auto;
+        width: 100%; 
+        height: 400px;
     }
 
     .user_post img{
@@ -49,6 +49,10 @@
     @media screen and (max-width: 600px){
         .user_post a{
             margin-left: 72px;
+        }
+
+        .user_post .badge{
+            margin-left: 135px;
         }
 
         .info_post{
@@ -85,6 +89,7 @@
 
                 <div class="row">
                     <div class="col-12 col-md-8 mt-3">
+
                         <div id="carouselId" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselId" data-slide-to="0" class="active"></li>
@@ -92,9 +97,25 @@
                                 <li data-target="#carouselId" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <img src="{{ url('public/upload/image_post_new/'.$value->image) }}" alt="First slide">
-                                </div>
+                                @php
+                                    $image_decode = (array)json_decode($value->images,true)
+                                @endphp
+                                @foreach ($image_decode as $key => $picture)
+                                    @if ($key == 0)
+                                        <div class="carousel-item active">
+                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="First slide">
+                                        </div>
+                                    @elseif($key == 1)
+                                        <div class="carousel-item">
+                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Second slide">
+                                        </div>
+                                    @elseif($key == 2)
+                                        <div class="carousel-item">
+                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Third slide">
+                                        </div>
+                                    @endif
+                                
+                                @endforeach
 
                             </div>
                             <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
@@ -106,6 +127,34 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
+
+                        {{-- <div id="carouselId" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselId" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselId" data-slide-to="1"></li>
+                                <li data-target="#carouselId" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img data-src="holder.js/900x500/auto/#777:#555/text:First slide" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img data-src="holder.js/900x500/auto/#666:#444/text:Second slide" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img data-src="holder.js/900x500/auto/#666:#444/text:Third slide" alt="Third slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div> --}}
+
                     </div>
 
                     <div class="col-12 col-md-4 user_post mt-0">
@@ -121,15 +170,17 @@
                             @endif
                             
                             <strong>Huỳnh Mi Nết</strong>
-                            <a name="" id="" class="btn btn-outline-info" href="{{ route('view_information_member', $item->id )}}" role="button">Thông tin</a>
+                            <a name="" id="" class="btn btn-outline-info" href="{{ route('view_information_member', [Str::slug($item->username),$item->id] )}}" role="button">Thông tin</a>
                         @endforeach
 
-                        <span><i class="fa fa-calendar" aria-hidden="true"></i> <strong>{{ $value->created_at }}</strong></span>
+                        <span><i class="fa fa-calendar" aria-hidden="true"></i> <strong>{{ date("d/m/Y", strtotime($value->created_at)) }}</strong></span>
 
-                        @if($value->status == 'Chưa duyệt')
-                            <span class="badge badge-danger">{{ $value->status }}</span>
+                        @if($value->status == 0)
+                            <span class="badge badge-danger">Chưa duyệt</span>
+                        @elseif($value->status == 1)
+                            <span class="badge badge-success">Đã duyệt</span>
                         @else
-                            <span class="badge badge-success">{{ $value->status }}</span>
+                            <span class="badge badge-danger">Hết hạn</span>
                         @endif
 
                         @php
@@ -140,10 +191,10 @@
                         @endforeach
 
                         @php
-                            $category = DB::table('categorys')->where('id', $value->category_id)->get();
+                            $category_first = DB::table('category_child_firsts')->where('id', $value->category_first_id)->get();
                         @endphp
-                        @foreach ($category as $item_category)
-                            <span><i class="fa fa-list" aria-hidden="true"></i> <strong>{{ $item_category->category_name }}</strong></span><br>
+                        @foreach ($category_first as $item_category_first)
+                            <span><i class="fa fa-list" aria-hidden="true"></i> <strong>{{ $item_category_first->category_child_name }}</strong></span><br>
                         @endforeach
                         @php
                             $province = DB::table('provinces')->where('id', $value->province_id)->get();
@@ -162,8 +213,8 @@
                 <div class="row content">
                     <div class="col-12 col-md-12 mt-2">
                         <h5>{{ $value->title }}</h5>
-                        <h5 class="price"><strong> {{ number_format($value->price) }} {{ $value->price_type}}</strong></h5>
-                        <p>{{ $value->content }}</p>
+                        <h5 class="price"><strong> {{ number_format($value->price) }} {{ $value->unit_price}}</strong></h5>
+                        <p>{!! $value->content !!}</p>
                     </div>
                 </div>
 

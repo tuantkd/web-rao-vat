@@ -212,77 +212,79 @@
                 <div class="card" style="margin-bottom:10px;">
                     <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="img-fluid" style="border-radius:5px; max-height: 400px;">
                     <div class="card-body">
-                        <h3 class="card-title">
-                            <b>{{ $item->title }}</b>
-                        </h3>
-                        <p class="card-text">
-
-                            {!! Str::limit($item->content,400,'...') !!}
-                        </p>
-                        <a href="{{ url('view-news-detail/'.Str::slug($item->title).'/'.$item->id) }}" class="btn btn-warning btn-sm">Xem chi tiết ...</a>
-                    </div>
-                </div>
-                @endforeach
-                <!-- news -->
-
-                <!-- option -->
-                <div class="card" style="margin-bottom:10px;">
-                    <div class="card-body" style="padding:5px;">
-                        <div class="d-flex">
-                            <div class="p-1 flex-fill">
-                                <button type="button" class="btn btn-danger">
-                                    <i class="fas fa-money-check-alt"></i> Nạp tiền
-                                </button>
-                            </div>
-                            <div class="p-1 flex-fill">
-                                <button type="button" class="btn btn-danger">
-                                    <i class="fas fa-search"></i> Tìm kiếm chọn lọc
-                                </button>
-                            </div>
-                        </div>
+                        <h4 class="card-title">
+                            <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}">{{ $item->title }}</a>
+                        </h4>
+                        <b class="card-text">
+                            {!! Str::limit($item->content,350,'...') !!}
+                        </b>
+                        <br>
+                        <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}" class="btn btn-warning btn-sm">Xem chi tiết</a>
 
                     </div>
                 </div>
-                <!-- option -->
-
-
-                <!-- carousel -->
-                <div id="demo" class="carousel slide" data-ride="carousel" style="border-radius:5px;">
-                    <!-- Indicators -->
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-                    <!-- The slideshow -->
-                    <div class="carousel-inner" style="border-radius:5px;">
-
-                        @foreach ($banner as $key => $value)
-                        @if($key == 0)
-                        <div class="carousel-item active">
-                            ​<img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
-                        </div>
-                        @else
-                        <div class="carousel-item">
-                            <img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
-                        </div>
-                        @endif
-
-                        @endforeach
-
-                    </div>
-                    <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev" style="color:red;">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next" style="color:red;">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-                </div>
-                <!-- carousel -->
             </div>
+            @endforeach
+            <!-- news -->
+
+            <!-- option -->
+            <div class="card" style="margin-bottom:10px;">
+                <div class="card-body" style="padding:5px;">
+                    <div class="d-flex">
+                        <div class="p-1 flex-fill">
+                            <button type="button" class="btn btn-danger">
+                                <i class="fas fa-money-check-alt"></i> Nạp tiền
+                            </button>
+                        </div>
+                        <div class="p-1 flex-fill">
+                            <button type="button" class="btn btn-danger">
+                                <i class="fas fa-search"></i> Tìm kiếm chọn lọc
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- option -->
+
+
+            <!-- carousel -->
+            <div id="demo" class="carousel slide" data-ride="carousel" style="border-radius:5px;">
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+                <!-- The slideshow -->
+                <div class="carousel-inner" style="border-radius:5px;">
+
+                    @foreach ($banner as $key => $value)
+                    @if($key == 0)
+                    <div class="carousel-item active">
+                        ​<img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
+                    </div>
+                    @else
+                    <div class="carousel-item">
+                        <img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
+                    </div>
+                    @endif
+
+                    @endforeach
+
+                </div>
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev" style="color:red;">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next" style="color:red;">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+            <!-- carousel -->
         </div>
     </div>
+</div>
 </div>
 
 @endsection

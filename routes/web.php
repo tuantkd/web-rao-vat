@@ -12,6 +12,9 @@ Route::get('/', 'HomeController@index');
 //Xem danh mục
 Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
 
+// xem danh mục cấp 1
+Route::get('danh-muc-cap-1/{name}/{id_category_first}', 'HomeController@view_category_first')->name('view_category_first');
+
 //Xem danh mục chi tiết
 Route::get('view-category-detail/{name}', 'HomeController@view_category_detail');
 //----------------------------------------------------------------------------
@@ -20,7 +23,7 @@ Route::get('view-category-detail/{name}', 'HomeController@view_category_detail')
 
 //----------------------------------------------------------------------------
 //Xem chi tiết tin tức đăng
-Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail');
+Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail')->name('view_news_detail');
 //----------------------------------------------------------------------------
 
 
@@ -217,7 +220,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xem thông tin thành viên
-    Route::get('admin/manage-member/view-information/{name}-{id}', 'AdminController@view_information_member');
+    Route::get('admin/manage-member/view-information/{name}-{id}', 'AdminController@view_information_member')->name('view_information_member');
 
     // xóa tất cả thành viên
     Route::delete('admin/manage-member/delete-all-member', [
@@ -275,7 +278,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xem chi tiết bài đăng
-    Route::get('admin/manage-post-new/view-information/{id}', [
+    Route::get('admin/manage-post-new/view-information/{name}/{id}', [
         'as' => 'view_post_new',
         'uses' => 'AdminController@view_post_new'
     ]);
@@ -485,4 +488,8 @@ Route::middleware(['checkStatus'])->group(function () {
         'as' => 'delete_new',
         'uses' => 'AdminController@delete_new'
     ]);
+
+    // xem chi tiết tin tức
+    Route::get('admin/manage-new/view-detail/{name}/{id}', 'AdminController@view_detail_new')->name('view_detail_new');
+
 });
