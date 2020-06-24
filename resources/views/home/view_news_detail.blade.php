@@ -1,4 +1,3 @@
-@include('layout/slug')
 @extends('layout.layout_home')
 @section('title', 'Xem chi tiết tin tức')
 <!-- ==================================================== -->

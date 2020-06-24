@@ -23,7 +23,7 @@ Route::get('view-category-detail/{name}', 'HomeController@view_category_detail')
 
 //----------------------------------------------------------------------------
 //Xem chi tiết tin tức đăng
-Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail');
+Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail')->name('view_news_detail');
 //----------------------------------------------------------------------------
 
 

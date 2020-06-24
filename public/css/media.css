@@ -18,6 +18,10 @@
     text-transform: uppercase;
  }
 
+ .media-body b{
+   font-size: 12px;
+}
+
  .media-body strong{
     color:orange;
  }

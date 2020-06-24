@@ -53,11 +53,23 @@ class HomeController extends Controller
         $allCategory = DB::table('categorys')->get();
         $province = DB::table('provinces')->get();
 
+        $categoryFirstId = DB::table('category_child_firsts')
+                    ->select('id')
+                    ->where('category_id', $id)
+                    ->groupBy('id');
+        
+        $postNew = DB::table('post_news')
+                ->joinSub($categoryFirstId, 'category_child_firsts', function($join){
+                    $join->on('post_news.category_first_id', '=', 'category_child_firsts.id');
+                })
+                ->paginate(8);
+
         return view('home.view_category')->with([
             'category' => $category,
             'category_first' => $category_first,
             'province' => $province,
-            'allCategory' => $allCategory
+            'allCategory' => $allCategory,
+            'postNew' => $postNew
         ]);
     }
 
@@ -68,6 +80,7 @@ class HomeController extends Controller
         $allCategory = DB::table('categorys')->get();
 
         $category_first = DB::table('category_child_firsts')->where('id', $id_category_first)->get();
+        $postNewCategoryFirst = DB::table('post_news')->where('category_first_id', $id_category_first)->paginate(8);
 
         $category_id = DB::table('category_child_firsts')
                 ->select('category_id')
@@ -89,7 +102,8 @@ class HomeController extends Controller
             'category_first' => $category_first,
             'province' => $province,
             'allCategory' => $allCategory,
-            'allCategoryFirst' => $allCategoryFirst
+            'allCategoryFirst' => $allCategoryFirst,
+            'postNewCategoryFirst' => $postNewCategoryFirst
         ]);
     }
 
@@ -312,7 +326,7 @@ class HomeController extends Controller
 
     // ==============================================================
     // xem tin tức
-    public function view_news_detail(Request $request, $name, $id)
+    public function view_news_detail(Request $request,$name, $id)
     {
         $new = DB::table('news')->where('id', $id)->get();
         return view('home.view_news_detail')->with([
@@ -326,10 +340,10 @@ class HomeController extends Controller
 
     // ==============================================================
     //Trang đăng nhập
-    public function page_login()
-    {
-        return view('home.page_login');
-    }
+    // public function page_login()
+    // {
+    //     return view('home.page_login');
+    // }
 
     //Xử lý đăng nhập
     public function post_page_login(Request $request)

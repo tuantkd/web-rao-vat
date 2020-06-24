@@ -58,7 +58,15 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
                 @foreach ($postNew as $value)
                     <div class="media border p-2">
-                        <img src="{{ url('public/upload/image_post_new/'.$value->images) }}" class="img-fluid mr-3 image-post-new">
+                        @php
+                            $image_decode = (array)json_decode($value->images,true)
+                        @endphp
+                        @foreach ($image_decode as $picture)
+                            @if ($loop->first)
+                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="img-fluid mr-3 image-post-new" style="width: 100px;">
+                            @endif
+                        @endforeach
+
                         <div class="media-body">
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-10 col-lg-10">
@@ -110,6 +118,10 @@
                     </div>
                 @endforeach
 
+            </div>
+
+            <div class="col-12 col-md-12">
+                {{ $postNew->links() }}
             </div>
 
         </div>

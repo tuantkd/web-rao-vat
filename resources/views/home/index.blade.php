@@ -212,14 +212,15 @@
                     <div class="card" style="margin-bottom:10px;">
                         <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="img-fluid" style="border-radius:5px; max-height: 400px;">
                         <div class="card-body">
-                            <h3 class="card-title">
-                                <b>{{ $item->title }}</b>
-                            </h3>
-                            <p class="card-text">
-                                
-                                {!! Str::limit($item->content,400,'...') !!}
-                            </p>
-                            <a href="{{ url('view-news-detail/'.Str::slug($item->title).'/'.$item->id) }}" class="btn btn-warning btn-sm">Xem chi tiết ...</a>
+                            <h4 class="card-title">
+                                <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}">{{ $item->title }}</a>
+                            </h4>
+                            <b class="card-text">
+                                {!! Str::limit($item->content,350,'...') !!}
+                            </b>
+                            <br>
+                            <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}" class="btn btn-warning btn-sm">Xem chi tiết</a>
+
                         </div>
                     </div>
                 @endforeach

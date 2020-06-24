@@ -96,7 +96,15 @@
 
                 @foreach ($postNew as $item_post_new)
                     <div class="media border p-2">
-                        <img src="{{ url('public/upload/image_post_new/'.$item_post_new->images) }}" class="img-fluid mr-3 image-post-new">
+                        @php
+                            $image_decode = (array)json_decode($item_post_new->images,true)
+                        @endphp
+                        @foreach ($image_decode as $picture)
+                            @if ($loop->first)
+                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="img-fluid mr-3 image-post-new">
+                            @endif
+                        @endforeach
+
                         <div class="media-body">
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-md-10 col-lg-10">

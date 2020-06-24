@@ -185,50 +185,40 @@
                 <div class="card-body" style="padding:5px;">
                     <div class="row">
 
-                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                            <a href="{{ url('view-category-detail/'.Str::slug('Xe Kia Morning 2020 thời trang hiện đại')) }}" style="text-decoration:none;color:#ff3333;">
-                                <div class="media">
-                                    <img src="public/images/car-1.jpg" class="align-self-start mr-3">
-                                    <div class="media-body">
-                                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                        <p class="p-text">
-                                            <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                                            <i class="far fa-clock"></i> 30p trước
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        @foreach ($postNew as $itemPostNew)
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                <a href="{{ url('view-category-detail/'.Str::slug('Xe Kia Morning 2020 thời trang hiện đại')) }}" style="text-decoration:none;color:#ff3333;">
+                                    <div class="media">
+                                        @php
+                                            $image_decode = (array)json_decode($itemPostNew->images,true)
+                                        @endphp
+                                        @foreach ($image_decode as $picture)
+                                            @if ($loop->first)
+                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="align-self-start mr-3">
+                                            @endif
+                                        @endforeach
 
-                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                            <a href="" style="text-decoration:none;color:#ff3333;">
-                                <div class="media">
-                                    <img src="public/images/car-1.jpg" class="align-self-start mr-3">
-                                    <div class="media-body">
-                                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                        <p class="p-text">
-                                            <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                                            <i class="far fa-clock"></i> 30p trước
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                        <div class="media-body">
+                                            <b style="font-size: 14px;">{{ $itemPostNew->title }}</b>
+                                            <p class="p-text">
+                                                @php
+                                                    $province = DB::table('provinces')->where('id', $itemPostNew->province_id)->get();
+                                                    $district = DB::table('districts')->where('id', $itemPostNew->district_id)->get();
+                                                @endphp
+                                                @foreach ($province as $item_province)
+                                                    @foreach ($district as $item_district)
+                                                        <i class="fas fa-map-marker-alt"></i> {{ $item_province->province_name }} / {{ $item_district->district_name }} <br>
+                                                    @endforeach
+                                                @endforeach
+                                                
+                                                <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($itemPostNew->created_at )) }}
+                                            </p>
 
-                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                            <a href="" style="text-decoration:none;color:#ff3333;">
-                                <div class="media">
-                                    <img src="public/images/car-1.jpg" class="align-self-start mr-3">
-                                    <div class="media-body">
-                                        <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                        <p class="p-text">
-                                            <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                                            <i class="far fa-clock"></i> 30p trước
-                                        </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        @endforeach
 
                     </div>
 
@@ -236,11 +226,12 @@
 
                     <!-- pagination -->
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link" href="#" style="color:red;">Previous</a></li>
+                        {{-- <li class="page-item"><a class="page-link" href="#" style="color:red;">Previous</a></li>
                         <li class="page-item"><a class="page-link" href="#" style="color:red;">1</a></li>
                         <li class="page-item active"><a class="page-link" href="#" style="background-color:red;color:white;border-color:red;">2</a></li>
                         <li class="page-item"><a class="page-link" href="#" style="color:red;">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#" style="color:red;">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="#" style="color:red;">Next</a></li> --}}
+                        {{ $postNew->links() }}
                     </ul>
                     <!-- pagination -->
                 </div>
@@ -258,100 +249,73 @@
                 <div class="card-body text-center" style="padding:15px;padding-top:5px;">
                     <div class="row">
                         <!-- ========================== -->
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class="fas fa-home" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Bất động sản</div>
-                            </a>
-                        </div>
+                        @foreach($allCategory as $key => $value)
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
 
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Xe cộ</div>
-                            </a>
-                        </div>
+                                    @if($value->id == 1)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class="fas fa-home" style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Bất động sản</div>
+                                        </a>
+                                    @elseif($value->id == 2)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Xe cộ</div>
+                                        </a>
+                                    @elseif($value->id == 3)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-mobile-alt' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Đồ điện tử</div>
+                                        </a>
+                                    @elseif($value->id == 4)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-business-time' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Việc làm</div>
+                                        </a>
+                                    @elseif($value->id == 5)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-dog' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Thú cưng</div>
+                                        </a>
+                                    @elseif($value->id == 6)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-hamburger' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;"> Đồ ăn, thực phẩm và các loại khác</div>
+                                        </a>
+                                    @elseif($value->id == 7)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-subway' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
+                                        </a>
+                                    @elseif($value->id == 8)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-couch' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
+                                        </a>
+                                    @elseif($value->id == 9)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-tshirt' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Thời trang, đồ dùng cá nhân</div>
+                                        </a>
+                                    @elseif($value->id == 10)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-volleyball-ball' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
+                                        </a>
+                                    @elseif($value->id == 11)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-book' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
+                                        </a>
+                                    @elseif($value->id == 12)
+                                        <a href="{{ url('post-new/'.Str::slug($value->category_name).'/'.$value->id )}}" style="text-decoration:none;">
+                                            <i class='fas fa-phone-volume' style="font-size:30px;color:red;"></i>
+                                            <div style="font-size:12px;color:red;">Dịch vụ, du lịch</div>
+                                        </a>
+                                    @endif
 
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-business-time' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Việc làm</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-mobile-alt' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ điện tử</div>
-                            </a>
-                        </div>
-                        <!-- ============================== -->
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-dog' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Thú cưng</div>
-                            </a>
-                        </div>
-
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-subway' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-hamburger' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;"> Đồ ăn, thực phẩm và các loại khác</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-baby' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Mẹ và bé</div>
-                            </a>
-                        </div>
-                        <!-- ========================== -->
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-couch' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-tshirt' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Thời trang, đồ dùng cá nhân</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-volleyball-ball' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-book' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
-                            </a>
-                        </div>
-
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding:3px;margin-bottom:10px;margin-top:10px;">
-                            <a href="" style="text-decoration:none;">
-                                <i class='fas fa-phone-volume' style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Dịch vụ, du lịch</div>
-                            </a>
-                        </div>
-
+                            </div>
+                        @endforeach
 
                     </div>
                 </div>

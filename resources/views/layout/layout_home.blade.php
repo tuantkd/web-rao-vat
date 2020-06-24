@@ -137,8 +137,7 @@
 
 
     <!-- Footer -->
-    <br><br><br>
-    <br><br><br>
+    <br><br>
     <section id="footer">
         <div class="container">
             <div class="row">
