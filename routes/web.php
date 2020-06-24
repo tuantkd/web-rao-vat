@@ -125,6 +125,12 @@ Route::middleware(['CheckViewInfor'])->group(function () {
     Route::get('page-service-news', 'HomeController@page_service_news');
     //Trang tin hết hạn
     Route::get('page-expired-news', 'HomeController@page_expired_news');
+    //Xóa tin
+    Route::get('delete-news/{id}', 'HomeController@delete_news');
+    //Chỉnh sửa tin
+    Route::get('edit-news/{id}', 'HomeController@edit_news');
+    //Cập nhật tin
+    Route::put('update-news/{id}', 'HomeController@update_news');
     //-----------------------------
 
     //Trang thông tin tin đã lưu

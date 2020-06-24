@@ -105,98 +105,98 @@
                     <div class="row">
                         <!-- ========================== -->
                         @foreach ($show_category as $key => $value)
-                            @if($value->id == 1)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-home" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Bất động sản</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 2)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Xe cộ</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 3)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-plug" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Đồ điện tử</div>
-                                    </a>
-                                </div>
-                                <!-- ========================== -->
-                            @elseif($value->id == 4)
-                                <!-- ========================== -->
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-business-time" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Việc làm</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 5)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-dog" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Thú cưng</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 6)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-hamburger" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Đồ ăn, thực phẩm</div>
-                                    </a>
-                                </div>
-                                <!-- ========================== -->
-                            @elseif($value->id == 7)
-                                <!-- ========================== -->
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-crosshairs" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 8)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-baby" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Mẹ và bé</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 9)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-couch" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
-                                    </a>
-                                </div>
-                                <!-- ========================== -->
-                            @elseif($value->id == 10)
-                                <!-- ========================== -->
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-tshirt" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Thời trang, đồ dùng, cá nhân</div>
-                                    </a>
-                                </div>
-                            @elseif($value->id == 11)
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-swimmer" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
-                                    </a>
-                                </div>
-                            @else
-                                <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                                    <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                        <i class="fas fa-tractor" style="font-size:30px;color:red;"></i>
-                                        <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
-                                    </a>
-                                </div>
-                                <!-- ========================== -->
-                            @endif
+                        @if($value->id == 1)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-home" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Bất động sản</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 2)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Xe cộ</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 3)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-plug" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ điện tử</div>
+                            </a>
+                        </div>
+                        <!-- ========================== -->
+                        @elseif($value->id == 4)
+                        <!-- ========================== -->
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-business-time" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Việc làm</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 5)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-dog" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Thú cưng</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 6)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-hamburger" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ ăn, thực phẩm</div>
+                            </a>
+                        </div>
+                        <!-- ========================== -->
+                        @elseif($value->id == 7)
+                        <!-- ========================== -->
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-crosshairs" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 8)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-baby" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Mẹ và bé</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 9)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-couch" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
+                            </a>
+                        </div>
+                        <!-- ========================== -->
+                        @elseif($value->id == 10)
+                        <!-- ========================== -->
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-tshirt" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Thời trang, đồ dùng, cá nhân</div>
+                            </a>
+                        </div>
+                        @elseif($value->id == 11)
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-swimmer" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
+                            </a>
+                        </div>
+                        @else
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
+                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class="fas fa-tractor" style="font-size:30px;color:red;"></i>
+                                <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
+                            </a>
+                        </div>
+                        <!-- ========================== -->
+                        @endif
                         @endforeach
 
                     </div>
@@ -209,19 +209,19 @@
             <div class="container" style="padding:1px;">
                 <!-- news -->
                 @foreach ($new as $item)
-                    <div class="card" style="margin-bottom:10px;">
-                        <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="img-fluid" style="border-radius:5px; max-height: 400px;">
-                        <div class="card-body">
-                            <h3 class="card-title">
-                                <b>{{ $item->title }}</b>
-                            </h3>
-                            <p class="card-text">
-                                
-                                {!! Str::limit($item->content,400,'...') !!}
-                            </p>
-                            <a href="{{ url('view-news-detail/'.Str::slug($item->title).'/'.$item->id) }}" class="btn btn-warning btn-sm">Xem chi tiết ...</a>
-                        </div>
+                <div class="card" style="margin-bottom:10px;">
+                    <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="img-fluid" style="border-radius:5px; max-height: 400px;">
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <b>{{ $item->title }}</b>
+                        </h3>
+                        <p class="card-text">
+
+                            {!! Str::limit($item->content,400,'...') !!}
+                        </p>
+                        <a href="{{ url('view-news-detail/'.Str::slug($item->title).'/'.$item->id) }}" class="btn btn-warning btn-sm">Xem chi tiết ...</a>
                     </div>
+                </div>
                 @endforeach
                 <!-- news -->
 
@@ -258,18 +258,16 @@
                     <div class="carousel-inner" style="border-radius:5px;">
 
                         @foreach ($banner as $key => $value)
-                            @if($key == 0)
-                                <div class="carousel-item active">
-                                    ​<img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" 
-                                        style="width: 100%; height: 300px;">
-                                </div>
-                            @else
-                                <div class="carousel-item">
-                                    <img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" 
-                                        style="width: 100%; height: 300px;">
-                                </div>
-                            @endif
-                            
+                        @if($key == 0)
+                        <div class="carousel-item active">
+                            ​<img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
+                        </div>
+                        @else
+                        <div class="carousel-item">
+                            <img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
+                        </div>
+                        @endif
+
                         @endforeach
 
                     </div>

@@ -348,7 +348,7 @@ class HomeController extends Controller
     //Quản lý tin tất cả
     public function page_all_news()
     {
-        $all_news = post_news::where('user_id', Auth::user()->id)->paginate(5);
+        $all_news = post_news::where('user_id', Auth::user()->id)->latest()->paginate(5);
         return view('home.infor_profile.all_news', ['all_news' => $all_news]);
     }
     //Quản lý tin dịch vụ
@@ -361,8 +361,92 @@ class HomeController extends Controller
     {
         return view('home.infor_profile.expired_news');
     }
+    //Xóa tin
+    public function delete_news($id, Request $request)
+    {
+        post_news::destroy($id);
+        $delete_new = $request->session()->get('delete_new');
+        return redirect()->back()->with('delete_new', '');
+    }
+    //Chỉnh sửa tin
+    public function edit_news($id)
+    {
+        $edit_new = post_news::find($id);
+        return view('home.infor_profile.edit_news', ['edit_new' => $edit_new]);
+    }
+    //Cập nhật tin
+    public function update_news(Request $request, $id)
+    {
+        $edit_post_new = post_news::find($id);
+        $edit_post_new->post_type_id = $request->input('txt_post_type_id');
+        $edit_post_new->user_id = Auth::user()->id;
+
+        //Lấy ID tỉnh/Huyện
+        $district_edit = $request->input('txt_district');
+        $province_edit = $request->input('txt_province');
+
+        $get_province_edits = DB::table('provinces')->where('province_name', $province_edit)->get();
+        foreach ($get_province_edits as $key => $get_province_edit) {
+            $id_province_edit = $get_province_edit->id;
+        }
+
+        $get_district_edits = DB::table('districts')->where('district_name', $district_edit)->get();
+        foreach ($get_district_edits as $key => $get_district_edit) {
+            $id_district_edit = $get_district_edit->id;
+        }
+
+        $edit_post_new->district_id = $id_district_edit;
+        $edit_post_new->province_id = $id_province_edit;
+        //---------------------------------
+
+        $edit_post_new->title = $request->input('txt_title');
+        $edit_post_new->price = $request->input('txt_price');
+        $edit_post_new->unit_price = $request->input('txt_unit_price');
+        $edit_post_new->currency = $request->input('txt_currency');
+        $edit_post_new->content = $request->input('txt_content');
+        $edit_post_new->tag_search = $request->input('txt_tag_search');
+        $edit_post_new->number_date_expired = $request->input('txt_date_expired');
+
+        //Upload nhiều hình ảnh
+        if ($request->hasFile('txt_images')) {
+            foreach ($request->file('txt_images') as $image) {
+                $image_post_edit = $image->getClientOriginalName();
+                $image->move(public_path('upload_images_post_new'), $image_post_edit);
+                $data_image_post_edit[] = $image_post_edit;
+            }
+            $edit_post_new->images = json_encode($data_image_post_edit);
+        } else {
+            $get_images = DB::table('post_news')->where('id', $id)->get();
+            foreach ($get_images as $key => $get_image) {
+                $image_db = $get_image->images;
+            }
+            $edit_post_new->images = $image_db;
+        }
+
+        //---------------------------------
+
+        //Ẩn là 1, hiện là NULL
+        $edit_post_new->hidden_new = $request->input('txt_hiden_new');
+
+        //Trạng thái có 3 loại: 0 là chưa duyệt, 1 là đã duyệt, 2 là hết hạn
+        $edit_post_new->status = 0;
+
+        //Mặc định không lưu tin sẻ là 0
+        $edit_post_new->save_post = 0;
+
+        $edit_post_new->save();
+        // ----------------------------------------------------------------------------
+        $session_update = $request->session()->get('session_update');
+        return redirect('page-all-news')->with('session_update', '');
+    }
     //-------------------------------------------
 
+
+
+
+
+
+    //-------------------------------------------
     //Quản lý tin lưu lại
     public function page_news_save()
     {

@@ -50,6 +50,15 @@
         .container .row .col-sm-3 .option-sidebar {
             display: none;
         }
+
+        .manage-post-new .media-body .row #col-mobile-9 {
+            width: 220px;
+        }
+
+        .manage-post-new .media-body .row #col-mobile-3 {
+            padding-left: 20px;
+        }
+
     }
 
     /* =================================================== */
@@ -98,6 +107,7 @@
         height: 60px;
         border-radius: 5px;
         margin-top: 0px;
+        margin-bottom: 12px;
     }
 
     .manage-post-new .media-body .row .col-md-9 h4 {
@@ -110,8 +120,15 @@
         color: #808080;
     }
 
+    .manage-post-new .media-body .row .col-md-9 {
+        width: 500px;
+    }
+
     .manage-post-new .media-body .row .col-md-3 {
         padding: 10px;
+        padding-left: 35px;
+        width: 20px;
+        padding-bottom: 10px;
     }
 
     .manage-post-new {
