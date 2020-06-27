@@ -82,7 +82,9 @@
                         </span> Số tiền:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8 text-left">
-                        <span class="badge badge-pill badge-warning">0 đ</span>
+                        @if(Auth::check())
+                        <span class="badge badge-pill badge-warning">{{ number_format(Auth::user()->number_money) }} đ</span>
+                        @endif
                     </div>
                 </div>
             </div>

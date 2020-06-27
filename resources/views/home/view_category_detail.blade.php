@@ -51,58 +51,58 @@
 
                                 @foreach ($allCategory as $item_category)
                                 @if($item_category->id == 1)
-                                    <option data-content="<i class='fas fa-home'></i> Bất động sản" value="{{ $item_category->id }}">
-                                        Bất động sản
-                                    </option>
+                                <option data-content="<i class='fas fa-home'></i> Bất động sản" value="{{ $item_category->id }}">
+                                    Bất động sản
+                                </option>
                                 @elseif($item_category->id == 2)
-                                    <option data-content="<i class='fas fa-car'></i> Xe cộ">
-                                        Xe cộ
-                                    </option>
+                                <option data-content="<i class='fas fa-car'></i> Xe cộ">
+                                    Xe cộ
+                                </option>
                                 @elseif($item_category->id == 3)
-                                    <option data-content="<i class='fas fa-mobile-alt'></i> Đồ điện tử">
-                                        Đồ điện tử
-                                    </option>
+                                <option data-content="<i class='fas fa-mobile-alt'></i> Đồ điện tử">
+                                    Đồ điện tử
+                                </option>
                                 @elseif($item_category->id == 4)
-                                    <option data-content="<i class='fas fa-business-time'></i> Việc làm">
-                                        Việc làm, tuyển sinh
-                                    </option>
+                                <option data-content="<i class='fas fa-business-time'></i> Việc làm">
+                                    Việc làm, tuyển sinh
+                                </option>
                                 @elseif($item_category->id == 5)
-                                    <option data-content="<i class='fas fa-dog'></i> Thú cưng">
-                                        Thú cưng
-                                    </option>
+                                <option data-content="<i class='fas fa-dog'></i> Thú cưng">
+                                    Thú cưng
+                                </option>
                                 @elseif($item_category->id == 6)
-                                    <option data-content="<i class='fas fa-hamburger'>
+                                <option data-content="<i class='fas fa-hamburger'>
                                                 </i> Đồ ăn, thực phẩm và các loại khác">
-                                        Đồ ăn, thực phẩm và các loại khác
-                                    </option>
+                                    Đồ ăn, thực phẩm và các loại khác
+                                </option>
                                 @elseif($item_category->id == 7)
-                                    <option data-content="<i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt">
-                                        Tủ lạnh, máy lạnh, máy giặt
-                                    </option>
+                                <option data-content="<i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt">
+                                    Tủ lạnh, máy lạnh, máy giặt
+                                </option>
                                 @elseif($item_category->id == 8)
-                                    <option data-content="<i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh">
-                                        Đồ gia dụng, nội thất, cây cảnh
-                                    </option>
+                                <option data-content="<i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh">
+                                    Đồ gia dụng, nội thất, cây cảnh
+                                </option>
                                 @elseif($item_category->id == 9)
-                                    <option data-content="<i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân">
-                                        Thời trang, đồ dùng cá nhân
-                                    </option>
+                                <option data-content="<i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân">
+                                    Thời trang, đồ dùng cá nhân
+                                </option>
                                 @elseif($item_category->id == 10)
-                                    <option data-content="<i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích">
-                                        Giải trí, thể thao, sở thích
-                                    </option>
+                                <option data-content="<i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích">
+                                    Giải trí, thể thao, sở thích
+                                </option>
                                 @elseif($item_category->id == 11)
-                                    <option data-content="<i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp">
-                                        Đồ văn phòng, công nông nghiệp
-                                    </option>
+                                <option data-content="<i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp">
+                                    Đồ văn phòng, công nông nghiệp
+                                </option>
                                 @elseif($item_category->id == 12)
-                                    <option data-content="<i class='fas fa-phone-volume'></i> Dịch vụ, du lịch">
-                                        Dịch vụ, du lịch
-                                    </option>
+                                <option data-content="<i class='fas fa-phone-volume'></i> Dịch vụ, du lịch">
+                                    Dịch vụ, du lịch
+                                </option>
                                 @else
-                                    <option data-content="<i class='fas fa-baby'></i> Mẹ và bé">
-                                        Mẹ và bé
-                                    </option>
+                                <option data-content="<i class='fas fa-baby'></i> Mẹ và bé">
+                                    Mẹ và bé
+                                </option>
                                 @endif
                                 @endforeach
                             </select>
@@ -129,11 +129,11 @@
             <ul class="breadcrumb breadcrumb-mobile" style="background-color:white;">
                 <li class="breadcrumb-item">
                     @foreach ($category as $item_category)
-                        <a href="{{ url('danh-muc/'.$item_category->category_name.'/'.$item_category->id) }}" style="text-decoration:none;color:red;">{{ $item_category->category_name }}</a>
+                    <a href="{{ url('danh-muc/'.$item_category->category_name.'/'.$item_category->id) }}" style="text-decoration:none;color:red;">{{ $item_category->category_name }}</a>
                     @endforeach
                 </li>
                 @foreach ($category_first as $item_category_first)
-                    <li class="breadcrumb-item active">{{ $item_category_first->category_child_name }}</li>
+                <li class="breadcrumb-item active">{{ $item_category_first->category_child_name }}</li>
                 @endforeach
             </ul>
             <!-- breadcrumb -->
@@ -142,10 +142,11 @@
             <div class="card" style="margin-bottom:10px;">
                 <div class="card-body" style="padding:5px;">
                     <style>
-                        .carousel-inner img{
+                        .carousel-inner img {
                             height: 400px;
                             width: 100%;
                         }
+
                     </style>
                     <div class="row">
                         <!-- col-8 -->
@@ -163,23 +164,23 @@
                                 <!-- The slideshow -->
                                 <div class="carousel-inner" style="border-radius:5px;">
                                     @php
-                                        $image_decode = (array)json_decode($item_postNew->images,true)
+                                    $image_decode = (array)json_decode($item_postNew->images,true)
                                     @endphp
                                     @foreach ($image_decode as $key => $picture)
-                                        @if ($key == 0)
-                                            <div class="carousel-item active">
-                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="First slide">
-                                            </div>
-                                        @elseif($key == 1)
-                                            <div class="carousel-item">
-                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Second slide">
-                                            </div>
-                                        @elseif($key == 2)
-                                            <div class="carousel-item">
-                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Third slide">
-                                            </div>
-                                        @endif
-                                    
+                                    @if ($key == 0)
+                                    <div class="carousel-item active">
+                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="First slide">
+                                    </div>
+                                    @elseif($key == 1)
+                                    <div class="carousel-item">
+                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Second slide">
+                                    </div>
+                                    @elseif($key == 2)
+                                    <div class="carousel-item">
+                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Third slide">
+                                    </div>
+                                    @endif
+
                                     @endforeach
                                 </div>
                                 <!-- Left and right controls -->
@@ -218,13 +219,13 @@
                                     <b>
                                         @php
                                         $province = DB::table('provinces')->where('id', $item_postNew->province_id)->get();
-                                        $district = DB::table('districts')->where('id', $item_postNew->district_id)->get(); 
+                                        $district = DB::table('districts')->where('id', $item_postNew->district_id)->get();
                                         @endphp
                                         @foreach ($province as $item_province)
-                                            <span><strong>{{ $item_province->province_name }}
-                                        @endforeach
-                                        @foreach ($district as $item_district)
-                                            - {{ $item_district->district_name }}</strong></span>
+                                        <span><strong>{{ $item_province->province_name }}
+                                                @endforeach
+                                                @foreach ($district as $item_district)
+                                                - {{ $item_district->district_name }}</strong></span>
                                         @endforeach
                                     </b>
                                 </p>
@@ -233,16 +234,15 @@
                                     <img src="{{ url('public/logo/icon-user.png') }}" class="mr-3 mt-3 rounded-circle" style="max-width:100%;height:70px;">
                                     <div class="media-body">
                                         @php
-                                            $user = DB::table('users')->where('id', $item_postNew->user_id)->get();
+                                        $user = DB::table('users')->where('id', $item_postNew->user_id)->get();
                                         @endphp
                                         @foreach ($user as $item_user)
-                                            <h4>{{ $item_user->username }} <br> <b>{{ $item_user->phone }}</b></h4>
-                                            <a class="btn btn-outline-warning btn-sm" 
-                                            href="{{ url('profile-user') }}" role="button">
-                                                Xem trang <i class="fas fa-chevron-right"></i>
-                                            </a>
+                                        <h4>{{ $item_user->username }} <br> <b>{{ $item_user->phone }}</b></h4>
+                                        <a class="btn btn-outline-warning btn-sm" href="{{ url('profile-user') }}" role="button">
+                                            Xem trang <i class="fas fa-chevron-right"></i>
+                                        </a>
                                         @endforeach
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -304,35 +304,35 @@
                                 <div class="card-body" style="padding:5px;">
 
                                     @foreach ($likePostNew as $item_likePostNew)
-                                        <a href="" style="text-decoration:none;color:#ff3333;">
-                                            <div class="media">
-                                                @php
-                                                    $image_decode = (array)json_decode($item_likePostNew->images,true)
-                                                @endphp
-                                                @foreach ($image_decode as $picture)
-                                                    @if ($loop->first)
-                                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="img-fluid mr-3 image-post-new" style="width: 100px;">
-                                                    @endif
-                                                @endforeach
-                                                <div class="media-body">
-                                                    <b style="font-size: 12px;">{{ $item_likePostNew->title }}</b>
-                                                    <p class="p-text">
-                                                        @php
-                                                            $province = DB::table('provinces')->where('id', $item_likePostNew->province_id)->get();
-                                                            $district = DB::table('districts')->where('id', $item_likePostNew->district_id)->get(); 
-                                                        @endphp
-                                                        @foreach ($province as $item_province)
-                                                            <i class="fas fa-map-marker-alt"></i><strong> {{ $item_province->province_name }}
+                                    <a href="" style="text-decoration:none;color:#ff3333;">
+                                        <div class="media">
+                                            @php
+                                            $image_decode = (array)json_decode($item_likePostNew->images,true)
+                                            @endphp
+                                            @foreach ($image_decode as $picture)
+                                            @if ($loop->first)
+                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="img-fluid mr-3 image-post-new" style="width: 100px;">
+                                            @endif
+                                            @endforeach
+                                            <div class="media-body">
+                                                <b style="font-size: 12px;">{{ $item_likePostNew->title }}</b>
+                                                <p class="p-text">
+                                                    @php
+                                                    $province = DB::table('provinces')->where('id', $item_likePostNew->province_id)->get();
+                                                    $district = DB::table('districts')->where('id', $item_likePostNew->district_id)->get();
+                                                    @endphp
+                                                    @foreach ($province as $item_province)
+                                                    <i class="fas fa-map-marker-alt"></i><strong> {{ $item_province->province_name }}
                                                         @endforeach
                                                         @foreach ($district as $item_district)
-                                                            - {{ $item_district->district_name }}</strong><br>
-                                                        @endforeach
-                                                                
-                                                        <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($item_likePostNew->created_at)) }}
-                                                    </p>
-                                                </div>
+                                                        - {{ $item_district->district_name }}</strong><br>
+                                                    @endforeach
+
+                                                    <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($item_likePostNew->created_at)) }}
+                                                </p>
                                             </div>
-                                        </a>
+                                        </div>
+                                    </a>
                                     @endforeach
 
                                 </div>

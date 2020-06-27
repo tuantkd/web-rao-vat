@@ -6,6 +6,13 @@
 <!-- ==================================================== -->
 @section('content')
 
+<style>
+    .list-group-flush {
+        display: block;
+    }
+
+</style>
+
 <div class="container" style="padding-top:15px;margin-top:70px;padding:5px;">
     <div class="row">
         <div class="col-sm-2"></div>
@@ -64,14 +71,12 @@
 
                             <div class="form-group">
                                 <label for="uname">Tôi tên:</label>
-                                <input type="text" class="form-control" id="uname" placeholder="Nhập tên" name="uname"
-                                    required>
+                                <input type="text" class="form-control" id="uname" placeholder="Nhập tên" name="uname" required>
                                 <div class="invalid-feedback">Chưa nhập tên</div>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Email hoặc số điện thoại:</label>
-                                <input type="text" class="form-control" id="phone"
-                                    placeholder="Nhập email hoặc số điện thoại" name="phone" required>
+                                <input type="text" class="form-control" id="phone" placeholder="Nhập email hoặc số điện thoại" name="phone" required>
                                 <div class="invalid-feedback">Chưa nhập email hoặc số điện thoại</div>
                             </div>
 
@@ -94,14 +99,14 @@
 
 <script>
     // Disable form submissions if there are invalid fields
-    (function () {
+    (function() {
         'use strict';
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             // Get the forms we want to add validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
@@ -111,6 +116,7 @@
             });
         }, false);
     })();
+
 </script>
 
 @endsection
