@@ -1,5 +1,5 @@
 @extends('layout.layout_home')
-@section('title', 'Xem danh mục')
+@section('title', 'Xem bài đăng')
 <!-- ==================================================== -->
 
 
@@ -17,69 +17,94 @@
                 <div class="card-body" style="padding:5px;">
                     <div class="row">
 
-                        <div class="col-2 col-sm-2 col-md-2 col-lg-2" style="padding-right:1px;">
-                            <select class="selectpicker form-control" data-live-search="true">
-                                <option data-tokens="Toàn quốc">Toàn quốc</option>
-                                <option value="">Hồ Chí Minh</option>
-                                <option value="">Hà Nội</option>
+                        <div class="col-12 col-sm-12 col-md-2 col-lg-2" style="padding-right:1px;">
+                            <select id="state" class="form-control selectpicker" data-live-search="true">
+                                <option>Chọn Tỉnh/TP</option>
+                                @foreach ($province as $item_province)
+                                <option value="{{ $item_province->province_name }}">{{ $item_province->province_name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:1px;">
-                            <select class="selectpicker form-control" data-live-search="true">
-                                <option data-tokens="Toàn quốc">Toàn quốc</option>
-                                <option value="">Hồ Chí Minh</option>
-                                <option value="">Hà Nội</option>
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 district" style="padding-left:1px;">
+                            <select id="city" class="form-control">
+                                @foreach ($province as $item_province)
+                                @php
+                                $district_id = DB::table('districts')->where('province_id',
+                                $item_province->id)->get();
+                                @endphp
+
+                                @foreach ($district_id as $item_district)
+                                <option value="{{ $item_district->district_name }}"> {{ $item_province->province_name }}-{{ $item_district->district_name }}
+                                </option>
+                                @endforeach
+
+                                @endforeach
                             </select>
                         </div>
 
-                        <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-left:1px;padding-right:1px;">
-                            <select class="selectpicker form-control" data-live-search="true" data-show-content="true">
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 category" style="padding-left:1px;padding-right:1px;">
+                            <select class="selectpicker form-control" data-live-search="true" data-show-content="true" style="z-index:5;">
                                 <option data-content="<i class='far fa-list-alt'></i> Tất cả danh mục">
                                     Tất cả danh mục
                                 </option>
-                                <option data-content="<i class='fas fa-home'></i> Bất động sản">
-                                    Bất động sản
-                                </option>
-                                <option data-content="<i class='fas fa-car'></i> Xe cộ">
-                                    Xe cộ
-                                </option>
-                                <option data-content="<i class='fas fa-mobile-alt'></i> Đồ điện tử">
-                                    Đồ điện tử
-                                </option>
-                                <option data-content="<i class='fas fa-business-time'></i> Việc làm">
-                                    Việc làm
-                                </option>
-                                <option data-content="<i class='fas fa-dog'></i> Thú cưng">
-                                    Thú cưng
-                                </option>
-                                <option data-content="<i class='fas fa-hamburger'></i> Đồ ăn, thực phẩm và các loại khác">
-                                    Đồ ăn, thực phẩm và các loại khác
-                                </option>
-                                <option data-content="<i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt">
-                                    Tủ lạnh, máy lạnh, máy giặt
-                                </option>
-                                <option data-content="<i class='fas fa-baby'></i> Mẹ và bé">
-                                    Mẹ và bé
-                                </option>
-                                <option data-content="<i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh">
-                                    Đồ gia dụng, nội thất, cây cảnh
-                                </option>
-                                <option data-content="<i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân">
-                                    Thời trang, đồ dùng cá nhân
-                                </option>
 
-                                <option data-content="<i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích">
-                                    Giải trí, thể thao, sở thích
-                                </option>
-
-                                <option data-content="<i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp">
-                                    Đồ văn phòng, công nông nghiệp
-                                </option>
-
-                                <option data-content="<i class='fas fa-phone-volume'></i> Dịch vụ, du lịch">
-                                    Dịch vụ, du lịch
-                                </option>
+                                @foreach ($allCategory as $item_category)
+                                @if($item_category->id == 1)
+                                    <option data-content="<i class='fas fa-home'></i> Bất động sản" value="{{ $item_category->id }}">
+                                        Bất động sản
+                                    </option>
+                                @elseif($item_category->id == 2)
+                                    <option data-content="<i class='fas fa-car'></i> Xe cộ">
+                                        Xe cộ
+                                    </option>
+                                @elseif($item_category->id == 3)
+                                    <option data-content="<i class='fas fa-mobile-alt'></i> Đồ điện tử">
+                                        Đồ điện tử
+                                    </option>
+                                @elseif($item_category->id == 4)
+                                    <option data-content="<i class='fas fa-business-time'></i> Việc làm">
+                                        Việc làm, tuyển sinh
+                                    </option>
+                                @elseif($item_category->id == 5)
+                                    <option data-content="<i class='fas fa-dog'></i> Thú cưng">
+                                        Thú cưng
+                                    </option>
+                                @elseif($item_category->id == 6)
+                                    <option data-content="<i class='fas fa-hamburger'>
+                                                </i> Đồ ăn, thực phẩm và các loại khác">
+                                        Đồ ăn, thực phẩm và các loại khác
+                                    </option>
+                                @elseif($item_category->id == 7)
+                                    <option data-content="<i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt">
+                                        Tủ lạnh, máy lạnh, máy giặt
+                                    </option>
+                                @elseif($item_category->id == 8)
+                                    <option data-content="<i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh">
+                                        Đồ gia dụng, nội thất, cây cảnh
+                                    </option>
+                                @elseif($item_category->id == 9)
+                                    <option data-content="<i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân">
+                                        Thời trang, đồ dùng cá nhân
+                                    </option>
+                                @elseif($item_category->id == 10)
+                                    <option data-content="<i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích">
+                                        Giải trí, thể thao, sở thích
+                                    </option>
+                                @elseif($item_category->id == 11)
+                                    <option data-content="<i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp">
+                                        Đồ văn phòng, công nông nghiệp
+                                    </option>
+                                @elseif($item_category->id == 12)
+                                    <option data-content="<i class='fas fa-phone-volume'></i> Dịch vụ, du lịch">
+                                        Dịch vụ, du lịch
+                                    </option>
+                                @else
+                                    <option data-content="<i class='fas fa-baby'></i> Mẹ và bé">
+                                        Mẹ và bé
+                                    </option>
+                                @endif
+                                @endforeach
                             </select>
                         </div>
 
@@ -103,17 +128,28 @@
             <!-- breadcrumb -->
             <ul class="breadcrumb breadcrumb-mobile" style="background-color:white;">
                 <li class="breadcrumb-item">
-                    <a href="#" style="text-decoration:none;color:red;">Xe cộ</a>
+                    @foreach ($category as $item_category)
+                        <a href="{{ url('danh-muc/'.$item_category->category_name.'/'.$item_category->id) }}" style="text-decoration:none;color:red;">{{ $item_category->category_name }}</a>
+                    @endforeach
                 </li>
-                <li class="breadcrumb-item active">Ô tô</li>
+                @foreach ($category_first as $item_category_first)
+                    <li class="breadcrumb-item active">{{ $item_category_first->category_child_name }}</li>
+                @endforeach
             </ul>
             <!-- breadcrumb -->
 
             <!-- new-detail -->
             <div class="card" style="margin-bottom:10px;">
                 <div class="card-body" style="padding:5px;">
+                    <style>
+                        .carousel-inner img{
+                            height: 400px;
+                            width: 100%;
+                        }
+                    </style>
                     <div class="row">
                         <!-- col-8 -->
+                        @foreach ($postNew as $item_postNew)
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8 text-right">
                             <!-- carousel -->
                             <div id="demo" class="carousel slide" data-ride="carousel" style="border-radius:5px;">
@@ -126,18 +162,25 @@
                                 </ul>
                                 <!-- The slideshow -->
                                 <div class="carousel-inner" style="border-radius:5px;">
-                                    <div class="carousel-item active">
-                                        ​<img src="public/images/car-1.jpg" class="img-fluid">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="public/images/car-2.jpg" class="img-fluid">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="public/images/car-3.jpg" class="img-fluid">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="public/images/car-4.jpg" class="img-fluid">
-                                    </div>
+                                    @php
+                                        $image_decode = (array)json_decode($item_postNew->images,true)
+                                    @endphp
+                                    @foreach ($image_decode as $key => $picture)
+                                        @if ($key == 0)
+                                            <div class="carousel-item active">
+                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="First slide">
+                                            </div>
+                                        @elseif($key == 1)
+                                            <div class="carousel-item">
+                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Second slide">
+                                            </div>
+                                        @elseif($key == 2)
+                                            <div class="carousel-item">
+                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Third slide">
+                                            </div>
+                                        @endif
+                                    
+                                    @endforeach
                                 </div>
                                 <!-- Left and right controls -->
                                 <a class="carousel-control-prev" href="#demo" data-slide="prev" style="color:red;">
@@ -151,13 +194,13 @@
 
                             <div class="text-left" style="margin:10px;">
                                 <h4 style="font-weight:bold;">
-                                    Volkswagen Polo Hb TẶNG 50% PHÍ TRƯỚC BẠ, TRẢ GÓP 0% 1 NĂM
+                                    {{ $item_postNew->title }}
                                 </h4>
 
                                 <div class="clearfix">
                                     <span class="float-left">
                                         <h5>
-                                            Giá: <b style="color:orange;">695,000,000 đ</b>
+                                            Giá: <b style="color:orange;">{{ number_format($item_postNew->price) }} {{ $item_postNew->currency }}</b>
                                         </h5>
                                     </span>
                                     <span class="float-right">
@@ -167,26 +210,39 @@
                                     </span>
                                 </div>
 
-
                                 <p>
                                     <i class="far fa-clock" style="color:orange;"></i>
-                                    <b>2/6/2020</b>
-                                    &emsp;
-                                    <i class="fas fa-eye" style="color:orange;"></i>
-                                    <b>123</b>
+                                    <b>{{ date("d/m/Y", strtotime($item_postNew->created_at)) }}</b>
                                     &emsp;
                                     <i class="fas fa-map-marker-alt" style="color:orange;"></i>
-                                    <b>Hồ Chí Minh - Quận 12</b>
+                                    <b>
+                                        @php
+                                        $province = DB::table('provinces')->where('id', $item_postNew->province_id)->get();
+                                        $district = DB::table('districts')->where('id', $item_postNew->district_id)->get(); 
+                                        @endphp
+                                        @foreach ($province as $item_province)
+                                            <span><strong>{{ $item_province->province_name }}
+                                        @endforeach
+                                        @foreach ($district as $item_district)
+                                            - {{ $item_district->district_name }}</strong></span>
+                                        @endforeach
+                                    </b>
                                 </p>
 
                                 <div class="media p-3 user-icon">
-                                    <img src="{{ url('public/logo/icon-user.png') }}" class="mr-3 mt-3 rounded-circle" style="max-width:100%;height:80px;">
+                                    <img src="{{ url('public/logo/icon-user.png') }}" class="mr-3 mt-3 rounded-circle" style="max-width:100%;height:70px;">
                                     <div class="media-body">
-                                        <h4>Thảo Volkswagen <br> <b>0936655612</b></h4>
-                                        <a class="btn btn-outline-warning btn-sm" 
-                                        href="{{ url('profile-user') }}" role="button">
-                                            Xem trang <i class="fas fa-chevron-right"></i>
-                                        </a>
+                                        @php
+                                            $user = DB::table('users')->where('id', $item_postNew->user_id)->get();
+                                        @endphp
+                                        @foreach ($user as $item_user)
+                                            <h4>{{ $item_user->username }} <br> <b>{{ $item_user->phone }}</b></h4>
+                                            <a class="btn btn-outline-warning btn-sm" 
+                                            href="{{ url('profile-user') }}" role="button">
+                                                Xem trang <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        @endforeach
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -194,52 +250,10 @@
                             <hr style="margin:10px;">
 
                             <p style="text-align:justify-all;text-align:left;margin:10px;">
-                                Polo Hatchback – đơn giản nhưng không kém phần độc đáo. <br>
-                                ???? Bản thân Polo, một chiếc hatchback vốn rất độc đáo và luôn thu hút người bởi thiết
-                                kế 5
-                                cửa
-                                nhỏ gọn của mình. <br>
-                                - Tuy nhiên, Polo còn có nhiều chi tiết độc đáo, thú vị và cũng không kém phần cao cấp
-                                khác
-                                bên cạnh vẻ đơn giản, thực dụng của mình như: <br>
-                                - Camera lùi thiết kế ẩn sau logo ở phần đuôi xe. <br>
-                                - Ghế nội thất bọc da cao cấp. <br>
-                                - Ghế ngồi thiết kế khoa học, ôm sát cơ thể người lái.<br>
-                                - Polo không chỉ là một chiếc xe đơn giản mà còn được trang bị rất nhiều tiện ích, tính
-                                năng, chi
-                                tiết
-                                độc đáo, giúp hỗ trợ tối đa cho người lái.<br>
-                                Một chiếc xe nhỏ gọn rất đáng để sở hữu!
+                                {!! $item_postNew->content !!}
                             </p>
 
-                            <div class="row list-info" style="margin:10px;">
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left" style="margin-bottom:10px;">
-                                    <i class="far fa-flag"></i> Hãng: LandRover
-                                </div>
-
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left" style="margin-bottom:10px;">
-                                    <i class="fas fa-tag"></i> Dòng xe: Range Rover Evoque
-                                </div>
-
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left" style="margin-bottom:10px;">
-                                    <i class="far fa-calendar-alt"></i> Năm đăng ký: 2003
-                                </div>
-
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left" style="margin-bottom:10px;">
-                                    <i class="fas fa-tachometer-alt"></i> Số Km đã đi: 123456
-                                </div>
-
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left" style="margin-bottom:10px;">
-                                    <i class="far fa-question-circle"></i> Tình trạng: Đã sử dụng
-                                </div>
-
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-left" style="margin-bottom:10px;">
-                                    <i class="fas fa-crosshairs"></i> Loại xe: Xe số
-                                </div>
-                            </div>
-
                             <hr style="margin:10px;">
-
 
                             <!-- =================== -->
                             <div class="social">
@@ -248,13 +262,13 @@
                                 </h5>
                                 <div class="text-left" style="margin:10px;">
                                     ​<a href="">
-                                        <img src="public/icons/facebook.png" class="img-social">
+                                        <img src="{{ url('public/icons/facebook.png') }}" class="img-social">
                                     </a>
                                     <a href="">
-                                        ​<img src="public/icons/Messenger.png" class="img-social">
+                                        ​<img src="{{ url('public/icons/Messenger.png') }}" class="img-social">
                                     </a>
                                     <a href="">
-                                        ​ <img src="public/icons/zalo.png" class="img-social">
+                                        ​ <img src="{{ url('public/icons/zalo.png') }}" class="img-social">
                                     </a>
                                 </div>
                             </div>
@@ -265,7 +279,7 @@
                             <div class="media p-2 user-icon">
                                 <img src="{{ url('public/logo/security.png') }}" class="mr-2 mt-2 rounded-circle" style="max-width:100%;height:60px;">
                                 <div class="media-body text-left">
-                                    <h5>Mã bản tin <b>58282327</b> này đã được duyệt đăng.</h5>
+                                    <h5>Mã bản tin <b>{{ $random }} </b> này đã được duyệt đăng.</h5>
                                     <p>
                                         Nếu bạn gặp vấn đề, vui lòng báo vi phạm. &emsp;
                                         <a class="btn btn-outline-danger btn-sm" href="{{ url('report-new') }}" role="button">Báo vi phạm</a>
@@ -275,6 +289,7 @@
                             <!-- =================== -->
 
                         </div>
+                        @endforeach
                         <!-- col-8 -->
 
                         <!-- col-4 -->
@@ -288,44 +303,37 @@
                                 </div>
                                 <div class="card-body" style="padding:5px;">
 
-                                    <a href="" style="text-decoration:none;color:#ff3333;">
-                                        <div class="media">
-                                            <img src="{{ url('public/images/car-1.jpg') }}" class="align-self-start mr-3" style="width:90px;height:60px;border-radius:5px;">
-                                            <div class="media-body">
-                                                <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                                <p class="p-text">
-                                                    <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                                                    <i class="far fa-clock"></i> 30p trước
-                                                </p>
+                                    @foreach ($likePostNew as $item_likePostNew)
+                                        <a href="" style="text-decoration:none;color:#ff3333;">
+                                            <div class="media">
+                                                @php
+                                                    $image_decode = (array)json_decode($item_likePostNew->images,true)
+                                                @endphp
+                                                @foreach ($image_decode as $picture)
+                                                    @if ($loop->first)
+                                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="img-fluid mr-3 image-post-new" style="width: 100px;">
+                                                    @endif
+                                                @endforeach
+                                                <div class="media-body">
+                                                    <b style="font-size: 12px;">{{ $item_likePostNew->title }}</b>
+                                                    <p class="p-text">
+                                                        @php
+                                                            $province = DB::table('provinces')->where('id', $item_likePostNew->province_id)->get();
+                                                            $district = DB::table('districts')->where('id', $item_likePostNew->district_id)->get(); 
+                                                        @endphp
+                                                        @foreach ($province as $item_province)
+                                                            <i class="fas fa-map-marker-alt"></i><strong> {{ $item_province->province_name }}
+                                                        @endforeach
+                                                        @foreach ($district as $item_district)
+                                                            - {{ $item_district->district_name }}</strong><br>
+                                                        @endforeach
+                                                                
+                                                        <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($item_likePostNew->created_at)) }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="" style="text-decoration:none;color:#ff3333;">
-                                        <div class="media">
-                                            <img src="{{ url('public/images/car-1.jpg') }}" class="align-self-start mr-3" style="width:90px;height:60px;border-radius:5px;">
-                                            <div class="media-body">
-                                                <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                                <p class="p-text">
-                                                    <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                                                    <i class="far fa-clock"></i> 30p trước
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a href="" style="text-decoration:none;color:#ff3333;">
-                                        <div class="media">
-                                            <img src="{{ url('public/images/car-2.jpg') }}" class="align-self-start mr-3" style="width:90px;height:60px;border-radius:5px;">
-                                            <div class="media-body">
-                                                <b>Xe Kia Morning 2020 - thời trang -hiện đại</b>
-                                                <p class="p-text">
-                                                    <i class="fas fa-map-marker-alt"></i> Hồ Chí Minh / Quận 12 <br>
-                                                    <i class="far fa-clock"></i> 30p trước
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    @endforeach
 
                                 </div>
                             </div>
@@ -341,5 +349,30 @@
     </div>
 </div>
 
+@endsection
+
+@section('link_js')
+<script>
+    $(function() {
+        var showCity = function(selectedState) {
+            $('#city option').hide();
+            $('#city').find('option').filter(function() {
+                var city = $(this).text();
+                return city.indexOf(selectedState) != -1;
+            }).show();
+            //set default value
+            var defaultCity = $('#city option:visible:first').text();
+            $('#city').val(defaultCity);
+        };
+
+        //set default state
+        var state = $('#state').val();
+        showCity(state);
+        $('#state').change(function() {
+            showCity($(this).val());
+        });
+    });
+
+</script>
 @endsection
 <!-- ==================================================== -->

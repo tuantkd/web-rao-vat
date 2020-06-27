@@ -15,8 +15,8 @@ Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
 // xem danh mục cấp 1
 Route::get('danh-muc-cap-1/{name}/{id_category_first}', 'HomeController@view_category_first')->name('view_category_first');
 
-//Xem danh mục chi tiết
-Route::get('view-category-detail/{name}', 'HomeController@view_category_detail');
+//Xem bài đăng chi tiết
+Route::get('view-category-detail/{name}/{id}', 'HomeController@view_category_detail');
 //----------------------------------------------------------------------------
 
 

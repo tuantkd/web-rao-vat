@@ -92,10 +92,14 @@
                                 <option data-content="<i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp">
                                     Đồ văn phòng, công nông nghiệp
                                 </option>
-                                @else
+                                @elseif($item_category->id == 12)
                                 <option data-content="<i class='fas fa-phone-volume'></i> Dịch vụ, du lịch">
                                     Dịch vụ, du lịch
                                 </option>
+                                @else
+                                    <option data-content="<i class='fas fa-baby'></i> Mẹ và bé">
+                                        Mẹ và bé
+                                    </option>
                                 @endif
                                 @endforeach
                             </select>
@@ -163,7 +167,11 @@
                             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                 <a href="{{ url('danh-muc-cap-1/'.Str::slug($item_category_first->category_child_name).'/'.$item_category_first->id) }}" style="text-decoration:none;">
                                     <b style="color:red;">{{ $item_category_first->category_child_name}}</b>
-                                </a> 10,123
+                                </a> 
+                                @php
+                                    $count = DB::table('post_news')->where('category_first_id', $item_category_first->id)->count();
+                                @endphp
+                                {{ $count }}
                             </div>
                         @endforeach
 
@@ -187,7 +195,7 @@
 
                         @foreach ($postNew as $itemPostNew)
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                <a href="{{ url('view-category-detail/'.Str::slug('Xe Kia Morning 2020 thời trang hiện đại')) }}" style="text-decoration:none;color:#ff3333;">
+                                <a href="{{ url('view-category-detail/'.Str::slug($itemPostNew->title), $itemPostNew->id) }}" style="text-decoration:none;color:#ff3333;">
                                     <div class="media">
                                         @php
                                             $image_decode = (array)json_decode($itemPostNew->images,true)
