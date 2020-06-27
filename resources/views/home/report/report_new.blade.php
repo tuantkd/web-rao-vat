@@ -11,51 +11,56 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <div class="container" style="padding:1px;">
-
-                <form action="" method="POST" class="needs-validation" novalidate>
+                @foreach ($postNew as $item_postNew)
+                <form action="{{ url('report-new/'.$item_postNew->id.'/'.$random_id) }}" method="POST" class="needs-validation" novalidate>
+                    @csrf
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Tôi muốn báo vi phạm</h4>
                             <p class="card-text">
-                                Mã tin: <b>37207388</b> - Công ty ô Tô Phi Dung chuyên cho thuê ô tô đời mới tự lái, có
-                                tài Q 6
+                                Mã tin: <b>{{ $random_id }}</b> - {{ $item_postNew->title }}
                             </p>
+
+                            <style>
+                                .list-group {
+                                    display: block;
+                                }
+                            </style>
 
                             <ul class="list-group list-group-flush">
 
-                                <li class="list-group-item">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="" required>
+                                <li class="list-group-item form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" required checked value="Tin sai nội dung">
+                                    <label class="form-check-label" for="radio1">
                                         Tin sai nội dung
                                     </label>
                                 </li>
 
-                                <li class="list-group-item">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="" required>
+                                <li class="list-group-item form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" required value="Tin lặp lại nội dung">
+                                    <label class="form-check-label" for="radio2">
                                         Tin lặp lại nội dung
                                     </label>
                                 </li>
 
-                                <li class="list-group-item">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="" required>
+                                <li class="list-group-item form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" required value="Tin không liên hệ được người đăng">
+                                    <label class="form-check-label" for="radio3">
                                         Tin không liên hệ được người đăng
                                     </label>
                                 </li>
 
-                                <li class="list-group-item">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="" required>
+                                <li class="list-group-item form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio4" required value="Tin có dấu hiệu lừa đảo">
+                                    <label class="form-check-label" for="radio4">
                                         Tin có dấu hiệu lừa đảo
                                     </label>
                                 </li>
 
-                                <li class="list-group-item">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="" required>
+                                <li class="list-group-item form-check"> 
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio5" required value="Tin đã giao dịch xong">
+                                    <label class="form-check-label" for="radio5">
                                         Tin đã giao dịch xong
-                                        <div class="invalid-feedback">Chưa chọn loại tin vi phạm</div>
                                     </label>
                                 </li>
                             </ul>
@@ -85,12 +90,25 @@
                         </div>
                     </div>
                 </form>
+                @endforeach
 
             </div>
         </div>
         <div class="col-sm-2"></div>
     </div>
 </div>
+
+@if (Session::has('reportSuccess'))    
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Đã báo cáo bài đăng thành công',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+@endif
 
 <script>
     // Disable form submissions if there are invalid fields

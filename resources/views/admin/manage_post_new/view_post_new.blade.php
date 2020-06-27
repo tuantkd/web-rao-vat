@@ -90,43 +90,38 @@
                 <div class="row">
                     <div class="col-12 col-md-8 mt-3">
 
-                        <div id="carouselId" class="carousel slide" data-ride="carousel">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselId" data-slide-to="1"></li>
-                                <li data-target="#carouselId" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner" role="listbox">
                                 @php
                                     $image_decode = (array)json_decode($value->images,true)
                                 @endphp
-                                @foreach ($image_decode as $key => $picture)
-                                    @if ($key == 0)
-                                        <div class="carousel-item active">
-                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="First slide">
-                                        </div>
-                                    @elseif($key == 1)
-                                        <div class="carousel-item">
-                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Second slide">
-                                        </div>
-                                    @elseif($key == 2)
-                                        <div class="carousel-item">
-                                            <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Third slide">
-                                        </div>
-                                    @endif
-                                
-                                @endforeach
 
+                                @foreach( $image_decode as $photo )
+                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"
+                                    class="{{ $loop->first ? 'active' : '' }}"></li>
+                                @endforeach
+                            </ol>
+
+                            <div class="carousel-inner" role="listbox">
+                                @foreach( $image_decode as $photo )
+                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                    <img class="d-block img-fluid" src="{{ url('public/upload_images_post_new/'.$photo) }}"
+                                        alt="">
+                                </div>
+                                @endforeach
                             </div>
-                            <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
+
                     </div>
 
                     <div class="col-12 col-md-4 user_post mt-0">

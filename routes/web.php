@@ -30,9 +30,15 @@ Route::get('view-news-detail/{name}/{id}', 'HomeController@view_news_detail')->n
 
 //----------------------------------------------------------------------------
 //Báo cáo vi phạm bản tin
-Route::get('report-new', 'HomeController@report_new');
+Route::get('report-new/{id_post_new}/{random_id}', 'HomeController@report_new');
+Route::post('report-new/{id_post_new}/{random_id}', 'HomeController@ReportPostNew');
 //----------------------------------------------------------------------------
 
+
+//----------------------------------------------------------------------------
+// thay đổi trạng thái lưu bài đăng
+Route::get('save-post-new/{id_post_new}/{id_status_save}', 'HomeController@savePostNew');
+//----------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------
 //Xem trang cá nhân người dùng
