@@ -38,6 +38,70 @@
         font-size: 15px;
     }
 
+    /* ========================================= */
+    .btn_upload {
+        cursor: pointer;
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+        color: #fff;
+        background-color: #2a72d4;
+        border: 1px solid #166b8a;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .btn_upload:hover,
+    .btn_upload:focus {
+        background-color: #7ca9e6;
+    }
+
+    .yes {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 10px !important;
+    }
+
+    .btn_upload input {
+        cursor: pointer;
+        height: 100%;
+        position: absolute;
+        filter: alpha(opacity=1);
+        -moz-opacity: 0;
+        opacity: 0;
+    }
+
+    .preview1 {
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+
+    .it {
+        height: 100px;
+        margin-left: 10px;
+    }
+
+    .btn-rmv1 {
+        display: none;
+    }
+
+    .rmv {
+        cursor: pointer;
+        color: #fff;
+        border-radius: 30px;
+        border: 1px solid #fff;
+        display: inline-block;
+        background: rgba(255, 0, 0, 1);
+        margin: -6px -10px;
+        padding: 0px 2px;
+    }
+
+    .rmv:hover {
+        background: rgba(255, 0, 0, 0.5);
+        border: 0.5px solid gray;
+    }
+
 </style>
 
 <div class="card">
@@ -50,8 +114,11 @@
     </div>
 
     <div class="card-body" style="padding:10px;">
+        @if(Auth::check())
+        <form action="{{ url('update-infor-account/'.Auth::user()->id) }}" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
 
-        <form action="/action_page.php" class="needs-validation" novalidate>
+            @csrf
+            @method('PUT')
             <div class="form-group">
                 <div class="row">
                     <div class="col-5 col-sm-5 col-md-4 col-lg-4 text-left">
@@ -73,8 +140,7 @@
                         </span> Tên liên hệ:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8 text-left">
-                        <input type="text" class="form-control" value="Tuan TKD" name="uname" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="text" class="form-control" value="{{ Auth::user()->username }}" name="txt_username">
                     </div>
                 </div>
             </div>
@@ -87,8 +153,7 @@
                         </span> Email:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8">
-                        <input type="text" class="form-control" value="nguyenvantuan9a7@gmail.com" name="uname" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="text" class="form-control" value="{{ Auth::user()->email }}" name="txt_email" disabled>
                     </div>
                 </div>
             </div>
@@ -101,6 +166,7 @@
                         </span> Giới tính:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8">
+                        @if(Auth::user()->sex == NULL )
                         <div class="form-check-inline">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="txt_sex" value="Nam" id="sex">Nam
@@ -111,6 +177,30 @@
                                 <input type="radio" class="form-check-input" name="txt_sex" value="Nữ" id="sex">Nữ
                             </label>
                         </div>
+                        @elseif(Auth::user()->sex == 'Nữ')
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" value="Nam" id="sex" name="txt_sex">Nam
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" checked value="Nữ" id="sex" name="txt_sex">Nữ
+
+                            </label>
+                        </div>
+                        @elseif(Auth::user()->sex == 'Nam')
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" checked value="Nam" id="sex" name="txt_sex">Nam
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" value="Nữ" id="sex" name="txt_sex">Nữ
+                            </label>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -123,8 +213,7 @@
                         </span> Ngày sinh:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8">
-                        <input type="date" class="form-control" value="nguyenvantuan9a7@gmail.com" name="uname" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="date" class="form-control" value="{{ Auth::user()->birthday }}" name="txt_birthday">
                     </div>
                 </div>
             </div>
@@ -137,8 +226,7 @@
                         </span> Địa chỉ:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8">
-                        <input type="text" class="form-control" value="" name="uname" required placeholder="Địa chỉ">
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="text" class="form-control" value="{{ Auth::user()->address }}" name="txt_address">
                     </div>
                 </div>
             </div>
@@ -151,8 +239,29 @@
                         </span> Điện thoại:
                     </div>
                     <div class="col-7 col-sm-7 col-md-8 col-lg-8">
-                        <input type="text" class="form-control" value="" name="uname" required placeholder="Số điện thoại">
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="text" class="form-control" value="{{ Auth::user()->phone }}" name="txt_phone" onblur="Test_numberphone();" id="phone">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-5 col-sm-5 col-md-4 col-lg-4">
+                        <span class="badge badge-pill badge-light">
+                            <i class="fa fa-file-image-o"></i>
+                        </span> Ảnh đại diện:
+                    </div>
+                    <div class="col-7 col-sm-7 col-md-8 col-lg-8">
+
+                        <div class="yes">
+                            <span class="btn_upload">
+                                <input type="file" id="imag" class="input-img" name="txt_avatar" />
+                                <i class="fa fa-camera"></i> Thay đổi ảnh
+                            </span>
+                            <img id="ImgPreview" src="" class="preview1" />
+                            <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -161,9 +270,24 @@
                 <button type="submit" class="btn btn-danger btn-sm">Cập nhật</button>
             </div>
         </form>
-
+        @endif
     </div>
 </div>
+{{-- =====================================================================  --}}
+
+@if (Session::has('update_infor'))
+<script>
+    Swal.fire({
+        position: 'center'
+        , icon: 'success'
+        , title: 'Đã cập nhật!'
+        , showConfirmButton: false
+        , timer: 2000
+    });
+
+</script>
+@endif
+
 
 <script>
     // Disable form submissions if there are invalid fields
@@ -184,6 +308,44 @@
             });
         }, false);
     })();
+
+    function Test_numberphone() {
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val();
+        if (mobile !== '') {
+            if (vnf_regex.test(mobile) == false) {
+                confirm('Số điện thoại không đúng định dạng. Vui lòng nhập lại');
+                $('#phone').val('');
+                $('#phone').focus();
+            }
+        }
+    }
+
+
+    function readURL(input, imgControlName) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $(imgControlName).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#imag").change(function() {
+        // add your logic to decide which image control you'll use
+        var imgControlName = "#ImgPreview";
+        readURL(this, imgControlName);
+        $('.preview1').addClass('it');
+        $('.btn-rmv1').addClass('rmv');
+    });
+    $("#removeImage1").click(function(e) {
+        e.preventDefault();
+        $("#imag").val("");
+        $("#ImgPreview").attr("src", "");
+        $('.preview1').removeClass('it');
+        $('.btn-rmv1').removeClass('rmv');
+    });
 
 </script>
 

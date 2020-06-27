@@ -26,15 +26,20 @@
                                 $newdate1 = strtotime ($all_new->number_date_expired.'day', strtotime ( $date1 ));
                                 $newdate1 = date ( 'd/m/Y' , $newdate1 );
                                 echo $newdate1;
+
+                                //Lấy ngày hiện tại
+                                $date_current = date("d/m/Y");
+                                if ($newdate1 < $date_current){
+                                    echo '&ensp;<span class="badge badge-pill badge-danger">Hết hạn</span>';
+                                }else{}
                             ?>
                         </b>
-                        <span class="badge badge-pill badge-danger">Hết hạn</span>
                     </p>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3" id="col-mobile-3">
                     <div class="clearfix">
                         <span class="float-right">
-                            <a class="btn btn-default" href="#" role="button" title="Nâng cấp tin">
+                            <a class="btn btn-default" href="{{ url('upgrade-news/'.$all_new->id) }}" role="button" title="Nâng cấp tin">
                                 <i class="fas fa-crown" style="color:orange;"></i>
                             </a>
 
@@ -77,6 +82,7 @@
     });
 
 </script>
+@php(Session::forget('session_success'))
 @endif
 
 
@@ -91,6 +97,7 @@
     });
 
 </script>
+@php(Session::forget('session_update'))
 @endif
 
 
@@ -105,6 +112,7 @@
     });
 
 </script>
+@php(Session::forget('delete_new'))
 @endif
 {{-- Thông báo thành công  --}}
 

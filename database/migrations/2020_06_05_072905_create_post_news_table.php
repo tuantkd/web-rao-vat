@@ -42,6 +42,7 @@ class CreatePostNewsTable extends Migration
             $table->integer('hidden_new')->nullable();
             $table->integer('status')->nullable();
             $table->integer('save_post')->nullable();
+            $table->integer('user_saved_id')->nullable();
             $table->timestamps();
         });
     }

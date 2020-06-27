@@ -22,6 +22,7 @@
 
     <!-- fontawesome 4 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- fonts.googleapis -->
     <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -29,23 +30,21 @@
 
     <!-- select -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
-    <!-- select -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AXcExZnHLRwtPKY5dbGu-jZPm8gJpA0buQ77OuHWFFs-QxmPazecch-_MjN3hpN26B2rU8b2udWi7-VH&currency=USD" data-sdk-integration-source="button-factory"></script>
+
+
 
     <link rel="stylesheet" href="{{ url('public/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('public/css/style_post_new.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-
-
 
     <style type="text/css" media="screen">
         .register-login .nav-item .link-image {
@@ -102,12 +101,18 @@
                 @if(Auth::check())
                 <li class="nav-item" style="margin-right:5px;">
                     <a href="{{ url('page-all-news') }}" class="link-image">
-                        @if(Auth::user()->avatar != NULL)
+
+                        @if(Auth::user()->facebook_id != NULL)
                         <img src="{{ Auth::user()->avatar }}"> ​
+                        @elseif(Auth::user()->google_id != NULL)
+                        <img src="{{ Auth::user()->avatar }}">
+                        @elseif(Auth::user()->avatar != NULL)
+                        <img src="{{ url('public/upload_images_avatar/'.Auth::user()->avatar) }}">
                         @else
                         <img src="{{ url('public/logo/user/user-icon-edit.png') }}">
                         @endif
                         <span style="color:white;">{{ Auth::user()->username }}</span>
+
                     </a>
                 </li>
                 <li class="nav-item">

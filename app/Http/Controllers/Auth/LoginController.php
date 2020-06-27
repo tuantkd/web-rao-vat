@@ -128,5 +128,13 @@ class LoginController extends Controller
             return redirect('page-login')->with('message', 'Xảy ra lỗi. Vui lòng đăng nhập tài khoản khác');
         }
     }
+
+
+    //Đăng xuất
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('page-login');
+    }
     // =====================================================
 }

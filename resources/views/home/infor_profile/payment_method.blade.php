@@ -100,35 +100,141 @@
 
                         <div class="row">
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/mb-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/mb-new.png') }}" class="img-fluid" id="mb-bank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/vietcombank-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/vietcombank-new.png') }}" class="img-fluid" id="vietcombank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/scombank-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/scombank-new.png') }}" class="img-fluid" id="sacombank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/agribank-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/agribank-new.png') }}" class="img-fluid" id="agribank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/HDbank-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/HDbank-new.png') }}" class="img-fluid" id="hd-bank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/techcombank-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/techcombank-new.png') }}" class="img-fluid" id="techcombank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/acb-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/acb-new.png') }}" class="img-fluid" id="acb-bank">
                             </div>
 
                             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                <img src="{{ url('public/logo/logo-bank/bidv-new.png') }}" class="img-fluid" alt="Responsive image">
+                                <img src="{{ url('public/logo/logo-bank/bidv-new.png') }}" class="img-fluid" id="bidv-bank">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+
+                        <div class="card text-left" id="bidv-bank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>Đầu tư và Phát triển Việt Nam - BIDV</b> <br>
+                                    Chi nhánh: <b>Nam Sài Gòn</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>13210000119651</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="agribank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>Nông nghiệp và PT Nông thôn - Agribank</b> <br>
+                                    Chi nhánh: <b>Phú Mỹ Hưng</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>6240201010877</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="sacombank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>Sài Gòn Thương tín - Sacombank</b> <br>
+                                    Chi nhánh: <b>Phú Mỹ Hưng</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>060086446858</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="acb-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>TMCP Á Châu - ACB</b> <br>
+                                    Chi nhánh: <b>Nam Sài Gòn</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>182328679</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="vietcombank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>Ngoại thương Việt Nam - Vietcombank</b> <br>
+                                    Chi nhánh: <b>Nam Sài Gòn</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>0181003429113</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="techcombank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>TMCP Kỹ thương Việt Nam - Techcombank</b> <br>
+                                    Chi nhánh: <b>Phú Mỹ Hưng</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>19020594876026</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="mb-bank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>TMCP Quân Ðội - MB</b> <br>
+                                    Chi nhánh: <b>Đông Sài Gòn</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>2811100166009</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card text-left" id="hd-bank-infor">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Ngân hàng: <b>TMCP Phát triển Nhà TP.HCM - HD Bank</b> <br>
+                                    Chi nhánh: <b>Sài Gòn</b> <br>
+                                    Chủ tài khoản: <b>Công ty cổ phần Mua Bán</b> <br>
+                                    Số tài khoản: <b>030704070003619</b> <br>
+                                    Nội dung CK: Nạp tiền cho tài khoản {{ Auth::user()->username }}
+                                </p>
                             </div>
                         </div>
 
@@ -176,7 +282,7 @@
 
 
 
-<!-- Modal -->
+{{-- Modal --}}
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
@@ -210,8 +316,111 @@
         </div>
     </div>
 </div>
-<!-- End-Modal -->
+{{-- End-Modal --}}
 
+<script>
+    $("#bidv-bank-infor").hide();
+    $("#agribank-infor").hide();
+
+    $("#sacombank-infor").hide();
+    $("#acb-infor").hide();
+
+    $("#vietcombank-infor").hide();
+    $("#techcombank-infor").hide();
+
+    $("#mb-bank-infor").hide();
+    $("#hd-bank-infor").hide();
+
+    $("#bidv-bank").click(function() {
+        $("#bidv-bank-infor").show();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").hide();
+
+    });
+
+    $("#agribank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").show();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").hide();
+    });
+
+    $("#mb-bank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").show();
+        $("#hd-bank-infor").hide();
+    });
+
+    $("#vietcombank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").show();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").hide();
+    });
+
+    $("#sacombank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").show();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").hide();
+    });
+
+    $("#hd-bank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").show();
+    });
+
+    $("#techcombank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").hide();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").show();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").hide();
+    });
+
+    $("#acb-bank").click(function() {
+        $("#bidv-bank-infor").hide();
+        $("#agribank-infor").hide();
+        $("#sacombank-infor").hide();
+        $("#acb-infor").show();
+        $("#vietcombank-infor").hide();
+        $("#techcombank-infor").hide();
+        $("#mb-bank-infor").hide();
+        $("#hd-bank-infor").hide();
+    });
+
+</script>
 
 
 <script>
@@ -227,14 +436,14 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: '100'
+                        value: '1'
                     }
                 }]
             });
         }
         , onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
-                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                alert('Giao dịch hoàn thành bởi' + details.payer.name.given_name + '!');
             });
         }
     }).render('#paypal-button-container');

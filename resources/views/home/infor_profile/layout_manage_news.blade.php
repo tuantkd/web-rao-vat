@@ -13,12 +13,14 @@
                 <h5>Quản lý tin</h5>
             </span>
             <span class="float-right">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm ...">
-                    <div class="input-group-append">
-                        <button class="btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
+                <form action="{{ url('page-all-news') }}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm ..." name="txt_search">
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </span>
         </div>
     </div>
@@ -29,9 +31,6 @@
         </span>
         <span class="badge badge-pill badge-warning">
             <a href="{{ url('page-service-news') }}">Tin dịch vụ</a>
-        </span>
-        <span class="badge badge-pill badge-danger">
-            <a href="{{ url('page-expired-news') }}">Tin hết hạn</a>
         </span>
         <hr>
 

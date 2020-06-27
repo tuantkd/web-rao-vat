@@ -121,16 +121,16 @@
                         <form id="msform" method="POST" action="{{ url('post-post-new') }}" enctype="multipart/form-data" name="myForm" onsubmit="return validateForm()" novalidate>
 
                             @csrf
-                            {{-- <!-- progressbar --> --}}
+                            {{-- progressbar --}}
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Chọn danh mục</strong></li>
                                 <li id="personal"><strong>Thông tin danh mục</strong></li>
                                 <li id="payment"><strong>Đăng tin</strong></li>
                             </ul>
-                            {{-- <!-- progressbar --> --}}
+                            {{-- progressbar --}}
 
                             {{-- ==============================================================================================  --}}
-                            {{-- <!-- fieldsets danh mục cấp 1 --> --}}
+                            {{-- fieldsets danh mục cấp 1  --}}
                             <fieldset>
                                 <div class="form-card">
                                     @php
@@ -155,7 +155,7 @@
                                 <a class="a-previous" href="{{ url('post-new-category') }}">Quay lại</a>
                                 <input type="button" name="next" class="next action-button" value="Tiếp tục" />
                             </fieldset>
-                            {{-- <!-- fieldsets danh mục cấp 1 --> --}}
+                            {{-- fieldsets danh mục cấp 1  --}}
                             {{-- ==============================================================================================  --}}
 
 
@@ -168,7 +168,7 @@
 
 
                             {{-- ==============================================================================================  --}}
-                            {{-- <!-- fieldsets thông tin -->  --}}
+                            {{-- fieldsets thông tin --}}
                             <fieldset>
                                 <div class="form-card">
                                     {{-- =====================================================  --}}
@@ -730,7 +730,7 @@
                                         </div>
                                         <div class="form-group col-12 col-sm-12 col-md-9" style="padding:2px;">
                                             <label class="label-title-mobile">Nội dung đăng tin: </label>
-                                            <textarea class="form-control" rows="10" placeholder="Nhập nội dung miêu tả đầy đủ" name="txt_content" id="txt_content"></textarea>
+                                            <textarea class="form-control" name="txt_content" id="txt_content"></textarea>
                                         </div>
                                     </div>
 
@@ -751,9 +751,9 @@
                                         <div class="form-group col-12 col-sm-12 col-md-5" style="padding:2px;">
                                             <label class="label-title-mobile">Thời hạn: </label>
                                             <select class="selectpicker form-control" data-live-search="true" required name="txt_date_expired">
-                                                <option value="1">1 Ngày</option>
-                                                <option value="2">2 Ngày</option>
                                                 <option value="3">3 Ngày</option>
+                                                <option value="5">5 Ngày</option>
+                                                <option value="7">7 Ngày</option>
                                             </select>
                                         </div>
                                     </div>

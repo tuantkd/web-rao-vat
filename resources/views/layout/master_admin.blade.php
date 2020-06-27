@@ -306,19 +306,19 @@
                                     Bài đăng mới
                                 </h6>
                                 @foreach ($postNew as $item_post_new)
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded" src="{{ url('public/upload/image_post_new/'.$item_post_new->images) }}">
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded" src="{{ url('public/upload/image_post_new/'.$item_post_new->images) }}">
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">
+                                            <i class="far fa-clock"></i> {{ date("d/m/Y-H:i", strtotime($item_post_new->created_at)) }}
                                         </div>
-                                        <div>
-                                            <div class="small text-gray-500">
-                                                <i class="far fa-clock"></i> {{ date("d/m/Y-H:i", strtotime($item_post_new->created_at)) }}
-                                            </div>
-                                            <span class="font-weight-bold">
-                                                {{ Str::limit($item_post_new->title,30,'...') }}
-                                            </span>
-                                        </div>
-                                    </a>
+                                        <span class="font-weight-bold">
+                                            {{ Str::limit($item_post_new->title,30,'...') }}
+                                        </span>
+                                    </div>
+                                </a>
                                 @endforeach
 
                                 <a class="dropdown-item text-center small text-gray-500" href="{{ route('manage_post_new') }}">Xem tất cả</a>
@@ -374,7 +374,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if(Auth::user()->avatar != NULL)
-                                <img src="{{ url('public/image_avatar/'.Auth::user()->avatar) }}" class="img-profile rounded-circle" style="width: 30px; margin-right: 10px;"> ​
+                                <img src="{{ url('public/upload_images_avatar/'.Auth::user()->avatar) }}" class="img-profile rounded-circle" style="width: 30px; margin-right: 10px;"> ​
                                 @else
                                 <img src="{{ url('public/logo/user/user-icon-edit.png') }}" class="img-profile rounded-circle" style="width: 30px; margin-right: 10px;">
                                 @endif
@@ -456,119 +456,119 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-<script src="{{ url('public/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ url('public/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url('public/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url('public/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="{{ url('public/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{ url('public/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="{{ url('public/js/sb-admin-2.min.js') }}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{ url('public/js/sb-admin-2.min.js') }}"></script>
 
-<!-- Page level plugins -->
-<script src="{{ url('public/vendor/chart.js/Chart.min.js') }}"></script>
+    <!-- Page level plugins -->
+    <script src="{{ url('public/vendor/chart.js/Chart.min.js') }}"></script>
 
-<!-- Page level custom scripts -->
-<script src="{{ url('public/js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ url('public/js/demo/chart-pie-demo.js') }}"></script>
+    <!-- Page level custom scripts -->
+    <script src="{{ url('public/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ url('public/js/demo/chart-pie-demo.js') }}"></script>
 
-<!-- select live search -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- select live search -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
-        $('.table-responsive-stack').find("th").each(function(i) {
+    <script>
+        $(document).ready(function() {
+            // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
+            $('.table-responsive-stack').find("th").each(function(i) {
 
-            $('.table-responsive-stack td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
-            $('.table-responsive-stack-thead').hide();
-        });
-
-        $('.table-responsive-stack').each(function() {
-            var thCount = $(this).find("th").length;
-            var rowGrow = 100 / thCount + '%';
-            //console.log(rowGrow);
-            $(this).find("th, td").css('flex-basis', rowGrow);
-        });
-
-        function flexTable() {
-            if ($(window).width() < 768) {
-
-                $(".table-responsive-stack").each(function(i) {
-                    $(this).find(".table-responsive-stack-thead").show();
-                    $(this).find('thead').hide();
-                });
-
-                // window is less than 768px
-            } else {
-
-
-                $(".table-responsive-stack").each(function(i) {
-                    $(this).find(".table-responsive-stack-thead").hide();
-                    $(this).find('thead').show();
-                });
-            }
-            // flextable
-        }
-
-        flexTable();
-
-        window.onresize = function(event) {
-            flexTable();
-        };
-    });
-
-</script>
-
-{{-- date time input --}}
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-
-<script>
-    $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4'
-    });
-
-</script>
-
-{{-- validation form --}}
-<script>
-    // Self-executing function
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
+                $('.table-responsive-stack td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
+                $('.table-responsive-stack-thead').hide();
             });
-        }, false);
-    })();
 
-</script>
+            $('.table-responsive-stack').each(function() {
+                var thCount = $(this).find("th").length;
+                var rowGrow = 100 / thCount + '%';
+                //console.log(rowGrow);
+                $(this).find("th, td").css('flex-basis', rowGrow);
+            });
+
+            function flexTable() {
+                if ($(window).width() < 768) {
+
+                    $(".table-responsive-stack").each(function(i) {
+                        $(this).find(".table-responsive-stack-thead").show();
+                        $(this).find('thead').hide();
+                    });
+
+                    // window is less than 768px
+                } else {
 
 
-<script type="text/javascript">
-    function myFunction() {
-        var x = document.getElementById("accordionSidebar");
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } else {
-            x.style.display = "block";
+                    $(".table-responsive-stack").each(function(i) {
+                        $(this).find(".table-responsive-stack-thead").hide();
+                        $(this).find('thead').show();
+                    });
+                }
+                // flextable
+            }
+
+            flexTable();
+
+            window.onresize = function(event) {
+                flexTable();
+            };
+        });
+
+    </script>
+
+    {{-- date time input --}}
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+
+    </script>
+
+    {{-- validation form --}}
+    <script>
+        // Self-executing function
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+    </script>
+
+
+    <script type="text/javascript">
+        function myFunction() {
+            var x = document.getElementById("accordionSidebar");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
         }
-    }
 
-</script>
+    </script>
 
-@yield('link_js')
+    @yield('link_js')
 
 </body>
 </html>

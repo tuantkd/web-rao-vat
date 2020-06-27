@@ -72,8 +72,9 @@
 
     <div class="card-body" style="padding:10px;">
 
-        <form action="#" class="needs-validation" novalidate>
-
+        <form action="{{ url('update-change-password/'.Auth::user()->id) }}" method="POST" class="needs-validation" novalidate>
+            @csrf
+            @method('PUT')
             <div class="form-group">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
@@ -83,7 +84,7 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
                         <div class="input-group mb-3" id="show_hide_password1">
-                            <input class="form-control" type="password" placeholder="Mật khẩu cũ" name="txt_password" required>
+                            <input class="form-control" type="password" placeholder="Mật khẩu cũ" name="txt_old_pass" required>
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">
                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true" style="color:white;"></i></a>
@@ -103,7 +104,7 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
                         <div class="input-group mb-3" id="show_hide_password2">
-                            <input class="form-control" type="password" placeholder="Mật khẩu mới" name="txt_password" required>
+                            <input class="form-control" type="password" placeholder="Mật khẩu mới" name="txt_new_pass" required>
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">
                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true" style="color:white;"></i></a>
@@ -124,21 +125,72 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
                         <div class="input-group mb-3" id="show_hide_password3">
-                            <input class="form-control" type="password" placeholder="Nhập lại mật khẩu mới" name="txt_password" required>
+                            <input class="form-control" type="password" placeholder="Nhập lại mật khẩu mới" name="txt_new_pass_confirm" required>
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">
                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true" style="color:white;"></i></a>
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
+                        <button type="submit" class="btn btn-danger">Thay đổi</button>
+                    </div>
+                </div>
+            </div>
         </form>
 
     </div>
 </div>
+{{-- ====================================================================  --}}
+@if (Session::has('change_password_user'))
+<script>
+    Swal.fire({
+        position: 'center'
+        , icon: 'success'
+        , title: 'Đã đổi mật khẩu!'
+        , showConfirmButton: false
+        , timer: 2000
+    });
+    window.location.replace("{{ url('logout') }}");
+
+</script>
+@endif
+
+@if (Session::has('change_password_user_fail'))
+<script>
+    Swal.fire({
+        position: 'center'
+        , icon: 'error'
+        , title: 'Đã xác nhận mật khẩu lại không khớp!'
+        , showConfirmButton: false
+        , timer: 2000
+    });
+
+</script>
+@endif
+
+@if (Session::has('old_pass_fail'))
+<script>
+    Swal.fire({
+        position: 'center'
+        , icon: 'error'
+        , title: 'Mật khẩu cũ không đúng!'
+        , showConfirmButton: false
+        , timer: 2000
+    });
+
+</script>
+@endif
+
 
 
 <script type="text/javascript">
@@ -184,6 +236,29 @@
     });
 
 </script>
+
+<script>
+    // Disable form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Get the forms we want to add validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+</script>
+
 
 @endsection
 {{-- ==================================================== --}}

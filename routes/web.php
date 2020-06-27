@@ -120,34 +120,61 @@ Route::middleware(['CheckViewInfor'])->group(function () {
     Route::post('post-post-new', 'HomeController@post_post_new');
     //----------------------------------------------------------------------------
 
+
+
     //----------------------------------------------------------------------------
     //-----------------------------
     //Trang tất cả tin
     Route::get('page-all-news', 'HomeController@page_all_news');
+
     //Trang tin dịch vụ
     Route::get('page-service-news', 'HomeController@page_service_news');
-    //Trang tin hết hạn
-    Route::get('page-expired-news', 'HomeController@page_expired_news');
+
+    //Nâng cấp tin dịch vụ
+    Route::get('upgrade-news/{id}', 'HomeController@upgrade_news');
+
     //Xóa tin
     Route::get('delete-news/{id}', 'HomeController@delete_news');
+
     //Chỉnh sửa tin
     Route::get('edit-news/{id}', 'HomeController@edit_news');
+
     //Cập nhật tin
     Route::put('update-news/{id}', 'HomeController@update_news');
     //-----------------------------
 
-    //Trang thông tin tin đã lưu
-    Route::get('page-news-save', 'HomeController@page_news_save');
 
+    //-----------------------------
+    //Trang thông tin tin đã lưu
+    Route::get('page-news-save', 'HomeController@page_news_save')->name('search');
+
+    //Xóa tin đã lưu (chuyển đổi trạng thái lại)
+    Route::get('none-news-save/{id}', 'HomeController@none_news_save');
+    //-----------------------------
+
+
+    //-----------------------------
     //Trang thông tin cá nhân tài khoản
     Route::get('page-infor-account', 'HomeController@page_infor_account');
+    //Cập nhật thông tin
+    Route::put('update-infor-account/{id}', 'HomeController@update_infor_account');
+    //-----------------------------
+
+
 
     //Trang thông tin thanh toán phương thức
     Route::get('page-payment-method', 'HomeController@page_payment_method');
 
+
+
+
+    //-----------------------------
     //Trang thay đổi mật khẩu
     Route::get('page-change-password', 'HomeController@page_change_password');
-    //----------------------------------------------------------------------------
+
+    //Xử lý đổi mật khẩu
+    Route::put('update-change-password/{id_user}', 'HomeController@update_change_password');
+    //-----------------------------
     // ===========================================================================
 });
 
@@ -491,5 +518,4 @@ Route::middleware(['checkStatus'])->group(function () {
 
     // xem chi tiết tin tức
     Route::get('admin/manage-new/view-detail/{name}/{id}', 'AdminController@view_detail_new')->name('view_detail_new');
-
 });

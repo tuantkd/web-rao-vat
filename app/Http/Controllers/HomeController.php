@@ -39,12 +39,8 @@ class HomeController extends Controller
     }
     // ==============================================================
 
-    // trang đăng nhập
-    public function page_login(){
-        return view('home.page_login');
-    }
 
-    // ==================================================================
+    // ==============================================================
     //Xem theo danh mục
     public function view_category($name, $id)
     {
@@ -54,15 +50,15 @@ class HomeController extends Controller
         $province = DB::table('provinces')->get();
 
         $categoryFirstId = DB::table('category_child_firsts')
-                    ->select('id')
-                    ->where('category_id', $id)
-                    ->groupBy('id');
-        
+            ->select('id')
+            ->where('category_id', $id)
+            ->groupBy('id');
+
         $postNew = DB::table('post_news')
-                ->joinSub($categoryFirstId, 'category_child_firsts', function($join){
-                    $join->on('post_news.category_first_id', '=', 'category_child_firsts.id');
-                })
-                ->paginate(8);
+            ->joinSub($categoryFirstId, 'category_child_firsts', function ($join) {
+                $join->on('post_news.category_first_id', '=', 'category_child_firsts.id');
+            })
+            ->paginate(8);
 
         return view('home.view_category')->with([
             'category' => $category,
@@ -73,9 +69,10 @@ class HomeController extends Controller
         ]);
     }
 
-    // ==================================================================
+    // ==============================================================
     // xem danh mục cấp 1
-    public function view_category_first(Request $request, $name, $id_category_first){
+    public function view_category_first(Request $request, $name, $id_category_first)
+    {
         $province = DB::table('provinces')->get();
         $allCategory = DB::table('categorys')->get();
 
@@ -83,15 +80,15 @@ class HomeController extends Controller
         $postNewCategoryFirst = DB::table('post_news')->where('category_first_id', $id_category_first)->paginate(8);
 
         $category_id = DB::table('category_child_firsts')
-                ->select('category_id')
-                ->where('id', $id_category_first)
-                ->groupBy('category_id');
+            ->select('category_id')
+            ->where('id', $id_category_first)
+            ->groupBy('category_id');
 
         $category = DB::table('categorys')
-                ->joinSub($category_id, 'category_child_firsts', function($join){
-                    $join->on('categorys.id', '=', 'category_child_firsts.category_id');
-                })
-                ->get();
+            ->joinSub($category_id, 'category_child_firsts', function ($join) {
+                $join->on('categorys.id', '=', 'category_child_firsts.category_id');
+            })
+            ->get();
 
         foreach ($category_first as $value) {
             $allCategoryFirst = DB::table('category_child_firsts')->where('category_id', $value->category_id)->get();
@@ -107,37 +104,12 @@ class HomeController extends Controller
         ]);
     }
 
-    // ====================================================================
-    // lọc tỉnh thành - quận huyện
-    public function filter(Request $request){
-
-        $value = $request->value;
-        $dependent = $request->dependent;
-
-        $data = DB::table('districts')
-            ->where('province_id', 2)
-            ->get();
-
-        // $data = DB::table('districts')
-        //     ->where($select, $value)
-        //     ->groupBy($dependent)
-        //     ->get();
-
-        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
-        foreach($data as $row)
-        {
-        $output .= '<option value="'.$row->id.'">'.$row->district_name.'</option>';
-        }
-        echo $output;
-    }
-
     //Xem theo danh mục chi tiết
     public function view_category_detail()
     {
         return view('home.view_category_detail');
     }
 
-    // ==============================================================
     //Xem theo danh mục chi tiết
     public function report_new()
     {
@@ -326,7 +298,7 @@ class HomeController extends Controller
 
     // ==============================================================
     // xem tin tức
-    public function view_news_detail(Request $request,$name, $id)
+    public function view_news_detail(Request $request, $name, $id)
     {
         $new = DB::table('news')->where('id', $id)->get();
         return view('home.view_news_detail')->with([
@@ -340,10 +312,10 @@ class HomeController extends Controller
 
     // ==============================================================
     //Trang đăng nhập
-    // public function page_login()
-    // {
-    //     return view('home.page_login');
-    // }
+    public function page_login()
+    {
+        return view('home.page_login');
+    }
 
     //Xử lý đăng nhập
     public function post_page_login(Request $request)
@@ -364,10 +336,10 @@ class HomeController extends Controller
             return redirect()->back()->with('message', 'Email, điện thoại hoặc mật khẩu của bạn không đúng');
         }
     }
-    //=================================================
+    // ==============================================================
 
 
-    //=================================================
+    // ==============================================================
     //Đăng ký
     public function page_register()
     {
@@ -408,31 +380,53 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
-    //=================================================
+    // ==============================================================
 
 
 
 
 
 
-    //=================================================
+    // ==============================================================
     //-------------------------------------------
     //Quản lý tin tất cả
-    public function page_all_news()
+    public function page_all_news(Request $request)
     {
-        $all_news = post_news::where('user_id', Auth::user()->id)->latest()->paginate(5);
+        $search = $request->input('txt_search');
+        if ($search != "") {
+            $all_news = post_news::where([
+                ['title', 'LIKE', '%' . $search . '%'],
+            ])->paginate(2);
+        } else {
+            $all_news = post_news::where('user_id', Auth::user()->id)->latest()->paginate(5);
+        }
         return view('home.infor_profile.all_news', ['all_news' => $all_news]);
     }
+
     //Quản lý tin dịch vụ
-    public function page_service_news()
+    public function page_service_news(Request $request)
     {
-        return view('home.infor_profile.service_news');
+        $search_service = $request->input('txt_search');
+        if ($search_service != "") {
+            $service_news = post_news::where([
+                ['title', 'LIKE', '%' . $search_service . '%'], ['status', '=', 2]
+            ])->paginate(2);
+        } else {
+            $service_news = post_news::where([
+                ['user_id', '=', Auth::user()->id],
+                ['status', '=', 2]
+            ])->latest()->paginate(5);
+        }
+        return view('home.infor_profile.service_news', ['service_news' => $service_news]);
     }
-    //Quản lý tin hết hạn
-    public function page_expired_news()
+
+    //Nâng cấp tin dịch vụ
+    public function upgrade_news(Request $request, $id)
     {
-        return view('home.infor_profile.expired_news');
+        $upgrade = post_news::find($id);
+        return view('home.infor_profile.upgrade_news', ['upgrade' => $upgrade]);
     }
+
     //Xóa tin
     public function delete_news($id, Request $request)
     {
@@ -440,12 +434,14 @@ class HomeController extends Controller
         $delete_new = $request->session()->get('delete_new');
         return redirect()->back()->with('delete_new', '');
     }
+
     //Chỉnh sửa tin
     public function edit_news($id)
     {
         $edit_new = post_news::find($id);
         return view('home.infor_profile.edit_news', ['edit_new' => $edit_new]);
     }
+
     //Cập nhật tin
     public function update_news(Request $request, $id)
     {
@@ -514,23 +510,69 @@ class HomeController extends Controller
     //-------------------------------------------
 
 
-
-
+    //-------------------------------------------
+    //Quản lý tin lưu lại
+    public function page_news_save(Request $request)
+    {
+        $search = $request->input('txt_search');
+        if ($search != "") {
+            $show_post_new_saves = post_news::where([
+                ['title', 'LIKE', '%' . $search . '%'], ['save_post', '=', 1], ['user_saved_id', '=', Auth::user()->id],
+            ])->paginate(2);
+        } else {
+            $show_post_new_saves = post_news::where([['save_post', '=', 1], ['user_saved_id', '=', Auth::user()->id],])->latest()->paginate(5);
+        }
+        return view('home.infor_profile.news_save', ['show_post_new_saves' => $show_post_new_saves]);
+    }
+    //Xóa tin đã lưu (thay đổi trạng thái lưu)
+    public function none_news_save($id)
+    {
+        post_news::where('id', $id)->update(['save_post' => 0]);
+        return redirect()->back();
+    }
+    //-------------------------------------------
 
 
     //-------------------------------------------
-    //Quản lý tin lưu lại
-    public function page_news_save()
-    {
-        return view('home.infor_profile.news_save');
-    }
-
     //Quản lý thông tin tài khoản
     public function page_infor_account()
     {
         return view('home.infor_profile.infor_account');
     }
 
+    //Cập nhật thông tin tài khoản
+    public function update_infor_account(Request $request, $id)
+    {
+        $update = User::find($id);
+        $update->username = $request->input('txt_username');
+        $update->sex = $request->input('txt_sex');
+        $update->birthday = $request->input('txt_birthday');
+        $update->address = $request->input('txt_address');
+        $update->phone = $request->input('txt_phone');
+
+        //Upload nhiều hình ảnh
+        if ($request->hasfile('txt_avatar')) {
+            $file = $request->file('txt_avatar');
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('upload_images_avatar'), $filename);
+            $update->avatar = $filename;
+        } else {
+            $get_avatars = DB::table('users')->where('id', $id)->get();
+            foreach ($get_avatars as $key => $get_avatar) {
+                $image_avatar = $get_avatar->avatar;
+            }
+            $update->avatar = $image_avatar;
+        }
+        $update->save();
+
+        $update_infor = $request->session()->get('update_infor');
+        return redirect('page-infor-account')->with('update_infor', '');
+    }
+    //-------------------------------------------
+
+
+
+    //-------------------------------------------
     //Quản lý thông tin tài khoản
     public function page_payment_method()
     {
@@ -541,6 +583,46 @@ class HomeController extends Controller
     public function page_change_password()
     {
         return view('home.infor_profile.change_password');
+    }
+
+    //Xử lý thay đổi mật khẩu
+    public function update_change_password(Request $request, $id_user)
+    {
+        //Lấy trường id trong bảng user so sánh với thẻ input hidden có chứa id user 
+        //mà mình muốn thay đổi mật khẩu của nó
+        $users = DB::table('users')->where('id', $id_user)->get();
+
+        //Trong model User tìm đến id thẻ input hidden có chứa id user cập nhật nó lại
+        $change = User::find($id_user);
+
+        $old_pass = $request->input('txt_old_pass');
+
+        $new_pass = $request->input('txt_new_pass');
+
+        $new_pass_confirm = $request->input('txt_new_pass_confirm');
+
+        foreach ($users as $val_users) {
+            //Lấy mật khẩu trong csdl ra
+            $db_pass = $val_users->password;
+
+            //Nếu mật khẩu trong thẻ inout (nhập mật khẩu cũ) mà bằng với mật khẩu trong csdl
+            if (password_verify($old_pass, $db_pass)) {
+
+                if ($new_pass == $new_pass_confirm) {
+                    $change->password = bcrypt($request->input('txt_new_pass_confirm'));
+                    $change->save();
+
+                    $change_password_user = $request->session()->get('change_password_user');
+                    return redirect()->back()->with('change_password_user', '');
+                } else {
+                    $change_password_user_fail = $request->session()->get('change_password_user_fail');
+                    return redirect()->back()->with('change_password_user_fail', '');
+                }
+            } else {
+                $old_pass_fail = $request->session()->get('old_pass_fail');
+                return redirect()->back()->with('old_pass_fail', '');
+            }
+        }
     }
     //------------------------------
 }
