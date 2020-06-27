@@ -86,8 +86,13 @@
                                 <i class='fas fa-phone-volume'></i> Dịch vụ, du lịch
                             </a>
                         </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                    <i class='fas fa-baby'></i> Mẹ và bé
+                                </a>
+                            </li>
                         @endif
-
                         @endforeach
 
 

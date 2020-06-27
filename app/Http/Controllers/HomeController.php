@@ -49,14 +49,10 @@ class HomeController extends Controller
         $allCategory = DB::table('categorys')->get();
         $province = DB::table('provinces')->get();
 
-        $categoryFirstId = DB::table('category_child_firsts')
-            ->select('id')
-            ->where('category_id', $id)
-            ->groupBy('id');
-
-        $postNew = DB::table('post_news')
-            ->joinSub($categoryFirstId, 'category_child_firsts', function ($join) {
-                $join->on('post_news.category_first_id', '=', 'category_child_firsts.id');
+        $postNew = DB::table('category_child_firsts')
+            ->join('post_news', function ($join) use ($id) {
+                $join->on('post_news.category_first_id', '=', 'category_child_firsts.id')
+                    ->where('category_child_firsts.category_id', '=', $id);
             })
             ->paginate(8);
 
@@ -105,9 +101,47 @@ class HomeController extends Controller
     }
 
     //Xem theo danh mục chi tiết
-    public function view_category_detail()
+    public function view_category_detail($name, $id)
     {
-        return view('home.view_category_detail');
+        $allCategory = DB::table('categorys')->get();
+        $province = DB::table('provinces')->get();
+        $postNew = DB::table('post_news')->where('id', $id)->get();
+
+        $category = DB::table('post_news')
+            ->join('category_child_firsts', function ($join) use ($id) {
+                $join->on('post_news.category_first_id', '=', 'category_child_firsts.id')
+                    ->where('post_news.id', '=', $id);
+            })
+            ->join('categorys', function ($join) {
+                $join->on('categorys.id', '=', 'category_child_firsts.category_id');
+            })
+            ->get();
+
+        $category_first = DB::table('post_news')
+            ->join('category_child_firsts', function ($join) use ($id) {
+                $join->on('post_news.category_first_id', '=', 'category_child_firsts.id')
+                    ->where('post_news.id', '=', $id);
+            })
+            ->get();
+
+        foreach ($postNew as $value) {
+            $likePostNew = DB::table('post_news')
+                ->where('category_first_id', $value->category_first_id)
+                ->where('id', '<>', $id)
+                ->get();
+        }
+
+        $random = $id . rand(10000, 99999);
+
+        return view('home.view_category_detail')->with([
+            'province' => $province,
+            'allCategory' => $allCategory,
+            'postNew' => $postNew,
+            'category' => $category,
+            'category_first' => $category_first,
+            'likePostNew' => $likePostNew,
+            'random' => $random
+        ]);
     }
 
     //Xem theo danh mục chi tiết
@@ -301,8 +335,10 @@ class HomeController extends Controller
     public function view_news_detail(Request $request, $name, $id)
     {
         $new = DB::table('news')->where('id', $id)->get();
+        $newDifferent = DB::table('news')->where('id', '<>', $id)->latest()->limit(6)->get();
         return view('home.view_news_detail')->with([
-            'new' => $new
+            'new' => $new,
+            'newDifferent' => $newDifferent
         ]);
     }
     // ==============================================================
