@@ -21,9 +21,9 @@
                 <div class="form-group">
                     <select class="custom-select" name="status_search" id="">
                         <option selected>Chọn trạng thái</option>
-                        <option value="Đã duyệt">Đã duyệt</option>
-                        <option value="Chưa duyệt">Chưa duyệt</option>
-                        <option value="Hết hạn">Hết hạn</option>
+                        <option value="1">Đã duyệt</option>
+                        <option value="0">Chưa duyệt</option>
+                        <option value="2">Hết hạn</option>
                     </select>
                 </div>
             </div>
@@ -105,10 +105,19 @@
                                 </div>
 
                                 <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                    <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip"
-                                        title="Phê duyệt">
-                                        <i class="far fa-check-square"></i>
-                                    </a>
+                                    @if($value->status == 0)
+                                        <a class="btn btn-success btn-sm" href="{{ url('admin/manage-post-new/approved/'.Str::slug($value->title).'/'.$value->id.'/'.$value->status) }}" role="button" data-toggle="tooltip"
+                                            title="Phê duyệt">
+                                            <i class="far fa-check-square"></i>
+                                        </a>
+                                    @elseif($value->status == 1)
+                                        <a class="btn btn-danger btn-sm" href="{{ url('admin/manage-post-new/approved/'.Str::slug($value->title).'/'.$value->id.'/'.$value->status)}}" role="button" data-toggle="tooltip"
+                                            title="Chặn">
+                                            <i class="fa fa-ban"></i>
+                                        </a>
+                                    @endif
+                                    
+
                                     <a class="btn btn-outline-danger btn-sm" href="{{ route('delete_post_new', $value->id) }}" role="button" title="xóa" onclick="return confirm('Bạn có chắc xóa không?')">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
@@ -129,5 +138,17 @@
     </div>
 
 </div>
+
+@if (Session::has('changeStatus'))
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Đã thay đổi trạng thái bài đăng',
+            showConfirmButton: false,
+            timer: 1000
+        });
+    </script>
+@endif
 
 @endsection

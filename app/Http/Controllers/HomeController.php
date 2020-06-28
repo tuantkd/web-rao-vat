@@ -180,9 +180,15 @@ class HomeController extends Controller
     }
 
     //Xem theo danh mục chi tiết
-    public function profile_user()
-    {
-        return view('home.profile_user');
+    public function profile_user($id, Request $request){
+        $user = DB::table('users')->where('id', $id)->get();
+        $postNew = DB::table('post_news')->where('user_id', $id)->paginate(10);
+        $countPostNew = DB::table('post_news')->where('user_id', $id)->count();
+        return view('home.profile_user')->with([
+            'user' => $user,
+            'postNew' => $postNew,
+            'countPostNew' => $countPostNew
+        ]);
     }
     // ==============================================================
 

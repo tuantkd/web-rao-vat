@@ -234,6 +234,7 @@
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Tùy chọn khác</h6>
                         <a class="collapse-item" href="{{ route('manage_type_post_new') }}">Loại bài đăng</a>
+                        <a class="collapse-item" href="{{ url('admin/manage-report') }}">Báo cáo vi phạm</a>
                     </div>
                 </div>
             </li>

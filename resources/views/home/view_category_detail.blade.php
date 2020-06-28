@@ -271,7 +271,7 @@
                                         @endphp
                                         @foreach ($user as $item_user)
                                         <h4>{{ $item_user->username }} <br> <b>{{ $item_user->phone }}</b></h4>
-                                        <a class="btn btn-outline-warning btn-sm" href="{{ url('profile-user') }}"
+                                        <a class="btn btn-outline-warning btn-sm" href="{{ url('profile-user/'.$item_user->id) }}"
                                             role="button">
                                             Xem trang <i class="fas fa-chevron-right"></i>
                                         </a>

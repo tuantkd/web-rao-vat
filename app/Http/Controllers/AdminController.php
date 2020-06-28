@@ -280,13 +280,27 @@ class AdminController extends Controller
         $type_post = DB::table('post_types')->get();
         $province = DB::table('provinces')->get();
         $district = DB::table('districts')->get();
-        $postNew = DB::table('post_news')->latest()->paginate(10);
+        $postNew = DB::table('post_news')->where('status',0)->latest()->paginate(10);
         return view('admin.manage_post_new.manage_post_new')->with([
             'type_post' => $type_post,
             'province' => $province,
             'district' => $district,
             'postNew' => $postNew
         ]);
+    }
+
+    // thay đổi trạng thái bài đăng
+    public function ApprovedPostNew(Request $request,$name, $id, $status){
+        if($status == 0) {
+            $approved = DB::table('post_news')->where('id', $id)->update(['status' => 1]);
+        }elseif($status == 1){
+            $approved = DB::table('post_news')->where('id', $id)->update(['status' => 0]);
+        }
+        
+        $changeStatus = $request->session()->get('changeStatus');
+        session()->put('changeStatus');
+
+        return redirect()->back()->with('changeStatus', '');
     }
 
     // tim kiếm bài đăng
@@ -395,6 +409,25 @@ class AdminController extends Controller
         session()->put('edit_type_post');
         return redirect()->route('manage_type_post_new')->with('edit_type_post', '');
     }
+
+    //===============================================================================
+    // báo cáo vi phạm
+    public function ManageReport(Request $request){
+        $report = DB::table('reports')->get();
+        $nameReport = DB::table('reports')->select('report_name')->distinct()->get();
+        $nameUserReport = DB::table('reports')->select('username')->distinct()->get();
+        $emailUserReport = DB::table('reports')->select('email')->distinct()->get();
+        return view('admin.manage_report.manage_report')->with([
+            'report' => $report,
+            'nameReport' => $nameReport,
+            'emailUserReport' => $emailUserReport,
+            'nameUserReport' => $nameUserReport
+        ]);
+
+        // echo $nameReport;
+    }
+
+    //===============================================================================
 
     // thêm loại bài đăng
     public function add_type_post_new(Request $request)
