@@ -7,7 +7,6 @@
 @section('content')
 
 <div class="row">
-
     <div class="col-xl-12 col-md-12 mt-0">
         <div class="card shadow h-100">
             <div class="card-header">
@@ -69,12 +68,42 @@
                                     @foreach ($admin as $key => $value)
                                     <tr>
                                         <td scope="row" data-label="STT">{{ ++$key }}</td>
+
+                                        @if($value->fullname != NULL)
                                         <td data-label="Họ tên">{{ $value->fullname }}</td>
-                                        <td data-label="Tài khoản">{{ $value->username}}</td>
+                                        @else
+                                        <td data-label="Điện thoại" style="color:red;">- - -</td>
+                                        @endif
+
+                                        @if($value->username != NULL)
+                                        <td data-label="Tên tài khoản">{{ $value->username }}</td>
+                                        @else
+                                        <td data-label="Tên tài khoản" style="color:red;">- - -</td>
+                                        @endif
+
+                                        @if($value->sex != NULL)
                                         <td data-label="Giới tính">{{ $value->sex }}</td>
-                                        <td data-label="Ngày sinh">{{ $value->birthday }}</td>
+                                        @else
+                                        <td data-label="Giới tính" style="color:red;">- - -</td>
+                                        @endif
+
+                                        @if($value->birthday != NULL)
+                                        <td data-label="Ngày sinh">{{ date("d/m/Y", strtotime($value->birthday)) }}</td>
+                                        @else
+                                        <td data-label="Ngày sinh" style="color:red;">- - -</td>
+                                        @endif
+
+                                        @if($value->phone != NULL)
                                         <td data-label="Điện thoại">{{ $value->phone}}</td>
+                                        @else
+                                        <td data-label="Điện thoại" style="color:red;">- - -</td>
+                                        @endif
+
+                                        @if($value->address != NULL)
                                         <td data-label="Địa chỉ">{{ $value->address }}</td>
+                                        @else
+                                        <td data-label="Địa chỉ" style="color:red;">- - -</td>
+                                        @endif
                                     </tr>
                                     @endforeach
 
@@ -88,51 +117,56 @@
             {{-- end card --}}
         </div>
     </div>
+</div>
 
 
 
 
-    @if (Session::has('add_admin'))
-    <script type="text/javascript">
-        Swal.fire({
-            position: 'top-end'
-            , icon: 'success'
-            , title: 'Đã thêm tài khoản admin'
-            , showConfirmButton: false
-            , timer: 2000
-        });
+@if (Session::has('add_admin'))
+<script type="text/javascript">
+    Swal.fire({
+        position: 'top-end'
+        , icon: 'success'
+        , title: 'Đã thêm tài khoản admin'
+        , showConfirmButton: false
+        , timer: 2000
+    });
 
-    </script>
-    @endif
+</script>
+@endif
 
-    <script>
-        $('#exampleModal').on('show.bs.modal', event => {
-            var button = $(event.relatedTarget);
-            var modal = $(this);
-        });
+<script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+    });
 
-    </script>
+</script>
 
-    @endsection
-    <!-- ============================= -->
+@endsection
+<!-- ============================= -->
 
 
-    <!-- ============================= -->
-    @section('link_js')
-    <script type="text/javascript">
-        CKEDITOR.replace('txt_describe_role');
 
-        function Test_numberphone() {
-            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-            var mobile = $('#phone').val();
-            if (mobile !== '') {
-                if (vnf_regex.test(mobile) == false) {
-                    confirm('Số điện thoại không đúng định dạng. Vui lòng nhập lại');
-                    $('#phone').val('');
-                }
+
+
+
+<!-- ============================= -->
+@section('link_js')
+<script type="text/javascript">
+    CKEDITOR.replace('txt_describe_role');
+
+    function Test_numberphone() {
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var mobile = $('#phone').val();
+        if (mobile !== '') {
+            if (vnf_regex.test(mobile) == false) {
+                confirm('Số điện thoại không đúng định dạng. Vui lòng nhập lại');
+                $('#phone').val('');
             }
         }
+    }
 
-    </script>
-    @endsection
-    <!-- ============================= -->
+</script>
+@endsection
+<!-- ============================= -->

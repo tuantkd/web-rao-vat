@@ -15,6 +15,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ url('public/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
     <!-- fonts.googleapis -->
     <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
 
@@ -125,8 +126,8 @@
         }
 
     </style>
-
 </head>
+
 <body id="page-top">
 
     <style type="text/css">
@@ -455,6 +456,8 @@
 
     </div>
 
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ url('public/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('public/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -476,6 +479,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 
     <script>
         $(document).ready(function() {
@@ -532,7 +537,7 @@
 
     </script>
 
-    {{-- validation form --}}
+
     <script>
         // Self-executing function
         (function() {

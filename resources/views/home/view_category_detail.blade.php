@@ -21,7 +21,8 @@
                             <select id="state" class="form-control selectpicker" data-live-search="true">
                                 <option>Chọn Tỉnh/TP</option>
                                 @foreach ($province as $item_province)
-                                <option value="{{ $item_province->province_name }}">{{ $item_province->province_name }}</option>
+                                <option value="{{ $item_province->province_name }}">{{ $item_province->province_name }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
@@ -35,7 +36,8 @@
                                 @endphp
 
                                 @foreach ($district_id as $item_district)
-                                <option value="{{ $item_district->district_name }}"> {{ $item_province->province_name }}-{{ $item_district->district_name }}
+                                <option value="{{ $item_district->district_name }}">
+                                    {{ $item_province->province_name }}-{{ $item_district->district_name }}
                                 </option>
                                 @endforeach
 
@@ -147,51 +149,46 @@
                             width: 100%;
                         }
 
+                        @media screen and (max-width: 600px) {
+                            .carousel-inner img {
+                                height: 200px;
+                                width: 100%;
+                            }
+                        }
+
                     </style>
                     <div class="row">
                         <!-- col-8 -->
                         @foreach ($postNew as $item_postNew)
                         <div class="col-12 col-sm-12 col-md-8 col-lg-8 text-right">
-                            <!-- carousel -->
-                            <div id="demo" class="carousel slide" data-ride="carousel" style="border-radius:5px;">
-                                <!-- Indicators -->
-                                <ul class="carousel-indicators">
-                                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                                    <li data-target="#demo" data-slide-to="1"></li>
-                                    <li data-target="#demo" data-slide-to="2"></li>
-                                    <li data-target="#demo" data-slide-to="3"></li>
-                                </ul>
-                                <!-- The slideshow -->
-                                <div class="carousel-inner" style="border-radius:5px;">
+
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
                                     @php
                                     $image_decode = (array)json_decode($item_postNew->images,true)
                                     @endphp
-                                    @foreach ($image_decode as $key => $picture)
-                                    @if ($key == 0)
-                                    <div class="carousel-item active">
-                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="First slide">
-                                    </div>
-                                    @elseif($key == 1)
-                                    <div class="carousel-item">
-                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Second slide">
-                                    </div>
-                                    @elseif($key == 2)
-                                    <div class="carousel-item">
-                                        <img src="{{ url('public/upload_images_post_new/'.$picture) }}" alt="Third slide">
-                                    </div>
-                                    @endif
 
+                                    @foreach( $image_decode as $photo )
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
+                                    @endforeach
+                                </ol>
+
+                                <div class="carousel-inner" role="listbox">
+                                    @foreach( $image_decode as $photo )
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                        <img class="d-block img-fluid" src="{{ url('public/upload_images_post_new/'.$photo) }}" alt="">
+                                    </div>
                                     @endforeach
                                 </div>
-                                <!-- Left and right controls -->
-                                <a class="carousel-control-prev" href="#demo" data-slide="prev" style="color:red;">
-                                    <span class="carousel-control-prev-icon"></span>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#demo" data-slide="next" style="color:red;">
-                                    <span class="carousel-control-next-icon"></span>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
                                 </a>
                             </div>
-                            <!-- carousel -->
 
                             <div class="text-left" style="margin:10px;">
                                 <h4 style="font-weight:bold;">
@@ -201,25 +198,52 @@
                                 <div class="clearfix">
                                     <span class="float-left">
                                         <h5>
-                                            Giá: <b style="color:orange;">{{ number_format($item_postNew->price) }} {{ $item_postNew->currency }}</b>
+                                            Giá: <b style="color:orange;">{{ number_format($item_postNew->price) }}
+                                                {{ $item_postNew->currency }}</b>
                                         </h5>
                                     </span>
+
+                                    <style>
+                                        #dontSave {
+                                            color: red;
+                                        }
+
+                                        #dontSave:hover {
+                                            color: white;
+                                        }
+
+                                        #save {
+                                            color: white;
+                                        }
+
+                                    </style>
+                                    @if ($item_postNew->save_post == 0)
                                     <span class="float-right">
-                                        <button type="button" class="btn btn-outline-danger">
+                                        <a class="btn btn-outline-danger" id="dontSave" href="{{ url('save-post-new/'.$item_postNew->id.'/'.$item_postNew->save_post) }}" role="button" title="lưu tin">
                                             Lưu tin <i class="far fa-heart"></i>
-                                        </button>
+                                        </a>
                                     </span>
+                                    @else
+                                    <span class="float-right">
+                                        <a class="btn btn-danger" id="save" href="{{ url('save-post-new/'.$item_postNew->id.'/'.$item_postNew->save_post) }}" role="button" title="Bỏ lưu tin">
+                                            Lưu tin <i class="far fa-heart"></i>
+                                        </a>
+                                    </span>
+                                    @endif
+
                                 </div>
 
                                 <p>
                                     <i class="far fa-clock" style="color:orange;"></i>
-                                    <b>{{ date("d/m/Y", strtotime($item_postNew->created_at)) }}</b>
+                                    <b>{{ date("d/m/Y", strtotime($item_postNew->updated_at)) }}</b>
                                     &emsp;
                                     <i class="fas fa-map-marker-alt" style="color:orange;"></i>
                                     <b>
                                         @php
-                                        $province = DB::table('provinces')->where('id', $item_postNew->province_id)->get();
-                                        $district = DB::table('districts')->where('id', $item_postNew->district_id)->get();
+                                        $province = DB::table('provinces')->where('id',
+                                        $item_postNew->province_id)->get();
+                                        $district = DB::table('districts')->where('id',
+                                        $item_postNew->district_id)->get();
                                         @endphp
                                         @foreach ($province as $item_province)
                                         <span><strong>{{ $item_province->province_name }}
@@ -282,7 +306,7 @@
                                     <h5>Mã bản tin <b>{{ $random }} </b> này đã được duyệt đăng.</h5>
                                     <p>
                                         Nếu bạn gặp vấn đề, vui lòng báo vi phạm. &emsp;
-                                        <a class="btn btn-outline-danger btn-sm" href="{{ url('report-new') }}" role="button">Báo vi phạm</a>
+                                        <a class="btn btn-outline-danger btn-sm" href="{{ url('report-new/'.$item_postNew->id.'/'.$random) }}" role="button">Báo vi phạm</a>
                                     </p>
                                 </div>
                             </div>
@@ -318,17 +342,21 @@
                                                 <b style="font-size: 12px;">{{ $item_likePostNew->title }}</b>
                                                 <p class="p-text">
                                                     @php
-                                                    $province = DB::table('provinces')->where('id', $item_likePostNew->province_id)->get();
-                                                    $district = DB::table('districts')->where('id', $item_likePostNew->district_id)->get();
+                                                    $province = DB::table('provinces')->where('id',
+                                                    $item_likePostNew->province_id)->get();
+                                                    $district = DB::table('districts')->where('id',
+                                                    $item_likePostNew->district_id)->get();
                                                     @endphp
                                                     @foreach ($province as $item_province)
-                                                    <i class="fas fa-map-marker-alt"></i><strong> {{ $item_province->province_name }}
+                                                    <i class="fas fa-map-marker-alt"></i><strong>
+                                                        {{ $item_province->province_name }}
                                                         @endforeach
                                                         @foreach ($district as $item_district)
                                                         - {{ $item_district->district_name }}</strong><br>
                                                     @endforeach
 
-                                                    <i class="far fa-clock"></i> {{ date("d/m/Y", strtotime($item_likePostNew->created_at)) }}
+                                                    <i class="far fa-clock"></i>
+                                                    {{ date("d/m/Y", strtotime($item_likePostNew->created_at)) }}
                                                 </p>
                                             </div>
                                         </div>

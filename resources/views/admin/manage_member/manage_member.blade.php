@@ -1,4 +1,3 @@
-@include('layout/slug')
 @extends('layout.master_admin')
 @section('title','Manage member')
 {{-- =============================================================================== --}}
@@ -63,6 +62,7 @@
                                 <th>Họ và tên</th>
                                 <th>Tên tài khoản</th>
                                 <th>Giới tính</th>
+                                <th>Email</th>
                                 <th>Ngày sinh</th>
                                 <th>Điện thoại</th>
                                 <th>Địa chỉ</th>
@@ -80,43 +80,49 @@
                                 @if($value->fullname != NULL)
                                 <td data-label="Họ tên">{{ $value->fullname }}</td>
                                 @else
-                                <td data-label="Họ tên">Trống</td>
+                                <td data-label="Họ tên" style="color:red;">- - -</td>
                                 @endif
 
                                 @if($value->username != NULL)
-                                <td data-label="Họ tên">{{ $value->username }}</td>
+                                <td data-label="Tên tài khoản">{{ $value->username }}</td>
                                 @else
-                                <td data-label="Họ tên">Trống</td>
+                                <td data-label="Tên tài khoản" style="color:red;">- - -</td>
                                 @endif
 
                                 @if($value->sex != NULL)
-                                <td data-label="Họ tên">{{ $value->sex }}</td>
+                                <td data-label="Giới tính">{{ $value->sex }}</td>
                                 @else
-                                <td data-label="Họ tên">Trống</td>
+                                <td data-label="Giới tính" style="color:red;">- - -</td>
+                                @endif
+
+                                @if($value->email != NULL)
+                                <td data-label="Giới tính">{{ $value->email }}</td>
+                                @else
+                                <td data-label="Giới tính" style="color:red;">- - -</td>
                                 @endif
 
                                 @if($value->birthday != NULL)
-                                <td data-label="Họ tên">{{ $value->birthday }}</td>
+                                <td data-label="Ngày sinh">{{ $value->birthday }}</td>
                                 @else
-                                <td data-label="Họ tên">Trống</td>
+                                <td data-label="Ngày sinh" style="color:red;">- - -</td>
                                 @endif
 
                                 @if($value->phone != NULL)
-                                <td data-label="Họ tên">{{ $value->phone }}</td>
+                                <td data-label="Điện thoại">{{ $value->phone }}</td>
                                 @else
-                                <td data-label="Họ tên">Trống</td>
+                                <td data-label="Điện thoại" style="color:red;">- - -</td>
                                 @endif
 
                                 @if($value->address != NULL)
-                                <td data-label="Họ tên">{{ $value->address }}</td>
+                                <td data-label="Địa chỉ">{{ $value->address }}</td>
                                 @else
-                                <td data-label="Họ tên">Trống</td>
+                                <td data-label="Địa chỉ" style="color:red;">- - -</td>
                                 @endif
 
                                 @if($value->number_money != NULL)
-                                <td data-label="Họ tên" class="text-success">{{ $value->number_money }} đồng</td>
+                                <td data-label="Tài khoản" class="text-success">{{ $value->number_money }} đồng</td>
                                 @else
-                                <td data-label="Họ tên" class="text-danger">0 đồng</td>
+                                <td data-label="Tài khoản" class="text-danger">0 đồng</td>
                                 @endif
 
 
@@ -138,7 +144,8 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-
+<br><br><br>
+<br><br><br>
 @endsection
 
 @section('link_js')

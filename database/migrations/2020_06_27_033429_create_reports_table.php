@@ -15,9 +15,10 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('post_new_id')->nullable();
             $table->foreign('post_new_id')->references('id')->on('post_news')->onDelete('cascade');
 
+            $table->string('report_name');
             $table->string('username');
             $table->string('email');
-            
+
             $table->timestamps();
         });
     }

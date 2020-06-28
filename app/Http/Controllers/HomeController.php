@@ -15,6 +15,7 @@ use App\category_child_seconds;
 use App\categorys;
 use App\news;
 use App\post_news;
+use App\Report;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         $show_category = categorys::all();
-        $banner = DB::table('banners')->latest()->limit(3)->get();
+        $banner = DB::table('banners')->latest()->limit(5)->get();
         $new = DB::table('news')->latest()->limit(1)->get();
         return view('home.index', [
             'show_category' => $show_category,
@@ -145,9 +146,40 @@ class HomeController extends Controller
     }
 
     //Xem theo danh mục chi tiết
-    public function report_new()
+    public function report_new($id_post_new, $random_id)
     {
-        return view('home.report.report_new');
+        $postNew = DB::table('post_news')->where('id', $id_post_new)->get();
+        return view('home.report.report_new')->with([
+            'postNew' => $postNew,
+            'random_id' => $random_id
+        ]);
+    }
+
+    public function ReportPostNew(Request $request, $id_post_new, $random_id)
+    {
+        $report = new Report();
+        $report->post_new_id = $id_post_new;
+        $report->report_name = $request->input('exampleRadios');
+        $report->username = $request->input('uname');
+        $report->email = $request->input('phone');
+        $report->save();
+
+        $reportSuccess = $request->session()->get('reportSuccess');
+        session()->put('reportSuccess');
+
+        return redirect()->back()->with('reportSuccess', '');
+    }
+
+    public function savePostNew(Request $request, $id_post_new, $id_status_save)
+    {
+
+        if ($id_status_save == 0) {
+            $save_post = DB::table('post_news')->where('id', $id_post_new)->update(['save_post' => 1]);
+        } else {
+            $save_post = DB::table('post_news')->where('id', $id_post_new)->update(['save_post' => 0]);
+        }
+
+        return redirect()->back();
     }
 
     //Xem theo danh mục chi tiết
@@ -461,6 +493,51 @@ class HomeController extends Controller
     {
         $upgrade = post_news::find($id);
         return view('home.infor_profile.upgrade_news', ['upgrade' => $upgrade]);
+    }
+
+    //Xử lý nâng cấp tin dịch vụ cập nhật
+    public function put_upgrade_news(Request $request, $id)
+    {
+        $updates = post_news::find($id);
+
+        $price_service = $request->input('txt_price_service');
+
+        $total_price = $request->input('txt_total_price');
+
+        //------------------------------------
+        $get_number_date_expired = DB::table('post_news')->where('id', $id)->get();
+        foreach ($get_number_date_expired as $key => $value_number) {
+            $number_date_expired = $value_number->number_date_expired;
+        }
+
+        $updates->number_date_expired = $number_date_expired + $request->input('txt_date');
+
+        if ($price_service == 1000) {
+            $updates->status = 0;
+        } else {
+            $updates->status = 2;
+        }
+
+        //------------------------------------
+        $get_money_users = DB::table('users')->where('id', Auth::user()->id)->get();
+        foreach ($get_money_users as $key => $get_money_user) {
+            $money_user_db = $get_money_user->number_money;
+            $id_user_db = $get_money_user->id;
+        }
+
+        if ($money_user_db < $total_price) {
+            $mes_infor_money = $request->session()->get('mes_infor_money');
+            return redirect()->back()->with('mes_infor_money', '');
+        } else {
+            $update_money = User::find($id_user_db);
+            $after_money = $money_user_db - $total_price;
+            $update_money->number_money = $after_money;
+            $update_money->save();
+        }
+        //------------------------------------
+        $updates->save();
+        $update_success = $request->session()->get('update_success');
+        return redirect()->back()->with('update_success', '');
     }
 
     //Xóa tin
