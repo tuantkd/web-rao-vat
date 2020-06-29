@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title','Manage role')
+@section('title','Quyền người dùng')
 {{-- =============================================================================== --}}
 
 @section('content')

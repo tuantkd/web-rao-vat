@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title', 'Manage new')
+@section('title', 'Tin tức')
 @section('link_css')
 <link rel="stylesheet" href="{{ url('public/css/media.css') }}">
 @endsection
@@ -56,8 +56,11 @@
                             </div>
 
                             <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Phê duyệt">
+                                {{-- <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Phê duyệt">
                                     <i class="far fa-check-square"></i>
+                                </a> --}}
+                                <a href="{{ url('admin/manage-new/edit/'.Str::slug($value->title).'/'.$value->id) }}" class="btn btn-outline-success btn-sm" role="button" data-toggle="tooltip" title="Chỉnh sửa">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
                                 </a>
                                 <a class="btn btn-outline-danger btn-sm" href="{{ route('delete_new', $value->id) }}" role="button" title="xóa" onclick="return confirm('Bạn có chắc xóa không?')">
                                     <i class="far fa-trash-alt"></i>
@@ -101,6 +104,19 @@
         , timer: 2000
     });
 
+</script>
+@endif
+
+
+@if (Session::has('edit_new'))
+<script type="text/javascript">
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Đã thêm tin tức',
+        showConfirmButton: false,
+        timer: 2000
+    });
 </script>
 @endif
 @endsection

@@ -55,7 +55,7 @@
         </ul>
         <!-- breadcrumb -->
 
-
+        @foreach ($member as $item_member)
         <div class="row">
 
             <div class="col-md-3">
@@ -63,19 +63,31 @@
                 <div class="card card-outline m-0">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="{{ url('public/dist/img/user4-128x128.jpg') }}" style="border-radius:50%;">
+                            @if($item_member->facebook_id != NULL)
+                                <img src="{{ $item_member->avatar }}" class="profile-user-img img-fluid img-circle" style="border-radius:50%;"> ​
+                            @elseif($item_member->google_id != NULL)
+                                <img src="{{ $item_member->avatar }}" class="profile-user-img img-fluid img-circle" style="border-radius:50%;">
+                            @elseif($item_member->avatar != NULL)
+                                <img src="{{ url('public/upload_images_avatar/'.$item_member->avatar) }}" class="profile-user-img img-fluid img-circle" style="border-radius:50%;">
+                            @else
+                                <img src="{{ url('public/logo/user/user-icon-edit.png') }}" class="profile-user-img img-fluid img-circle" style="border-radius:50%;">
+                            @endif
+
                         </div>
 
-                        <h3 class="profile-username text-center">Tuan TKD</h3>
+                        <h3 class="profile-username text-center">{{ $item_member->username }}</h3>
 
                         <p class="text-muted text-center">Thành viên</p>
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b><i class="far fa-newspaper"></i> Số bài đăng</b> <a class="float-right">132</a>
+                                @php
+                                    $postCount = DB::table('post_news')->where('user_id', $item_member->id)->count();
+                                @endphp
+                                <b><i class="far fa-newspaper"></i> Số bài đăng</b> <a class="float-right">{{ $postCount }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="far fa-money-bill-alt"></i> Số tiền</b> <a class="float-right">20.000 đ</a>
+                                <b><i class="far fa-money-bill-alt"></i> Số tiền</b> <a class="float-right">{{ $item_member->number_money }} đ</a>
                             </li>
                         </ul>
 
@@ -94,16 +106,32 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <strong><i class="fas fa-phone"></i> 0326568256</strong>
+                        @if($item_member->phone == null)
+                            <strong><i class="fas fa-phone"></i> Đang cập nhật</strong>
+                        @else
+                            <strong><i class="fas fa-phone"></i> {{ $item_member->phone }}</strong>
+                        @endif
                         <hr>
 
-                        <strong><i class="fas fa-map-marker-alt mr-1"></i> Hậu Giang - Vị Thủy</strong>
+                        @if($item_member->address == null)
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> Đang cập nhật</strong>
+                        @else
+                            <strong><i class="fas fa-map-marker-alt mr-1"></i> {{ $item_member->address }}</strong>
+                        @endif
                         <hr>
 
-                        <strong><i class="fas fa-mars"></i> Nam</strong>
+                        @if($item_member->sex == null)
+                            <strong><i class="fas fa-mars"></i> Đang cập nhật</strong>
+                        @else
+                            <strong><i class="fas fa-mars"></i> {{ $item_member->sex }}</strong>
+                        @endif
                         <hr>
 
-                        <strong><i class="far fa-calendar-alt"></i> 25/01/1998</strong>
+                        @if($item_member->birthday == null)
+                            <strong><i class="far fa-calendar-alt"></i> Đang cập nhật</strong>
+                        @else
+                            <strong><i class="far fa-calendar-alt"></i> {{ $item_member->birthday }}</strong>
+                        @endif
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -124,108 +152,84 @@
                             <!-- tab-content -->
                             <div class="tab-pane active" id="settings">
 
-                                <div class="media border p-2">
-                                    <img src="{{ url('public/images/car-2.jpg') }}" class="img-fluid mr-3 image-post-new">
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                                <a href=""><b>Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019.</b></a>
-                                                <p>
-                                                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> <br>
-                                                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
-                                                    <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
-                                                </p>
-                                            </div>
+                                @foreach ($postNew as $value)
+                                    <div class="media border p-2">
+                                        @php
+                                            $image_decode = (array)json_decode($value->images,true)
+                                        @endphp
+                                        @foreach ($image_decode as $picture)
+                                            @if ($loop->first)
+                                                <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="img-fluid mr-3 image-post-new" style="width: 100px;">
+                                            @endif
+                                        @endforeach
 
-                                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                                    <i class="far fa-check-square"></i>
-                                                </a>
-                                                <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </a>
+                                        <div class="media-body">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+                                                    <a href="{{ route('view_post_new', [ Str::slug($value->title), $value->id]) }}"><b>{{ $value->title }}</b></a>
+                                                    <p>
+                                                        <strong><i class="fa fa-money" aria-hidden="true"></i> {{ number_format($value->price) }} {{ $value->unit_price }}</strong> | 
+                                                        
+                                                        @if($value->status == 0)
+                                                            <span class="badge badge-danger">Chưa duyệt</span>
+                                                        @elseif($value->status == 1)
+                                                            <span class="badge badge-success">Đã duyệt</span>
+                                                        @else
+                                                            <span class="badge badge-danger">Hết hạn</span>
+                                                        @endif
+
+                                                        <br>
+                                                        <small><i class="fa fa-calendar" aria-hidden="true"></i> {{ date("d/m/Y", strtotime($value->created_at )) }}</small> |
+
+                                                        @php
+                                                            $user = DB::table('users')->where('id', $value->user_id)->get();
+                                                        @endphp
+                                                        @foreach ($user as $item)
+                                                            <small><i class="fa fa-user" aria-hidden="true"></i> {{ $item->username }}</small> |
+                                                        @endforeach
+                                                        
+                                                        @php
+                                                            $district = DB::table('districts')->where('id', $value->district_id)->get();
+                                                            $province = DB::table('provinces')->where('id', $value->province_id)->get();
+                                                        @endphp
+                                                        @foreach ($district as $item)
+                                                            @foreach ($province as $items)
+                                                                <small><i class="fas fa-map-marker-alt"></i> {{ $items->province_name}} - {{ $item->district_name}}</small>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
+                                                    @if($value->status == 0)
+                                                        <a class="btn btn-success btn-sm" href="{{ url('admin/manage-post-new/approved/'.Str::slug($value->title).'/'.$value->id.'/'.$value->status) }}" role="button" data-toggle="tooltip"
+                                                            title="Phê duyệt">
+                                                            <i class="far fa-check-square"></i>
+                                                        </a>
+                                                    @elseif($value->status == 1)
+                                                        <a class="btn btn-danger btn-sm" href="{{ url('admin/manage-post-new/approved/'.Str::slug($value->title).'/'.$value->id.'/'.$value->status)}}" role="button" data-toggle="tooltip"
+                                                            title="Chặn">
+                                                            <i class="fa fa-ban"></i>
+                                                        </a>
+                                                    @endif
+                                                    
+
+                                                    <a class="btn btn-outline-danger btn-sm" href="{{ route('delete_post_new', $value->id) }}" role="button" title="xóa" onclick="return confirm('Bạn có chắc xóa không?')">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="media border p-2">
-                                    <img src="{{ url('public/images/car-2.jpg') }}" class="img-fluid mr-3 image-post-new">
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                                <a href=""><b>Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019.</b></a>
-                                                <p>
-                                                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> <br>
-                                                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
-                                                    <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
-                                                </p>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                                    <i class="far fa-check-square"></i>
-                                                </a>
-                                                <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media border p-2">
-                                    <img src="{{ url('public/images/car-2.jpg') }}" class="img-fluid mr-3 image-post-new">
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                                <a href=""><b>Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019.</b></a>
-                                                <p>
-                                                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> <br>
-                                                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
-                                                    <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
-                                                </p>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                                    <i class="far fa-check-square"></i>
-                                                </a>
-                                                <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media border p-2">
-                                    <img src="{{ url('public/images/car-2.jpg') }}" class="img-fluid mr-3 image-post-new">
-                                    <div class="media-body">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-10 col-lg-10">
-                                                <a href=""><b>Bán xe Land Rover Range Sport HSE Supercharged 3.0 model 2019.</b></a>
-                                                <p>
-                                                    <strong><i class="fa fa-money" aria-hidden="true"></i> 2.000.000.000 đ</strong> <br>
-                                                    <small><i class="fa fa-calendar" aria-hidden="true"></i> 06/08/2020</small> |
-                                                    <small><i class="fas fa-map-marker-alt"></i> Hậu Giang - Vị Thủy</small>
-                                                </p>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                                <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                                    <i class="far fa-check-square"></i>
-                                                </a>
-                                                <a class="btn btn-outline-danger btn-sm" href="#" role="button" title="xóa">
-                                                    <i class="far fa-trash-alt"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
 
                             </div>
                             <!-- tab-content -->
                         </div>
                         <!-- /.tab-content -->
-
+                        <ul class="pagination justify-content-center">
+                            {{ $postNew->links() }}
+                        </ul>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -233,7 +237,9 @@
             </div>
             <!-- /.col -->
         </div>
+        @endforeach
         <!-- /.row -->
+
     </div>
     <!-- /.container-fluid -->
 </section>

@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title','Manage post new')
+@section('title','Bài đăng')
 @section('link_css')
 <link rel="stylesheet" href="{{ url('public/css/media.css') }}">
 @endsection

@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title', 'Manage district')
+@section('title', 'Quận - Huyện')
 {{-- ======================================================== --}}
 
 @section('content')

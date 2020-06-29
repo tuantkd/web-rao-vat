@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title', 'Manage category')
+@section('title', 'Danh mục')
 {{-- ======================================================= --}}
 
 @section('content')

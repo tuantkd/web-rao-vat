@@ -133,8 +133,7 @@ class AdminController extends Controller
 
     // ==================================================================
     // trang quản lý thành viên
-    public function manage_member(Request $request)
-    {
+    public function manage_member(Request $request){
         $member = DB::table('users')->where('level_id', 2)->get();
         $allMember = DB::table('users')->where('level_id', 2)->get();
         return view('admin.manage_member.manage_member')->with([
@@ -144,12 +143,15 @@ class AdminController extends Controller
     }
 
     // trang xem thông tin thành viên
-    public function view_information_member(Request $request, $id)
-    {
-        $member = User::find($id);
+    public function view_information_member(Request $request, $name, $id){
+        $member = DB::table('users')->where('id', $id)->get();
+        $postNew = DB::table('post_news')->where('user_id', $id)->paginate(10);
+
         return view('admin.manage_member.information_member')->with([
-            'member' => $member
+            'member' => $member,
+            'postNew' => $postNew
         ]);
+        // echo $postCount;
     }
 
     // xóa tất cả thành viên
@@ -413,7 +415,7 @@ class AdminController extends Controller
     //===============================================================================
     // báo cáo vi phạm
     public function ManageReport(Request $request){
-        $report = DB::table('reports')->get();
+        $report = DB::table('reports')->paginate(10);
         $nameReport = DB::table('reports')->select('report_name')->distinct()->get();
         $nameUserReport = DB::table('reports')->select('username')->distinct()->get();
         $emailUserReport = DB::table('reports')->select('email')->distinct()->get();
@@ -423,8 +425,78 @@ class AdminController extends Controller
             'emailUserReport' => $emailUserReport,
             'nameUserReport' => $nameUserReport
         ]);
+    }
 
-        // echo $nameReport;
+    // xóa báo cáo
+    public function DeleteReport(Request $request){
+        $ids = $request->ids;
+        DB::table("reports")->whereIn('id', explode(",", $ids))->delete();
+
+        return response()->json(['success' => "Deleted successfully"]);
+    }
+
+    // tìm kiếm report
+    public function SearchReport(Request $request){
+        $nameReportSearch = $request->input('nameReport');
+        $userReportSearch = $request->input('userReport');
+        $email_user_report = $request->input('email_user_report');
+
+        $nameReport = DB::table('reports')->select('report_name')->distinct()->get();
+        $nameUserReport = DB::table('reports')->select('username')->distinct()->get();
+        $emailUserReport = DB::table('reports')->select('email')->distinct()->get();
+
+        if(($nameReportSearch == null) && ($userReportSearch == null) && ($email_user_report == null)){
+            $report = DB::table('reports')->get();
+
+        }elseif(($nameReportSearch != null) && ($userReportSearch == null) && ($email_user_report == null)){
+            $report = DB::table('reports')->where(function($query) use($nameReportSearch){
+                $query->where('report_name', $nameReportSearch);
+            })
+            ->paginate(10);
+
+        }elseif(($nameReportSearch == null) && ($userReportSearch != null) && ($email_user_report == null)){
+            $report = DB::table('reports')->where('username', $userReportSearch)->paginate(10);
+
+        }elseif(($nameReportSearch == null) && ($userReportSearch == null) && ($email_user_report != null)){
+            $report = DB::table('reports')->where('email', $email_user_report)->paginate(10);
+
+        }elseif(($nameReportSearch != null) && ($userReportSearch != null) && ($email_user_report == null)){
+            $report = DB::table('reports')
+                    ->where([
+                        ['report_name', '=', $nameReportSearch],
+                        ['username', '=', $userReportSearch]
+                    ])
+                    ->paginate(10);
+        }elseif(($nameReportSearch == null) && ($userReportSearch != null) && ($email_user_report != null)){
+            $report = DB::table('reports')
+                    ->where([
+                        ['username', '=', $userReportSearch],
+                        ['email', '=', $email_user_report]
+                    ])
+                    ->paginate(10);
+        }elseif(($nameReportSearch != null) && ($userReportSearch == null) && ($email_user_report != null))
+            $report = DB::table('reports')
+                    ->where([
+                        ['report_name', '=', $nameReportSearch],
+                        ['email', '=', $email_user_report]
+                    ])
+                    ->paginate(10);
+        else{
+            $report = DB::table('reports')
+                    ->where([
+                        ['report_name', '=', $nameReportSearch],
+                        ['username', '=', $userReportSearch],
+                        ['email', '=', $email_user_report]
+                    ])
+                    ->paginate(10);
+        }
+
+        return view('admin.manage_report.manage_report')->with([
+            'report' => $report,
+            'nameReport' => $nameReport,
+            'emailUserReport' => $emailUserReport,
+            'nameUserReport' => $nameUserReport
+        ]);
     }
 
     //===============================================================================
@@ -872,5 +944,37 @@ class AdminController extends Controller
         return view('admin.manage_new.view_new')->with([
             'new' => $new
         ]);
+    }
+
+    // chỉnh sửa tin tức
+    public function EditNew(Request $request, $name, $id){
+        $new = DB::table('news')->where('id', $id)->get();
+        return view('admin.manage_new.edit_new')->with([
+            'new' => $new
+        ]);
+    }
+
+    public function PostEditNew(Request $request, $name, $id){
+        $title = $request->input('title');
+        $content = $request->input('summary-ckeditor');
+
+        if ($request->hasfile('upload_file')) {
+            $get_file = $request->file('upload_file');
+
+            $file_image_total = $get_file->getClientOriginalName();
+
+            $get_file->move(public_path('upload/image_new'), $file_image_total);
+
+            $new = DB::table('news')->where('id', $id)
+                ->update(['title' => $title, 'content' => $content, 'image' => $file_image_total]);
+        }else{
+            $new = DB::table('news')->where('id', $id)
+                ->update(['title' => $title, 'content' => $content]);
+        }
+
+        $edit_new = $request->session()->get('edit_new');
+        session()->put('add_new');
+
+        return redirect()->route('manage_new')->with('edit_new', '');
     }
 }

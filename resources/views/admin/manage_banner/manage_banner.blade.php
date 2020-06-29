@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title', 'Manage banner')
+@section('title', 'Ảnh bìa')
 @section('link_css')
 <link rel="stylesheet" href="{{ url('public/css/manage_banner.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/css/bootstrap-select.css" />

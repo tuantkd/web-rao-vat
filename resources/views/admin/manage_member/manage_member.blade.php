@@ -1,6 +1,5 @@
-@include('layout/slug')
 @extends('layout.master_admin')
-@section('title','Manage member')
+@section('title','Thành viên')
 {{-- =============================================================================== --}}
 
 @section('content')
@@ -19,13 +18,13 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mr-auto mb-1">
                     <button class="btn btn-danger btn-sm delete_all" role="button" data-url="{{ url('admin/manage-member/delete-all-member') }}">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Xóa đã chọn
+                        <i class="fa fa-trash" aria-hidden="true"></i> Delete all
                     </button>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ml-auto mb-1">
                     <div class="input-group">
-                        <select data-live-search="true" title="Nhập tìm kiếm điện thoại" class="form-control selectpicker" name="phone_search">
+                        <select data-live-search="true" title="Nhập tìm kiếm theo điện thoại" class="form-control selectpicker" name="phone_search">
                             @foreach ($allMember as $value)
                             <option value="{{ $value->phone }}">{{ $value->phone }}</option>
                             @endforeach
@@ -122,7 +121,7 @@
 
                                 <td data-label="Tùy chọn">
                                     <a class="btn btn-info btn-sm" href="{{ url('admin/manage-member/view-information/'
-                                    .$value->slug.'-'.$value->id) }}" role="button" title="xem chi tiết">
+                                    .$value->slug.'/'.$value->id) }}" role="button" title="xem chi tiết">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
                                 </td>

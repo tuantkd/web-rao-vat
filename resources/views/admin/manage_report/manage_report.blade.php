@@ -10,7 +10,8 @@
         </div>
 
         <div class="card-body p-2">
-            <form action="" method="get">
+            <form action="{{ url('admin/manage-report/search') }}" method="get">
+                
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 mb-1">
                         <a class="btn btn-danger delete_all" href="#" role="button">
@@ -162,7 +163,7 @@
                     if(check == true){  
                         var join_selected_values = allVals.join(","); 
                         $.ajax({
-                            url: "{{ route('delete_province') }}",
+                            url: "{{ url('admin/manage-report/delete') }}",
                             type: 'DELETE',
                             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                             data: 'ids=' + join_selected_values,
@@ -176,7 +177,7 @@
                                     Swal.fire({
                                         position: 'top-end',
                                         icon: 'success',
-                                        title: 'Đã xóa các loại bài đăng',
+                                        title: 'Đã xóa các báo cáo được chọn',
                                         showConfirmButton: false,
                                         timer: 2000
                                     });

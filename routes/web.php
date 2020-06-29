@@ -253,7 +253,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xem thông tin thành viên
-    Route::get('admin/manage-member/view-information/{name}-{id}', 'AdminController@view_information_member')->name('view_information_member');
+    Route::get('admin/manage-member/view-information/{name}/{id}', 'AdminController@view_information_member')->name('view_information_member');
 
     // xóa tất cả thành viên
     Route::delete('admin/manage-member/delete-all-member', [
@@ -351,6 +351,12 @@ Route::middleware(['checkStatus'])->group(function () {
     //=======================================================
     // báo cáo vi phạm
     Route::get('admin/manage-report', 'AdminController@ManageReport');
+
+    // xóa báo cáo
+    Route::delete('admin/manage-report/delete', 'AdminController@DeleteReport');
+
+    // tìm kiếm báo cáo
+    Route::get('admin/manage-report/search', 'AdminController@SearchReport');
 
     //=======================================================
 
@@ -533,4 +539,8 @@ Route::middleware(['checkStatus'])->group(function () {
 
     // xem chi tiết tin tức
     Route::get('admin/manage-new/view-detail/{name}/{id}', 'AdminController@view_detail_new')->name('view_detail_new');
+
+    // chỉnh sửa tin tức
+    Route::get('admin/manage-new/edit/{name}/{id}', 'AdminController@EditNew');
+    Route::post('admin/manage-new/edit/{name}/{id}', 'AdminController@PostEditNew')->name('edit_new');
 });

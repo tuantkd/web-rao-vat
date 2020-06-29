@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title', 'manage privince')
+@section('title', 'Tỉnh - Thành phố')
 {{-- ========================================================================= --}}
 
 @section('content')

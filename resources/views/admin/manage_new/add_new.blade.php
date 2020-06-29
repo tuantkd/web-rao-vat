@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title','Thêm thêm tin tức')
+@section('title','Thêm tin tức')
 
 <!-- ============================= -->
 

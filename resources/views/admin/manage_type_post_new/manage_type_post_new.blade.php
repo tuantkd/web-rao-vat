@@ -1,5 +1,5 @@
 @extends('layout.master_admin')
-@section('title','Manage type post new')
+@section('title','Loại bài đăng')
 {{-- =============================================================================== --}}
 
 @section('content')
