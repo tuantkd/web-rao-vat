@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="card-body" style="padding:10px;">
-        <form action="{{ url('post-upgrade-news/'.$upgrade->id) }}" method="POST">
+        <form action="{{ url('post-upgrade-news/'.$upgrade->id) }}" method="POST" class="needs-validation" novalidate>
             @csrf
             @method('put')
             <div class="alert alert-warning" role="alert">
@@ -24,32 +24,15 @@
                     <span class="float-left">
                         <span style="width:60px;"><i class="fa fa-shopping-cart"></i></span> Loại tin <br>
                         <span style="width:60px;"><i class="fa fa-clock-o"></i></span> Ngày cập nhật <br>
-                        <span style="width:60px;"><i class="fa fa-clock-o"></i></span> Ngày hết hạn <br>
-                        <span style="width:60px;"><i class="fa fa-info-circle"></i></span> Trạng thái tin
                     </span>
                     <span class="float-right">
                         @if($upgrade->status == 0)
-                        Miễn phí
+                        <span class="badge badge-pill badge-info">Miễn phí</span>
                         @else
-                        Dịch vụ
+                        <span class="badge badge-pill badge-warning">Dịch vụ</span>
                         @endif
                         <br>
-
                         {{ date("d/m/Y", strtotime($upgrade->created_at)) }} <br>
-
-                        <?php
-                            $date1 = $upgrade->created_at;
-                            $newdate1 = strtotime ($upgrade->number_date_expired.'day', strtotime ( $date1 ));
-                            $newdate1 = date ( 'd/m/Y' , $newdate1 );
-                            echo $newdate1;
-
-                            $date_current = date("d/m/Y");
-                            if ($newdate1 < $date_current){ 
-                                echo '<br><span class="text-danger">Đã hết hạn</span>'; 
-                            }else{
-                                echo '<br><span class="text-success">Còn thời hạn</span>'; 
-                            }
-                        ?>
                     </span>
                 </div>
             </div>
@@ -71,193 +54,247 @@
                             @endif
                         </span>
                     </div>
-                    <hr>
 
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="txt_price_service" value="1000" id="txt_price_service" onchange="ChangePrice(this)">
-                                    Tin Thường
-                                </label>
-                            </div>
-                            <span class="badge badge-danger badge-pill">1,000 đ</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="txt_price_service" value="15000" checked id="txt_price_service" onchange="ChangePrice(this)">
-                                    Tin Vip
-                                </label>
-                            </div>
-                            <span class="badge badge-danger badge-pill">15,000 đ</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="txt_price_service" value="25000" id="txt_price_service" onchange="ChangePrice(this)">
-                                    Tin PowerVip
-                                </label>
-                            </div>
-                            <span class="badge badge-danger badge-pill">25,000 đ</span>
-                        </li>
-                    </ul>
-                    <hr>
+                    {{-- <div class="clearfix">
+                        <span class="float-left"><b>Số lượng đăng tin</b></span>
+                        <span class="float-right">
+                            @if(Auth::check())
+                            <span class="badge badge-pill badge-warning">
+                                {{ number_format(Auth::user()->number_money) }} đ
+                    </span>
+                    @endif
+                    </span>
+                </div> --}}
+                <hr>
 
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
-                                <span class="badge badge-pill badge-light">
-                                    <i class="fa fa-calendar-plus-o"></i>
-                                </span> Số ngày:
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="txt_price_service" value="0" id="txt_price_service" onchange="ChangePrice(this)">
+                                Tin Thường
+                            </label>
+                        </div>
+                        <span class="badge badge-danger badge-pill">0 đ</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="txt_price_service" value="15000" checked id="txt_price_service" onchange="ChangePrice(this)">
+                                Tin Vip
+                            </label>
+                        </div>
+                        <span class="badge badge-danger badge-pill">15,000 đ</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="txt_price_service" value="25000" id="txt_price_service" onchange="ChangePrice(this)">
+                                Tin PowerVip
+                            </label>
+                        </div>
+                        <a class="badge badge-danger badge-pill text-white" data-toggle="modal" data-target="#myModal">Liên hệ</a>
+                    </li>
+                </ul>
+
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Tin power vip là gì?</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-8 col-lg-8 text-left">
-                                <div class="form-group">
-                                    <select class="form-control" name="txt_date" id="mySelect" onclick="ChangeDate(this)">
-                                        <option value="">- - Chọn - -</option>
-                                        <option value="2">2 ngày</option>
-                                        <option value="3">3 ngày</option>
-                                        <option value="4">4 ngày</option>
-                                        <option value="5">5 ngày</option>
-                                        <option value="6">6 ngày</option>
-                                        <option value="7">7 ngày (Giảm 5%)</option>
-                                        <option value="8">8 ngày</option>
-                                        <option value="9">9 ngày</option>
-                                        <option value="10">10 ngày</option>
-                                        <option value="11">11 ngày</option>
-                                        <option value="12">12 ngày</option>
-                                        <option value="13">13 ngày</option>
-                                        <option value="14">14 ngày (Giảm 10%)</option>
-                                        <option value="15">15 ngày</option>
-                                        <option value="16">16 ngày</option>
-                                        <option value="17">17 ngày</option>
-                                        <option value="18">18 ngày</option>
-                                        <option value="19">19 ngày</option>
-                                        <option value="20">20 ngày</option>
-                                        <option value="21">21 ngày (Giảm 15%)</option>
-                                        <option value="22">22 ngày</option>
-                                        <option value="23">23 ngày</option>
-                                        <option value="24">24 ngày</option>
-                                        <option value="25">25 ngày</option>
-                                        <option value="26">26 ngày</option>
-                                        <option value="27">27 ngày</option>
-                                        <option value="28">28 ngày (Giảm 20%)</option>
-                                        <option value="29">29 ngày</option>
-                                        <option value="90">3 tháng (Giảm 25%)</option>
-                                        <option value="180">6 tháng (Giảm 30%)</option>
-                                        <option value="270">9 tháng (Giảm 35%)</option>
-                                        <option value="360">12 tháng (Giảm 40%)</option>
-                                    </select>
-                                </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <p>
+                                    - Đăng trên trang chủ <br>
+                                    - Gồm hình ảnh và nội dung như một bài quảng cáo <br>
+                                    - Để biết thêm thông tin hãy liên hệ với chúng tôi <br>
+                                    - Hoặc số điện thoại <b>0326827373</b> <br>
+                                    - Hoặc qua Email <b>raovat@gmail.com</b>
+                                </p>
                             </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                            </div>
+
                         </div>
                     </div>
-
-
-
-                    {{-- Chiết khấu --}}
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6 col-sm-6 col-md-4 col-lg-4 text-left">
-                                <span class="badge badge-pill badge-light">
-                                    <i class="fa fa-percent"></i>
-                                </span> Chiết khấu :
-                            </div>
-                            <div class="col-6 col-sm-6 col-md-8 col-lg-8 text-right">
-                                <div class="form-group">
-                                    <span class="text-danger" id="discount">- - -</span><br>
-                                    <span class="text-success" id="price_origin">- - -</span>
-                                    <span class="text-success" id="discount_price">- - -</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Chiết khấu --}}
-
-
-
-                    {{-- Thuế VAT --}}
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-7 col-sm-7 col-md-4 col-lg-4 text-left">
-                                <span class="badge badge-pill badge-light">
-                                    <i class="fa fa-stack-overflow"></i>
-                                </span> Thuế VAT <span class="badge badge-pill badge-secondary">10%</span> :
-                            </div>
-                            <div class="col-5 col-sm-5 col-md-8 col-lg-8 text-right">
-                                <div class="form-group">
-                                    <span class="text-danger" id="tax">- - -</span><br>
-                                    <span class="text-success" id="price_of_tax">- - -</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Thuế VAT --}}
-
-
-                    {{-- Thành tiền --}}
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-7 col-sm-7 col-md-4 col-lg-4 text-left">
-                                <span class="badge badge-pill badge-light">
-                                    <i class="fa fa-money"></i>
-                                </span> Thành tiền:
-                            </div>
-                            <div class="col-5 col-sm-5 col-md-8 col-lg-8 text-right">
-                                <div class="form-group">
-                                    <span class="text-success" id="money" style="font-weight: bold;">- - -</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Thành tiền --}}
-
-
-
-                    {{-- Thanh toán --}}
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-7 col-sm-7 col-md-4 col-lg-4 text-left">
-                                <span class="badge badge-pill badge-light">
-                                    <i class="fa fa-money"></i>
-                                </span> Thanh toán:
-                            </div>
-                            <div class="col-5 col-sm-5 col-md-8 col-lg-8 text-right">
-                                <div class="form-group">
-                                    <span class="text-success" id="payment" style="font-weight: bold;">- - -</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Thanh toán --}}
-
-                    {{-- Tổng số tiền thanh toán --}}
-                    <input type="hidden" name="txt_total_price" id="txt_total_price" value="">
-
                 </div>
-            </div>
 
-            <div class="text-right mt-5">
-                <button type="submit" class="btn btn-info"><i class="fa fa-level-up"></i> Nâng cấp</button>
-            </div>
 
-        </form>
+
+
+
+
+                {{-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-left">
+                            <span class="badge badge-pill badge-light">
+                                <i class="fa fa-calendar-plus-o"></i>
+                            </span> Số lượng tin:
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-8 col-lg-8 text-left">
+                            <div class="form-group">
+                                <select class="form-control" name="txt_date" id="mySelect" onclick="ChangeDate(this)" required>
+                                    <option value="">- - Chọn - -</option>
+                                    <option value="2">2 tin</option>
+                                    <option value="3">3 tin</option>
+                                    <option value="4">4 tin</option>
+                                    <option value="5">5 tin</option>
+                                    <option value="6">6 tin</option>
+                                    <option value="7">7 tin (Giảm 5%)</option>
+                                    <option value="8">8 tin</option>
+                                    <option value="9">9 tin</option>
+                                    <option value="10">10 tin</option>
+                                    <option value="11">11 tin</option>
+                                    <option value="12">12 tin</option>
+                                    <option value="13">13 tin</option>
+                                    <option value="14">14 tin (Giảm 10%)</option>
+                                    <option value="15">15 tin</option>
+                                    <option value="16">16 tin</option>
+                                    <option value="17">17 tin</option>
+                                    <option value="18">18 tin</option>
+                                    <option value="19">19 tin</option>
+                                    <option value="20">20 tin</option>
+                                    <option value="21">21 tin (Giảm 15%)</option>
+                                    <option value="22">22 tin</option>
+                                    <option value="23">23 tin</option>
+                                    <option value="24">24 tin</option>
+                                    <option value="25">25 tin</option>
+                                    <option value="26">26 tin</option>
+                                    <option value="27">27 tin</option>
+                                    <option value="28">28 tin (Giảm 20%)</option>
+                                    <option value="29">29 tin</option>
+                                    <option value="90">90 tin (Giảm 25%)</option>
+                                    <option value="180">180 tin (Giảm 30%)</option>
+                                    <option value="270">270 tin (Giảm 35%)</option>
+                                    <option value="360">360 tin (Giảm 40%)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+
+
+
+                {{-- Chiết khấu --}}
+                {{-- <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 text-left">
+                            <span class="badge badge-pill badge-light">
+                                <i class="fa fa-percent"></i>
+                            </span> Chiết khấu :
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-8 col-lg-8 text-right">
+                            <div class="form-group">
+                                <span class="text-danger" id="discount">- - -</span><br>
+                                <span class="text-success" id="price_origin">- - -</span>
+                                <span class="text-success" id="discount_price">- - -</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                {{-- Chiết khấu --}}
+
+
+
+                {{-- Thuế VAT --}}
+                {{-- <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-7 col-sm-7 col-md-4 col-lg-4 text-left">
+                            <span class="badge badge-pill badge-light">
+                                <i class="fa fa-stack-overflow"></i>
+                            </span> Thuế VAT <span class="badge badge-pill badge-secondary">10%</span> :
+                        </div>
+                        <div class="col-5 col-sm-5 col-md-8 col-lg-8 text-right">
+                            <div class="form-group">
+                                <span class="text-danger" id="tax">- - -</span><br>
+                                <span class="text-success" id="price_of_tax">- - -</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                {{-- Thuế VAT --}}
+
+
+                {{-- Thành tiền --}}
+                {{-- <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-7 col-sm-7 col-md-4 col-lg-4 text-left">
+                            <span class="badge badge-pill badge-light">
+                                <i class="fa fa-money"></i>
+                            </span> Thành tiền:
+                        </div>
+                        <div class="col-5 col-sm-5 col-md-8 col-lg-8 text-right">
+                            <div class="form-group">
+                                <span class="text-success" id="money" style="font-weight: bold;">- - -</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                {{-- Thành tiền --}}
+
+
+
+                {{-- Thanh toán --}}
+                {{-- <hr>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-7 col-sm-7 col-md-4 col-lg-4 text-left">
+                            <span class="badge badge-pill badge-light">
+                                <i class="fa fa-money"></i>
+                            </span> Thanh toán:
+                        </div>
+                        <div class="col-5 col-sm-5 col-md-8 col-lg-8 text-right">
+                            <div class="form-group">
+                                <span class="text-success" id="payment" style="font-weight: bold;">- - -</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                {{-- Thanh toán --}}
+
+                {{-- Tổng số tiền thanh toán --}}
+                {{-- <input type="hidden" name="txt_total_price" id="txt_total_price" value=""> --}}
+
+            </div>
     </div>
+
+    <div class="text-right mt-5">
+        <button type="submit" class="btn btn-info"><i class="fa fa-level-up"></i> Nâng cấp</button>
+    </div>
+
+    </form>
+</div>
 </div>
 
 
 @if (Session::has('mes_infor_money'))
 <script>
     Swal.fire({
-        position: 'center'
-        , icon: 'success'
-        , title: 'Tài khoản hiện tại của bạn không đủ nâng cấp tin. Vui lòng nạp tiền vào tài khoản!'
-        , showConfirmButton: false
-        , timer: 5000
+        title: 'Tài khoản hiện tại không đủ nâng cấp tin'
+        , text: "Vui lòng nạp tiền vào tài khoản!"
+        , icon: 'warning'
+        , showCancelButton: true
+        , confirmButtonColor: '#3085d6'
+        , cancelButtonColor: '#d33'
+        , confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.value) {
+            location.href = "{{ url('page-payment-method') }}";
+        }
     });
 
 </script>
@@ -1710,6 +1747,29 @@
         }
         //------------------------------------
     }
+
+</script>
+
+
+<script>
+    // Disable form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Get the forms we want to add validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 
 </script>
 

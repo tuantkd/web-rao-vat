@@ -42,7 +42,7 @@ Route::get('save-post-new/{id_post_new}/{id_status_save}', 'HomeController@saveP
 
 //----------------------------------------------------------------------------
 //Xem trang cá nhân người dùng
-Route::get('profile-user', 'HomeController@profile_user');
+Route::get('profile-user/{id}', 'HomeController@profile_user');
 //----------------------------------------------------------------------------
 
 
@@ -299,6 +299,9 @@ Route::middleware(['checkStatus'])->group(function () {
         'uses' => 'AdminController@manage_post_new'
     ]);
 
+    // thay đổi trạng thái bài đăng
+    Route::get('admin/manage-post-new/approved/{name}/{id}/{status}', 'AdminController@ApprovedPostNew');
+
     // tìm kiếm bài đăng
     Route::get('admin/manage-post-new/search', [
         'as' => 'search_post_new',
@@ -345,6 +348,12 @@ Route::middleware(['checkStatus'])->group(function () {
         'as' => 'post_edit_type_post_new',
         'uses' => 'AdminController@post_edit_type_post_new'
     ]);
+
+    //=======================================================
+    // báo cáo vi phạm
+    Route::get('admin/manage-report', 'AdminController@ManageReport');
+
+    //=======================================================
 
     // trang quản lý tỉnh thành
     Route::get('admin/manage-province', [

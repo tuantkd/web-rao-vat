@@ -114,7 +114,7 @@
 
                                         @if($item_post_new->status == 0)
                                             <span class="badge badge-danger">Chưa duyệt</span>
-                                        @elseif($value->status == 1)
+                                        @elseif($item_post_new->status == 1)
                                             <span class="badge badge-success">Đã duyệt</span>
                                         @else
                                             <span class="badge badge-danger">Hết hạn</span>
@@ -135,9 +135,17 @@
                                 </div>
 
                                 <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-right">
-                                    <a class="btn btn-outline-success btn-sm" href="#" role="button" data-toggle="tooltip" title="Chưa duyệt">
-                                        <i class="far fa-check-square"></i>
-                                    </a>
+                                    @if($item_post_new->status == 0)
+                                        <a class="btn btn-success btn-sm" href="{{ url('admin/manage-post-new/approved/'.Str::slug($item_post_new->title).'/'.$item_post_new->id.'/'.$item_post_new->status) }}" role="button" data-toggle="tooltip"
+                                            title="Phê duyệt">
+                                            <i class="far fa-check-square"></i>
+                                        </a>
+                                    @elseif($item_post_new->status == 1)
+                                        <a class="btn btn-danger btn-sm" href="{{ url('admin/manage-post-new/approved/'.Str::slug($item_post_new->title).'/'.$item_post_new->id.'/'.$item_post_new->status)}}" role="button" data-toggle="tooltip"
+                                            title="Chặn">
+                                            <i class="fa fa-ban"></i>
+                                        </a>
+                                    @endif
                                     <a class="btn btn-outline-danger btn-sm" href="{{ route('delete_post_new', $item_post_new->id)}}" role="button" title="xóa" onclick="return confirm('Bạn có chắc xóa không?')">
                                         <i class="far fa-trash-alt"></i>
                                     </a>

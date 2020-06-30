@@ -19,21 +19,6 @@
                     <h4 class="h4-title">{{ $all_new->title }}</h4>
                     <p class="p-content-text"><i class="far fa-clock"></i>
                         {{ date("d/m/Y", strtotime($all_new->created_at)) }}
-                        -
-                        <b>
-                            <?php
-                                $date1 = $all_new->created_at;
-                                $newdate1 = strtotime ($all_new->number_date_expired.'day', strtotime ( $date1 ));
-                                $newdate1 = date ( 'd/m/Y' , $newdate1 );
-                                echo $newdate1;
-
-                                //Lấy ngày hiện tại
-                                $date_current = date("d/m/Y");
-                                if ($newdate1 < $date_current){
-                                    echo '&ensp;<span class="badge badge-pill badge-danger">Hết hạn</span>';
-                                }else{}
-                            ?>
-                        </b>
                     </p>
                 </div>
                 <div class="col-12 col-sm-12 col-md-3 col-lg-3" id="col-mobile-3">
@@ -84,6 +69,30 @@
 </script>
 @php(Session::forget('session_success'))
 @endif
+
+
+{{-- Thông báo lỗi  --}}
+@if (Session::has('session_error'))
+<script>
+    Swal.fire({
+        title: 'Số lượng đăng tin đã hết'
+        , text: "Vui lòng gia hạn số lượng đăng tin!"
+        , icon: 'warning'
+        , showCancelButton: true
+        , confirmButtonColor: '#3085d6'
+        , cancelButtonColor: '#d33'
+        , confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.value) {
+            location.href = "{{ url('page-payment-method') }}";
+        }
+    });
+
+</script>
+@php(Session::forget('session_success'))
+@endif
+
+
 
 
 @if (Session::has('session_update'))

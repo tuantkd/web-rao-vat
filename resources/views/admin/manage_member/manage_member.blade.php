@@ -120,7 +120,9 @@
                                 @endif
 
                                 @if($value->number_money != NULL)
-                                <td data-label="Tài khoản" class="text-success">{{ $value->number_money }} đồng</td>
+                                <td data-label="Tài khoản" class="text-success">
+                                    {{ number_format($value->number_money) }} đồng
+                                </td>
                                 @else
                                 <td data-label="Tài khoản" class="text-danger">0 đồng</td>
                                 @endif

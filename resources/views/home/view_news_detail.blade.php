@@ -21,28 +21,39 @@
         }
     }
 
+    .responsive {
+        max-width: 100%;
+        height: auto;
+        border-radius: 3px;
+    }
+
 </style>
 
 
 <div class="container container-index">
-
     <div class="row">
         <!-- Post Content Column -->
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body p-3">
 
                     @foreach ($new as $key => $value)
 
                     <!-- Title -->
-                    <h3 class="mt-1 p-0">
+                    <h2 class="mt-1 p-0 text-justify">
                         <b>{!! $value->title !!}</b>
-                    </h3>
-
+                    </h2>
                     <hr>
 
+                    <!-- Date/Time -->
+                    <p class="lead">
+                        <i class="fa fa-calendar"></i>
+                        Ngày {!! date('d/m/Y - H:i', strtotime($value->created_at)) !!} phút</p>
+                    <hr>
+
+
                     <!-- Preview Image -->
-                    <img class="img-fluid rounded" src="{{ url('public/upload/image_new/'.$value->image) }}" alt="">
+                    <img src="{{ url('public/upload/image_new/'.$value->image) }}" class="responsive" width="700" height="400">
 
                     <hr>
 
@@ -57,91 +68,7 @@
         </div>
         <!-- /.row -->
     </div>
+</div>
 
-    <div class="row mt-2">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <!-- Title -->
-                    <h3 class="mt-1 p-0">
-                        <b>Tin tức khác</b>
-                    </h3>
-                    <hr>
-
-                    @foreach ($newDifferent as $item_newDifferent)
-                    <div class="card border-danger">
-                        <a href="">
-                            <img class="card-img-top" src="{{ url('public/upload/image_new/')}}" alt="">
-                        </a>
-                        <div class="card-body">
-                            <a href="">
-                                <h5 class="card-title">{{ $item_newDifferent->title }}</h5>
-                            </a>
-                        </div>
-                    </div>
-                    @endforeach
-
-                    <div class="row">
-                        <div class="col-12 col-md-3">
-                            <div class="card border-danger">
-                                <a href="">
-                                    <img class="card-img-top" src="{{ url('public/upload/image_new/car-2.jpg')}}" alt="" style="max-height: 200px;">
-                                </a>
-                                <div class="card-body">
-                                    <a href="">
-                                        <h6 class="card-title">Xe Trung Quốc Hanteng X5 đổ bộ Việt Nam, giá chỉ 600 triệu</h6>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-3">
-                            <div class="card border-danger">
-                                <a href="">
-                                    <img class="card-img-top" src="{{ url('public/upload/image_new/car-2.jpg')}}" alt="" style="max-height: 200px;">
-                                </a>
-                                <div class="card-body">
-                                    <a href="">
-                                        <h6 class="card-title">Xe Trung Quốc Hanteng X5 đổ bộ Việt Nam, giá chỉ 600 triệu</h6>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-3">
-                            <div class="card border-danger">
-                                <a href="">
-                                    <img class="card-img-top" src="{{ url('public/upload/image_new/car-2.jpg')}}" alt="" style="max-height: 200px;">
-                                </a>
-                                <div class="card-body">
-                                    <a href="">
-                                        <h6 class="card-title">Xe Trung Quốc Hanteng X5 đổ bộ Việt Nam, giá chỉ 600 triệu</h6>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-3">
-                            <div class="card border-danger">
-                                <a href="">
-                                    <img class="card-img-top" src="{{ url('public/upload/image_new/car-2.jpg')}}" alt="" style="max-height: 200px;">
-                                </a>
-                                <div class="card-body">
-                                    <a href="">
-                                        <h6 class="card-title">Xe Trung Quốc Hanteng X5 đổ bộ Việt Nam, giá chỉ 600 triệu</h6>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-
-    @endsection
-    <!-- ==================================================== -->
+@endsection
+<!-- ==================================================== -->

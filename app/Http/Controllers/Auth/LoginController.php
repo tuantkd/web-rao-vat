@@ -73,7 +73,7 @@ class LoginController extends Controller
                     'avatar' => $user->getAvatar(),
                     'verifyToken' => $user->token,
                     'level_id' => 2,
-                    'slug' => Str::slug($user->getName()),
+                    'number_of_posting' => 10,
                 ]);
 
                 Auth::login($newUser, true);
@@ -117,7 +117,7 @@ class LoginController extends Controller
                     'avatar' => $user_fb->getAvatar(),
                     'verifyToken' => $user_fb->token,
                     'level_id' => 2,
-                    'slug' => Str::slug($user_fb->getName()),
+                    'number_of_posting' => 10,
                 ]);
 
                 Auth::login($newUser_fb, true);

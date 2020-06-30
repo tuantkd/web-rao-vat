@@ -198,8 +198,11 @@
                                 <div class="clearfix">
                                     <span class="float-left">
                                         <h5>
-                                            Giá: <b style="color:orange;">{{ number_format($item_postNew->price) }}
-                                                {{ $item_postNew->currency }}</b>
+                                            Giá:
+                                            <b style="color:orange;">
+                                                {{ number_format($item_postNew->price) }}
+                                                {{ $item_postNew->currency }}
+                                            </b>
                                         </h5>
                                     </span>
 
@@ -225,7 +228,7 @@
                                     </span>
                                     @else
                                     <span class="float-right">
-                                        <a class="btn btn-danger" id="save" href="{{ url('save-post-new/'.$item_postNew->id.'/'.$item_postNew->save_post) }}" role="button" title="Bỏ lưu tin">
+                                        <a class="btn btn-outline-danger" id="save" href="{{ url('save-post-new/'.$item_postNew->id.'/'.$item_postNew->save_post) }}" role="button" title="Bỏ lưu tin">
                                             Lưu tin <i class="far fa-heart"></i>
                                         </a>
                                     </span>
@@ -245,12 +248,16 @@
                                         $district = DB::table('districts')->where('id',
                                         $item_postNew->district_id)->get();
                                         @endphp
-                                        @foreach ($province as $item_province)
-                                        <span><strong>{{ $item_province->province_name }}
+                                        <span>
+                                            <strong>
+                                                @foreach ($province as $item_province)
+                                                {{ $item_province->province_name }}
                                                 @endforeach
                                                 @foreach ($district as $item_district)
-                                                - {{ $item_district->district_name }}</strong></span>
-                                        @endforeach
+                                                - {{ $item_district->district_name }}
+                                                @endforeach
+                                            </strong>
+                                        </span>
                                     </b>
                                 </p>
 
@@ -262,7 +269,7 @@
                                         @endphp
                                         @foreach ($user as $item_user)
                                         <h4>{{ $item_user->username }} <br> <b>{{ $item_user->phone }}</b></h4>
-                                        <a class="btn btn-outline-warning btn-sm" href="{{ url('profile-user') }}" role="button">
+                                        <a class="btn btn-outline-warning btn-sm" href="{{ url('profile-user/'.$item_user->id) }}" role="button">
                                             Xem trang <i class="fas fa-chevron-right"></i>
                                         </a>
                                         @endforeach
@@ -273,9 +280,9 @@
 
                             <hr style="margin:10px;">
 
-                            <p style="text-align:justify-all;text-align:left;margin:10px;">
+                            <div class="text-left m-2">
                                 {!! $item_postNew->content !!}
-                            </p>
+                            </div>
 
                             <hr style="margin:10px;">
 
@@ -302,8 +309,8 @@
                             <!-- =================== -->
                             <div class="media p-2 user-icon">
                                 <img src="{{ url('public/logo/security.png') }}" class="mr-2 mt-2 rounded-circle" style="max-width:100%;height:60px;">
-                                <div class="media-body text-left">
-                                    <h5>Mã bản tin <b>{{ $random }} </b> này đã được duyệt đăng.</h5>
+                                <div class="media-body text-left mt-2">
+                                    <h5>Mã bản tin <b>{{ $random }}</b> này đã được duyệt đăng.</h5>
                                     <p>
                                         Nếu bạn gặp vấn đề, vui lòng báo vi phạm. &emsp;
                                         <a class="btn btn-outline-danger btn-sm" href="{{ url('report-new/'.$item_postNew->id.'/'.$random) }}" role="button">Báo vi phạm</a>
@@ -347,13 +354,18 @@
                                                     $district = DB::table('districts')->where('id',
                                                     $item_likePostNew->district_id)->get();
                                                     @endphp
-                                                    @foreach ($province as $item_province)
-                                                    <i class="fas fa-map-marker-alt"></i><strong>
+
+
+
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <strong>
+                                                        @foreach ($province as $item_province)
                                                         {{ $item_province->province_name }}
                                                         @endforeach
                                                         @foreach ($district as $item_district)
-                                                        - {{ $item_district->district_name }}</strong><br>
-                                                    @endforeach
+                                                        - {{ $item_district->district_name }}
+                                                        @endforeach
+                                                    </strong><br>
 
                                                     <i class="far fa-clock"></i>
                                                     {{ date("d/m/Y", strtotime($item_likePostNew->created_at)) }}

@@ -6,6 +6,16 @@
 <!-- ==================================================== -->
 @section('content')
 
+<style>
+    .responsive {
+        max-width: 100%;
+        height: auto;
+        border-radius: 3px;
+    }
+
+</style>
+
+
 <div class="container container-index">
     <div class="row">
         <div class="col-sm-3">
@@ -87,11 +97,11 @@
                             </a>
                         </li>
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                    <i class='fas fa-baby'></i> Mẹ và bé
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <i class='fas fa-baby'></i> Mẹ và bé
+                            </a>
+                        </li>
                         @endif
                         @endforeach
 
@@ -211,25 +221,30 @@
         </div>
 
         <div class="col-sm-9">
+            <!-- news -->
             <div class="container" style="padding:1px;">
-                <!-- news -->
                 @foreach ($new as $item)
                 <div class="card" style="margin-bottom:10px;">
-                    <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="img-fluid" style="border-radius:5px; max-height: 400px;">
+                    <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="responsive" width="900" height="400">
                     <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}">{{ $item->title }}</a>
-                        </h4>
-                        <b class="card-text">
-                            {!! Str::limit($item->content,350,'...') !!}
+                        <h2 class="card-title">
+                            <b>
+                                <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}">
+                                    {{ $item->title }}
+                                </a>
+                            </b>
+                        </h2>
+                        <b class="card-text" style="text-transform:lowercase;text-align:justify;font-size:18px;">
+                            {!! Str::limit($item->content,130,'...') !!}
                         </b>
                         <br>
-                        <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}" class="btn btn-warning btn-sm">Xem chi tiết</a>
-
+                        <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}" class="btn btn-warning btn-sm">
+                            - - Xem chi tiết - -
+                        </a>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
             <!-- news -->
 
             <!-- option -->
@@ -237,88 +252,43 @@
                 <div class="card-body" style="padding:5px;">
                     <div class="d-flex">
                         <div class="p-1 flex-fill">
-                            <button type="button" class="btn btn-danger">
-                                <i class="fas fa-money-check-alt"></i> Nạp tiền
-                            </button>
-                        </div>
-                        <div class="p-1 flex-fill">
-                            <button type="button" class="btn btn-danger">
-                                <i class="fas fa-search"></i> Tìm kiếm chọn lọc
-                            </button>
+                            <a href="{{ url('page-payment-method') }}" class="btn btn-danger text-white">
+                                <i class="fas fa-money-check-alt"></i> Nạp tiền nâng cấp bản tin
+                            </a>
                         </div>
                     </div>
-
                 </div>
             </div>
             <!-- option -->
 
 
             <!-- carousel -->
-            {{-- <div id="demo" class="carousel slide" data-ride="carousel" style="border-radius:5px;">
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-                <!-- The slideshow -->
-                <div class="carousel-inner" style="border-radius:5px;">
-
-                    @foreach ($banner as $key => $value)
-                    @if($key == 0)
-                    <div class="carousel-item active">
-                        ​<img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
-                    </div>
-                    @else
-                    <div class="carousel-item">
-                        <img src="{{ url('public/upload/banner/'.$value->image) }}" class="img-fluid" style="width: 100%; height: 300px;">
-                    </div>
-                    @endif
-
-                    @endforeach
-
-                </div>
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#demo" data-slide="prev" style="color:red;">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next" style="color:red;">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
-            </div> --}}
-
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-
                     @foreach( $banner as $photo )
-                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}"
-                        class="{{ $loop->first ? 'active' : '' }}"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
                     @endforeach
                 </ol>
 
                 <div class="carousel-inner" role="listbox">
                     @foreach( $banner as $photo )
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <img class="d-block img-fluid" src="{{ url('public/upload/banner/'.$photo->image) }}"
-                            alt="">
+                        <img class="d-block img-fluid" src="{{ url('public/upload/banner/'.$photo->image) }}" alt="">
                     </div>
                     @endforeach
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                    data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                    data-slide="next">
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <!-- carousel -->
+
         </div>
     </div>
-</div>
 </div>
 
 @endsection

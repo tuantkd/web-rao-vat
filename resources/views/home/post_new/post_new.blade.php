@@ -744,7 +744,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-row">
+                                    {{-- <div class="form-row">
                                         <div class="form-group col-md-3" style="padding:2px;">
                                             <label class="label-title">Thời hạn: </label>
                                         </div>
@@ -756,7 +756,7 @@
                                                 <option value="7">7 Ngày</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-row">
                                         <div class="form-group col-md-3" style="padding:2px;">

@@ -53,16 +53,22 @@ class HomeController extends Controller
         $postNew = DB::table('category_child_firsts')
             ->join('post_news', function ($join) use ($id) {
                 $join->on('post_news.category_first_id', '=', 'category_child_firsts.id')
-                    ->where('category_child_firsts.category_id', '=', $id);
-            })
-            ->paginate(8);
+                    ->where([['category_child_firsts.category_id', '=', $id], ['status', '=', 1]]);
+            })->paginate(8);
+
+        $postNewVip = DB::table('category_child_firsts')
+            ->join('post_news', function ($join) use ($id) {
+                $join->on('post_news.category_first_id', '=', 'category_child_firsts.id')
+                    ->where([['category_child_firsts.category_id', '=', $id], ['status', '=', 2]]);
+            })->paginate(8);
 
         return view('home.view_category')->with([
             'category' => $category,
             'category_first' => $category_first,
             'province' => $province,
             'allCategory' => $allCategory,
-            'postNew' => $postNew
+            'postNew' => $postNew,
+            'postNewVip' => $postNewVip
         ]);
     }
 
@@ -172,20 +178,25 @@ class HomeController extends Controller
 
     public function savePostNew(Request $request, $id_post_new, $id_status_save)
     {
-
         if ($id_status_save == 0) {
-            $save_post = DB::table('post_news')->where('id', $id_post_new)->update(['save_post' => 1]);
+            DB::table('post_news')->where('id', $id_post_new)->update(['save_post' => 1, 'user_saved_id' => Auth::user()->id]);
         } else {
-            $save_post = DB::table('post_news')->where('id', $id_post_new)->update(['save_post' => 0]);
+            DB::table('post_news')->where('id', $id_post_new)->update(['save_post' => 0, 'user_saved_id' => Auth::user()->id]);
         }
-
         return redirect()->back();
     }
 
     //Xem theo danh mục chi tiết
-    public function profile_user()
+    public function profile_user($id, Request $request)
     {
-        return view('home.profile_user');
+        $user = DB::table('users')->where('id', $id)->get();
+        $postNew = DB::table('post_news')->where('user_id', $id)->paginate(10);
+        $countPostNew = DB::table('post_news')->where('user_id', $id)->count();
+        return view('home.profile_user')->with([
+            'user' => $user,
+            'postNew' => $postNew,
+            'countPostNew' => $countPostNew
+        ]);
     }
     // ==============================================================
 
@@ -219,6 +230,20 @@ class HomeController extends Controller
     //Xử lý đăng tin
     public function post_post_new(Request $request)
     {
+
+        //Lấy số lượng đăng tin của người dùng điều kiện đăng tin
+        // $get_number_post = DB::table('users')->where('id', Auth::user()->id)->get();
+        // foreach ($get_number_post as $key => $data) {
+        //     $number_post = $data->number_of_posting;
+        // }
+
+        //==============================================================
+        // if ($number_post <= 0) {
+        //     $session_error = $request->session()->get('session_error');
+        //     return redirect('page-all-news')->with('session_error', '');
+        // } else {
+
+
         // THỰC HIỆN 1
         // ----------------------------------------------------------------------------
         $add_second = new category_child_seconds();
@@ -331,7 +356,7 @@ class HomeController extends Controller
         $add_post_new->currency = $request->input('txt_currency');
         $add_post_new->content = $request->input('txt_content');
         $add_post_new->tag_search = $request->input('txt_tag_search');
-        $add_post_new->number_date_expired = $request->input('txt_date_expired');
+        //$add_post_new->number_date_expired = $request->input('txt_date_expired');
 
         //Upload nhiều hình ảnh
         if ($request->hasFile('txt_images')) {
@@ -355,8 +380,17 @@ class HomeController extends Controller
 
         $add_post_new->save();
         // ----------------------------------------------------------------------------
+
+        // ----------------------------------------------------------------------------
+        //Lấy số lượng đăng tin của người dùng trừ đi 1
+        // $after_number_post = $number_post - 1;
+        // DB::table('users')->where('id', Auth::user()->id)->update(['number_of_posting' => $after_number_post]);
+        // ----------------------------------------------------------------------------
+
         $session_success = $request->session()->get('session_success');
         return redirect('page-all-news')->with('session_success', '');
+        //}
+        //==============================================================
     }
     // ==============================================================
 
@@ -440,6 +474,7 @@ class HomeController extends Controller
             'password' => bcrypt($request->input('txt_password')),
             'verifyToken' => Str::random(32),
             'verify' => 0,
+            'number_of_posting' => 10,
         ]);
 
         Mail::to($user->email)->send(new VerificationEmail($user));
@@ -488,6 +523,7 @@ class HomeController extends Controller
         return view('home.infor_profile.service_news', ['service_news' => $service_news]);
     }
 
+    //----------------------------------------------
     //Nâng cấp tin dịch vụ
     public function upgrade_news(Request $request, $id)
     {
@@ -502,16 +538,17 @@ class HomeController extends Controller
 
         $price_service = $request->input('txt_price_service');
 
-        $total_price = $request->input('txt_total_price');
+        //$total_price = $request->input('txt_total_price');
 
         //------------------------------------
-        $get_number_date_expired = DB::table('post_news')->where('id', $id)->get();
-        foreach ($get_number_date_expired as $key => $value_number) {
-            $number_date_expired = $value_number->number_date_expired;
-        }
+        // $get_number_date_expired = DB::table('post_news')->where('id', $id)->get();
+        // foreach ($get_number_date_expired as $key => $value_number) {
+        //     $number_date_expired = $value_number->number_date_expired;
+        // }
 
-        $updates->number_date_expired = $number_date_expired + $request->input('txt_date');
+        //$updates->number_date_expired = $number_date_expired + $request->input('txt_date');
 
+        //Thường là 0 2 là VIP
         if ($price_service == 1000) {
             $updates->status = 0;
         } else {
@@ -519,18 +556,19 @@ class HomeController extends Controller
         }
 
         //------------------------------------
+        //Lấy số tiền và lấy ID người dùng
         $get_money_users = DB::table('users')->where('id', Auth::user()->id)->get();
         foreach ($get_money_users as $key => $get_money_user) {
             $money_user_db = $get_money_user->number_money;
             $id_user_db = $get_money_user->id;
         }
 
-        if ($money_user_db < $total_price) {
+        if ($money_user_db < $price_service) {
             $mes_infor_money = $request->session()->get('mes_infor_money');
             return redirect()->back()->with('mes_infor_money', '');
         } else {
             $update_money = User::find($id_user_db);
-            $after_money = $money_user_db - $total_price;
+            $after_money = $money_user_db - $price_service;
             $update_money->number_money = $after_money;
             $update_money->save();
         }
@@ -539,7 +577,12 @@ class HomeController extends Controller
         $update_success = $request->session()->get('update_success');
         return redirect()->back()->with('update_success', '');
     }
+    //----------------------------------------------
 
+
+
+
+    //----------------------------------------------
     //Xóa tin
     public function delete_news($id, Request $request)
     {
