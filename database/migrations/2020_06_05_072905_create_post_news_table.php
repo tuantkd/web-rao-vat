@@ -31,6 +31,9 @@ class CreatePostNewsTable extends Migration
             $table->unsignedBigInteger('district_id')->nullable();
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
 
+            $table->unsignedBigInteger('category_second_id')->nullable();
+            $table->foreign('category_second_id')->references('id')->on('category_child_seconds')->onDelete('cascade');
+
             $table->mediumText('title')->nullable();
             $table->integer('price')->nullable();
             $table->mediumText('unit_price')->nullable();

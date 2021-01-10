@@ -18,7 +18,7 @@ class CheckViewInfor
     {
         if (!Auth::check()) {
             return redirect('page-login');
-        } elseif (Auth::check() && Auth::user()->level_id == 2 || Auth::user()->verify == 1 || Auth::user()->level_id == 1) {
+        } elseif (Auth::check() && Auth::user()->level_id == 2 || Auth::user()->level_id == 1) {
             return $next($request);
         }
 

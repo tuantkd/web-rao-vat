@@ -48,7 +48,7 @@
         <div class="col-sm-10">
             <div class="card" style="margin-bottom:5px;">
                 <div class="card-header header-title">
-                    <h4>ĐĂNG KÝ TÀI KHOẢN</h4>
+                    <h4><strong style="color: #ffdf00;text-shadow: 1px 1px 1px gray;">ĐĂNG KÝ TÀI KHOẢN</strong></h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -146,8 +146,11 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-danger submit-button" id="submitBtn">
-                                        <i class="fas fa-user-plus"></i> Đăng ký
+                                    <button type="submit" class="btn btn-secondary submit-button" id="submitBtn">
+                                        <span style="color: #ffdf00;text-shadow: 1px 1px 1px gray;">
+                                            <i class="fas fa-user-plus"></i>
+                                            Đăng ký
+                                        </span>
                                     </button>
                                 </div>
 

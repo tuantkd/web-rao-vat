@@ -42,6 +42,7 @@ class CreateCategoryChildSecondsTable extends Migration
             $table->mediumText('car_category')->nullable();
             $table->mediumText('car_number_kilometer')->nullable();
             $table->mediumText('car_fuel')->nullable();
+            $table->mediumText('car_image_register_paper')->nullable();
             // -----------------------------------------------------------
 
             // -----------------------------------------------------------

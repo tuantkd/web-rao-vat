@@ -6,14 +6,20 @@ use Illuminate\Support\Facades\Route;
 
 /*HOME*/
 //Trang chủ
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home_index');
 
 //----------------------------------------------------------------------------
 //Xem danh mục
 Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
 
+//Tìm kiếm nhanh trang chủ
+Route::get('search-quick-category', 'HomeController@search_quick_category');
+
+//Xem danh mục
+Route::get('danh-muc/{name}/{id}', 'HomeController@view_category');
+
 // xem danh mục cấp 1
-Route::get('danh-muc-cap-1/{name}/{id_category_first}', 'HomeController@view_category_first')->name('view_category_first');
+Route::get('danh-muc-tiep-theo/{name}/{id_category_first}', 'HomeController@view_category_first')->name('view_category_first');
 
 //Xem bài đăng chi tiết
 Route::get('view-category-detail/{name}/{id}', 'HomeController@view_category_detail');
@@ -104,6 +110,25 @@ Route::post('post-page-register', 'HomeController@post_page_register');
 //Xác nhận mã token
 Route::get('verify/{token}', 'VerifyController@VerifyEmail')->name('verify');
 //----------------------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------------------
+//Hướng dẫn đăng ký
+Route::get('page-tutorial-register', 'HomeController@page_tutorial_register');
+
+//Hướng dẫn đăng tin
+Route::get('page-tutorial-post-new', 'HomeController@page_tutorial_post_new');
+
+//Hướng dẫn thanh toán nạp tiền
+Route::get('page-tutorial-payment', 'HomeController@page_tutorial_payment');
+
+//Quy định hoạt động
+Route::get('page-operation-regulation', 'HomeController@operation_regulation');
+
+//Bảo mật thông tin
+Route::get('page-security-information', 'HomeController@security_information');
+//----------------------------------------------------------------------------
 /*===============================================================================*/
 
 
@@ -111,8 +136,7 @@ Route::get('verify/{token}', 'VerifyController@VerifyEmail')->name('verify');
 
 
 
-
-Route::middleware(['CheckViewInfor'])->group(function () {
+Route::middleware([CheckViewInfor::class])->group(function () {
     // ===========================================================================
     //ĐÃ ĐĂNG NHẬP VÀO TRANG KHÁCH (HOME)
     //----------------------------------------------------------------------------
@@ -216,10 +240,11 @@ Route::middleware(['checkStatus'])->group(function () {
         'uses' => 'AdminController@manage_admin'
     ]);
 
-    // Trang thêm admin
-    Route::get('admin/add-admin-new', [
-        'as' => 'add_admin-new',
-        'uses' => 'AdminController@add_admin_new'
+    //---------------------------------------------------
+    // Nạp tiền cho admin
+    Route::put('admin/update-money/{id}', [
+        'as' => 'update-money',
+        'uses' => 'AdminController@update_money'
     ]);
 
     // Trang xem thông tin cá nhân
@@ -228,13 +253,35 @@ Route::middleware(['checkStatus'])->group(function () {
         'uses' => 'AdminController@profile_user'
     ]);
 
+    // Xử lý cập nhật thông tin người dùng admin
+    Route::put('update-profile-admin/{id}', [
+        'as' => 'update-profile-admin',
+        'uses' => 'AdminController@update_profile_admin'
+    ]);
+
     // Trang thay đổi mật khẩu
     Route::get('admin/change-password', [
         'as' => 'change-password',
         'uses' => 'AdminController@change_password'
     ]);
 
-    // trang thêm admin
+    // Trang thay đổi mật khẩu
+    Route::put('admin/update-change-password/{id_user}', [
+        'as' => 'update-change-password',
+        'uses' => 'AdminController@update_change_password'
+    ]);
+    //---------------------------------------------------
+
+
+
+    //---------------------------------------------------
+    // Trang thêm admin
+    Route::get('admin/add-admin-new', [
+        'as' => 'add_admin-new',
+        'uses' => 'AdminController@add_admin_new'
+    ]);
+
+    // Xử lý thêm admin
     Route::post('admin/manage-admin/add-admin', [
         'as' => 'add_admin',
         'uses' => 'AdminController@add_admin'
@@ -254,7 +301,7 @@ Route::middleware(['checkStatus'])->group(function () {
     ]);
 
     // xem thông tin thành viên
-    Route::get('admin/manage-member/view-information/{name}-{id}', 'AdminController@view_information_member')->name('view_information_member');
+    Route::get('admin/manage-member/view-information/{name}/{id}', 'AdminController@view_information_member')->name('view_information_member');
 
     // xóa tất cả thành viên
     Route::delete('admin/manage-member/delete-all-member', [
@@ -352,6 +399,12 @@ Route::middleware(['checkStatus'])->group(function () {
     //=======================================================
     // báo cáo vi phạm
     Route::get('admin/manage-report', 'AdminController@ManageReport');
+
+    // xóa báo cáo
+    Route::delete('admin/manage-report/delete', 'AdminController@DeleteReport');
+
+    // tìm kiếm báo cáo
+    Route::get('admin/manage-report/search', 'AdminController@SearchReport');
 
     //=======================================================
 
@@ -534,4 +587,8 @@ Route::middleware(['checkStatus'])->group(function () {
 
     // xem chi tiết tin tức
     Route::get('admin/manage-new/view-detail/{name}/{id}', 'AdminController@view_detail_new')->name('view_detail_new');
+
+    // chỉnh sửa tin tức
+    Route::get('admin/manage-new/edit/{name}/{id}', 'AdminController@EditNew');
+    Route::put('admin/manage-new/edit/{name}/{id}', 'AdminController@PostEditNew')->name('edit_new');
 });

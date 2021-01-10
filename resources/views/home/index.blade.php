@@ -7,10 +7,97 @@
 @section('content')
 
 <style>
+    .navbar-nav .nav-item .nav-link {
+        color: gray;
+    }
+
     .responsive {
         max-width: 100%;
         height: auto;
         border-radius: 3px;
+    }
+
+    .nav-pills .nav-item {
+        margin-top: 10px
+    }
+
+    .nav-pills .nav-item .active {
+        background-color: gray;
+        color: #ffdf00;
+        padding: 5px;
+        font-size: 14px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        font-weight: bolder;
+        text-shadow: 1px 1px 1px gray;
+    }
+
+    .nav-pills .nav-item .active:hover {
+        background-color: #ffdf00;
+        color: gray;
+        box-shadow: 2px 2px 6px 1px gray;
+        text-shadow: 1px 1px 1px #FFDF00;
+    }
+
+    .btn-outline-warning:hover {
+        border: none;
+    }
+
+    .flex-fill #a-payment:hover {
+        color: #ffdf00;
+        border: 2px solid #ffdf00;
+        background-color: gray;
+        font-weight: bold;
+    }
+
+    .flex-fill #a-payment {
+        color: gray;
+        border: 2px solid gray;
+        background-color: #ffdf00;
+        font-weight: bold;
+    }
+
+    .image-icon-index {
+        max-width: 100%;
+        height: 30px;
+    }
+
+    /*=============================================*/
+    .category-all {
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    .category-all .card-header {
+        background-color: gray;
+        padding: 8px;
+    }
+
+    .category-all .card-header b {
+        color: #ffdf00;
+        font-size: 18px;
+    }
+
+
+    @media screen and (max-width: 600px) {
+        .category-all .card-header b {
+            color: #ffdf00;
+            font-size: 12px;
+        }
+
+        .category-all .card-header {
+            padding: 5px;
+        }
+
+        .nav-pills .nav-item .active {
+            font-size: 12px;
+        }
+
+        .image-icon-index {
+            max-width: 100%;
+            height: 25px;
+        }
+
     }
 
 </style>
@@ -18,88 +105,102 @@
 
 <div class="container container-index">
     <div class="row">
+
         <div class="col-sm-3">
             <!-- card-desktop -->
-            <div class="card desktop" style="border:1px solid #dd3420;margin-bottom:10px;">
-                <div class="card-header" style="background-color:#dd3420;padding:5px;">
-                    <b style="color:white;font-size:15px;">DANH MỤC</b>
+            <div class="card category-all">
+                <div class="card-header">
+                    <b>DANH MỤC</b>
                 </div>
-                <div class="card-body" style="padding:5px;padding-top:5px;font-size:13px;">
+                <div class="card-body p-1">
                     <ul class="nav nav-pills flex-column">
-
                         @foreach($show_category as $key => $value)
 
                         @if($value->id == 1)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-home'></i> Bất động sản
+                                <img src="{{ url('public/icons/bat-dong-san.png') }}" class="image-icon-index"> Bất động sản
                             </a>
                         </li>
                         @elseif($value->id == 2)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-car'></i> Xe cộ</a>
+                                <img src="{{ url('public/icons/xe-co.png') }}" class="image-icon-index"> Xe
+                                cộ
+                            </a>
                         </li>
                         @elseif($value->id == 3)
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}"><i class='fas fa-mobile-alt'></i> Đồ điện tử</a>
+                            <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <img src="{{ url('public/icons/dien-tu.png') }}" class="image-icon-index">
+                                Đồ điện tử
+                            </a>
                         </li>
                         @elseif($value->id == 4)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-business-time'></i> Việc làm, tuyển sinh
+                                <img src="{{ url('public/icons/viec-lam.png') }}" class="image-icon-index">
+                                Việc làm, tuyển sinh
                             </a>
                         </li>
                         @elseif($value->id == 5)
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}"><i class='fas fa-dog'></i> Thú cưng</a>
+                            <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
+                                <img src="{{ url('public/icons/thu-cung.png') }}" class="image-icon-index">
+                                Thú cưng
+                            </a>
                         </li>
                         @elseif($value->id == 6)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-hamburger'></i> Đồ ăn, thực phẩm và loại khác
+                                <img src="{{ url('public/icons/thuc-pham.png') }}" class="image-icon-index">
+                                Thực phẩm, loại khác
                             </a>
                         </li>
                         @elseif($value->id == 7)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-subway'></i> Tủ lạnh, máy lạnh, máy giặt
+                                <img src="{{ url('public/icons/may-lanh.png') }}" class="image-icon-index">
+                                Điện lạnh, máy giặt
                             </a>
                         </li>
                         @elseif($value->id == 8)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-couch'></i> Đồ gia dụng, nội thất, cây cảnh
+                                <img src="{{ url('public/icons/do-van-phong.png') }}" class="image-icon-index"> Đồ gia dụng, và loại khác
                             </a>
                         </li>
                         @elseif($value->id == 9)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-tshirt'></i> Thời trang, đồ dùng cá nhân
+                                <img src="{{ url('public/icons/thoi-trang.png') }}" class="image-icon-index"> Thời trang, đồ dùng
                             </a>
                         </li>
                         @elseif($value->id == 10)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-volleyball-ball'></i> Giải trí, thể thao, sở thích
+                                <img src="{{ url('public/icons/the-thao.png') }}" class="image-icon-index"> Thể thao, sở thích, giải trí
                             </a>
                         </li>
                         @elseif($value->id == 11)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-book'></i> Đồ văn phòng, công nông nghiệp
+                                <img src="{{ url('public/icons/van-phong.png') }}" class="image-icon-index">
+                                Đồ văn phòng, loại khác
                             </a>
                         </li>
                         @elseif($value->id == 12)
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-phone-volume'></i> Dịch vụ, du lịch
+                                <img src="{{ url('public/icons/dich-vu.png') }}" class="image-icon-index">
+                                Dịch vụ, du lịch
                             </a>
                         </li>
                         @else
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class='fas fa-baby'></i> Mẹ và bé
+                                <img src="{{ url('public/icons/me-be.png') }}" class="image-icon-index"> Mẹ
+                                và bé
                             </a>
                         </li>
                         @endif
@@ -110,150 +211,39 @@
                 </div>
             </div>
             <!-- card-desktop -->
-
-            <!-- card-moblie -->
-            <div class="card moblie">
-                <div class="card-header" style="background-color:#dd3420;padding:5px;border:none;">
-                    <b style="color:white;">DANH MỤC</b>
-                </div>
-                <div class="card-body text-center" style="padding:15px;padding-top:5px;">
-                    <div class="row">
-                        <!-- ========================== -->
-                        @foreach ($show_category as $key => $value)
-                        @if($value->id == 1)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-home" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Bất động sản</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 2)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-motorcycle" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Xe cộ</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 3)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-plug" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ điện tử</div>
-                            </a>
-                        </div>
-                        <!-- ========================== -->
-                        @elseif($value->id == 4)
-                        <!-- ========================== -->
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-business-time" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Việc làm</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 5)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-dog" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Thú cưng</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 6)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-hamburger" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ ăn, thực phẩm</div>
-                            </a>
-                        </div>
-                        <!-- ========================== -->
-                        @elseif($value->id == 7)
-                        <!-- ========================== -->
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-crosshairs" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Tủ lạnh, máy lạnh, máy giặt</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 8)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-baby" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Mẹ và bé</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 9)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-couch" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ gia dụng, nội thất, cây cảnh</div>
-                            </a>
-                        </div>
-                        <!-- ========================== -->
-                        @elseif($value->id == 10)
-                        <!-- ========================== -->
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-tshirt" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Thời trang, đồ dùng, cá nhân</div>
-                            </a>
-                        </div>
-                        @elseif($value->id == 11)
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-swimmer" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Giải trí, thể thao, sở thích</div>
-                            </a>
-                        </div>
-                        @else
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4" style="padding:3px;">
-                            <a href="{{ url('danh-muc/'.Str::slug($value->category_name).'/'.$value->id) }}">
-                                <i class="fas fa-tractor" style="font-size:30px;color:red;"></i>
-                                <div style="font-size:12px;color:red;">Đồ văn phòng, công nông nghiệp</div>
-                            </a>
-                        </div>
-                        <!-- ========================== -->
-                        @endif
-                        @endforeach
-
-                    </div>
-                </div>
-            </div>
-            <!-- card-moblie -->
         </div>
+
+
 
         <div class="col-sm-9">
             <!-- news -->
-            <div class="container" style="padding:1px;">
-                @foreach ($new as $item)
-                <div class="card" style="margin-bottom:10px;">
+            @foreach ($new as $item)
+            <div class="card mb-2">
+                <div class="card-body p-2" style="box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);">
                     <img src="{{ url('public/upload/image_new/'.$item->image) }}" class="responsive" width="900" height="400">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            <b>
-                                <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}">
-                                    {{ $item->title }}
-                                </a>
-                            </b>
-                        </h2>
-                        <b class="card-text" style="text-transform:lowercase;text-align:justify;font-size:18px;">
-                            {!! Str::limit($item->content,130,'...') !!}
-                        </b>
-                        <br>
-                        <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}" class="btn btn-warning btn-sm">
-                            - - Xem chi tiết - -
-                        </a>
-                    </div>
+                    <h3 class="card-title">
+                        <strong>
+                            <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}">
+                                {{ $item->title }}
+                            </a>
+                        </strong>
+                    </h3>
+                    <p class="card-text">{!! $item->title_short !!}</p>
+                    <a href="{{ route('view_news_detail', [Str::slug($item->title),$item->id]) }}" class="btn btn-outline-secondary btn-sm">
+                        - - Xem chi tiết - -
+                    </a>
                 </div>
-                @endforeach
             </div>
+            @endforeach
             <!-- news -->
 
             <!-- option -->
-            <div class="card" style="margin-bottom:10px;">
-                <div class="card-body" style="padding:5px;">
+            <div class="card mb-2">
+                <div class="card-body" style="padding:5px;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);">
                     <div class="d-flex">
                         <div class="p-1 flex-fill">
-                            <a href="{{ url('page-payment-method') }}" class="btn btn-danger text-white">
-                                <i class="fas fa-money-check-alt"></i> Nạp tiền nâng cấp bản tin
+                            <a href="{{ url('page-payment-method') }}" class="btn" id="a-payment">
+                                <img src="{{ url('public/icons/nap-tien.png') }}" class="image-icon-index"> Nạp tiền nâng cấp bản tin
                             </a>
                         </div>
                     </div>
@@ -263,7 +253,7 @@
 
 
             <!-- carousel -->
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);border-radius:5px;">
                 <ol class="carousel-indicators">
                     @foreach( $banner as $photo )
                     <li data-target="#carouselExampleIndicators" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
@@ -273,7 +263,14 @@
                 <div class="carousel-inner" role="listbox">
                     @foreach( $banner as $photo )
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <img class="d-block img-fluid" src="{{ url('public/upload/banner/'.$photo->image) }}" alt="">
+                        @php
+                        $get_post_news = DB::table('post_news')->where('id',$photo->post_id)->get();
+                        @endphp
+                        @foreach( $get_post_news as $data )
+                        <a href="{{ url('view-category-detail/'.Str::slug($data->title).'/'.$data->id) }}">
+                            <img class="img-fluid" src="{{ url('public/upload/banner/'.$photo->image) }}" style="border-radius:5px;">
+                        </a>
+                        @endforeach
                     </div>
                     @endforeach
                 </div>
@@ -286,8 +283,10 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
+            <!-- carousel -->
         </div>
+
+
     </div>
 </div>
 

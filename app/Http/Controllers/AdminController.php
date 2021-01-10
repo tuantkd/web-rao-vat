@@ -25,28 +25,112 @@ class AdminController extends Controller
     //Trang chủ admin
     public function index(Request $request)
     {
-        $member = DB::table('users')->where('level_id', 2)->latest()->limit(5)->get();
-        $postNew = DB::table('post_news')->latest()->limit(5)->get();
-        return view('admin.index_admin')->with([
-            'member' => $member,
-            'postNew' => $postNew
-        ]);
+        if (Auth::check()) {
+            $member = DB::table('users')->where('level_id', 2)->latest()->limit(5)->get();
+            $postNew = DB::table('post_news')->latest()->limit(5)->get();
+            return view('admin.index_admin')->with([
+                'member' => $member,
+                'postNew' => $postNew
+            ]);
+        } else {
+            return redirect('page-login');
+        }
     }
     // ==================================================================
 
 
 
     // ==================================================================
+    //Nạp tiền cho admin
+    public function update_money(Request $request, $id)
+    {
+        $input_money = $request->input('input_Money');
+        if ($input_money == 0) {
+            DB::table('users')->where('id', $id)->update(['number_money' => $input_money]);
+            return redirect()->back();
+        } else {
+            $get_moneys = DB::table('users')->where('id', $id)->get();
+            foreach ($get_moneys as $key => $get_money) {
+                $money_db = $get_money->number_money;
+            }
+            $money_new = $money_db + $input_money;
+            DB::table('users')->where('id', $id)->update(['number_money' => $money_new]);
+            return redirect()->back();
+        }
+    }
+
     //Trang thông tin cá nhân
     public function profile_user(Request $request)
     {
         return view('admin.profile_admin.profile_user');
     }
 
+    //Xử lý thông tin cá nhân
+    public function update_profile_admin(Request $request, $id)
+    {
+        $update_profile = User::find($id);
+        $update_profile->username = $request->input('input_Username');
+        $update_profile->sex = $request->input('input_Sex');
+        $update_profile->birthday = $request->input('input_Birthday');
+        $update_profile->phone = $request->input('input_Phone');
+        $update_profile->address = $request->input('input_Address');
+
+        if ($request->hasfile('input_Avatar')) {
+            $get_file_image = $request->file('input_Avatar');
+            $file_image_avatar = $get_file_image->getClientOriginalName();
+            $get_file_image->move(public_path('upload_images_avatar'), $file_image_avatar);
+            $update_profile->avatar = $file_image_avatar;
+        }
+        $update_profile->save();
+
+        $update_profile_admin = $request->session()->get('update_profile_admin');
+        return redirect()->back()->with('update_profile_admin', '');
+    }
+
     // trang thay đổi mật khẩu
     public function change_password(Request $request)
     {
         return view('admin.profile_admin.change_password');
+    }
+
+    //Xử lý thay đổi mật khẩu
+    public function update_change_password(Request $request, $id_user)
+    {
+        //Lấy trường id trong bảng user so sánh với thẻ input hidden có chứa id user 
+        //mà mình muốn thay đổi mật khẩu của nó
+        $users = DB::table('users')->where('id', $id_user)->get();
+
+        //Trong model User tìm đến id thẻ input hidden có chứa id user cập nhật nó lại
+        $change = User::find($id_user);
+
+        $old_pass = $request->input('input_Password_Old');
+
+        $new_pass = $request->input('input_Password_New');
+
+        $new_pass_confirm = $request->input('input_Password_Confirm_New');
+
+        foreach ($users as $val_users) {
+            //Lấy mật khẩu trong csdl ra
+            $db_pass = $val_users->password;
+
+            //Nếu mật khẩu trong thẻ inout (nhập mật khẩu cũ) mà bằng với mật khẩu trong csdl
+            if (password_verify($old_pass, $db_pass)) {
+
+                if ($new_pass == $new_pass_confirm) {
+                    $change->password = bcrypt($request->input('input_Password_Confirm_New'));
+                    $change->save();
+
+                    $change_password_user = $request->session()->get('change_password_success');
+                    return redirect()->back()->with('change_password_success', '');
+                } else {
+                    $change_password_user_fail = $request->session()->get('two_password_not_mismatched');
+                    return redirect()->back()->with('two_password_not_mismatched', '');
+                }
+            } else {
+                $old_pass_fail = $request->session()->get('old_password_incorrect');
+                return redirect()->back()->with('old_password_incorrect', '');
+            }
+        }
     }
     // ==================================================================
 
@@ -57,7 +141,7 @@ class AdminController extends Controller
     //Trang quản lý admin
     public function manage_admin(Request $request)
     {
-        $admin = DB::table('users')->where('level_id', 1)->get();
+        $admin = DB::table('users')->where('level_id', '<>', 2)->get();
         $allAdmin = DB::table('users')->where('level_id', 1)->get();
         return view('admin.manage_admin.manage_admin')->with([
             'admin' => $admin,
@@ -137,7 +221,7 @@ class AdminController extends Controller
     // trang quản lý thành viên
     public function manage_member(Request $request)
     {
-        $member = DB::table('users')->where('level_id', 2)->get();
+        $member = DB::table('users')->where('level_id', 2)->paginate(5);
         $allMember = DB::table('users')->where('level_id', 2)->get();
         return view('admin.manage_member.manage_member')->with([
             'member' => $member,
@@ -146,12 +230,16 @@ class AdminController extends Controller
     }
 
     // trang xem thông tin thành viên
-    public function view_information_member(Request $request, $id)
+    public function view_information_member(Request $request, $name, $id)
     {
-        $member = User::find($id);
+        $member = DB::table('users')->where('id', $id)->get();
+        $postNew = DB::table('post_news')->where('user_id', $id)->paginate(10);
+
         return view('admin.manage_member.information_member')->with([
-            'member' => $member
+            'member' => $member,
+            'postNew' => $postNew
         ]);
+        // echo $postCount;
     }
 
     // xóa tất cả thành viên
@@ -282,12 +370,12 @@ class AdminController extends Controller
         $type_post = DB::table('post_types')->get();
         $province = DB::table('provinces')->get();
         $district = DB::table('districts')->get();
-        $postNew = DB::table('post_news')->where('status', 0)->latest()->paginate(10);
+        $postNew_all = DB::table('post_news')->latest()->paginate(10);
         return view('admin.manage_post_new.manage_post_new')->with([
             'type_post' => $type_post,
             'province' => $province,
             'district' => $district,
-            'postNew' => $postNew
+            'postNew_all' => $postNew_all
         ]);
     }
 
@@ -295,14 +383,12 @@ class AdminController extends Controller
     public function ApprovedPostNew(Request $request, $name, $id, $status)
     {
         if ($status == 0) {
-            $approved = DB::table('post_news')->where('id', $id)->update(['status' => 1]);
+            DB::table('post_news')->where('id', $id)->update(['status' => 1]);
         } elseif ($status == 1) {
-            $approved = DB::table('post_news')->where('id', $id)->update(['status' => 0]);
+            DB::table('post_news')->where('id', $id)->update(['status' => 0]);
         }
-
         $changeStatus = $request->session()->get('changeStatus');
         session()->put('changeStatus');
-
         return redirect()->back()->with('changeStatus', '');
     }
 
@@ -312,19 +398,18 @@ class AdminController extends Controller
         $status = $request->input('status_search');
         $post_type = $request->input('post_type_search_id');
         $province_search = $request->input('province_search_id');
-
-
+        $title_search = $request->input('txt_title');
 
         $type_post = DB::table('post_types')->get();
         $province = DB::table('provinces')->get();
         $district = DB::table('districts')->get();
 
-        if (($status == null) && ($post_type == null) && ($province_search == null)) {
+        if (($status == null) && ($post_type == null) && ($province_search == null) && ($title_search == null)) {
 
-            $postNew = DB::table('post_news')->paginate(10);
-        } elseif (($status != null) && ($post_type != null) && ($province_search != null)) {
+            $postNew_all = DB::table('post_news')->paginate(10);
+        } elseif (($status != null) && ($post_type != null) && ($province_search != null) && ($title_search != null)) {
 
-            $postNew = DB::table('post_news')
+            $postNew_all = DB::table('post_news')
                 ->where(function ($query) use ($status) {
                     $query->where('post_news.status', '=', $status);
                 })
@@ -334,9 +419,12 @@ class AdminController extends Controller
                 ->where(function ($query) use ($province_search) {
                     $query->where('post_news.province_id', '=', $province_search);
                 })
-                ->paginate(10);
+                ->where(function ($query) use ($title_search) {
+                    $query->where('post_news.id', '=', $title_search);
+                })
+                ->paginate(5);
         } else {
-            $postNew = DB::table('post_news')
+            $postNew_all = DB::table('post_news')
                 ->where(function ($query) use ($status) {
                     $query->where('post_news.status', '=', $status);
                 })
@@ -346,14 +434,19 @@ class AdminController extends Controller
                 ->orWhere(function ($query) use ($province_search) {
                     $query->where('post_news.province_id', '=', $province_search);
                 })
-                ->paginate(10);
+                ->orwhere(function ($query) use ($title_search) {
+                    $query->where('post_news.id', '=', $title_search);
+                })
+                ->paginate(5);
         }
+
+
 
         return view('admin.manage_post_new.manage_post_new')->with([
             'type_post' => $type_post,
             'province' => $province,
             'district' => $district,
-            'postNew' => $postNew
+            'postNew_all' => $postNew_all
         ]);
     }
 
@@ -370,6 +463,7 @@ class AdminController extends Controller
     public function view_post_new(Request $request, $name, $id)
     {
         $postNew = DB::table('post_news')->where('id', $id)->get();
+
         return view('admin.manage_post_new.view_post_new')->with([
             'postNew' => $postNew
         ]);
@@ -378,7 +472,7 @@ class AdminController extends Controller
     // trang quản lý loại bài đăng
     public function manage_type_post_new(Request $request)
     {
-        $allTypePost = DB::table('post_types')->get();
+        $allTypePost = DB::table('post_types')->paginate(5);
         return view('admin.manage_type_post_new.manage_type_post_new')->with([
             'allTypePost' => $allTypePost
         ]);
@@ -417,7 +511,7 @@ class AdminController extends Controller
     // báo cáo vi phạm
     public function ManageReport(Request $request)
     {
-        $report = DB::table('reports')->get();
+        $report = DB::table('reports')->paginate(10);
         $nameReport = DB::table('reports')->select('report_name')->distinct()->get();
         $nameUserReport = DB::table('reports')->select('username')->distinct()->get();
         $emailUserReport = DB::table('reports')->select('email')->distinct()->get();
@@ -427,8 +521,76 @@ class AdminController extends Controller
             'emailUserReport' => $emailUserReport,
             'nameUserReport' => $nameUserReport
         ]);
+    }
 
-        // echo $nameReport;
+    // xóa báo cáo
+    public function DeleteReport(Request $request)
+    {
+        $ids = $request->ids;
+        DB::table("reports")->whereIn('id', explode(",", $ids))->delete();
+
+        return response()->json(['success' => "Deleted successfully"]);
+    }
+
+    // tìm kiếm report
+    public function SearchReport(Request $request)
+    {
+        $nameReportSearch = $request->input('nameReport');
+        $userReportSearch = $request->input('userReport');
+        $email_user_report = $request->input('email_user_report');
+
+        $nameReport = DB::table('reports')->select('report_name')->distinct()->get();
+        $nameUserReport = DB::table('reports')->select('username')->distinct()->get();
+        $emailUserReport = DB::table('reports')->select('email')->distinct()->get();
+
+        if (($nameReportSearch == null) && ($userReportSearch == null) && ($email_user_report == null)) {
+            $report = DB::table('reports')->get();
+        } elseif (($nameReportSearch != null) && ($userReportSearch == null) && ($email_user_report == null)) {
+            $report = DB::table('reports')->where(function ($query) use ($nameReportSearch) {
+                $query->where('report_name', $nameReportSearch);
+            })
+                ->paginate(10);
+        } elseif (($nameReportSearch == null) && ($userReportSearch != null) && ($email_user_report == null)) {
+            $report = DB::table('reports')->where('username', $userReportSearch)->paginate(10);
+        } elseif (($nameReportSearch == null) && ($userReportSearch == null) && ($email_user_report != null)) {
+            $report = DB::table('reports')->where('email', $email_user_report)->paginate(10);
+        } elseif (($nameReportSearch != null) && ($userReportSearch != null) && ($email_user_report == null)) {
+            $report = DB::table('reports')
+                ->where([
+                    ['report_name', '=', $nameReportSearch],
+                    ['username', '=', $userReportSearch]
+                ])
+                ->paginate(10);
+        } elseif (($nameReportSearch == null) && ($userReportSearch != null) && ($email_user_report != null)) {
+            $report = DB::table('reports')
+                ->where([
+                    ['username', '=', $userReportSearch],
+                    ['email', '=', $email_user_report]
+                ])
+                ->paginate(10);
+        } elseif (($nameReportSearch != null) && ($userReportSearch == null) && ($email_user_report != null))
+            $report = DB::table('reports')
+                ->where([
+                    ['report_name', '=', $nameReportSearch],
+                    ['email', '=', $email_user_report]
+                ])
+                ->paginate(10);
+        else {
+            $report = DB::table('reports')
+                ->where([
+                    ['report_name', '=', $nameReportSearch],
+                    ['username', '=', $userReportSearch],
+                    ['email', '=', $email_user_report]
+                ])
+                ->paginate(10);
+        }
+
+        return view('admin.manage_report.manage_report')->with([
+            'report' => $report,
+            'nameReport' => $nameReport,
+            'emailUserReport' => $emailUserReport,
+            'nameUserReport' => $nameUserReport
+        ]);
     }
 
     //===============================================================================
@@ -853,6 +1015,7 @@ class AdminController extends Controller
             $new->image = $file_image_total;
         }
         $new->title = $request->input('title');
+        $new->title_short = $request->input('title_short');
         $new->content = $request->input('summary-ckeditor');
         $new->save();
 
@@ -877,5 +1040,54 @@ class AdminController extends Controller
         return view('admin.manage_new.view_new')->with([
             'new' => $new
         ]);
+    }
+
+    // chỉnh sửa tin tức
+    public function EditNew(Request $request, $name, $id)
+    {
+        $new = DB::table('news')->where('id', $id)->get();
+        return view('admin.manage_new.edit_new')->with([
+            'new' => $new
+        ]);
+    }
+
+    public function PostEditNew(Request $request, $name, $id)
+    {
+        $this->validate(
+            $request,
+            [
+                'summary-ckeditor' => 'required',
+                'title' => 'required',
+            ],
+            [
+                'summary-ckeditor.required' => 'Vui lòng nhập nội dung tin tức',
+                'title.required' => 'Vui lòng nhập tiêu đề tin tức',
+            ]
+        );
+
+        $update_news = news::find($id);
+        $update_news->title = $request->input('title');
+        $update_news->content = $request->input('summary-ckeditor');
+
+        if ($request->hasfile('upload_file')) {
+            $get_file_edit = $request->file('upload_file');
+
+            $file_image_edit = $get_file_edit->getClientOriginalName();
+
+            $get_file_edit->move(public_path('upload/image_new'), $file_image_edit);
+
+            $update_news->image = $file_image_edit;
+        } else {
+            $get_image_db = DB::table('news')->where('id', $id)->get();
+            foreach ($get_image_db as $key => $image) {
+                $image_db = $image->image;
+            }
+            $update_news->image = $image_db;
+        }
+
+        $update_news->save();
+
+        $edit_new = $request->session()->get('edit_new');
+        return redirect()->route('manage_new')->with('edit_new', '');
     }
 }

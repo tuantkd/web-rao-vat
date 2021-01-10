@@ -11,7 +11,7 @@ class post_news extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id', 'post_type_id', 'user_id', 'category_first_id', 'district_id', 'province_id',
+        'id', 'post_type_id', 'user_id', 'category_first_id', 'district_id', 'province_id', 'category_second_id',
         'title', 'price', 'unit_price', 'currency', 'content', 'tag_search',
         'images', 'number_date_expired', 'hidden_new', 'status', 'save_post', 'user_saved_id'
     ];

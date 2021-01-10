@@ -6,15 +6,22 @@
 {{-- <!-- ==================================================== --> --}}
 @section('content')
 
+<style>
+    .card .card-body #list-hover:hover {
+        background-color: #f5f5f5;
+    }
+
+</style>
+
 <div class="container" style="padding-top:5px;margin-top:50px;padding:5px;">
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
 
             {{-- breadcrumb --}}
-            <ul class="breadcrumb breadcrumb-mobile">
+            <ul class="breadcrumb breadcrumb-mobile" style="background-color:white;border:1px solid #e5e5e5;">
                 <li class="breadcrumb-item">
-                    <a href="{{ url('/') }}" style="text-decoration:none;color:red;">Trang chủ</a>
+                    <a href="{{ url('/') }}" style="text-decoration:none;color:#ffdf00;font-weight: bold;">Trang chủ</a>
                 </li>
                 @foreach ($user as $name)
                 <li class="breadcrumb-item active">
@@ -61,7 +68,7 @@
                 <div class="card-body" style="padding:1px;">
 
                     @foreach ($postNew as $item_postNew)
-                    <div class="list">
+                    <div class="list" id="list-hover">
                         <a href="{{ url('view-category-detail/'.Str::slug($item_postNew->title), $item_postNew->id) }}">
                             <div class="row">
                                 <div class="col-4 col-sm-4 col-md-2 col-lg-2">
@@ -70,13 +77,15 @@
                                     @endphp
                                     @foreach ($image_decode as $picture)
                                     @if ($loop->first)
-                                    <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="rounded" style="width: 100px;">
+                                    <img src="{{ url('public/upload_images_post_new/'.$picture) }}" class="rounded mr-2" style="width:100px;">
                                     @endif
                                     @endforeach
                                 </div>
                                 <div class="col-8 col-sm-8 col-md-10 col-lg-10 text-left">
-                                    <h5>{{ $item_postNew->title }}</h5>
-                                    <h5><b>{{ number_format($item_postNew->price) }} {{ $item_postNew->currency }}</b></h5>
+                                    <h5>
+                                        <span style="color:orange;font-weight: bold;">{{ $item_postNew->title }}</span>
+                                    </h5>
+                                    <h5>{{ number_format($item_postNew->price) }} {{ $item_postNew->currency }}</h5>
 
                                     <div class="row row-cols-1">
                                         <div class="col-12 col-sm-12 col-md-6">
